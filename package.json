@@ -1,4 +1,19 @@
 {
-    "name": "typescript-express-starter",
-    "version": "0.0.0"
+  "name": "typescript-express-starter",
+  "version": "0.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljlm0402/typescript-express-starter.git"
+  },
+  "keywords": ["typescript", "express"],
+  "author": "limkyungmin ljlm0402@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ljlm0402/typescript-express-starter/issues"
+  },
+  "homepage": "https://github.com/ljlm0402/typescript-express-starter#readme",
+  "description": "typescript-express-starter"
 }
