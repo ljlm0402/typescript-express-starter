@@ -10,8 +10,8 @@ describe('Testing Users', () => {
   describe('GET /users', () => {
     it('response statusCode 200', () => {
       const usersRoute = new UserRoute();
-
       const app = new App([usersRoute]);
+
       return request(app.getServer())
       .get(`${usersRoute.path}`)
       .expect(200);
@@ -22,8 +22,8 @@ describe('Testing Users', () => {
     it('response statusCode 200', () => {
       const userId = 1;
       const usersRoute = new UserRoute();
-
       const app = new App([usersRoute]);
+
       return request(app.getServer())
       .get(`${usersRoute.path}/${userId}`)
       .expect({ data: { id: userId, name: 'lim' }, message: 'findOne' });
@@ -34,8 +34,8 @@ describe('Testing Users', () => {
     it('response statusCode 201', () => {
       const userData = { name: 'Robert' };
       const usersRoute = new UserRoute();
-
       const app = new App([usersRoute]);
+
       return request(app.getServer())
       .post(`${usersRoute.path}`)
       .send(userData)
@@ -48,8 +48,8 @@ describe('Testing Users', () => {
       const userId = 1;
       const userData = { name: 'Robert' };
       const usersRoute = new UserRoute();
-
       const app = new App([usersRoute]);
+
       return request(app.getServer())
       .put(`${usersRoute.path}/${userId}`)
       .send(userData)
@@ -61,8 +61,8 @@ describe('Testing Users', () => {
     it('response statusCode 200', () => {
       const userId = 1;
       const usersRoute = new UserRoute();
-
       const app = new App([usersRoute]);
+      
       return request(app.getServer())
       .delete(`${usersRoute.path}/${userId}`)
       .expect(200);
