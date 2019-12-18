@@ -6,12 +6,12 @@
 <a href="https://www.npmjs.com/package/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/package/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="NPM Downloads" /></a>
 
-## 🧐What is it?
+## 🧐 What is it?
 
 Creates a new typescript express application.
 application is configured to use TypeScript instead of plain JavaScript. 
 
-## 🤔Why typescript-express-starter?
+## 🤔 Why typescript-express-starter?
 
 NodeJS is great for the rapid development of web-projects, but is often neglected because of the lack of
 type safety. TypeScript solves this issue and (along with its linter file) can even make your code
