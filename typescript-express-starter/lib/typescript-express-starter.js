@@ -19,7 +19,6 @@ async function tsExpressStarter(destination) {
     }
 }
 
-
 function copyProjectFiles(destination) {
     const prjFolder = './project-files';
     const source = path.join(__dirname, prjFolder);
@@ -35,7 +34,6 @@ function copyProjectFiles(destination) {
     })
 }
 
-
 function updatePackageJson(destination) {
     let file = editJsonFile(destination + '/package.json', {
         autosave: true
@@ -43,13 +41,11 @@ function updatePackageJson(destination) {
     file.set('name', path.basename(destination));
 }
 
-
 function getDepStrings() {
     const dependencies = 'class-transformer class-validator cookie-parser express jest morgan ts-jest ts-node typescript';
     const devDependencies = '@types/cookie-parser @types/express @types/jest @types/morgan @types/supertest supertest tslint tslint-config-airbnb';
     return { dependencies, devDependencies };
 }
-
 
 function downloadNodeModules(destination, dep) {
     const options = {cwd: destination};
