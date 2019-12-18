@@ -1,4 +1,4 @@
-<img alt='overnightjs' src='https://github.com/ljlm0402/typescript-express-starter/raw/master/typescript-express-starter.jng' border='0'>
+<img alt='overnightjs' src='https://github.com/ljlm0402/typescript-express-starter/blob/master/typescript-express-starter.jpg' border='0'>
 
 [Express](https://www.npmjs.com/package/express) with [TypeScript's](https://www.npmjs.com/package/typescript) application generator.
 
@@ -11,8 +11,6 @@
 
 Creates a new express application similar to the _express-generator_ module. Except this new
 application is configured to use TypeScript instead of plain JavaScript. 
-
-
 
 ## Why typescript-express-starter?
 
@@ -39,7 +37,6 @@ and `_moduleAliases` in _package.json_ if you want to add/edit the relative path
 $ npm install -g typescript-express-starter
 ```
 
-
 ## Quick Start
 
 The quickest way to get started is use npx and pass in the name of the project you want to create.
@@ -57,18 +54,12 @@ Start your typescript-express-starter app in development mode at `http://localho
 $ cd "project name" && npm run start
 ```
 
-
 ## Available commands for the server.
 
-- Run the server in development mode: `npm run start:dev`.
-- Run all unit-tests: `npm test`.
-- Run a single unit-test: `npm test -- --testFile="name of test file" (i.e. --testFile=Users)`.
+- Run the Server in production mode : `npm run start`.
+- Run the Server in development mode : `npm run dev`.
+- Run all unit-tests: `npm run test`.
 - Check for linting errors: `npm run lint`.
-- Build the project for production: `npm run build`.
-- Run the production build: `npm start`.
-- Run production build with a different env file `npm start -- --env="name of env file" (default is production)`.
-
-
 
 ## License
 
