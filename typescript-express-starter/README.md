@@ -6,27 +6,27 @@
 <a href="https://www.npmjs.com/package/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/package/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="NPM Downloads" /></a>
 
-## What is it?
+## 🧐What is it?
 
 Creates a new typescript express application.
 application is configured to use TypeScript instead of plain JavaScript. 
 
-## Why typescript-express-starter?
+## 🤔Why typescript-express-starter?
 
 NodeJS is great for the rapid development of web-projects, but is often neglected because of the lack of
 type safety. TypeScript solves this issue and (along with its linter file) can even make your code
 more robust than some other static languages like Java.
 
-## Installation
+## ⚙️ Installation
 
 ```sh
 $ npm install -g typescript-express-starter
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 The quickest way to get started is use npx and pass in the name of the project you want to create.
-If you don't specify a project name, the default typescript-express-starter_ will be used instead.
+If you don't specify a project name, the default _typescript-express-starter_ will be used instead.
 
 Create the app:
 
@@ -34,21 +34,67 @@ Create the app:
 $ npx typescript-express-starter "project name"
 ```
 
-Start your typescript-express-starter app in development mode at `http://localhost:3000/`:
+Start your typescript-express-starter app in development mode at `http://localhost:3000/`
 
 ```bash
 $ cd "project name" && npm run start
 ```
 
-## Available commands for the server.
+## 🎠 Available commands for the server.
 
 - Run the Server in production mode : `npm run start`.
 - Run the Server in development mode : `npm run dev`.
 - Run all unit-tests: `npm run test`.
 - Check for linting errors: `npm run lint`.
 
+## ⛑ Code Structure
+
+```bash
+│
+├── /src
+│   ├── /controllers
+│   │   ├── index.controller.ts
+│   │   └── users.controller.ts
+│   │
+│   ├── /dtos
+│   │   └── user.dto.ts
+│   │
+│   ├── /exceptions
+│   │   └── HttpException.ts
+│   │
+│   ├── /interfaces
+│   │   ├── routes.interface.ts
+│   │   └── user.interface.ts
+│   │
+│   ├── /middlewares
+│   │   ├── error.middleware.ts
+│   │   └── validation.middleware.ts
+│   │
+│   ├── /models
+│   │   └── users.model.ts
+│   │
+│   ├── /routes
+│   │   ├── index.route.ts
+│   │   └── users.route.ts
+│   │
+│   ├── /services
+│   │   └── user.service.ts
+│   │
+│   ├── /tests
+│   │   ├── index.test.ts
+│   │   └── users.test.ts
+│   │
+│   ├── app.ts
+│   └── server.ts
+│
+├── .gitignore
+├── jest.config.js
+├── package-lock.json
+├── package.json
+├── tsconfig.json
+└── tslint.json
+```
+
 ## License
 
 [MIT](LICENSE)
-
-<sub><sup>Written by <a href="https://github.com/ljlm0402">@AGUMON</a></sup></sub><small>✌</small>

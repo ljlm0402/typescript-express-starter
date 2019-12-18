@@ -42,7 +42,7 @@ class UsersController {
     const userData: User = req.body;
 
     try {
-      const updateUserData: User = await this.userService.updateUser(userId, userData);
+      const updateUserData: Users = await this.userService.updateUser(userId, userData);
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {
       next(error);
