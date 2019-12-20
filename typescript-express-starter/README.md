@@ -6,6 +6,8 @@
 <a href="https://www.npmjs.com/package/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
 <a href="https://www.npmjs.com/package/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="NPM Downloads" /></a>
 
+<br />
+
 ## 🧐 What is it?
 
 Creates a new typescript express application.
@@ -13,7 +15,7 @@ application is configured to use TypeScript instead of plain JavaScript.
 
 ## 🤔 Why typescript-express-starter?
 
-NodeJS is great for the rapid development of web-projects, but is often neglected because of the lack of
+Node Js is great for the rapid development of web-projects, but is often neglected because of the lack of
 type safety. TypeScript solves this issue and (along with its linter file) can even make your code
 more robust than some other static languages like Java.
 
@@ -84,6 +86,9 @@ $ cd "project name" && npm run start
 │   │   ├── index.test.ts
 │   │   └── users.test.ts
 │   │
+│   ├── /utils
+│   │   └── util.ts
+│   │
 │   ├── app.ts
 │   └── server.ts
 │
@@ -98,3 +103,7 @@ $ cd "project name" && npm run start
 ## License
 
 [MIT](LICENSE)
+
+## Contributors
+
+* Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)

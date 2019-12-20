@@ -1,7 +1,7 @@
 {
     "name": "typescript-express-starter",
-    "version": "1.0.3",
-    "description": "Easy TypeScript Express Starter",
+    "version": "1.0.4",
+    "description": "Quick and easy TypeScript Express Starter package",
     "author": "AGUMON ljlm0402@gmail.com",
     "license": "MIT",
     "main": "lib/cli.js",
