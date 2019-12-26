@@ -19,7 +19,13 @@ class UserService {
 
   public async createUser(userData: CreateUserDto): Promise<User> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
-    const createUserData = { id: (this.users.length + 1), ...userData };
+    let newId: number = 0;
+    this.users.forEach(user => {
+      if(user.id > newId) newId = user.id
+    });
+    newId += 1;
+    const createUserData = { id: newId, ...userData };
+    this.users.push(createUserData);
     return createUserData;
   }
 
