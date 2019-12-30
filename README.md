@@ -87,7 +87,8 @@ $ cd "project name" && npm run start
 │   │   └── users.test.ts
 │   │
 │   ├── /utils
-│   │   └── util.ts
+│   │   ├── util.ts
+│   │   └── validateEnv.ts
 │   │
 │   ├── app.ts
 │   └── server.ts
