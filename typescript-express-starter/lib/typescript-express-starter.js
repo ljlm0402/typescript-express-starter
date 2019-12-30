@@ -42,8 +42,8 @@ function updatePackageJson(destination) {
 }
 
 function getDepStrings() {
-    const dependencies = 'class-transformer class-validator cookie-parser express jest morgan ts-jest ts-node typescript';
-    const devDependencies = '@types/cookie-parser @types/express @types/jest @types/morgan @types/supertest supertest tslint tslint-config-airbnb';
+    const dependencies = 'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript';
+    const devDependencies = '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest supertest tslint tslint-config-airbnb';
     return { dependencies, devDependencies };
 }
 
