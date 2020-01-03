@@ -20,7 +20,7 @@ async function tsExpressStarter(destination) {
 }
 
 function copyProjectFiles(destination) {
-    const prjFolder = './project-files';
+    const prjFolder = './default-folder';
     const source = path.join(__dirname, prjFolder);
     
     return new Promise((resolve, reject) => {

@@ -1,6 +1,6 @@
 {
     "name": "typescript-express-starter",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Quick and easy TypeScript Express Starter package",
     "author": "AGUMON ljlm0402@gmail.com",
     "license": "MIT",
@@ -9,7 +9,8 @@
       "typescript",
       "express",
       "jest",
-      "lint"
+      "tslint",
+      "tsconfig"
     ],
     "scripts": {
       "typescript-express-starter": "node bin/cli.js",
