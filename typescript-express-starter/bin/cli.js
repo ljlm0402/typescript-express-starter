@@ -12,10 +12,12 @@ const destination = getDest(process.argv[2]);
 console.log('Setting up new TypeScript-Express-Starter Project');
 
 tsExpressStarter(destination).then(() => {
+  console.log('tsExpressStarter', destination);
   console.log('Project setup complete!');
 });
 
 function getDest(destFolder) {
+  console.log('getDest', destFolder);
   destFolder = destFolder || 'typescript-express-starter';
   return path.join(process.cwd(), destFolder);
 };

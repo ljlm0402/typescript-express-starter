@@ -26,6 +26,7 @@ async function tsExpressStarter(destination) {
 function getDirectorys() {
   let directorys = [];
 
+  console.log('getDirectorys', TARGET_DIR);
   fs.readdirSync(TARGET_DIR, { withFileTypes: true })
   .forEach(p => {
     const dir = p.name;
@@ -34,6 +35,7 @@ function getDirectorys() {
     }
   });
 
+  console.log('directorys', directorys)
   return directorys;
 };
 
