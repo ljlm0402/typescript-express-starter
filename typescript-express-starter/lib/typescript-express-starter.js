@@ -9,7 +9,6 @@ const editJsonFile = require('edit-json-file');
 const childProcess = require('child_process');
 const inquirer = require('inquirer');
 const ncp = require('ncp').ncp;
-const TARGET_DIR = `${process.cwd()}/lib`;
 
 async function tsExpressStarter(destination) {
   try {
@@ -26,8 +25,7 @@ async function tsExpressStarter(destination) {
 function getDirectorys() {
   let directorys = [];
 
-  console.log('getDirectorys', TARGET_DIR);
-  fs.readdirSync(TARGET_DIR, { withFileTypes: true })
+  fs.readdirSync(__dirname, { withFileTypes: true })
   .forEach(p => {
     const dir = p.name;
     if (p.isDirectory()) {
@@ -35,7 +33,6 @@ function getDirectorys() {
     }
   });
 
-  console.log('directorys', directorys)
   return directorys;
 };
 
