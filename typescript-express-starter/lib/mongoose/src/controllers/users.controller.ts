@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto } from '../dtos/users.dto';
-import { User, Users } from '../interfaces/users.interface';
+import { User } from '../interfaces/users.interface';
 import userService from '../services/users.service';
 
 class UsersController {
@@ -8,7 +8,7 @@ class UsersController {
 
   public getUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllUsersData: Users = await this.userService.findAllUser();
+      const findAllUsersData: User[] = await this.userService.findAllUser();
       res.status(200).json({ data: findAllUsersData, message: 'findAll' });
     } catch (error) {
       next(error);
@@ -16,7 +16,7 @@ class UsersController {
   }
 
   public getUserById = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+    const userId: string = req.params.id;
 
     try {
       const findOneUserData: User = await this.userService.findUserById(userId);
@@ -38,11 +38,11 @@ class UsersController {
   }
 
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+    const userId: string = req.params.id;
     const userData: User = req.body;
 
     try {
-      const updateUserData: Users = await this.userService.updateUser(userId, userData);
+      const updateUserData: User = await this.userService.updateUser(userId, userData);
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {
       next(error);
@@ -50,10 +50,10 @@ class UsersController {
   }
 
   public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+    const userId: string = req.params.id;
 
     try {
-      const deleteUserData: Users = await this.userService.deleteUserData(userId);
+      const deleteUserData: User = await this.userService.deleteUserData(userId);
       res.status(200).json({ data: deleteUserData, message: 'deleted' });
     } catch (error) {
       next(error);
