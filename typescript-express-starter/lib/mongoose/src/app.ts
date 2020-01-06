@@ -2,6 +2,7 @@ import * as cors from 'cors';
 import * as express from 'express';
 import * as helmet from 'helmet';
 import * as hpp from 'hpp';
+import * as mongoose from 'mongoose';
 import * as logger from 'morgan';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
@@ -16,6 +17,7 @@ class App {
     this.port = process.env.PORT || 3000;
     this.env = process.env.NODE_ENV === 'production' ? true : false;
 
+    this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeErrorHandling();
@@ -54,6 +56,22 @@ class App {
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  private connectToDatabase() {
+    const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
+    const options = {
+        useCreateIndex: true,
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+      };
+    
+      if (this.env) {
+        // production database
+      } else {
+        mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}?authSource=admin`, { ...options });
+      }
   }
 }
 

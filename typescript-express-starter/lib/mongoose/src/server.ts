@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import App from './app';
 import IndexRoute from './routes/index.route';
 import UsersRoute from './routes/users.route';

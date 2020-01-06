@@ -30,10 +30,21 @@ $ npm install -g typescript-express-starter
 The quickest way to get started is use npx and pass in the name of the project you want to create.
 If you don't specify a project name, the default _typescript-express-starter_ will be used instead.
 
-Create the app:
+### 1. Create the app
 
 ```bash
 $ npx typescript-express-starter "project name"
+```
+
+Choose the template you want. We will create more templates later.
+
+### 2. Select a templates 
+
+```bash
+? Select a templates (Use arraw keys)
+> default
+  mongoose
+--------------------
 ```
 
 Start your typescript-express-starter app in development mode at `http://localhost:3000/`
@@ -49,7 +60,7 @@ $ cd "project name" && npm run start
 - Run all unit-tests: `npm run test`.
 - Check for linting errors: `npm run lint`.
 
-## ⛑ Code Structure
+## ⛑ Code Structure (default)
 
 ```bash
 │
