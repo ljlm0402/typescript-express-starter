@@ -41,7 +41,7 @@ Choose the template you want. We will create more templates later.
 ### 2. Select a templates 
 
 ```bash
-? Select a templates (Use arraw keys)
+? Select a templates (Use arrow keys)
 > default
   mongoose
 --------------------
