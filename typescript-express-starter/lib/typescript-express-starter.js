@@ -5,6 +5,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const log = require('signale');
 const editJsonFile = require('edit-json-file');
 const childProcess = require('child_process');
 const inquirer = require('inquirer');
@@ -17,23 +18,10 @@ async function tsExpressStarter(destination) {
     updatePackageJson(destination);
     const dep = getDepStrings(directory);
     downloadNodeModules(destination, dep);
+    log.success('Project setup complete!');
   } catch (err) {
-    console.error(err);
+    log.error(err);
   }
-};
-
-function getDirectorys() {
-  let directorys = [];
-
-  fs.readdirSync(__dirname, { withFileTypes: true })
-  .forEach(p => {
-    const dir = p.name;
-    if (p.isDirectory()) {
-      directorys.push(dir);
-    }
-  });
-
-  return directorys;
 };
 
 async function fetchDirectory() {
@@ -48,7 +36,22 @@ async function fetchDirectory() {
     }
   ]);
 
+  log.start('Setting up new TypeScript-Express-Starter Project');
   return selectedTemplates;
+};
+
+function getDirectorys() {
+  let directorys = [];
+
+  fs.readdirSync(__dirname, { withFileTypes: true })
+  .forEach(p => {
+    const dir = p.name;
+    if (p.isDirectory()) {
+      directorys.push(dir);
+    }
+  });
+
+  return directorys;
 };
 
 function copyProjectFiles(destination, directory) {

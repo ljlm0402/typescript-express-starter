@@ -1,10 +1,10 @@
 {
   "name": "typescript-express-starter",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Quick and easy TypeScript Express Starter package",
   "author": "AGUMON ljlm0402@gmail.com",
   "license": "MIT",
-  "main": "lib/cli.js",
+  "main": "bin/cli.js",
   "keywords": [
     "typescript",
     "express",
@@ -22,9 +22,10 @@
   },
   "dependencies": {
     "edit-json-file": "^1.3.2",
-    "recursive-readdir": "^2.2.2",
     "inquirer": "^6.2.2",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "recursive-readdir": "^2.2.2",
+    "signale": "^1.4.0"
   },
   "repository": {
     "type": "git",
