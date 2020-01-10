@@ -41,7 +41,7 @@ Choose the template you want. We will create more templates later.
 ### 2. Select a templates 
 
 ```bash
-? Select a templates (Use arraw keys)
+? Select a templates (Use arrow keys)
 > default
   mongoose
 --------------------
@@ -119,3 +119,5 @@ $ cd "project name" && npm run start
 ## Contributors
 
 * Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
+
+* Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)

@@ -119,3 +119,5 @@ $ cd "project name" && npm run start
 ## Contributors
 
 * Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
+
+* Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)

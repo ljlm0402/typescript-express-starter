@@ -9,13 +9,9 @@ const path = require('path');
 const tsExpressStarter = require('../lib/typescript-express-starter');
 const destination = getDest(process.argv[2]);
 
-console.log('Setting up new TypeScript-Express-Starter Project');
-
-tsExpressStarter(destination).then(() => {
-  console.log('Project setup complete!');
-});
-
 function getDest(destFolder) {
   destFolder = destFolder || 'typescript-express-starter';
   return path.join(process.cwd(), destFolder);
 };
+
+tsExpressStarter(destination);
