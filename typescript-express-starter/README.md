@@ -1,4 +1,4 @@
-<img alt='logo' src='https://github.com/ljlm0402/typescript-express-starter/raw/master/typescript-express-starter.jpg' border='0'>
+<img src='https://github.com/ljlm0402/typescript-express-starter/raw/master/typescript-express-starter.jpg' border='0' alt='logo' />
 
 [Express](https://www.npmjs.com/package/express) with [TypeScript's](https://www.npmjs.com/package/typescript) application generator.
 
@@ -40,12 +40,7 @@ Choose the template you want. We will create more templates later.
 
 ### 2. Select a templates 
 
-```bash
-? Select a templates (Use arrow keys)
-> default
-  mongoose
---------------------
-```
+<img src='https://github.com/ljlm0402/typescript-express-starter/raw/master/typescript-express-starter.gif' border='0' alt='example' />
 
 Start your typescript-express-starter app in development mode at `http://localhost:3000/`
 
