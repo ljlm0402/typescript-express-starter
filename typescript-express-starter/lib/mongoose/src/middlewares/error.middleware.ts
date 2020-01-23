@@ -1,12 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpException from '../exceptions/HttpException';
 
-function errorMiddleware(error: HttpException, req: Request, res: Response, next: NextFunction ) {
-  if (res.headersSent) return next(error);
+function errorMiddleware(error: HttpException, req: Request, res: Response, next: NextFunction) {
   const status: number = error.status || 500;
   const message: string = error.message || 'Something went wrong';
 
-  console.log('[ERROR] ', status, message);
+  console.error('[ERROR] ', status, message);
 
   res.status(status).json({ message });
 }

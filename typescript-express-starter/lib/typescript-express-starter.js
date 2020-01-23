@@ -5,22 +5,24 @@
 
 const path = require('path');
 const fs = require('fs');
-const log = require('signale');
 const editJsonFile = require('edit-json-file');
 const childProcess = require('child_process');
-const inquirer = require('inquirer');
 const ncp = require('ncp').ncp;
+const inquirer = require('inquirer');
+const chalk = require('chalk');
+const ora = require('ora');
 
 async function tsExpressStarter(destination) {
   try {
     const directory = await fetchDirectory();
+    const spinner = ora(`Setting up new TypeScript Express Starter Project`).start();
     await copyProjectFiles(destination, directory);
     updatePackageJson(destination);
     const dep = getDepStrings(directory);
     downloadNodeModules(destination, dep);
-    log.success('Project setup complete!');
-  } catch (err) {
-    log.error(err);
+    spinner.succeed(`${chalk.green('Project setup complete!')}`);
+  } catch (error) {
+    console.error(`${chalk.red('[ERROR] Please leave this error as an issue.')}\n${error}`);
   }
 };
 
@@ -36,7 +38,6 @@ async function fetchDirectory() {
     }
   ]);
 
-  log.start('Setting up new TypeScript-Express-Starter Project');
   return selectedTemplates;
 };
 
