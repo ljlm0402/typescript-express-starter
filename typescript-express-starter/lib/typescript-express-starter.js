@@ -98,8 +98,8 @@ async function installDependencies(
   { dependencies, devDependencies },
 ) {
   const options = { cwd: destination };
-  await asyncExec('npm i -s' + dependencies, options);
-  await asyncExec('npm i -D' + devDependencies, options);
+  await asyncExec('npm i -s ' + dependencies, options);
+  await asyncExec('npm i -D ' + devDependencies, options);
 }
 
 module.exports = tsExpressStarter;
