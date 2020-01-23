@@ -59,19 +59,13 @@ class App {
   }
 
   private connectToDatabase() {
-    const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH } = process.env;
-    const options = {
-        useCreateIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-      };
+    const { 
+      MONGO_USER,
+      MONGO_PASSWORD,
+      MONGO_PATH 
+    } = process.env;
     
-      if (this.env) {
-        // production database
-      } else {
-        mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}?authSource=admin`, { ...options });
-      }
+    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}`);
   }
 }
 
