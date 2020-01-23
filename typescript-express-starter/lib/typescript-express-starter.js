@@ -89,25 +89,21 @@ async function getDependencies(directory) {
     '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest supertest tslint tslint-config-airbnb';
 
   switch (directory) {
-    case 'mongoose':
-      {
+    case 'mongoose': {
         dependencies += ' mongoose dotenv';
         devDependencies += ' @types/mongoose';
-      }
-      break;
+      } break;
   }
 
   return { dependencies, devDependencies };
 }
 
-async function installDependencies(
-  destination,
-  { dependencies, devDependencies },
-  spinner,
-) {
+async function installDependencies(destination, { dependencies, devDependencies }, spinner) {
   const options = { cwd: destination };
+
   spinner.text = 'Install dependencies..';
   await asyncExec('npm i -s ' + dependencies, options);
+  
   spinner.text = 'Install devDependencies..';
   await asyncExec('npm i -D ' + devDependencies, options);
 }
