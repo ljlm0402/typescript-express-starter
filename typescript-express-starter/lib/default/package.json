@@ -1,6 +1,8 @@
 {
   "name": "typescript-express-starter",
   "version": "0.0.0",
+  "description": "typescript-express-starter-default",
+  "license": "ISC",
   "scripts": {
     "start": "NODE_ENV=production ts-node --transpile-only src/server.ts",
     "dev": "NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts",

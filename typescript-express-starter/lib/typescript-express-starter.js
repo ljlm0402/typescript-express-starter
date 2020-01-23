@@ -9,24 +9,24 @@ const editJsonFile = require('edit-json-file');
 const childProcess = require('child_process');
 const ncp = require('ncp').ncp;
 const inquirer = require('inquirer');
-const chalk = require('chalk');
 const ora = require('ora');
+const chalk = require('chalk');
 
-async function tsExpressStarter(destination) {
+async function tsExpressStarter(projectName) {
   try {
-    const directory = await fetchDirectory();
-    const spinner = ora(`Setting up new TypeScript Express Starter Project`).start();
-    await copyProjectFiles(destination, directory);
-    updatePackageJson(destination);
-    const dep = getDepStrings(directory);
-    downloadNodeModules(destination, dep);
-    spinner.succeed(`${chalk.green('Project setup complete!')}`);
+    const template = await selectedTemplates();
+    await copyProjectFiles(projectName, template);
+    updatePackageJson(projectName);
+    const dependencies = getDependencies(template);
+    installDependencies(projectName, dependencies);
+    ora(`${chalk.green('Complete setup project')}`).succeed();
   } catch (error) {
-    console.error(`${chalk.red('[ERROR] Please leave this error as an issue.')}\n${error}`);
+    ora(chalk.red('Please leave this error as an issue.')).fail();
+    console.error(error);
   }
 };
 
-async function fetchDirectory() {
+async function selectedTemplates() {
   const directorys = getDirectorys();
   const directoryChoices = [...directorys, new inquirer.Separator()];
   const { selectedTemplates } = await inquirer.prompt([
@@ -56,6 +56,8 @@ function getDirectorys() {
 };
 
 function copyProjectFiles(destination, directory) {
+  ora(' copying project...').stopAndPersist({ symbol: '[ 1 / 3 ] 🔍 '});
+
   const prjFolder = `./${directory}`;
   const source = path.join(__dirname, prjFolder);
 
@@ -73,7 +75,9 @@ function updatePackageJson(destination) {
   file.set("name", path.basename(destination));
 };
 
-function getDepStrings(directory) {
+function getDependencies(directory) {
+  ora(' fetching dependencies...').stopAndPersist({ symbol: '[ 2 / 3 ] 🚚 '});
+
   let dependencies =
     'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript';
   let devDependencies =
@@ -89,10 +93,12 @@ function getDepStrings(directory) {
   return { dependencies, devDependencies };
 };
 
-function downloadNodeModules(destination, dep) {
+function installDependencies(destination, { dependencies, devDependencies }) {
+  ora(' linking dependencies...').stopAndPersist({ symbol: '[ 3 / 3 ] 🔗 '});
+  
   const options = { cwd: destination };
-  childProcess.execSync('npm i -s ' + dep.dependencies, options);
-  childProcess.execSync('npm i -D ' + dep.devDependencies, options);
+  childProcess.execSync('npm i -s ' + dependencies, options);
+  childProcess.execSync('npm i -D ' + devDependencies, options);
 };
 
 module.exports = tsExpressStarter;
