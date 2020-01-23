@@ -19,14 +19,21 @@ async function tsExpressStarter(projectName) {
   try {
     const template = await selectedTemplates();
 
-    spinner = ora('Setting up new Typescript Express Starter Project\n');
-    spinner.start();
+    console.log('[ 1 / 3 ] 🔍  copying project...');
+    console.log('[ 2 / 3 ] 🚚  fetching dependencies...');
 
     await copyProjectFiles(projectName, template);
     await updatePackageJson(projectName);
-
     const dependencies = await getDependencies(template);
-    await installDependencies(projectName, dependencies);
+
+    console.log('[ 3 / 3 ] 🔗  linking dependencies...');
+
+    console.log('\u001b[2m──────────────\u001b[22m');
+
+    spinner = ora('Install modules..\n');
+    spinner.start();
+
+    await installDependencies(projectName, dependencies, spinner);
 
     spinner.succeed(chalk`{green Complete setup project}`);
   } catch (error) {
@@ -96,9 +103,12 @@ async function getDependencies(directory) {
 async function installDependencies(
   destination,
   { dependencies, devDependencies },
+  spinner,
 ) {
   const options = { cwd: destination };
+  spinner.text = 'Install dependencies..';
   await asyncExec('npm i -s ' + dependencies, options);
+  spinner.text = 'Install devDependencies..';
   await asyncExec('npm i -D ' + devDependencies, options);
 }
 
