@@ -127,3 +127,5 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 * Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
 
 * BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
+
+* strama4 [https://github.com/strama4](https://github.com/strama4)
