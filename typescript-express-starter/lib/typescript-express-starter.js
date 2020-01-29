@@ -84,7 +84,7 @@ async function updatePackageJson(destination) {
 
 async function getDependencies(directory) {
   let dependencies =
-    'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript';
+    'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript cross-env';
   let devDependencies =
     '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest supertest tslint tslint-config-airbnb';
 
