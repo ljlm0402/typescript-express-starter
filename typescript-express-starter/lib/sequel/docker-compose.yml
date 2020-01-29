@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: "mongoose"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: mongodb
+    ports:
+    - 27017:27017
