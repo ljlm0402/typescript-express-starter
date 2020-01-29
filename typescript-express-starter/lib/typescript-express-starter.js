@@ -84,15 +84,18 @@ async function updatePackageJson(destination) {
 
 async function getDependencies(directory) {
   let dependencies =
-    'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript cross-env';
+    'class-transformer class-validator cors cross-env dotenv envalid express helmet hpp jest morgan ts-jest ts-node typescript';
   let devDependencies =
     '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest supertest tslint tslint-config-airbnb';
 
   switch (directory) {
     case 'mongoose': {
-        dependencies += ' mongoose dotenv';
+        dependencies += ' mongoose';
         devDependencies += ' @types/mongoose';
       } break;
+    case 'sequelize': {
+      dependencies += ' mysql2 sequelize sequelize-typescript';
+    }
   }
 
   return { dependencies, devDependencies };

@@ -2,11 +2,11 @@ import { Sequelize } from 'sequelize-typescript';
 import User from './users.model';
 
 export const sequelize = new Sequelize(
-  process.env.SEQUEL_DATABASE,
-  process.env.SEQUEL_USER,
-  process.env.SEQUEL_PASSWORD,
+  process.env.MYSQL_DATABASE,
+  process.env.MYSQL_USER,
+  process.env.MYSQL_PASSWORD,
   {
-    host: process.env.SEQUEL_PATH,
+    host: process.env.MYSQL_PATH,
     dialect: 'mysql',
     timezone: '+09:00',
     define: {
