@@ -70,6 +70,7 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 │
 ├── /src
 │   ├── /controllers
+│   │   ├── auth.controller.ts
 │   │   ├── index.controller.ts
 │   │   └── users.controller.ts
 │   │
@@ -80,6 +81,7 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 │   │   └── HttpException.ts
 │   │
 │   ├── /interfaces
+│   │   ├── auth.interface.ts
 │   │   ├── routes.interface.ts
 │   │   └── user.interface.ts
 │   │
@@ -91,13 +93,16 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 │   │   └── users.model.ts
 │   │
 │   ├── /routes
+│   │   ├── auth.route.ts
 │   │   ├── index.route.ts
 │   │   └── users.route.ts
 │   │
 │   ├── /services
+│   │   ├── auth.service.ts
 │   │   └── user.service.ts
 │   │
 │   ├── /tests
+│   │   ├── auth.test.ts
 │   │   ├── index.test.ts
 │   │   └── users.test.ts
 │   │
@@ -108,6 +113,7 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 │   ├── app.ts
 │   └── server.ts
 │
+├── .env
 ├── .gitignore
 ├── jest.config.js
 ├── package-lock.json

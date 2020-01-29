@@ -30,14 +30,14 @@ async function tsExpressStarter(projectName) {
 
     console.log('\u001b[2m──────────────\u001b[22m');
 
-    spinner = ora('Install modules..\n');
+    spinner = ora('Install modules...\n');
     spinner.start();
 
     await installDependencies(projectName, dependencies, spinner);
 
     spinner.succeed(chalk`{green Complete setup project}`);
   } catch (error) {
-    spinner.fail(chalk`{red Please leave this error as an issue.}`);
+    spinner.fail(chalk`{red Please leave this error as an issue}`);
     console.error(error);
   }
 }
@@ -84,13 +84,14 @@ async function updatePackageJson(destination) {
 
 async function getDependencies(directory) {
   let dependencies =
-    'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript';
+    'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript cookie-parser jsonwebtoken bcrypt dotenv';
   let devDependencies =
-    '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest supertest tslint tslint-config-airbnb';
+    '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest @types/cookie-parser @types/jsonwebtoken @types/bcrypt' + 
+    ' supertest tslint tslint-config-airbnb';
 
   switch (directory) {
     case 'mongoose': {
-        dependencies += ' mongoose dotenv';
+        dependencies += ' mongoose';
         devDependencies += ' @types/mongoose';
       } break;
   }
@@ -101,10 +102,10 @@ async function getDependencies(directory) {
 async function installDependencies(destination, { dependencies, devDependencies }, spinner) {
   const options = { cwd: destination };
 
-  spinner.text = 'Install dependencies..';
+  spinner.text = 'Install dependencies...';
   await asyncExec('npm i -s ' + dependencies, options);
   
-  spinner.text = 'Install devDependencies..';
+  spinner.text = 'Install devDependencies...';
   await asyncExec('npm i -D ' + devDependencies, options);
 }
 

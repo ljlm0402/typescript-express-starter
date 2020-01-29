@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto } from '../dtos/users.dto';
-import { User, Users } from '../interfaces/users.interface';
+import { User } from '../interfaces/users.interface';
 import userService from '../services/users.service';
 
 class UsersController {
@@ -8,7 +8,7 @@ class UsersController {
 
   public getUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const findAllUsersData: Users = await this.userService.findAllUser();
+      const findAllUsersData: User[] = await this.userService.findAllUser();
       res.status(200).json({ data: findAllUsersData, message: 'findAll' });
     } catch (error) {
       next(error);
@@ -42,7 +42,7 @@ class UsersController {
     const userData: User = req.body;
 
     try {
-      const updateUserData: Users = await this.userService.updateUser(userId, userData);
+      const updateUserData: User[] = await this.userService.updateUser(userId, userData);
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {
       next(error);
@@ -53,7 +53,7 @@ class UsersController {
     const userId: number = Number(req.params.id);
 
     try {
-      const deleteUserData: Users = await this.userService.deleteUserData(userId);
+      const deleteUserData: User[] = await this.userService.deleteUser(userId);
       res.status(200).json({ data: deleteUserData, message: 'deleted' });
     } catch (error) {
       next(error);

@@ -2,6 +2,7 @@ import { CreateUserDto } from '../dtos/users.dto';
 import HttpException from '../exceptions/HttpException';
 import { User } from '../interfaces/users.interface';
 import userModel from '../models/users.model';
+import { isEmptyObject } from '../utils/util';
 
 class UserService {
   public users = userModel;
@@ -12,30 +13,36 @@ class UserService {
   }
 
   public async findUserById(userId: string): Promise<User> {
-    const user = await this.users.findById(userId);
-    if (user) return user;
-    throw new HttpException(409, "You're not user");
+    const findUser = await this.users.findById(userId);
+    if (!findUser) throw new HttpException(409, "You're not user");
+    
+    return findUser;
   }
 
   public async createUser(userData: CreateUserDto): Promise<User> {
-    if (await this.users.findOne({ email: userData.email })) {
-      throw new HttpException(400, `User with email ${userData.email} already exists`);
-    }
-    const user = await this.users.create(userData);
+    if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
+    const findUser = await this.users.findOne({ email: userData.email });
+    if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
+    
+    const user = await this.users.create(userData);
     return user;
   }
 
   public async updateUser(userId: string, userData: User): Promise<User> {
-    const user = await this.users.findByIdAndUpdate(userId, userData);
-    if (user) return user;
-    throw new HttpException(409, "You're not user");
+    if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
+    
+    const updateUserById = await this.users.findByIdAndUpdate(userId, userData);
+    if (!updateUserById) throw new HttpException(409, "You're not user");
+
+    return updateUserById;
   }
 
   public async deleteUserData(userId: string): Promise<User> {
-    const user = await this.users.findByIdAndDelete(userId);
-    if (user) return user;
-    throw new HttpException(409, "You're not user");
+    const deleteUserById = await this.users.findByIdAndDelete(userId);
+    if (!deleteUserById) throw new HttpException(409, "You're not user");
+
+    return deleteUserById;
   }
 }
 
