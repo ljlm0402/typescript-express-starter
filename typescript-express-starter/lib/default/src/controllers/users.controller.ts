@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto } from '../dtos/users.dto';
 import { User } from '../interfaces/users.interface';
 import userService from '../services/users.service';
+import { RequestWithUser } from '../interfaces/auth.interface';
 
 class UsersController {
   public userService = new userService();
@@ -37,23 +38,25 @@ class UsersController {
     }
   }
 
-  public updateUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+  public updateUser = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    const id: number = Number(req.params.id);
+    const userId: number = Number(req.user.id);
     const userData: User = req.body;
 
     try {
-      const updateUserData: User[] = await this.userService.updateUser(userId, userData);
+      const updateUserData: User[] = await this.userService.updateUser(id, userId, userData);
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {
       next(error);
     }
   }
 
-  public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+  public deleteUser = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    const id: number = Number(req.params.id);
+    const userId : number = Number(req.user.id);
 
     try {
-      const deleteUserData: User[] = await this.userService.deleteUser(userId);
+      const deleteUserData: User[] = await this.userService.deleteUser(id, userId);
       res.status(200).json({ data: deleteUserData, message: 'deleted' });
     } catch (error) {
       next(error);

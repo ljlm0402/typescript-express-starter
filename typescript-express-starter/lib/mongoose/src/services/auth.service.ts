@@ -11,24 +11,24 @@ class AuthService {
   public users = userModel;
 
   public async signup(userData: CreateUserDto): Promise<User> {
-    if(isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
+    if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser =  await this.users.findOne({ email: userData.email })
+    const findUser: User = await this.users.findOne({ email: userData.email })
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
     
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const createUserData = await this.users.create({ ...userData, password: hashedPassword });
+    const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
     
     return createUserData;
   }
 
   public async login(userData: CreateUserDto): Promise<{ cookie: string, findUser: User }> {
-    if(isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
+    if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = await this.users.findOne({ email: userData.email });
     if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
 
-    const isPasswordMatching = await bcrypt.compare(userData.password, findUser.password);
+    const isPasswordMatching: boolean = await bcrypt.compare(userData.password, findUser.password);
     if (!isPasswordMatching) throw new HttpException(409, "You're password not matching");
 
     const tokenData = this.createToken(findUser);
@@ -42,7 +42,7 @@ class AuthService {
     const secret: string = process.env.JWT_SECRET;
     const expiresIn: number = 60 * 60;
 
-    return { token: jwt.sign(dataStoredInToken, secret, { expiresIn }), expiresIn };
+    return { expiresIn, token: jwt.sign(dataStoredInToken, secret, { expiresIn }) };
   }
 
   public createCookie(tokenData: TokenData): string {

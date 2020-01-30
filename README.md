@@ -57,13 +57,6 @@ $ cd "project name" && npm run start
 
 You may need to install [nodemon](https://www.npmjs.com/package/nodemon) separately if you do not currently have it installed on your machine.
 
-NOTE: If you are running this on a Windows machine, you will need to update the `npm run start` and `npm run dev` script commands as follows:
-
-```
-"start": "SET NODE_ENV=production & ts-node --transpile-only src/server.ts",
-"dev": "SET NODE_ENV=development & nodemon --watch src --delay 1 --exec ts-node src/server.ts",
-```
-
 ## ⛑ Code Structure (default)
 
 ```bash
@@ -86,6 +79,7 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 │   │   └── user.interface.ts
 │   │
 │   ├── /middlewares
+│   │   ├── auth.middleware.ts
 │   │   ├── error.middleware.ts
 │   │   └── validation.middleware.ts
 │   │
@@ -135,3 +129,7 @@ NOTE: If you are running this on a Windows machine, you will need to update the 
 * BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
 
 * strama4 [https://github.com/strama4](https://github.com/strama4)
+
+* João Silva [https://github.com/joaopms](https://github.com/joaopms)
+
+* sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)

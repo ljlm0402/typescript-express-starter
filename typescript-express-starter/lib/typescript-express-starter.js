@@ -15,7 +15,8 @@ const { promisify } = require('util');
 const asyncExec = promisify(exec);
 
 async function tsExpressStarter(projectName) {
-  let spinner = null;
+  let spinner;
+
   try {
     const template = await selectedTemplates();
 
@@ -84,9 +85,9 @@ async function updatePackageJson(destination) {
 
 async function getDependencies(directory) {
   let dependencies =
-    'class-transformer class-validator cors envalid express helmet hpp jest morgan ts-jest ts-node typescript cookie-parser jsonwebtoken bcrypt dotenv';
+    'bcrypt class-transformer class-validator cookie-parser cors cross-env dotenv envalid express helmet hpp jest jsonwebtoken morgan ts-jest ts-node typescript';
   let devDependencies =
-    '@types/cors @types/express @types/helmet @types/hpp @types/jest @types/morgan @types/node @types/supertest @types/cookie-parser @types/jsonwebtoken @types/bcrypt' + 
+    '@types/bcrypt @types/cookie-parser @types/cors @types/express @types/helmet @types/hpp @types/jest @types/jsonwebtoken @types/morgan @types/node @types/supertest' + 
     ' supertest tslint tslint-config-airbnb';
 
   switch (directory) {
@@ -94,6 +95,9 @@ async function getDependencies(directory) {
         dependencies += ' mongoose';
         devDependencies += ' @types/mongoose';
       } break;
+    case 'sequelize': {
+      dependencies += ' mysql2 sequelize sequelize-typescript';
+    }
   }
 
   return { dependencies, devDependencies };

@@ -6,16 +6,17 @@
   "license": "MIT",
   "main": "bin/cli.js",
   "keywords": [
-    "typescript",
+    "bcrypt",
     "express",
+    "mongoose",
+    "sequlize",
     "jest",
-    "tslint",
-    "tsconfig"
+    "jsonwebtoken",
+    "typescript"
   ],
   "scripts": {
-    "typescript-express-starter": "node bin/cli.js",
     "start": "node bin/cli.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "typescript-express-starter": "node bin/cli.js"
   },
   "bin": {
     "typescript-express-starter": "bin/cli.js"

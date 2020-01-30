@@ -13,11 +13,11 @@ class AuthService {
   public async signup(userData: CreateUserDto): Promise<User> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser =  this.users.find(user => user.email === userData.email);
+    const findUser: User = this.users.find(user => user.email === userData.email);
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const createUserData = { id: (this.users.length + 1), ...userData, password: hashedPassword };
+    const createUserData: User = { id: (this.users.length + 1), ...userData, password: hashedPassword };
 
     return createUserData;
   }
@@ -25,10 +25,10 @@ class AuthService {
   public async login(userData: CreateUserDto): Promise<{ cookie: string, findUser: User }> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser = this.users.find(user => user.email === userData.email);
+    const findUser: User = this.users.find(user => user.email === userData.email);
     if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
 
-    const isPasswordMatching = await bcrypt.compare(userData.password, findUser.password);
+    const isPasswordMatching: boolean = await bcrypt.compare(userData.password, findUser.password);
     if (!isPasswordMatching) throw new HttpException(409, "You're password not matching");
 
     const tokenData = this.createToken(findUser);

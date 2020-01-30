@@ -1,3 +1,4 @@
+import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dtos/users.dto';
 import HttpException from '../exceptions/HttpException';
 import { User } from '../interfaces/users.interface';
@@ -8,12 +9,12 @@ class UserService {
   public users = userModel;
 
   public async findAllUser(): Promise<User[]> {
-    const users = await this.users.find();
+    const users: User[] = await this.users.find();
     return users;
   }
 
   public async findUserById(userId: string): Promise<User> {
-    const findUser = await this.users.findById(userId);
+    const findUser: User = await this.users.findById(userId);
     if (!findUser) throw new HttpException(409, "You're not user");
     
     return findUser;
@@ -22,24 +23,29 @@ class UserService {
   public async createUser(userData: CreateUserDto): Promise<User> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
-    const findUser = await this.users.findOne({ email: userData.email });
+    const findUser: User = await this.users.findOne({ email: userData.email });
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
     
-    const user = await this.users.create(userData);
+    const user: User = await this.users.create(userData);
     return user;
   }
 
-  public async updateUser(userId: string, userData: User): Promise<User> {
+  public async updateUser(id: string, userId: string, userData: User): Promise<User> {
+    if (id !== userId) throw new HttpException(403, "You're not authrized");
+
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
     
-    const updateUserById = await this.users.findByIdAndUpdate(userId, userData);
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const updateUserById: User = await this.users.findByIdAndUpdate(userId, { ...userData, password: hashedPassword });
     if (!updateUserById) throw new HttpException(409, "You're not user");
 
     return updateUserById;
   }
 
-  public async deleteUserData(userId: string): Promise<User> {
-    const deleteUserById = await this.users.findByIdAndDelete(userId);
+  public async deleteUserData(id: string, userId: string): Promise<User> {
+    if (id !== userId) throw new HttpException(403, "You're not authrized");
+
+    const deleteUserById: User = await this.users.findByIdAndDelete(userId);
     if (!deleteUserById) throw new HttpException(409, "You're not user");
 
     return deleteUserById;

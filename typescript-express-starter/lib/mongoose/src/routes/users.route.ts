@@ -2,6 +2,7 @@ import { Router } from 'express';
 import UsersController from '../controllers/users.controller';
 import { CreateUserDto } from '../dtos/users.dto';
 import Route from '../interfaces/routes.interface';
+import authMiddleware from '../middlewares/auth.middleware';
 import validationMiddleware from '../middlewares/validation.middleware';
 
 class UsersRoute implements Route {
@@ -17,8 +18,8 @@ class UsersRoute implements Route {
     this.router.get(`${this.path}`, this.usersController.getUsers);
     this.router.get(`${this.path}/:id`, this.usersController.getUserById);
     this.router.post(`${this.path}`, validationMiddleware(CreateUserDto), this.usersController.createUser);
-    this.router.put(`${this.path}/:id`, validationMiddleware(CreateUserDto, true), this.usersController.updateUser);
-    this.router.delete(`${this.path}/:id`, this.usersController.deleteUser);
+    this.router.put(`${this.path}/:id`, authMiddleware, validationMiddleware(CreateUserDto, true), this.usersController.updateUser);
+    this.router.delete(`${this.path}/:id`, authMiddleware, this.usersController.deleteUser);
   }
 }
 
