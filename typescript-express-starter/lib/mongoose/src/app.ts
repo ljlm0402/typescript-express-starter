@@ -61,14 +61,10 @@ class App {
   }
 
   private connectToDatabase() {
-    const { 
-      MONGO_USER,
-      MONGO_PASSWORD,
-      MONGO_PATH,
-      MONGO_DATABASE 
-    } = process.env;
-    
-    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}/${MONGO_DATABASE}`);
+    const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DATABASE } = process.env;
+    const options = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
+
+    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}/${MONGO_DATABASE}?authSource=admin`, { ...options });
   }
 }
 

@@ -15,10 +15,10 @@ class AuthService {
 
     const findUser: User = await this.users.findOne({ where: { email: userData.email } });
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
-    
+
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
-    
+
     return createUserData;
   }
 
@@ -35,6 +35,15 @@ class AuthService {
     const cookie = this.createCookie(tokenData);
 
     return { cookie, findUser };
+  }
+
+  public async logout(userData: User): Promise<User> {
+    if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
+
+    const findUser: User = await this.users.findOne({ where: { password: userData.password } });
+    if (!findUser) throw new HttpException(409, "You're not user");
+
+    return findUser;
   }
 
   public createToken(user: User): TokenData {

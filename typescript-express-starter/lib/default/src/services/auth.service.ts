@@ -37,6 +37,15 @@ class AuthService {
     return { cookie, findUser };
   }
 
+  public async logout(userData: User): Promise<User> {
+    if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
+
+    const findUser: User = this.users.find(user => user.password === userData.password);
+    if (!findUser) throw new HttpException(409, "You're not user");
+
+    return findUser;
+  }
+
   public createToken(user: User): TokenData {
     const dataStoredInToken: DataStoredInToken = { id: user.id };
     const secret: string = process.env.JWT_SECRET;

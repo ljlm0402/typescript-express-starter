@@ -32,9 +32,7 @@ class UserService {
     return createUserData;
   }
 
-  public async updateUser(id: number, userId: number, userData: User): Promise<User[]> {
-    if (id !== userId) throw new HttpException(403, "You're not authrized");
-
+  public async updateUser(userId: number, userData: User): Promise<User[]> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = this.users.find(user => user.id === userId);
@@ -49,9 +47,7 @@ class UserService {
     return updateUserData;
   }
 
-  public async deleteUser(id: number, userId: number): Promise<User[]> {
-    if (id !== userId) throw new HttpException(403, "You're not authrized");
-
+  public async deleteUser(userId: number): Promise<User[]> {
     const findUser: User = this.users.find(user => user.id === userId);
     if (!findUser) throw new HttpException(409, "You're not user");
 

@@ -16,7 +16,7 @@ class UserService {
   public async findUserById(userId: string): Promise<User> {
     const findUser: User = await this.users.findById(userId);
     if (!findUser) throw new HttpException(409, "You're not user");
-    
+
     return findUser;
   }
 
@@ -25,16 +25,15 @@ class UserService {
 
     const findUser: User = await this.users.findOne({ email: userData.email });
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
-    
-    const user: User = await this.users.create(userData);
-    return user;
+
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
+    return createUserData;
   }
 
-  public async updateUser(id: string, userId: string, userData: User): Promise<User> {
-    if (id !== userId) throw new HttpException(403, "You're not authrized");
-
+  public async updateUser(userId: string, userData: User): Promise<User> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
-    
+
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const updateUserById: User = await this.users.findByIdAndUpdate(userId, { ...userData, password: hashedPassword });
     if (!updateUserById) throw new HttpException(409, "You're not user");
@@ -42,9 +41,7 @@ class UserService {
     return updateUserById;
   }
 
-  public async deleteUserData(id: string, userId: string): Promise<User> {
-    if (id !== userId) throw new HttpException(403, "You're not authrized");
-
+  public async deleteUserData(userId: string): Promise<User> {
     const deleteUserById: User = await this.users.findByIdAndDelete(userId);
     if (!deleteUserById) throw new HttpException(409, "You're not user");
 

@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto } from '../dtos/users.dto';
-import AuthService from '../services/auth.service';
+import { RequestWithUser } from '../interfaces/auth.interface';
 import { User } from '../interfaces/users.interface';
+import AuthService from '../services/auth.service';
 
 class AuthController {
   public authService = new AuthService();
@@ -29,10 +30,13 @@ class AuthController {
     }
   }
 
-  public logOut = (req: Request, res: Response, next: NextFunction) => {
+  public logOut = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+    const userData: User = req.user;
+
     try {
+      const logOutUserData: User = await this.authService.logout(userData);
       res.setHeader('Set-Cookie', ['Authorization=; Max-age=0']);
-      res.status(200).json({ message: 'logout' });
+      res.status(200).json({ data: logOutUserData, message: 'logout' });
     } catch (error) {
       next(error);
     }
