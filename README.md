@@ -116,11 +116,11 @@ You may need to install [nodemon](https://www.npmjs.com/package/nodemon) separat
 └── tslint.json
 ```
 
-## License
+## 💳 License
 
 [MIT](LICENSE)
 
-## Contributors
+## 🤝 Contributors
 
 * Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
 
