@@ -20,6 +20,5 @@ jobs:
 
       - name: Publish npm
         run: npm publish --access public
-        working-directory: ./typescript-express-starter
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
