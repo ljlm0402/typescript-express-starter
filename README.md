@@ -11,7 +11,7 @@
 ## 🧐 What is it?
 
 Creates a new typescript express application.
-application is configured to use TypeScript instead of plain JavaScript. 
+application is configured to use TypeScript instead of plain JavaScript. NOTE: This project is a variation of the project <i>express-generator-typescript</i> located here <a href="https://github.com/seanpmaxwell/express-generator-typescript">here<a/>.
 
 ## 🤔 Why typescript-express-starter?
 
