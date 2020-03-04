@@ -2,7 +2,8 @@
 
 /*****************************************************************
  * Create new typescript-express-starter project.
- * created by Lim Kyungmin, 12/18/2019
+ * By AGUMON <ljlm0402@gmail.com>
+ * December 18, 2019.
  *****************************************************************/
 
 const path = require('path');

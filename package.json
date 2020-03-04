@@ -1,18 +1,18 @@
 {
   "name": "typescript-express-starter",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
   "main": "bin/cli.js",
   "keywords": [
-    "bcrypt",
+    "typescript",
     "express",
-    "mongoose",
     "sequlize",
+    "mongoose",
     "jest",
     "jsonwebtoken",
-    "typescript"
+    "bcrypt"
   ],
   "bin": {
     "typescript-express-starter": "bin/cli.js"

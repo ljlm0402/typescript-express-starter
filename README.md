@@ -8,29 +8,31 @@
 
 <br />
 
-## 🧐 What is it?
+## 🤔 What is Express ?
 
-Creates a new typescript express application.
-application is configured to use TypeScript instead of plain JavaScript. 
+Express is a fast, open and concise web framework and is a Node.js based project.
 
-## 🤔 Why typescript-express-starter?
+## 🧐 What is The package ?
 
-Node Js is great for the rapid development of web-projects, but is often neglected because of the lack of
-type safety. TypeScript solves this issue and (along with its linter file) can even make your code
-more robust than some other static languages like Java.
+Express consists of JavaScript, which makes it vulnerable to type definitions. That's why we avoid supersets with starter packages that introduce TypeScript.
 
-## ⚙️ Installation
+The package is configured to use TypeScript instead of JavaScript.
+
+## 🚀 Quick Start
+
+### Install with the npm global package
 
 ```sh
 $ npm install -g typescript-express-starter
 ```
 
-## 🚀 Quick Start
+### Run npx to install the package
 
-The quickest way to get started is use npx and pass in the name of the project you want to create.
-If you don't specify a project name, the default _typescript-express-starter_ will be used instead.
+npx is a tool in the JavaScript package management module, npm.
 
-### 1. Create the app
+This is a tool that allows you to run the npm package on a single run without installing the package.
+
+If you do not enter a project name, it defaults to _typescript-express-starter_.
 
 ```bash
 $ npx typescript-express-starter "project name"
@@ -38,7 +40,7 @@ $ npx typescript-express-starter "project name"
 
 Choose the template you want. We will create more templates later.
 
-### 2. Select a templates 
+### Select a templates 
 
 <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/example.gif' border='0' alt='example' />
 
