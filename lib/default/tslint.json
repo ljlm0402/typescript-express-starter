@@ -13,7 +13,8 @@
       "object-literal-sort-keys": false,
       "disable-next-line": ["align", "no-trailing-whitespace"],
       "max-classes-per-file": true,
-      "no-parameter-reassignment": false
+      "no-parameter-reassignment": false,
+      "jsdoc-format": false
     },
     "rulesDirectory": []
   }
