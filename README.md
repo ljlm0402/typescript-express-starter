@@ -12,7 +12,7 @@
 
 Express is a fast, open and concise web framework and is a Node.js based project.
 
-## 😎 What is The package ?
+## 😎 Introducing the package.
 
 Express consists of JavaScript, which makes it vulnerable to type definitions. That's why we avoid supersets with starter packages that introduce TypeScript.
 
@@ -52,7 +52,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 $ cd "project name" && npm run start
 ```
 
-## 🎠 Available commands for the server.
+## 🛎 Available commands for the server.
 
 - Run the Server in production mode : `npm run start`.
 - Run the Server in development mode : `npm run dev`.
@@ -61,7 +61,7 @@ $ cd "project name" && npm run start
 
 You may need to install [nodemon](https://www.npmjs.com/package/nodemon) separately if you do not currently have it installed on your machine.
 
-## ⛑ Code Structure (default)
+## 🗂 Code Structure (default)
 
 ```bash
 │
@@ -148,3 +148,5 @@ Modify `swagger.yaml` file to your source code
 * João Silva [https://github.com/joaopms](https://github.com/joaopms)
 
 * sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
+
+* Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
