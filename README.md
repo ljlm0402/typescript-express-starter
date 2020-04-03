@@ -12,7 +12,7 @@
 
 Express is a fast, open and concise web framework and is a Node.js based project.
 
-## 🧐 What is The package ?
+## 😎 What is The package ?
 
 Express consists of JavaScript, which makes it vulnerable to type definitions. That's why we avoid supersets with starter packages that introduce TypeScript.
 
@@ -116,9 +116,20 @@ You may need to install [nodemon](https://www.npmjs.com/package/nodemon) separat
 ├── jest.config.js
 ├── package-lock.json
 ├── package.json
+├── swagger.yaml
 ├── tsconfig.json
 └── tslint.json
 ```
+
+## 📗 Swagger UI Docs
+
+Simplify API development for users, teams, and enterprises with the Swagger open source and professional toolset. 
+
+Find out how Swagger can help you design and document your APIs at scale.
+
+Start your typescript-express-starter app in development mode at `http://localhost:3000/swagger`
+
+Modify `swagger.yaml` file to your source code
 
 ## 💳 License
 
