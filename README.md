@@ -59,8 +59,6 @@ $ cd "project name" && npm run start
 - Run all unit-tests: `npm run test`.
 - Check for linting errors: `npm run lint`.
 
-You may need to install [nodemon](https://www.npmjs.com/package/nodemon) separately if you do not currently have it installed on your machine.
-
 ## 🗂 Code Structure (default)
 
 ```bash
