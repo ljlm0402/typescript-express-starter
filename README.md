@@ -148,3 +148,5 @@ Modify `swagger.yaml` file to your source code
 * sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
 
 * Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
+
+* Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
