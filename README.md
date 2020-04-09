@@ -131,7 +131,7 @@ Modify `swagger.yaml` file to your source code
 
 ## 📬 Recommended Commit Message
 
-|  When ?  |  Commit Message  |
+|  When |  Commit Message  |
 |:--------|:-----------|
 | Add function | feat: ⚡️ Add function |
 | Fix bug | fix: 🐞 Fix bug |
