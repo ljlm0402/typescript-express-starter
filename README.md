@@ -129,7 +129,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 Modify `swagger.yaml` file to your source code
 
-## Recommended Commit Message
+## 📬 Recommended Commit Message
 
 |  When ?  |  Commit Message  |
 |:--------|:-----------|
