@@ -129,6 +129,17 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 Modify `swagger.yaml` file to your source code
 
+## Recommended Commit Message
+
+|  When ?  |  Commit Message  |
+|:--------|:-----------|
+| Add function | feat: ⚡️ Add function |
+| Fix bug | fix: 🐞 Fix bug |
+| Refactoring | refactor: 🛠 Refactoring |
+| Add package | package: 📦 Add package |
+| Fix readme | docs: 📚 Fix readme |
+| Improvements style | style: 👁 Improvements style |
+
 ## 💳 License
 
 [MIT](LICENSE)
