@@ -14,7 +14,9 @@ Express is a fast, open and concise web framework and is a Node.js based project
 
 ## 😎 Introducing the package.
 
-Express consists of JavaScript, which makes it vulnerable to type definitions. That's why we avoid supersets with starter packages that introduce TypeScript.
+Express consists of JavaScript, which makes it vulnerable to type definitions. 
+
+That's why we avoid supersets with starter packages that introduce TypeScript.
 
 The package is configured to use TypeScript instead of JavaScript. 
 
@@ -70,15 +72,19 @@ $ cd "project name" && npm run start
 │   │   └── users.controller.ts
 │   │
 │   ├── /dtos
-│   │   └── user.dto.ts
+│   │   └── users.dto.ts
 │   │
 │   ├── /exceptions
 │   │   └── HttpException.ts
 │   │
+│   ├── /http
+│   │   ├── auth.http
+│   │   └── users.http
+│   │
 │   ├── /interfaces
 │   │   ├── auth.interface.ts
 │   │   ├── routes.interface.ts
-│   │   └── user.interface.ts
+│   │   └── users.interface.ts
 │   │
 │   ├── /middlewares
 │   │   ├── auth.middleware.ts
@@ -95,7 +101,7 @@ $ cd "project name" && npm run start
 │   │
 │   ├── /services
 │   │   ├── auth.service.ts
-│   │   └── user.service.ts
+│   │   └── users.service.ts
 │   │
 │   ├── /tests
 │   │   ├── auth.test.ts
@@ -129,6 +135,12 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 Modify `swagger.yaml` file to your source code
 
+## 🌐 REST Client
+
+REST Client allows you to send HTTP request and view the response in Visual Studio Code directly.
+
+VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) Install.
+
 ## 📬 Recommended Commit Message
 
 |  When |  Commit Message  |
@@ -161,3 +173,9 @@ Modify `swagger.yaml` file to your source code
 * Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
 
 * Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
+
+## 📬 Please request an issue
+
+In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
+
+Thank you very much for your interest in our package. 
