@@ -47,7 +47,7 @@ Choose the template you want. We will create more templates later.
 
 ### Select a templates 
 
-<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/example.gif' border='0' alt='example' />
+<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/cli.gif' border='0' alt='cli' />
 
 Start your typescript-express-starter app in development mode at `http://localhost:3000/`
 
@@ -152,6 +152,7 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 | Add package | package: 📦 Add package |
 | Fix readme | docs: 📚 Fix readme |
 | Improvements style | style: 👁 Improvements style |
+| New Releases | releases: 🎉 Releases |
 
 ## 💳 License
 
@@ -174,6 +175,10 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 * Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
 
 * Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
+
+* João Silva [https://github.com/joaopms](https://github.com/joaopms)
+
+* Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
 
 ## 📬 Please request an issue
 
