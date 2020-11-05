@@ -161,13 +161,12 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 |  When |  Commit Message  |
 |:--------|:-----------|
-| Add function | feat: ⚡️ Add function |
-| Fix bug | fix: 🐞 Fix bug |
-| Refactoring | refactor: 🛠 Refactoring |
-| Add package | package: 📦 Add package |
-| Fix readme | docs: 📚 Fix readme |
-| Improvements style | style: 👁 Improvements style |
-| New Releases | releases: 🎉 Releases |
+| Add Function | feat: ⚡️ Add Function |
+| Fix Bug | fix: 🐞 Fix Bug |
+| Refactoring Code | refactor: 🛠 Refactoring Code |
+| Install Package | package: 📦 Install Package |
+| Fix Readme | docs: 📚 Fix Readme |
+| New Releases | releases: 🎉 New Releases |
 
 ## 💳 License
 
@@ -177,21 +176,19 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 * Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
 
-* Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
+* João Silva [https://github.com/joaopms](https://github.com/joaopms)
 
 * BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
 
-* strama4 [https://github.com/strama4](https://github.com/strama4)
+* Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
 
-* João Silva [https://github.com/joaopms](https://github.com/joaopms)
+* Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
+
+* strama4 [https://github.com/strama4](https://github.com/strama4)
 
 * sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
 
 * Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
-
-* Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
-
-* João Silva [https://github.com/joaopms](https://github.com/joaopms)
 
 * Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
 
