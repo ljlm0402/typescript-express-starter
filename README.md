@@ -116,15 +116,30 @@ $ cd "project name" && npm run start
 │   ├── app.ts
 │   └── server.ts
 │
+├── .dockerignore
 ├── .env
 ├── .gitignore
+├── docker-compose.yml
+├── Dockerfile
+├── Dockerfile.dev
 ├── jest.config.js
+├── Makefile
+├── nginx.conf
 ├── package-lock.json
 ├── package.json
 ├── swagger.yaml
 ├── tsconfig.json
 └── tslint.json
 ```
+
+## 🐳 Dockerize
+
+[Docker](https://docs.docker.com/) is a platform for developers and sysadmins to build, run, and share applications with containers.
+
+[Docker](https://docs.docker.com/get-docker/) Install.
+
+- starts the containers in the background and leaves them running : `docker-compose up -d`.
+- Stops containers and removes containers, networks, volumes, and images : `docker-compose down`.
 
 ## 📗 Swagger UI Docs
 

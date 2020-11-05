@@ -18,25 +18,10 @@ services:
     container_name: server
     ports:
       - "3000:3000"
-    environment: 
-      MONGO_HOST: mongo
-      MONGO_PORT: 27017
-      MONGO_DATABASE: mongoose
     volumes:
       - ./:/app
       - /app/node_modules
     restart: "unless-stopped"
-    networks:
-      - backend
-    links:
-      - mongo
-    depends_on:
-      - mongo
-  mongo:
-    image: mvertes/alpine-mongo
-    container_name: mongo
-    ports:
-      - "27017:27017"
     networks:
       - backend
 
