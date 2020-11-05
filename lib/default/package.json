@@ -1,6 +1,9 @@
 {
   "name": "typescript-express-starter",
   "version": "0.0.0",
+  "description": "TypeScript + Express API Server",
+  "author": "",
+  "license": "ISC",
   "scripts": {
     "start": "cross-env NODE_ENV=production ts-node --transpile-only src/server.ts",
     "dev": "cross-env NODE_ENV=development nodemon --watch src --delay 1 --exec 'ts-node' src/server.ts",

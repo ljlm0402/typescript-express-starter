@@ -1,12 +1,12 @@
 import { Sequelize } from 'sequelize-typescript';
 import User from './users.model';
 
-export const sequelize = new Sequelize(
+const sequelize = new Sequelize(
   process.env.MYSQL_DATABASE,
   process.env.MYSQL_USER,
   process.env.MYSQL_PASSWORD,
   {
-    host: process.env.MYSQL_PATH,
+    host: process.env.MYSQL_HOST,
     dialect: 'mysql',
     timezone: '+09:00',
     define: {
@@ -27,3 +27,5 @@ sequelize.addModels([User]);
 sequelize.authenticate().catch((err: Error) => {
   console.error('Unable to connect to the database:', err);
 });
+
+export default sequelize;

@@ -1,12 +1,12 @@
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import * as express from 'express';
-import helmet from 'helmet';
+import * as helmet from 'helmet';
 import * as hpp from 'hpp';
 import * as logger from 'morgan';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
-import { sequelize } from './models/index.model';
+import sequelize from './models/index.model';
 
 class App {
   public app: express.Application;
@@ -18,6 +18,7 @@ class App {
     this.port = process.env.PORT || 3000;
     this.env = process.env.NODE_ENV === 'production' ? true : false;
 
+    this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeErrorHandling();
@@ -43,7 +44,6 @@ class App {
       this.app.use(logger('dev'));
       this.app.use(cors({ origin: true, credentials: true }));
     }
-    sequelize.sync({ force: false });
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
@@ -57,6 +57,10 @@ class App {
 
   private initializeErrorHandling() {
     this.app.use(errorMiddleware);
+  }
+
+  private connectToDatabase() {
+    sequelize.sync({ force: false });
   }
 
 }

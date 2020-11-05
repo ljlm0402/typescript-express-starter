@@ -1,7 +1,7 @@
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import * as express from 'express';
-import helmet from 'helmet';
+import * as helmet from 'helmet';
 import * as hpp from 'hpp';
 import * as mongoose from 'mongoose';
 import * as logger from 'morgan';
@@ -61,10 +61,14 @@ class App {
   }
 
   private connectToDatabase() {
-    const { MONGO_USER, MONGO_PASSWORD, MONGO_PATH, MONGO_DATABASE } = process.env;
+    const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
     const options = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
 
-    mongoose.connect(`mongodb://${MONGO_USER}:${MONGO_PASSWORD}${MONGO_PATH}/${MONGO_DATABASE}?authSource=admin`, { ...options });
+    mongoose
+    .connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`, { ...options })
+    .catch(error => {
+      console.error('[ERROR]', error);
+    });
   }
 }
 
