@@ -17,12 +17,12 @@ class AuthService {
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const createUserData: User = { id: (this.users.length + 1), ...userData, password: hashedPassword };
+    const createUserData: User = { id: this.users.length + 1, ...userData, password: hashedPassword };
 
     return createUserData;
   }
 
-  public async login(userData: CreateUserDto): Promise<{ cookie: string, findUser: User }> {
+  public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = this.users.find(user => user.email === userData.email);

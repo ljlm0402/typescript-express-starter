@@ -1,15 +1,17 @@
-import * as cookieParser from 'cookie-parser';
-import * as cors from 'cors';
-import * as express from 'express';
-import * as helmet from 'helmet';
-import * as hpp from 'hpp';
-import * as logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import logger from 'morgan';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 
 class App {
   public app: express.Application;
-  public port: (string | number);
+  public port: string | number;
   public env: boolean;
 
   constructor(routes: Routes[]) {
@@ -50,14 +52,11 @@ class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
-    routes.forEach((route) => {
+    routes.forEach(route => {
       this.app.use('/', route.router);
     });
   }
   private initializeSwagger() {
-    const swaggerJSDoc = require('swagger-jsdoc');
-    const swaggerUi = require('swagger-ui-express');
-
     const options = {
       swaggerDefinition: {
         info: {
@@ -70,7 +69,7 @@ class App {
     };
 
     const specs = swaggerJSDoc(options);
-    this.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
   private initializeErrorHandling() {
