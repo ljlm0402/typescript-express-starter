@@ -15,11 +15,11 @@ Express is a fast, open and concise web framework and is a Node.js based project
 
 ## 😎 Introducing the package.
 
-Express consists of JavaScript, which makes it vulnerable to type definitions. 
+Express consists of JavaScript, which makes it vulnerable to type definitions.
 
 That's why we avoid supersets with starter packages that introduce TypeScript.
 
-The package is configured to use TypeScript instead of JavaScript. 
+The package is configured to use TypeScript instead of JavaScript.
 
 NOTE: This project is a variation of [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript) by [seanpmaxwell](https://github.com/seanpmaxwell) 👍
 
@@ -45,7 +45,7 @@ $ npx typescript-express-starter "project name"
 
 Choose the template you want. We will create more templates later.
 
-### Select a templates 
+### Select a templates
 
 <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/cli.gif' border='0' alt='cli' />
 
@@ -61,6 +61,7 @@ $ cd "project name" && npm run start
 - Run the Server in development mode : `npm run dev`.
 - Run all unit-tests: `npm run test`.
 - Check for linting errors: `npm run lint`.
+- Fix for linting: `npm run lint:fix`.
 
 ## 🗂 Code Structure (default)
 
@@ -117,8 +118,12 @@ $ cd "project name" && npm run start
 │   └── server.ts
 │
 ├── .dockerignore
+├── .editorconfig
 ├── .env
+├── .eslintignore
+├── .eslintrc
 ├── .gitignore
+├── .prettierrc
 ├── docker-compose.yml
 ├── Dockerfile
 ├── Dockerfile.dev
@@ -128,8 +133,7 @@ $ cd "project name" && npm run start
 ├── package-lock.json
 ├── package.json
 ├── swagger.yaml
-├── tsconfig.json
-└── tslint.json
+└── tsconfig.json
 ```
 
 ## 🐳 Dockerize
@@ -141,9 +145,23 @@ $ cd "project name" && npm run start
 - starts the containers in the background and leaves them running : `docker-compose up -d`.
 - Stops containers and removes containers, networks, volumes, and images : `docker-compose down`.
 
+## 🪄 Code Formatter
+
+Palantir, the backers behind TSLint announced in 2019 that they would be deprecating TSLint in favor of supporting typescript-eslint in order to benefit the community.
+
+So, migration from TSLint to ESLint.
+
+[ESLint](https://eslint.org/), Find and fix problems in your JavaScript code
+
+[Prettier](https://prettier.io/) is an opinionated code formatter.
+
+It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
+
+VSCode Extension [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
 ## 📗 Swagger UI Docs
 
-Simplify API development for users, teams, and enterprises with the Swagger open source and professional toolset. 
+Simplify API development for users, teams, and enterprises with the Swagger open source and professional toolset.
 
 Find out how Swagger can help you design and document your APIs at scale.
 
@@ -159,14 +177,14 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 ## 📬 Recommended Commit Message
 
-|  When |  Commit Message  |
-|:--------|:-----------|
-| Add Function | feat: ⚡️ Add Function |
-| Fix Bug | fix: 🐞 Fix Bug |
+| When             | Commit Message               |
+| :--------------- | :--------------------------- |
+| Add Feature      | feat: ⚡️ Add Feature        |
+| Fix Bug          | fix: 🐞 Fix Bug              |
 | Refactoring Code | refactor: 🛠 Refactoring Code |
-| Install Package | package: 📦 Install Package |
-| Fix Readme | docs: 📚 Fix Readme |
-| New Releases | releases: 🎉 New Releases |
+| Install Package  | package: 📦 Install Package  |
+| Fix Readme       | docs: 📚 Fix Readme          |
+| New Releases     | releases: 🎉 New Releases    |
 
 ## 💳 License
 
@@ -176,26 +194,26 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 <img src="https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter" alt="Contributors">
 
-* Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
+- Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
 
-* João Silva [https://github.com/joaopms](https://github.com/joaopms)
+- João Silva [https://github.com/joaopms](https://github.com/joaopms)
 
-* BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
+- BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
 
-* Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
+- Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
 
-* Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
+- Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
 
-* strama4 [https://github.com/strama4](https://github.com/strama4)
+- strama4 [https://github.com/strama4](https://github.com/strama4)
 
-* sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
+- sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
 
-* Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
+- Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
 
-* Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
+- Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
 
 ## 📬 Please request an issue
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
 
-Thank you very much for your interest in our package. 
+Thank you very much for your interest in our package.
