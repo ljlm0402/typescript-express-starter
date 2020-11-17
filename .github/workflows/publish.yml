@@ -15,7 +15,8 @@ jobs:
       - name: Setup nodejs
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
 
       - name: Publish npm
         run: npm publish --access public
