@@ -13,10 +13,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup nodejs
-        uses: actions/setup-node@v1.4.3
+        uses: actions/setup-node@v1
         with:
-          node-version: 12
-          registry-url: https://registry.npmjs.org/
+          node-version: '12'
 
       - name: Publish npm
         run: npm publish --access public
