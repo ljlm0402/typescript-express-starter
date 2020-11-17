@@ -6,7 +6,7 @@ paths:
 # [GET] users
   /users:
     get:
-      tags: 
+      tags:
       - users
       summary: Find All Users
       responses:
