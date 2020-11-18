@@ -213,6 +213,8 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 - Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
 
+- Malavan [https://github.com/malavan](https://github.com/malavan)
+
 ## 📬 Please request an issue
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
