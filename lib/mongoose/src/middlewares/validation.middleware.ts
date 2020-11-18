@@ -3,9 +3,10 @@ import { validate, ValidationError } from 'class-validator';
 import { RequestHandler } from 'express';
 import HttpException from '../exceptions/HttpException';
 
-function validationMiddleware(type: any, skipMissingProperties = false): RequestHandler {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const validationMiddleware = (type: any, value: string | 'body' | 'query' | 'params' = 'body', skipMissingProperties = false): RequestHandler => {
   return (req, res, next) => {
-    validate(plainToClass(type, req.body), { skipMissingProperties })
+    validate(plainToClass(type, req[value]), { skipMissingProperties })
     .then((errors: ValidationError[]) => {
       if (errors.length > 0) {
         const message = errors.map((error: ValidationError) => Object.values(error.constraints)).join(', ');
@@ -15,6 +16,6 @@ function validationMiddleware(type: any, skipMissingProperties = false): Request
       }
     });
   };
-}
+};
 
 export default validationMiddleware;
