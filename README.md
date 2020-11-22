@@ -145,7 +145,7 @@ $ cd "project name" && npm run start
 - starts the containers in the background and leaves them running : `docker-compose up -d`.
 - Stops containers and removes containers, networks, volumes, and images : `docker-compose down`.
 
-## 🪄 Code Formatter
+## ✨ Code Formatter
 
 Palantir, the backers behind TSLint announced in 2019 that they would be deprecating TSLint in favor of supporting typescript-eslint in order to benefit the community.
 
@@ -157,7 +157,17 @@ So, migration from TSLint to ESLint.
 
 It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
 
-VSCode Extension [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+1. Install VSCode Extension [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+2. `CMD` + `Shift` + `P` (Mac Os) or `Ctrl` + `Shift` + `P` (Windows)
+
+3. Format Selection With
+
+4. Configure Default Formatter...
+
+5. Prettier - Code formatter
+
+<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/formatter.png' border='0' alt='formatter' />
 
 ## 📗 Swagger UI Docs
 
