@@ -1,17 +1,32 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
     "target": "es2017",
-    "outDir": "./dist",
-    "baseUrl": "./src",
-    "alwaysStrict": true,
-    "noImplicitAny": true,
+    "lib": [
+      "es2017",
+      "esnext.asynciterable"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "typeRoots": ["./node_modules/@types"]
+    "module": "commonjs",
+    "pretty": true,
+    "sourceMap": true,
+    "outDir": "./build",
+    "allowJs": true,
+    "noEmit": false,
+    "esModuleInterop": true
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "./src/**/*",
+    ".env"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

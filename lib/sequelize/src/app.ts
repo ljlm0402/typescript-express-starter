@@ -1,16 +1,16 @@
-import * as cookieParser from 'cookie-parser';
-import * as cors from 'cors';
-import * as express from 'express';
-import * as helmet from 'helmet';
-import * as hpp from 'hpp';
-import * as logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import logger from 'morgan';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import sequelize from './models/index.model';
 
 class App {
   public app: express.Application;
-  public port: (string | number);
+  public port: string | number;
   public env: boolean;
 
   constructor(routes: Routes[]) {
@@ -50,7 +50,7 @@ class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
-    routes.forEach((route) => {
+    routes.forEach(route => {
       this.app.use('/', route.router);
     });
   }
@@ -62,7 +62,6 @@ class App {
   private connectToDatabase() {
     sequelize.sync({ force: false });
   }
-
 }
 
 export default App;
