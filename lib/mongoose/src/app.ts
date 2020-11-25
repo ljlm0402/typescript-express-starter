@@ -1,16 +1,18 @@
-import * as cookieParser from 'cookie-parser';
-import * as cors from 'cors';
-import * as express from 'express';
-import * as helmet from 'helmet';
-import * as hpp from 'hpp';
-import * as mongoose from 'mongoose';
-import * as logger from 'morgan';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import hpp from 'hpp';
+import mongoose from 'mongoose';
+import logger from 'morgan';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 
 class App {
   public app: express.Application;
-  public port: (string | number);
+  public port: string | number;
   public env: boolean;
 
   constructor(routes: Routes[]) {
@@ -21,6 +23,7 @@ class App {
     this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
+    this.initializeSwagger();
     this.initializeErrorHandling();
   }
 
@@ -32,6 +35,15 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+
+  private connectToDatabase() {
+    const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
+    const options = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
+
+    mongoose.connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`, { ...options }).catch(error => {
+      console.error('[ERROR]', error);
+    });
   }
 
   private initializeMiddlewares() {
@@ -51,24 +63,29 @@ class App {
   }
 
   private initializeRoutes(routes: Routes[]) {
-    routes.forEach((route) => {
+    routes.forEach(route => {
       this.app.use('/', route.router);
     });
   }
 
-  private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
+  private initializeSwagger() {
+    const options = {
+      swaggerDefinition: {
+        info: {
+          title: 'REST API',
+          version: '1.0.0',
+          description: 'Example docs',
+        },
+      },
+      apis: ['swagger.yaml'],
+    };
+
+    const specs = swaggerJSDoc(options);
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
-  private connectToDatabase() {
-    const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
-    const options = { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
-
-    mongoose
-    .connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`, { ...options })
-    .catch(error => {
-      console.error('[ERROR]', error);
-    });
+  private initializeErrorHandling() {
+    this.app.use(errorMiddleware);
   }
 }
 

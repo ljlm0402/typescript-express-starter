@@ -13,7 +13,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public getUserById = async (req: Request, res: Response, next: NextFunction) => {
     const userId: string = req.params.id;
@@ -24,7 +24,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public createUser = async (req: Request, res: Response, next: NextFunction) => {
     const userData: CreateUserDto = req.body;
@@ -35,7 +35,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
     const userId: string = req.params.id;
@@ -47,7 +47,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
     const userId: string = req.params.id;
@@ -58,7 +58,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }
 
 export default UsersController;

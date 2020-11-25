@@ -1,6 +1,6 @@
 import { cleanEnv, port, str } from 'envalid';
 
-function validateEnv() {
+const validateEnv = () => {
   cleanEnv(process.env, {
     NODE_ENV: str(),
     MONGO_HOST: str(),
@@ -9,6 +9,6 @@ function validateEnv() {
     JWT_SECRET: str(),
     PORT: port(),
   });
-}
+};
 
 export default validateEnv;
