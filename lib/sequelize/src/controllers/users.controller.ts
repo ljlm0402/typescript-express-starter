@@ -13,10 +13,10 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public getUserById = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+    const userId = Number(req.params.id);
 
     try {
       const findOneUserData: User = await this.userService.findUserById(userId);
@@ -24,7 +24,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public createUser = async (req: Request, res: Response, next: NextFunction) => {
     const userData: CreateUserDto = req.body;
@@ -35,10 +35,10 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public updateUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+    const userId = Number(req.params.id);
     const userData: User = req.body;
 
     try {
@@ -47,10 +47,10 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 
   public deleteUser = async (req: Request, res: Response, next: NextFunction) => {
-    const userId: number = Number(req.params.id);
+    const userId = Number(req.params.id);
 
     try {
       const deleteUserData: User = await this.userService.deleteUserData(userId);
@@ -58,7 +58,7 @@ class UsersController {
     } catch (error) {
       next(error);
     }
-  }
+  };
 }
 
 export default UsersController;

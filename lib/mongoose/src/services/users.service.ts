@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dtos/users.dto';
 import HttpException from '../exceptions/HttpException';
 import { User } from '../interfaces/users.interface';
@@ -14,7 +14,7 @@ class UserService {
   }
 
   public async findUserById(userId: string): Promise<User> {
-    const findUser: User = await this.users.findById(userId);
+    const findUser: User = await this.users.findOne({ _id: userId });
     if (!findUser) throw new HttpException(409, "You're not user");
 
     return findUser;

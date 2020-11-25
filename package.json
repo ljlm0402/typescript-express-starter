@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -13,7 +13,12 @@
     "jest",
     "jsonwebtoken",
     "bcrypt",
-    "swagger"
+    "swagger",
+    "eslint",
+    "prettier",
+    "docker",
+    "docker-compose",
+    "nginx"
   ],
   "bin": {
     "typescript-express-starter": "bin/cli.js"

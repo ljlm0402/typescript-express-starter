@@ -1,5 +1,5 @@
-import * as bcrypt from 'bcrypt';
-import * as jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 import { CreateUserDto } from '../dtos/users.dto';
 import HttpException from '../exceptions/HttpException';
 import { DataStoredInToken, TokenData } from '../interfaces/auth.interface';
@@ -22,7 +22,7 @@ class AuthService {
     return createUserData;
   }
 
-  public async login(userData: CreateUserDto): Promise<{ cookie: string, findUser: User }> {
+  public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
     if (isEmptyObject(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = await this.users.findOne({ where: { email: userData.email } });
