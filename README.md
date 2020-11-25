@@ -189,7 +189,7 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 | When             | Commit Message     |
 | :--------------- | :----------------- |
-| Add Feature      | ⚡️ Add Feature    |
+| Add Feature      | ✨ Add Feature     |
 | Fix Bug          | 🐞 Fix Bug         |
 | Refactoring Code | 🛠 Refactoring Code |
 | Install Package  | 📦 Install Package |
