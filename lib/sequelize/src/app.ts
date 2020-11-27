@@ -3,10 +3,12 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
+import sequelize from './models/index.model';
 import logger from 'morgan';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
-import sequelize from './models/index.model';
 
 class App {
   public app: express.Application;
@@ -21,6 +23,7 @@ class App {
     this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
+    this.initializeSwagger();
     this.initializeErrorHandling();
   }
 
@@ -32,6 +35,10 @@ class App {
 
   public getServer() {
     return this.app;
+  }
+
+  private connectToDatabase() {
+    sequelize.sync({ force: false });
   }
 
   private initializeMiddlewares() {
@@ -55,12 +62,24 @@ class App {
     });
   }
 
-  private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
+  private initializeSwagger() {
+    const options = {
+      swaggerDefinition: {
+        info: {
+          title: 'REST API',
+          version: '1.0.0',
+          description: 'Example docs',
+        },
+      },
+      apis: ['swagger.yaml'],
+    };
+
+    const specs = swaggerJSDoc(options);
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
-  private connectToDatabase() {
-    sequelize.sync({ force: false });
+  private initializeErrorHandling() {
+    this.app.use(errorMiddleware);
   }
 }
 
