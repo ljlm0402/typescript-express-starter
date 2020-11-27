@@ -1,8 +1,8 @@
 ---
-name: Question ❓
-about: Ask a question about this project
+name: "Question \U00002753"
+about: "Ask a question about this project"
 title: ""
-labels: question
+labels: "Question"
 assignees: ""
 ---
 
