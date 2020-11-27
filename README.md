@@ -67,6 +67,9 @@ $ cd "project name" && npm run start
 
 ```bash
 │
+├── /.vscode
+│   └── settings.json
+│
 ├── /src
 │   ├── /controllers
 │   │   ├── auth.controller.ts
@@ -123,6 +126,7 @@ $ cd "project name" && npm run start
 ├── .eslintignore
 ├── .eslintrc
 ├── .gitignore
+├── .huskyrc
 ├── .prettierrc
 ├── docker-compose.yml
 ├── Dockerfile
@@ -175,7 +179,7 @@ Simplify API development for users, teams, and enterprises with the Swagger open
 
 Find out how Swagger can help you design and document your APIs at scale.
 
-Start your typescript-express-starter app in development mode at `http://localhost:3000/swagger`
+Start your app in development mode at `http://localhost:3000/api-docs`
 
 Modify `swagger.yaml` file to your source code
 
