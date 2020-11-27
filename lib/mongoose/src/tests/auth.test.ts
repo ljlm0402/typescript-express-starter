@@ -9,7 +9,7 @@ import { TokenData } from '../interfaces/auth.interface';
 import AuthService from '../services/auth.service';
 
 afterAll(async () => {
-  await new Promise(resolve => setTimeout(() => resolve(), 500));
+  await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
 
 describe('Testing AuthController', () => {
