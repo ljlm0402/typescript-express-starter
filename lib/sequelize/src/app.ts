@@ -3,22 +3,24 @@ import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
-import sequelize from './models/index.model';
-import logger from 'morgan';
+import morgan from 'morgan';
+import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
+import sequelize from './models/index.model';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
+import { logger, stream } from './utils/logger';
 
 class App {
   public app: express.Application;
   public port: string | number;
-  public env: boolean;
+  public env: string;
 
   constructor(routes: Routes[]) {
     this.app = express();
     this.port = process.env.PORT || 3000;
-    this.env = process.env.NODE_ENV === 'production' ? true : false;
+    this.env = process.env.NODE_ENV || 'production';
 
     this.connectToDatabase();
     this.initializeMiddlewares();
@@ -29,7 +31,7 @@ class App {
 
   public listen() {
     this.app.listen(this.port, () => {
-      console.log(`🚀 App listening on the port ${this.port}`);
+      logger.info(`🚀 App listening on the port ${this.port}`);
     });
   }
 
@@ -42,15 +44,17 @@ class App {
   }
 
   private initializeMiddlewares() {
-    if (this.env) {
-      this.app.use(hpp());
-      this.app.use(helmet());
-      this.app.use(logger('combined'));
+    if (this.env === 'production') {
+      this.app.use(morgan('combined', { stream }));
       this.app.use(cors({ origin: 'your.domain.com', credentials: true }));
-    } else {
-      this.app.use(logger('dev'));
+    } else if (this.env === 'development') {
+      this.app.use(morgan('dev', { stream }));
       this.app.use(cors({ origin: true, credentials: true }));
     }
+
+    this.app.use(hpp());
+    this.app.use(helmet());
+    this.app.use(compression());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
     this.app.use(cookieParser());
