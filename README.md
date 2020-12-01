@@ -114,6 +114,7 @@ $ cd "project name" && npm run start
 │   │   └── users.test.ts
 │   │
 │   ├── /utils
+│   │   ├── logger.ts
 │   │   ├── util.ts
 │   │   └── vaildateEnv.ts
 │   │
