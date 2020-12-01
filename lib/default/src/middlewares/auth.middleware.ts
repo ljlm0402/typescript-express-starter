@@ -4,13 +4,13 @@ import HttpException from '../exceptions/HttpException';
 import { DataStoredInToken, RequestWithUser } from '../interfaces/auth.interface';
 import userModel from '../models/users.model';
 
-const authMiddleware = (req: RequestWithUser, res: Response, next: NextFunction) => {
+const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
     const cookies = req.cookies;
 
     if (cookies && cookies.Authorization) {
       const secret = process.env.JWT_SECRET;
-      const verificationResponse = jwt.verify(cookies.Authorization, secret) as DataStoredInToken;
+      const verificationResponse = (await jwt.verify(cookies.Authorization, secret)) as DataStoredInToken;
       const userId = verificationResponse.id;
       const findUser = userModel.find(user => user.id === userId);
 
