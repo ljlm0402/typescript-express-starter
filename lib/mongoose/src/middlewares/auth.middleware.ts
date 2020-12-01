@@ -4,14 +4,13 @@ import HttpException from '../exceptions/HttpException';
 import { DataStoredInToken, RequestWithUser } from '../interfaces/auth.interface';
 import userModel from '../models/users.model';
 
-async function authMiddleware(req: RequestWithUser, res: Response, next: NextFunction) {
-  const cookies = req.cookies;
+const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+  try {
+    const cookies = req.cookies;
 
-  if (cookies && cookies.Authorization) {
-    const secret = process.env.JWT_SECRET;
-
-    try {
-      const verificationResponse = jwt.verify(cookies.Authorization, secret) as DataStoredInToken;
+    if (cookies && cookies.Authorization) {
+      const secret = process.env.JWT_SECRET;
+      const verificationResponse = (await jwt.verify(cookies.Authorization, secret)) as DataStoredInToken;
       const userId = verificationResponse._id;
       const findUser = await userModel.findById(userId);
 
@@ -21,12 +20,12 @@ async function authMiddleware(req: RequestWithUser, res: Response, next: NextFun
       } else {
         next(new HttpException(401, 'Wrong authentication token'));
       }
-    } catch (error) {
-      next(new HttpException(401, 'Wrong authentication token'));
+    } else {
+      next(new HttpException(404, 'Authentication token missing'));
     }
-  } else {
-    next(new HttpException(404, 'Authentication token missing'));
+  } catch (error) {
+    next(new HttpException(401, 'Wrong authentication token'));
   }
-}
+};
 
 export default authMiddleware;

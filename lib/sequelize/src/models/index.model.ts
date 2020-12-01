@@ -1,8 +1,10 @@
 import { Sequelize } from 'sequelize-typescript';
 import User from './users.model';
+import { logger } from '../utils/logger';
 
-const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
-  host: process.env.MYSQL_HOST,
+const { MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST } = process.env;
+const sequelize = new Sequelize(MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, {
+  host: MYSQL_HOST,
   dialect: 'mysql',
   timezone: '+09:00',
   define: {
@@ -19,8 +21,13 @@ const sequelize = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_US
 
 sequelize.addModels([User]);
 
-sequelize.authenticate().catch((err: Error) => {
-  console.error('Unable to connect to the database:', err);
-});
+sequelize
+  .authenticate()
+  .then(() => {
+    logger.info('🟢 The database is connected.');
+  })
+  .catch((error: Error) => {
+    logger.error(`🔴 Unable to connect to the database: ${error}.`);
+  });
 
 export default sequelize;
