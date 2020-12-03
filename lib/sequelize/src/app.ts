@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
@@ -7,7 +8,7 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import sequelize from './models/index.model';
+import sequelize from './database';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { logger, stream } from './utils/logger';
