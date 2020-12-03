@@ -227,7 +227,7 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 | Install Package  | 📦 Install Package |
 | Fix Readme       | 📚 Fix Readme      |
 | Update Version   | 🌼 Update Version  |
-| New Releases     | 🎉 New Releases    |
+| New Template     | 🎉 New Template    |
 
 ## 💳 License
 
