@@ -1,7 +1,7 @@
 {
   "name": "typescript-express-starter",
   "version": "0.0.0",
-  "description": "TypeScript + Mongoose + Express API Server",
+  "description": "TypeScript + Mongoose + MongoDB + Express API Server",
   "author": "",
   "license": "ISC",
   "scripts": {
