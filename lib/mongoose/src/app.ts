@@ -8,6 +8,7 @@ import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import mongoose from 'mongoose';
+import { dbConnection } from './database';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { logger, stream } from './utils/logger';
@@ -40,15 +41,12 @@ class App {
   }
 
   private connectToDatabase() {
-    const { MONGO_HOST, MONGO_PORT, MONGO_DATABASE } = process.env;
-    const options = { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false };
-
     if (this.env !== 'production') {
       mongoose.set('debug', true);
     }
 
     mongoose
-      .connect(`mongodb://${MONGO_HOST}:${MONGO_PORT}/${MONGO_DATABASE}`, { ...options })
+      .connect(dbConnection.url, dbConnection.options)
       .then(() => {
         logger.info('🟢 The database is connected.');
       })

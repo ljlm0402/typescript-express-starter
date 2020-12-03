@@ -1,7 +1,7 @@
 {
   "name": "typescript-express-starter",
   "version": "0.0.0",
-  "description": "TypeScript + Sequelize + Express API Server",
+  "description": "TypeScript + Sequelize + MySQL + Express API Server",
   "author": "",
   "license": "ISC",
   "scripts": {

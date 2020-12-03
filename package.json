@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "2.8.3",
+  "version": "3.0.0",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -8,9 +8,11 @@
   "keywords": [
     "typescript",
     "express",
-    "sequlize",
+    "sequelize",
     "mongoose",
+    "typeorm",
     "jest",
+    "nodemon",
     "jsonwebtoken",
     "bcrypt",
     "logs",
@@ -21,7 +23,10 @@
     "docker",
     "docker-compose",
     "nginx",
-    "huskyrc"
+    "huskyrc",
+    "mysql",
+    "mongodb",
+    "postgresql"
   ],
   "bin": {
     "typescript-express-starter": "bin/cli.js"

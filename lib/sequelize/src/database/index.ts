@@ -1,5 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import User from './users.model';
+import User from '../models/users.model';
 import { logger } from '../utils/logger';
 
 const { MYSQL_DATABASE, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST } = process.env;
