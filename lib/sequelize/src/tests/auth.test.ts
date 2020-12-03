@@ -17,7 +17,7 @@ describe('Testing Auth', () => {
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
-      return request(app.getServer()).post(`${authRoute.path}/signup`).send(userData);
+      return request(app.getServer()).post('/signup').send(userData);
     });
   });
 
@@ -32,7 +32,7 @@ describe('Testing Auth', () => {
       const app = new App([authRoute]);
 
       return request(app.getServer())
-        .post(`${authRoute.path}/login`)
+        .post('/login')
         .send(userData)
         .expect('Set-Cookie', /^Authorization=.+/);
     });
@@ -44,7 +44,7 @@ describe('Testing Auth', () => {
       const app = new App([authRoute]);
 
       return request(app.getServer())
-        .post(`${authRoute.path}/logout`)
+        .post('/logout')
         .expect('Set-Cookie', /^Authorization=\;/);
     });
   });
