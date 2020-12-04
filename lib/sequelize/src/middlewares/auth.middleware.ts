@@ -2,7 +2,7 @@ import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import HttpException from '../exceptions/HttpException';
 import { DataStoredInToken, RequestWithUser } from '../interfaces/auth.interface';
-import userModel from '../models/users.model';
+import DB from '../database';
 
 const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
@@ -10,9 +10,9 @@ const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFun
 
     if (cookies && cookies.Authorization) {
       const secret = process.env.JWT_SECRET;
-      const verificationResponse = (await jwt.verify(cookies.Authorization, secret)) as DataStoredInToken;
+      const verificationResponse = jwt.verify(cookies.Authorization, secret) as DataStoredInToken;
       const userId = verificationResponse.id;
-      const findUser = await userModel.findByPk(userId);
+      const findUser = await DB.Users.findByPk(userId);
 
       if (findUser) {
         req.user = findUser;

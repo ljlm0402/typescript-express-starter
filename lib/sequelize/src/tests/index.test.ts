@@ -12,7 +12,7 @@ describe('Testing Index', () => {
       const indexRoute = new IndexRoute();
       const app = new App([indexRoute]);
 
-      return request(app.getServer()).get(`${indexRoute.path}`).expect(200);
+      return request(app.getServer()).get('/').expect(200);
     });
   });
 });
