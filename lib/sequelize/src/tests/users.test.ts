@@ -1,7 +1,7 @@
 import request from 'supertest';
 import App from '../app';
 import { User } from '../interfaces/users.interface';
-import userModel from '../models/users.model';
+import DB from '../database';
 import UserRoute from '../routes/users.route';
 import { CreateUserDto } from '../dtos/users.dto';
 
@@ -11,21 +11,21 @@ afterAll(async () => {
 
 describe('Testing Users', () => {
   describe('[GET] /users', () => {
-    it('response statusCode 200 / findAll', () => {
-      const findUser: User[] = userModel.findAll();
+    it('response statusCode 200 / findAll', async () => {
       const usersRoute = new UserRoute();
       const app = new App([usersRoute]);
+      const allUser: User[] = await DB.Users.findAll();
 
-      return request(app.getServer()).get(`${usersRoute.path}`).expect(200, { data: findUser, message: 'findAll' });
+      return request(app.getServer()).get(`${usersRoute.path}`).expect(200, { data: allUser, message: 'findAll' });
     });
   });
 
   describe('[GET] /users/:id', () => {
-    it('response statusCode 200 / findOne', () => {
-      const userId = 1;
-      const findUser: User = userModel.findByPk(userId);
+    it('response statusCode 200 / findOne', async () => {
       const usersRoute = new UserRoute();
       const app = new App([usersRoute]);
+      const userId = 1;
+      const findUser: User = await DB.Users.findByPk(userId);
 
       return request(app.getServer()).get(`${usersRoute.path}/${userId}`).expect(200, { data: findUser, message: 'findOne' });
     });
@@ -59,9 +59,9 @@ describe('Testing Users', () => {
   });
 
   describe('[DELETE] /users/:id', () => {
-    it('response statusCode 200 / deleted', () => {
+    it('response statusCode 200 / deleted', async () => {
       const userId = 1;
-      const deleteUser: User = userModel.destroy({ where: { id: userId } });
+      const deleteUser = await DB.Users.destroy({ where: { id: userId } });
       const usersRoute = new UserRoute();
       const app = new App([usersRoute]);
 

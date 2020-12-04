@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
@@ -8,7 +7,7 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import sequelize from './database';
+import DB from './database';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
 import { logger, stream } from './utils/logger';
@@ -21,7 +20,7 @@ class App {
   constructor(routes: Routes[]) {
     this.app = express();
     this.port = process.env.PORT || 3000;
-    this.env = process.env.NODE_ENV || 'production';
+    this.env = process.env.NODE_ENV || 'development';
 
     this.connectToDatabase();
     this.initializeMiddlewares();
@@ -41,7 +40,7 @@ class App {
   }
 
   private connectToDatabase() {
-    sequelize.sync({ force: false });
+    DB.sequelize.sync({ force: false });
   }
 
   private initializeMiddlewares() {

@@ -2,18 +2,20 @@ import bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dtos/users.dto';
 import HttpException from '../exceptions/HttpException';
 import { User } from '../interfaces/users.interface';
-import userModel from '../models/users.model';
+import DB from '../database';
 import { isEmpty } from '../utils/util';
 
 class UserService {
-  public users = userModel;
+  public users = DB.Users;
 
   public async findAllUser(): Promise<User[]> {
-    const users: User[] = await this.users.findAll();
-    return users;
+    const allUser: User[] = await this.users.findAll();
+    return allUser;
   }
 
   public async findUserById(userId: number): Promise<User> {
+    if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
+
     const findUser: User = await this.users.findByPk(userId);
     if (!findUser) throw new HttpException(409, "You're not user");
 
@@ -35,18 +37,25 @@ class UserService {
   public async updateUser(userId: number, userData: User): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
-    const updateUser: User = await this.users.update({ ...userData, password: hashedPassword }, { where: { id: userId } });
-    if (!updateUser) throw new HttpException(409, "You're not user");
+    const findUser: User = await this.users.findByPk(userId);
+    if (!findUser) throw new HttpException(409, "You're not user");
 
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    await this.users.update({ ...userData, password: hashedPassword }, { where: { id: userId } });
+
+    const updateUser: User = await this.users.findByPk(userId);
     return updateUser;
   }
 
   public async deleteUserData(userId: number): Promise<User> {
-    const deleteUser: User = await this.users.destroy({ where: { id: userId } });
-    if (!deleteUser) throw new HttpException(409, "You're not user");
+    if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
 
-    return deleteUser;
+    const findUser: User = await this.users.findByPk(userId);
+    if (!findUser) throw new HttpException(409, "You're not user");
+
+    await this.users.destroy({ where: { id: userId } });
+
+    return findUser;
   }
 }
 
