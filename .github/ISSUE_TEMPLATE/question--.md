@@ -8,8 +8,8 @@ assignees: ""
 
 ### Summary
 
-A clear and concise summary of your question.
+<!-- A clear and concise summary of your question. -->
 
 ### Additional Details
 
-Provide any additional details here.
+<!-- Provide any additional details here. -->
