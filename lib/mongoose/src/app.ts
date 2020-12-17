@@ -7,7 +7,7 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import mongoose from 'mongoose';
+import { connect, set } from 'mongoose';
 import { dbConnection } from './database';
 import Routes from './interfaces/routes.interface';
 import errorMiddleware from './middlewares/error.middleware';
@@ -42,11 +42,10 @@ class App {
 
   private connectToDatabase() {
     if (this.env !== 'production') {
-      mongoose.set('debug', true);
+      set('debug', true);
     }
 
-    mongoose
-      .connect(dbConnection.url, dbConnection.options)
+    connect(dbConnection.url, dbConnection.options)
       .then(() => {
         logger.info('🟢 The database is connected.');
       })
