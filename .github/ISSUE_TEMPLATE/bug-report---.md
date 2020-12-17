@@ -10,6 +10,18 @@ assignees: ""
 
 <!-- A clear and concise description of what the bug is. -->
 
+### Version to Reproduce
+
+<!-- Your Version
+```sh
+node : '...'
+npm : '...'
+node_modules : {
+    module_name : '...'
+}
+```
+-->
+
 ### Steps to Reproduce
 
 Checking the TEST function of each template
