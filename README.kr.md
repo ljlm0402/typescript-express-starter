@@ -1,6 +1,6 @@
 <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/logo.jpg' border='0' alt='logo' />
 
-[타입스크립트](https://www.typescriptlang.org/)기반의 [Express](https://expressjs.com/ko/) 스타터 패키지
+[타입스크립트](https://www.typescriptlang.org/) 기반의 [Express](https://expressjs.com/ko/) 스타터 패키지
 
 <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="NPM 버전" /></a>
 <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="패키지 라이센스" /></a>
