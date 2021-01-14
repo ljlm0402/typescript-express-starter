@@ -1,40 +1,26 @@
-<!--
-Thanks for your interest in the project. Bugs filed and PRs submitted are appreciated!
-
-Please make sure that you are familiar with and follow the Code of Conduct for
-this project (found in the CODE_OF_CONDUCT.md file).
-
-Also, please make sure you're familiar with and follow the instructions in the
-contributing guidelines (found in the CONTRIBUTING.md file).
-
-Please fill out the information below to expedite the review and (hopefully)
-merge of your pull request!
--->
+## What(무엇을 변경하셨나요 ?)
 
 <!-- What changes are being made? (What feature/bug is being fixed here?) -->
 
-**What**:
+## Why(왜 변경하셨나요 ?)
 
 <!-- Why are these changes necessary? -->
 
-**Why**:
+## How(어떻게 변경하였나요 ?)
 
 <!-- How were these changes implemented? -->
 
-**How**:
+## Check List(체크 사항)
 
-<!-- Have you done all of these things?  -->
+<!-- to check an item, place an "x" in the box -->
 
-**Checklist**:
-
-<!-- add "N/A" to the end of each line that's irrelevant to your changes -->
-<!-- to check an item, place an "x" in the box like so: "- [x] Documentation" -->
-
-- [ ] Documentation
-- [ ] Tests
-- [ ] Ready to be merged
+- [ ] Issue(이슈)
+- [ ] Tests(테스트)
+- [ ] Ready to be merged(병합 준비 완료)
       <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
-- [ ] Added myself to contributors table
+- [ ] Added myself to contributors table(기여자 추가)
       <!-- this is optional, see the contributing guidelines for instructions -->
 
-<!-- feel free to add additional comments -->
+## Additional Context(추가 사항)
+
+<!-- feel free to add additional context -->
