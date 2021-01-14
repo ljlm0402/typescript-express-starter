@@ -1,6 +1,6 @@
 <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/logo.jpg' border='0' alt='logo' />
 
-[Express](https://www.npmjs.com/package/express) with [TypeScript's](https://www.npmjs.com/package/typescript) Starter.
+[Express](https://expressjs.com/) with [TypeScript](https://www.typescriptlang.org/)'s Starter.
 
 <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="NPM Version" /></a>
 <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
@@ -9,11 +9,15 @@
 
 <br />
 
+🇰🇷 [Korean](README.kr.md)
+
+<br />
+
 ## 🤔 What is Express ?
 
 Express is a fast, open and concise web framework and is a Node.js based project.
 
-## 😎 Introducing The Package
+## 😎 Introducing The Project
 
 Express consists of JavaScript, which makes it vulnerable to type definitions.
 
@@ -21,11 +25,11 @@ That's why we avoid supersets with starter packages that introduce TypeScript.
 
 The package is configured to use TypeScript instead of JavaScript.
 
-NOTE: This project is a variation of [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript) by [seanpmaxwell](https://github.com/seanpmaxwell) 👍
+> The project referred to [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript) by [seanpmaxwell](https://github.com/seanpmaxwell) 👍
 
 ## 🚀 Quick Start
 
-### Install with the npm Global Package
+### Install with the NPM Global Package
 
 ```bash
 $ npm install -g typescript-express-starter
@@ -43,51 +47,52 @@ If you do not enter a project name, it defaults to _typescript-express-starter_.
 $ npx typescript-express-starter "project name"
 ```
 
-Choose the template you want. We will create more templates later.
-
 ### Select a Templates
 
 <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/cli.gif' border='0' alt='cli' />
 
 Start your typescript-express-starter app in development mode at `http://localhost:3000/`
 
-```bash
-$ cd "project name" && npm run start
-```
-
 ## 🛎 Available Commands for the Server
 
-- Run the Server in production mode : `npm run start`.
-- Run the Server in development mode : `npm run dev`.
-- Run all unit-tests: `npm run test`.
-- Check for linting errors: `npm run lint`.
-- Fix for linting: `npm run lint:fix`.
+- Run the Server in production mode : `npm run start`
+- Run the Server in development mode : `npm run dev`
+- Run all unit-tests : `npm run test`
+- Check for linting errors : `npm run lint`
+- Fix for linting : `npm run lint:fix`
 
 ## 💎 The Package Features
 
+![](https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff)
+![](https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff)
 ![](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff)
 ![](https://img.shields.io/badge/-Express-F8F8F5?style=for-the-badge)
-![](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff)
-![](https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff)
+![](https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff)
 ![](https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff)
 ![](https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000)
-![](https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000)
 ![](https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff)
-![](https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff)
-![](https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff)
+![](https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000)
+![](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff)
+![](https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff)
 ![](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff)
+![](https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff)
 ![](https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff)
+![](https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff)
 
-### 🐳 Dockerize
+> [Simple Icons](https://simpleicons.org/)
+
+### 🐳 Docker - Containers
 
 [Docker](https://docs.docker.com/) is a platform for developers and sysadmins to build, run, and share applications with containers.
 
 [Docker](https://docs.docker.com/get-docker/) Install.
 
-- starts the containers in the background and leaves them running : `docker-compose up -d`.
-- Stops containers and removes containers, networks, volumes, and images : `docker-compose down`.
+- starts the containers in the background and leaves them running : `docker-compose up -d`
+- Stops containers and removes containers, networks, volumes, and images : `docker-compose down`
 
-### ♻️ Reverse Proxy
+Modify `docker-compose.yml` and `Dockerfile` file to your source code.
+
+### ♻️ NGINX - Reverse Proxy
 
 [NGINX](https://www.nginx.com/) is a web server that can also be used as a reverse proxy, load balancer, mail proxy and HTTP cache.
 
@@ -95,9 +100,9 @@ Proxying is typically used to distribute the load among several servers, seamles
 
 When NGINX proxies a request, it sends the request to a specified proxied server, fetches the response, and sends it back to the client.
 
-Modify `nginx.conf` file to your source code
+Modify `nginx.conf` file to your source code.
 
-### ✨ Code Formatter
+### ✨ ESLint, Prettier - Code Formatter
 
 Palantir, the backers behind TSLint announced in 2019 that they would be deprecating TSLint in favor of supporting typescript-eslint in order to benefit the community.
 
@@ -109,7 +114,7 @@ So, migration from TSLint to ESLint.
 
 It enforces a consistent style by parsing your code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
 
-1. Install VSCode Extension [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+1. Install [VSCode](https://code.visualstudio.com/) Extension [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode), [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 2. `CMD` + `Shift` + `P` (Mac Os) or `Ctrl` + `Shift` + `P` (Windows)
 
@@ -121,21 +126,23 @@ It enforces a consistent style by parsing your code and re-printing it with its 
 
 <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/formatter.png' border='0' alt='formatter' />
 
-### 📗 Swagger UI Docs
+### 📗 Swagger - API Document
 
 [Swagger](https://swagger.io/) is Simplify API development for users, teams, and enterprises with the Swagger open source and professional toolset.
 
-Find out how Swagger can help you design and document your APIs at scale.
+Easily used by Swagger to design and document APIs at scale.
 
 Start your app in development mode at `http://localhost:3000/api-docs`
 
-Modify `swagger.yaml` file to your source code
+Modify `swagger.yaml` file to your source code.
 
-### 🌐 REST Client
+### 🌐 REST Client(VSCode Extension) - HTTP Client Tools
 
 REST Client allows you to send HTTP request and view the response in Visual Studio Code directly.
 
 VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) Install.
+
+Modify `*.http` file in http folder to your source code.
 
 ## 🗂 Code Structure (default)
 
@@ -261,4 +268,4 @@ VSCode Extension [REST Client](https://marketplace.visualstudio.com/items?itemNa
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
 
-Thank you very much for your interest in our package.
+Thank you very much for your interest in our package. ( ･∀･)ﾉｼ
