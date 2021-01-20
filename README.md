@@ -53,6 +53,10 @@ $ npx typescript-express-starter "project name"
 
 Start your typescript-express-starter app in development mode at `http://localhost:3000/`
 
+#### Template type
+
+<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/templates.png' border='0' alt='templates' />
+
 ## 🛎 Available Commands for the Server
 
 - Run the Server in production mode : `npm run start`

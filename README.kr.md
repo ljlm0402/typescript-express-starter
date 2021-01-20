@@ -49,6 +49,10 @@ $ npx typescript-express-starter "project name"
 
 설치가 완료되면 Script 명령어를 통해 프로젝트를 실행합니다.
 
+#### 템플릿 종류
+
+<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/templates.png' border='0' alt='templates' />
+
 ## 🛎 Script 명령어
 
 - 프로덕션 모드 실행 : `npm run start`
