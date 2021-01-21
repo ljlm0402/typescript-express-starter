@@ -2,8 +2,10 @@ name: npm publish
 
 on:
   pull_request:
-    branches: [master]
-    paths: "package.json"
+    branches:
+      - master
+    paths:
+      - package.json
 
 jobs:
   build:
