@@ -11,21 +11,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source code
+      - name: ⬇️ Checkout source code
         uses: actions/checkout@v2
 
-      - name: Setup nodejs
+      - name: ⎔ Setup nodejs
         uses: actions/setup-node@v1
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
 
-      - name: Publish npm
+      - name: 🏗 Publish npm
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
-      - name: Notification
+      - name: 📤 Send Notification to Slack
         uses: 8398a7/action-slack@v2.6.0
         with:
           status: ${{ job.status }}
