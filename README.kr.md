@@ -55,11 +55,11 @@ $ npx typescript-express-starter "project name"
 
 ## 🛎 Script 명령어
 
-- 프로덕션 모드 실행 : `npm run start`
-- 개발 모드 실행 : `npm run dev`
-- 단위 테스트 : `npm run test`
-- 코드 포맷터 검사 : `npm run lint`
-- 코드 포맷터 적용 : `npm run lint:fix`
+- 프로덕션 모드 실행 : `npm run start` 아니면 `Start typescript-express-starter` VS Code 로
+- 개발 모드 실행 : `npm run dev` 아니면 `Dev typescript-express-starter` VS Code 로
+- 단위 테스트 : `npm run test` 아니면 `Test typescript-express-starter` VS Code 로
+- 코드 포맷터 검사 : `npm run lint` 아니면 `Lint typescript-express-starter` VS Code 로
+- 코드 포맷터 적용 : `npm run lint:fix` 아니면 `Lint:Fix typescript-express-starter` VS Code 로
 
 ## 💎 프로젝트 기능
 
@@ -148,6 +148,7 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 │
 ├── /.vscode
 │   └── settings.json
+│   └── launch.json
 │
 ├── /src
 │   ├── /controllers
