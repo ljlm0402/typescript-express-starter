@@ -269,6 +269,8 @@ Modify `*.http` file in http folder to your source code.
 
 - Malavan [https://github.com/malavancs](https://github.com/malavancs)
 
+- Jon Gallant [https://github.com/jongio](https://github.com/jongio)
+
 ## 📬 Please request an issue
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
