@@ -147,8 +147,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ```bash
 │
 ├── /.vscode
+│   ├── launch.json
 │   └── settings.json
-│   └── launch.json
 │
 ├── /src
 │   ├── /controllers

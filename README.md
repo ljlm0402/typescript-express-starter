@@ -153,8 +153,8 @@ Modify `*.http` file in http folder to your source code.
 ```bash
 │
 ├── /.vscode
+│   ├── launch.json
 │   └── settings.json
-│   └── launch.json
 │
 ├── /src
 │   ├── /controllers
