@@ -1,0 +1,38 @@
+# users API
+
+###
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# Find All Users
+GET {{baseURL}}/users
+
+###
+# Find User By Id
+GET {{baseURL}}/users/1
+
+
+###
+# Add User
+POST {{baseURL}}/users
+Content-Type: application/json
+
+{
+    "email": "example@gmail.com",
+	"password": "qwer1234"
+}
+
+###
+# Edit User By Id
+PUT {{baseURL}}/users/1
+Content-Type: application/json
+
+{
+    "email": "example@gmail.com",
+	"password": "qwer1234"
+}
+
+###
+# Del User By Id
+DELETE {{baseURL}}/users/1
