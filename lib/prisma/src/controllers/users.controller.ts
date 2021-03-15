@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto } from '../dtos/users.dto';
-import { User } from '../interfaces/users.interface';
+import { User } from '@prisma/client';
 import userService from '../services/users.service';
 
 class UsersController {
@@ -42,7 +42,7 @@ class UsersController {
     try {
       const userId = Number(req.params.id);
       const userData: User = req.body;
-      const updateUserData: User[] = await this.userService.updateUser(userId, userData);
+      const updateUserData: User = await this.userService.updateUser(userId, userData);
 
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {
@@ -53,7 +53,7 @@ class UsersController {
   public deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userId = Number(req.params.id);
-      const deleteUserData: User[] = await this.userService.deleteUser(userId);
+      const deleteUserData: User = await this.userService.deleteUser(userId);
 
       res.status(200).json({ data: deleteUserData, message: 'deleted' });
     } catch (error) {

@@ -22,7 +22,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
-      MYSQL_DATABASE: sequelize
+      MYSQL_DATABASE: prisma
     volumes:
       - ./:/app
       - /app/node_modules
