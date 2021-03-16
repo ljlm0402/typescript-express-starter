@@ -1,7 +1,7 @@
 {
   "name": "typescript-express-starter",
   "version": "0.0.0",
-  "description": "TypeScript + Express API Server",
+  "description": "TypeScript + Prisma + MySQL + Express API Server",
   "author": "",
   "license": "ISC",
   "scripts": {
@@ -10,7 +10,9 @@
     "build": "tsc",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prisma:init": "prisma init",
+    "prisma:generate": "prisma generate"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
