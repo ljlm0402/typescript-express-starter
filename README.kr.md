@@ -263,6 +263,10 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - Malavan [https://github.com/malavancs](https://github.com/malavancs)
 
+- Jon Gallant [https://github.com/jongio](https://github.com/jongio)
+
+- Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
+
 ## 📬 이슈를 남겨주세요
 
 추후 추가하고자하는 템플릿, 질문, 기능을 적어 주시면 최선을 다해 답변하고 반영하겠습니다.
