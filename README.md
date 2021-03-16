@@ -55,7 +55,14 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template type
 
-<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/templates.png' border='0' alt='templates' />
+| Name | Desc |
+|:-----|:-----|
+| Default | Express Default |
+| Sequlize | Easy to use multi SQL dialect ROM for Node.js |
+| Mongoose | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment |
+| TypeORM | An ORM that can run in Node.js and Others |
+| Prisma | Modern Database Access for TypeScript & Node.js |
+| Knex (developing) | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle |
 
 ## 🛎 Available Commands for the Server
 
