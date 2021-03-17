@@ -29,7 +29,7 @@ Express는 유형 정의에 취약한 JavaScript로 구성 되어있습니다.
 
 ## 🚀 시작하기
 
-### NPM 전역 설치
+### npm 전역 설치
 
 ```bash
 $ npm install -g typescript-express-starter
@@ -221,7 +221,6 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ├── Dockerfile.dev
 ├── jest.config.js
 ├── Makefile
-├── Makefile
 ├── nginx.conf
 ├── nodemon.json
 ├── package-lock.json
@@ -232,15 +231,15 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 ## 📬 커밋 메시지 정의
 
-| 언제             | 메시지     |
-| :--------------- | :----------------- |
-| 기능 추가      | ✨ 기능 추가    |
-| 버그 수정          | 🐞 버그 수정          |
-| 코드 수정 | 🛠 코드 수정 |
-| 패키지 설치  | 📦 패키지 설치 |
-| 문서 수정       | 📚 문서 수정      |
-| 버전 업데이트   | 🌼 버전 업데이트  |
-| 새로운 템플릿 추가    | 🎉 새로운 템플릿 추가   |
+| 언제 | 메시지 |
+| :-- | :--- |
+| 기능 추가 | ✨ 기능 추가 |
+| 버그 수정 | 🐞 버그 수정 |
+| 코드 개선 | 🛠 코드 개선 |
+| 패키지 설치 | 📦 패키지 설치 |
+| 문서 수정 | 📚 문서 수정 |
+| 버전 업데이트 | 🌼 버전 업데이트 |
+| 새로운 템플릿 추가 | 🎉 새로운 템플릿 추가 |
 
 ## 💳 라이센스
 
