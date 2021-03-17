@@ -272,6 +272,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - Jon Gallant [https://github.com/jongio](https://github.com/jongio)
 
+- Kuba Rozkwitalski [https://github.com/kubarozkwitalski](https://github.com/kubarozkwitalski)
+
 - Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
 
 ## 📬 이슈를 남겨주세요
