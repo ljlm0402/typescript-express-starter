@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt';
 import { CreateUserDto } from '../dtos/users.dto';
 import HttpException from '../exceptions/HttpException';
-// import userModel from '../models/users.model';
 import { isEmpty } from '../utils/util';
 import { PrismaClient, User } from '@prisma/client';
 

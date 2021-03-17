@@ -16,9 +16,7 @@ class AuthService {
     const findUser: User = await this.users.findUserByEmail(userData.email);
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
     const createUserData: Promise<User> = this.users.createUser(userData)
-
     return createUserData;
   }
 
@@ -53,7 +51,7 @@ class AuthService {
 
     return { expiresIn, token: jwt.sign(dataStoredInToken, secret, { expiresIn }) };
   }
- 
+
   public createCookie(tokenData: TokenData): string {
     return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
   }

@@ -1,26 +1,32 @@
-## What(무엇을 변경하셨나요 ?)
+## Content (작업 내용)
 
-<!-- What changes are being made? (What feature/bug is being fixed here?) -->
+<!-- List up changes so that reviewer can quickly understand the important parts -->
+<!-- 리뷰어가 중점적으로 봐야 하는 부분을 바로 알 수 있도록 변경된 내용을 나열 합니다. -->
 
-## Why(왜 변경하셨나요 ?)
+## Links (링크)
 
-<!-- Why are these changes necessary? -->
+* Issue Links (이슈 링크)
 
-## How(어떻게 변경하였나요 ?)
+* API Links (API 스팩 문서)
 
-<!-- How were these changes implemented? -->
+* Development Links (개발 문서)
 
-## Check List(체크 사항)
+* Document Links (기획 문서)
+
+* Design Links (디자인 문서)
+
+## Etc (기타 사항)
+
+<!-- Additional information about this PR or any troubles working on this PR -->
+<!-- PR에 대한 추가 설명이나 작업하면서 고민이 되었던 부분 등 -->
+
+## Check List (체크 사항)
 
 <!-- to check an item, place an "x" in the box -->
 
-- [ ] Issue(이슈)
-- [ ] Tests(테스트)
-- [ ] Ready to be merged(병합 준비 완료)
+- [ ] Issue (이슈)
+- [ ] Tests (테스트)
+- [ ] Ready to be merged (병합 준비 완료)
       <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
-- [ ] Added myself to contributors table(기여자 추가)
+- [ ] Added myself to contributors table (기여자 추가)
       <!-- this is optional, see the contributing guidelines for instructions -->
-
-## Additional Context(추가 사항)
-
-<!-- feel free to add additional context -->

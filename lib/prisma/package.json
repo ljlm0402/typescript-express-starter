@@ -12,6 +12,7 @@
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "prisma:init": "prisma init",
+    "prisma:migrate": "prisma migrate dev --preview-feature",
     "prisma:generate": "prisma generate"
   },
   "prisma": {
