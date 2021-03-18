@@ -2,8 +2,8 @@
 name: "Feature Request(기능 요청서) \U0001F4A1"
 about: "Suggest an idea for this project"
 title: ""
-labels: "Feature"
-assignees: ""
+labels: "\U000026A1 Feature"
+assignees: "ljlm0402"
 ---
 
 ### Motivation(새로운 기능 설명)

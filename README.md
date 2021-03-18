@@ -29,7 +29,7 @@ The package is configured to use TypeScript instead of JavaScript.
 
 ## 🚀 Quick Start
 
-### Install with the NPM Global Package
+### Install with the npm Global Package
 
 ```bash
 $ npm install -g typescript-express-starter
@@ -53,7 +53,7 @@ $ npx typescript-express-starter "project name"
 
 Start your typescript-express-starter app in development mode at `http://localhost:3000/`
 
-#### Template type
+#### Template Type
 
 | Name | Desc |
 |:-----|:-----|
@@ -227,7 +227,6 @@ Modify `*.http` file in http folder to your source code.
 ├── Dockerfile.dev
 ├── jest.config.js
 ├── Makefile
-├── Makefile
 ├── nginx.conf
 ├── nodemon.json
 ├── package-lock.json
@@ -238,15 +237,15 @@ Modify `*.http` file in http folder to your source code.
 
 ## 📬 Recommended Commit Message
 
-| When             | Commit Message     |
-| :--------------- | :----------------- |
-| Add Feature      | ✨ Add Feature     |
-| Fix Bug          | 🐞 Fix Bug         |
+| When             | Commit Message      |
+| :--------------- | :------------------ |
+| Add Feature      | ✨ Add Feature      |
+| Fix Bug          | 🐞 Fix Bug          |
 | Refactoring Code | 🛠 Refactoring Code |
-| Install Package  | 📦 Install Package |
-| Fix Readme       | 📚 Fix Readme      |
-| Update Version   | 🌼 Update Version  |
-| New Template     | 🎉 New Template    |
+| Install Package  | 📦 Install Package  |
+| Fix Readme       | 📚 Fix Readme       |
+| Update Version   | 🌼 Update Version   |
+| New Template     | 🎉 New Template     |
 
 ## 💳 License
 

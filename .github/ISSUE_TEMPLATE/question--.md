@@ -2,8 +2,8 @@
 name: "Question(문의) \U00002753"
 about: "Ask a question about this project"
 title: ""
-labels: "Question"
-assignees: ""
+labels: "\U00002754 Question"
+assignees: "ljlm0402"
 ---
 
 ### Summary(요약)
