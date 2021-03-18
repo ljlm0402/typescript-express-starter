@@ -2,8 +2,8 @@
 name: "Bug Report(버그 보고서) \U0001F41B"
 about: "Create a report to help us improve"
 title: ""
-labels: "Bug"
-assignees: ""
+labels: "\U0001F41E Bug"
+assignees: "ljlm0402"
 ---
 
 ### Describe the Bug(버그 설명)
