@@ -1,15 +1,27 @@
-<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/logo.jpg' border='0' alt='logo' />
+<h1 align="center">
+<br>
+  <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/logo.jpg' border='0' alt='logo' />
+  <br>
+    <br>
+  타입스크립트 익스프레스 스타터
+  <br>
+</h1>
 
-[타입스크립트](https://www.typescriptlang.org/) 기반의 [Express](https://expressjs.com/ko/) 스타터 패키지
+<h4 align="center">🚀 타입스크립트 기반의 익스프레스 보일러 플레이트 스타터 패키지</h4>
 
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="NPM 버전" /></a>
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="패키지 라이센스" /></a>
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="릴리즈 버전" /></a>
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="NPM 다운로드 수" /></a>
+<p align="center">
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm 버전" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="패키지 라이선스" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="릴리즈 버전" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" /></a>
+</p>
 
 <br />
 
-🇺🇸 [영어](README.md)
+<p align="center">
+  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md">🇺🇸</a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md">🇰🇷</a>
+</p>
 
 <br />
 
@@ -51,14 +63,14 @@ $ npx typescript-express-starter "project name"
 
 #### 템플릿 종류
 
-| 이름 | 설명 |
-|:-----|:-----|
-| Default | Express 기본 |
-| Sequlize | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM |
-| Mongoose |  Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리 |
-| TypeORM | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM |
-| Prisma | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
-| Knex (developing) | 쿼리 빌더를 위한 라이브러리 |
+| 이름              | 설명                                                                                                                                                                            |
+| :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Default           | Express 기본                                                                                                                                                                    |
+| Sequlize          | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                               |
+| Mongoose          | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
+| TypeORM           | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
+| Prisma            | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
+| Knex (developing) | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
 
 ## 🛎 Script 명령어
 
@@ -231,14 +243,14 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 ## 📬 커밋 메시지 정의
 
-| 언제 | 메시지 |
-| :-- | :--- |
-| 기능 추가 | ✨ 기능 추가 |
-| 버그 수정 | 🐞 버그 수정 |
-| 코드 개선 | 🛠 코드 개선 |
-| 패키지 설치 | 📦 패키지 설치 |
-| 문서 수정 | 📚 문서 수정 |
-| 버전 업데이트 | 🌼 버전 업데이트 |
+| 언제               | 메시지                |
+| :----------------- | :-------------------- |
+| 기능 추가          | ✨ 기능 추가          |
+| 버그 수정          | 🐞 버그 수정          |
+| 코드 개선          | 🛠 코드 개선           |
+| 패키지 설치        | 📦 패키지 설치        |
+| 문서 수정          | 📚 문서 수정          |
+| 버전 업데이트      | 🌼 버전 업데이트      |
 | 새로운 템플릿 추가 | 🎉 새로운 템플릿 추가 |
 
 ## 💳 라이센스

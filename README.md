@@ -1,15 +1,27 @@
-<img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/logo.jpg' border='0' alt='logo' />
+<h1 align="center">
+<br>
+  <img src='https://github.com/ljlm0402/typescript-express-starter/raw/images/logo.jpg' border='0' alt='logo' />
+  <br>
+    <br>
+  TypeScript Express Starter
+  <br>
+</h1>
 
-[Express](https://expressjs.com/) with [TypeScript](https://www.typescriptlang.org/)'s Starter.
+<h4 align="center">🚀 Express RESTful API Boilerplate Using TypeScript</h4>
 
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="NPM Version" /></a>
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="Release Version" /></a>
-<a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="NPM Downloads" /></a>
+<p align="center">
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm Version" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="Release Version" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm Downloads" /></a>
+</p>
 
 <br />
 
-🇰🇷 [Korean](README.kr.md)
+<p align="center">
+  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md">🇺🇸</a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md">🇰🇷</a>
+</p>
 
 <br />
 
@@ -55,14 +67,14 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name | Desc |
-|:-----|:-----|
-| Default | Express Default |
-| Sequlize | Easy to use multi SQL dialect ROM for Node.js |
-| Mongoose | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment |
-| TypeORM | An ORM that can run in Node.js and Others |
-| Prisma | Modern Database Access for TypeScript & Node.js |
-| Knex (developing) | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle |
+| Name              | Desc                                                                         |
+| :---------------- | :--------------------------------------------------------------------------- |
+| Default           | Express Default                                                              |
+| Sequlize          | Easy to use multi SQL dialect ROM for Node.js                                |
+| Mongoose          | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment |
+| TypeORM           | An ORM that can run in Node.js and Others                                    |
+| Prisma            | Modern Database Access for TypeScript & Node.js                              |
+| Knex (developing) | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle           |
 
 ## 🛎 Available Commands for the Server
 
@@ -237,15 +249,15 @@ Modify `*.http` file in http folder to your source code.
 
 ## 📬 Recommended Commit Message
 
-| When             | Commit Message      |
-| :--------------- | :------------------ |
-| Add Feature      | ✨ Add Feature      |
-| Fix Bug          | 🐞 Fix Bug          |
+| When             | Commit Message     |
+| :--------------- | :----------------- |
+| Add Feature      | ✨ Add Feature     |
+| Fix Bug          | 🐞 Fix Bug         |
 | Refactoring Code | 🛠 Refactoring Code |
-| Install Package  | 📦 Install Package  |
-| Fix Readme       | 📚 Fix Readme       |
-| Update Version   | 🌼 Update Version   |
-| New Template     | 🎉 New Template     |
+| Install Package  | 📦 Install Package |
+| Fix Readme       | 📚 Fix Readme      |
+| Update Version   | 🌼 Update Version  |
+| New Template     | 🎉 New Template    |
 
 ## 💳 License
 
