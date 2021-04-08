@@ -233,6 +233,7 @@ Modify `*.http` file in http folder to your source code.
 ├── .eslintrc
 ├── .gitignore
 ├── .huskyrc
+├── .lintstagedrc.json
 ├── .prettierrc
 ├── docker-compose.yml
 ├── Dockerfile
@@ -292,6 +293,8 @@ Modify `*.http` file in http folder to your source code.
 - Kuba Rozkwitalski [https://github.com/kubarozkwitalski](https://github.com/kubarozkwitalski)
 
 - Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
+
+- Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
 
 ## 📬 Please request an issue
 

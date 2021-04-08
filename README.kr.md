@@ -227,6 +227,7 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ├── .eslintrc
 ├── .gitignore
 ├── .huskyrc
+├── .lintstagedrc.json
 ├── .prettierrc
 ├── docker-compose.yml
 ├── Dockerfile
@@ -286,6 +287,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - Kuba Rozkwitalski [https://github.com/kubarozkwitalski](https://github.com/kubarozkwitalski)
 
 - Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
+
+- Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
 
 ## 📬 이슈를 남겨주세요
 
