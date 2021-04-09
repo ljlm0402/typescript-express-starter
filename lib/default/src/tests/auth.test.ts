@@ -1,7 +1,7 @@
 import request from 'supertest';
-import App from '../app';
-import AuthRoute from '../routes/auth.route';
-import { CreateUserDto } from '../dtos/users.dto';
+import App from '@app';
+import AuthRoute from '@routes/auth.route';
+import { CreateUserDto } from '@dtos/users.dto';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -27,7 +27,7 @@ describe('Testing Auth', () => {
         email: 'lim@gmail.com',
         password: 'q1w2e3r4',
       };
-      process.env.JWT_SECRET = 'jwt_secret';
+
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
