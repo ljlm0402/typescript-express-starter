@@ -1,6 +1,6 @@
 import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import { get } from 'config';
+import config from 'config';
 import HttpException from '@exceptions/HttpException';
 import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 import userModel from '@models/users.model';
@@ -10,7 +10,7 @@ const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFun
     const cookies = req.cookies;
 
     if (cookies && cookies.Authorization) {
-      const secretKey: string = get('secretKey');
+      const secretKey: string = config.get('secretKey');
       const verificationResponse = (await jwt.verify(cookies.Authorization, secretKey)) as DataStoredInToken;
       const userId = verificationResponse.id;
       const findUser = userModel.find(user => user.id === userId);
