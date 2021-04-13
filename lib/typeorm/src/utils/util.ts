@@ -1,4 +1,10 @@
-export const isEmpty = (value: any): boolean => {
+/**
+ * @method isEmpty
+ * @param {String | Number | Object} value
+ * @returns {Boolean} true & false
+ * @description this value is Empty Check
+ */
+export const isEmpty = (value: string | number | object): boolean => {
   if (value === null) {
     return true;
   } else if (typeof value !== 'number' && value === '') {

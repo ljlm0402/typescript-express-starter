@@ -1,0 +1,9 @@
+{
+    "env": "production",
+    "dbConfig": {
+        "host": "localhost",
+        "database": "mongoose",
+        "port": 27017
+    },
+    "secretKey": "secretKey"
+}

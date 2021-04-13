@@ -1,7 +1,7 @@
 import request from 'supertest';
-import App from '../app';
-import AuthRoute from '../routes/auth.route';
-import { CreateUserDto } from '../dtos/users.dto';
+import App from '@app';
+import { CreateUserDto } from '@dtos/users.dto';
+import AuthRoute from '@routes/auth.route';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -24,10 +24,10 @@ describe('Testing Auth', () => {
   describe('[POST] /login', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
       const userData: CreateUserDto = {
-        email: 'lim@gmail.com',
+        email: 'test@email.com',
         password: 'q1w2e3r4',
       };
-      process.env.JWT_SECRET = 'jwt_secret';
+
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 

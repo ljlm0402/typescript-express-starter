@@ -1,12 +1,13 @@
-import { getRepository } from 'typeorm';
 import bcrypt from 'bcrypt';
+import config from 'config';
 import jwt from 'jsonwebtoken';
-import { CreateUserDto } from '../dtos/users.dto';
-import HttpException from '../exceptions/HttpException';
-import { DataStoredInToken, TokenData } from '../interfaces/auth.interface';
-import { User } from '../interfaces/users.interface';
-import { UserEntity } from '../entity/users.entity';
-import { isEmpty } from '../utils/util';
+import { getRepository } from 'typeorm';
+import { CreateUserDto } from '@dtos/users.dto';
+import { UserEntity } from '@entity/users.entity';
+import HttpException from '@exceptions/HttpException';
+import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
+import { User } from '@interfaces/users.interface';
+import { isEmpty } from '@utils/util';
 
 class AuthService {
   public users = UserEntity;
@@ -43,7 +44,7 @@ class AuthService {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     const userRepository = getRepository(this.users);
-    const findUser: User = await userRepository.findOne({ where: { password: userData.password } });
+    const findUser: User = await userRepository.findOne({ where: { email: userData.email, password: userData.password } });
     if (!findUser) throw new HttpException(409, "You're not user");
 
     return findUser;
@@ -51,10 +52,10 @@ class AuthService {
 
   public createToken(user: User): TokenData {
     const dataStoredInToken: DataStoredInToken = { id: user.id };
-    const secret: string = process.env.JWT_SECRET;
+    const secretKey: string = config.get('secretKey');
     const expiresIn: number = 60 * 60;
 
-    return { expiresIn, token: jwt.sign(dataStoredInToken, secret, { expiresIn }) };
+    return { expiresIn, token: jwt.sign(dataStoredInToken, secretKey, { expiresIn }) };
   }
 
   public createCookie(tokenData: TokenData): string {

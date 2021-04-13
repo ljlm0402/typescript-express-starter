@@ -6,13 +6,13 @@
  * December 18, 2019.
  *****************************************************************/
 
-const path = require('path');
-const starter = require('../lib/starter');
+const path = require("path");
+const starter = require("../lib/starter");
 const destination = getDest(process.argv[2]);
 
 function getDest(destFolder) {
-  destFolder = destFolder || 'typescript-express-starter';
+  destFolder = destFolder || "typescript-express-starter";
   return path.join(process.cwd(), destFolder);
-};
+}
 
 starter(destination);

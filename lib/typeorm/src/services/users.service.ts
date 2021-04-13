@@ -1,10 +1,10 @@
-import { getRepository } from 'typeorm';
 import bcrypt from 'bcrypt';
-import { CreateUserDto } from '../dtos/users.dto';
-import HttpException from '../exceptions/HttpException';
-import { User } from '../interfaces/users.interface';
-import { UserEntity } from '../entity/users.entity';
-import { isEmpty } from '../utils/util';
+import { getRepository } from 'typeorm';
+import { CreateUserDto } from '@dtos/users.dto';
+import { UserEntity } from '@entity/users.entity';
+import HttpException from '@exceptions/HttpException';
+import { User } from '@interfaces/users.interface';
+import { isEmpty } from '@utils/util';
 
 class UserService {
   public users = UserEntity;
@@ -16,6 +16,8 @@ class UserService {
   }
 
   public async findUserById(userId: number): Promise<User> {
+    if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
+
     const userRepository = getRepository(this.users);
     const findUser: User = await userRepository.findOne({ where: { id: userId } });
     if (!findUser) throw new HttpException(409, "You're not user");
@@ -36,7 +38,7 @@ class UserService {
     return createUserData;
   }
 
-  public async updateUser(userId: number, userData: User): Promise<User> {
+  public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     const userRepository = getRepository(this.users);
@@ -51,6 +53,8 @@ class UserService {
   }
 
   public async deleteUser(userId: number): Promise<User> {
+    if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
+
     const userRepository = getRepository(this.users);
     const findUser: User = await userRepository.findOne({ where: { id: userId } });
     if (!findUser) throw new HttpException(409, "You're not user");

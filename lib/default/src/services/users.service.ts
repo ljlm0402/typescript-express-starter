@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
-import { CreateUserDto } from '../dtos/users.dto';
-import HttpException from '../exceptions/HttpException';
-import { User } from '../interfaces/users.interface';
-import userModel from '../models/users.model';
-import { isEmpty } from '../utils/util';
+import { CreateUserDto } from '@dtos/users.dto';
+import HttpException from '@exceptions/HttpException';
+import { User } from '@interfaces/users.interface';
+import userModel from '@models/users.model';
+import { isEmpty } from '@utils/util';
 
 class UserService {
   public users = userModel;
@@ -33,7 +33,7 @@ class UserService {
     return createUserData;
   }
 
-  public async updateUser(userId: number, userData: User): Promise<User[]> {
+  public async updateUser(userId: number, userData: CreateUserDto): Promise<User[]> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = this.users.find(user => user.id === userId);

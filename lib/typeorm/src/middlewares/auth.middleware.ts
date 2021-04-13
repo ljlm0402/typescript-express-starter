@@ -1,17 +1,18 @@
+import config from 'config';
 import { NextFunction, Response } from 'express';
-import { getRepository } from 'typeorm';
 import jwt from 'jsonwebtoken';
-import HttpException from '../exceptions/HttpException';
-import { DataStoredInToken, RequestWithUser } from '../interfaces/auth.interface';
-import { UserEntity } from '../entity/users.entity';
+import { getRepository } from 'typeorm';
+import { UserEntity } from '@entity/users.entity';
+import HttpException from '@exceptions/HttpException';
+import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 
 const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
     const cookies = req.cookies;
 
     if (cookies && cookies.Authorization) {
-      const secret = process.env.JWT_SECRET;
-      const verificationResponse = (await jwt.verify(cookies.Authorization, secret)) as DataStoredInToken;
+      const secretKey: string = config.get('secretKey');
+      const verificationResponse = (await jwt.verify(cookies.Authorization, secretKey)) as DataStoredInToken;
       const userId = verificationResponse.id;
 
       const userRepository = getRepository(UserEntity);

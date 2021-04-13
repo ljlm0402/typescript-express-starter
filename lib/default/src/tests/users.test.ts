@@ -1,9 +1,9 @@
 import request from 'supertest';
-import App from '../app';
-import { User } from '../interfaces/users.interface';
-import userModel from '../models/users.model';
-import UserRoute from '../routes/users.route';
-import { CreateUserDto } from '../dtos/users.dto';
+import App from '@app';
+import { CreateUserDto } from '@dtos/users.dto';
+import { User } from '@interfaces/users.interface';
+import userModel from '@models/users.model';
+import UserRoute from '@routes/users.route';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -34,7 +34,7 @@ describe('Testing Users', () => {
   describe('[POST] /users', () => {
     it('response statusCode 201 / created', async () => {
       const userData: CreateUserDto = {
-        email: 'lkm@gmail.com',
+        email: 'test@email.com',
         password: 'q1w2e3r4',
       };
       const usersRoute = new UserRoute();
@@ -48,8 +48,8 @@ describe('Testing Users', () => {
     it('response statusCode 200 / updated', async () => {
       const userId = 1;
       const userData: CreateUserDto = {
-        email: 'lim@gmail.com',
-        password: '1q2w3e4r',
+        email: 'test@email.com',
+        password: 'q1w2e3r4',
       };
       const usersRoute = new UserRoute();
       const app = new App([usersRoute]);

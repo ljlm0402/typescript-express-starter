@@ -14,7 +14,8 @@ services:
   server:
     build:
       context: ./
-      dockerfile: Dockerfile.dev
+      target: development-build-stage
+      dockerfile: Dockerfile
     container_name: server
     ports:
       - '3000:3000'
