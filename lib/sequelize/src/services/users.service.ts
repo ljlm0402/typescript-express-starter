@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt';
-import { CreateUserDto } from '../dtos/users.dto';
-import HttpException from '../exceptions/HttpException';
-import { User } from '../interfaces/users.interface';
-import DB from '../database';
-import { isEmpty } from '../utils/util';
+import DB from '@databases';
+import { CreateUserDto } from '@dtos/users.dto';
+import HttpException from '@exceptions/HttpException';
+import { User } from '@interfaces/users.interface';
+import { isEmpty } from '@utils/util';
 
 class UserService {
   public users = DB.Users;
@@ -30,11 +30,10 @@ class UserService {
 
     const hashedPassword = await bcrypt.hash(userData.password, 10);
     const createUserData: User = await this.users.create({ ...userData, password: hashedPassword });
-
     return createUserData;
   }
 
-  public async updateUser(userId: number, userData: User): Promise<User> {
+  public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
 
     const findUser: User = await this.users.findByPk(userId);
@@ -47,7 +46,7 @@ class UserService {
     return updateUser;
   }
 
-  public async deleteUserData(userId: number): Promise<User> {
+  public async deleteUser(userId: number): Promise<User> {
     if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
 
     const findUser: User = await this.users.findByPk(userId);
