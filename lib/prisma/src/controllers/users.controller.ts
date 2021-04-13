@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateUserDto } from '../dtos/users.dto';
 import { User } from '@prisma/client';
-import userService from '../services/users.service';
+import { CreateUserDto } from '@dtos/users.dto';
+import userService from '@services/users.service';
 
 class UsersController {
   public userService = new userService();
@@ -41,7 +41,7 @@ class UsersController {
   public updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       const userId = Number(req.params.id);
-      const userData: User = req.body;
+      const userData: CreateUserDto = req.body;
       const updateUserData: User = await this.userService.updateUser(userId, userData);
 
       res.status(200).json({ data: updateUserData, message: 'updated' });

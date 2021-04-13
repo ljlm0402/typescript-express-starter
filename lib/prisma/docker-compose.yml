@@ -1,24 +1,25 @@
-version: "3.7"
+version: '3.7'
 
 services:
   proxy:
     image: nginx:alpine
     container_name: proxy
-    ports: 
-      - "80:80"
+    ports:
+      - '80:80'
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-    restart: "unless-stopped"
+    restart: 'unless-stopped'
     networks:
       - backend
   server:
     build:
       context: ./
-      dockerfile: Dockerfile.dev
+      target: development-build-stage
+      dockerfile: Dockerfile
     container_name: server
     ports:
-      - "3000:3000"
-    environment: 
+      - '3000:3000'
+    environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
       MYSQL_HOST: mysql
@@ -26,7 +27,7 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
-    restart: "unless-stopped"
+    restart: 'unless-stopped'
     networks:
       - backend
     links:
@@ -41,7 +42,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: prisma
     ports:
-      - "3306:3306"
+      - '3306:3306'
     networks:
       - backend
 
