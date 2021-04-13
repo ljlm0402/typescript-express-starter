@@ -1,3 +1,4 @@
 {
+    "env": "test",
     "secretKey": "secretKey"
 }

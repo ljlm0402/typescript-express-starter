@@ -1,6 +1,6 @@
+import config from 'config';
 import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
-import config from 'config';
 import HttpException from '@exceptions/HttpException';
 import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 import userModel from '@models/users.model';
