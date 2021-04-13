@@ -237,7 +237,7 @@ Modify `*.http` file in http folder to your source code.
 ├── .prettierrc
 ├── docker-compose.yml
 ├── Dockerfile
-├── Dockerfile.dev
+├── ecosystem.config.js
 ├── jest.config.js
 ├── Makefile
 ├── nginx.conf

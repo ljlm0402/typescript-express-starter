@@ -231,7 +231,7 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ├── .prettierrc
 ├── docker-compose.yml
 ├── Dockerfile
-├── Dockerfile.dev
+├── ecosystem.config.js
 ├── jest.config.js
 ├── Makefile
 ├── nginx.conf
