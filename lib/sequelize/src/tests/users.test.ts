@@ -69,7 +69,11 @@ describe('Testing Users', () => {
       const users = usersRoute.usersController.userService.users;
 
       users.findOne = jest.fn().mockReturnValue(null);
-      users.create = jest.fn().mockReturnValue({ id: 1, ...userData, password: await bcrypt.hash(userData.password, 10) });
+      users.create = jest.fn().mockReturnValue({
+        id: 1,
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
 
       (Sequelize as any).authenticate = jest.fn();
       const app = new App([usersRoute]);

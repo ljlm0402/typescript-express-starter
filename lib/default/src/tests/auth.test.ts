@@ -24,7 +24,7 @@ describe('Testing Auth', () => {
   describe('[POST] /login', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
       const userData: CreateUserDto = {
-        email: 'lim@gmail.com',
+        email: 'test@email.com',
         password: 'q1w2e3r4',
       };
 

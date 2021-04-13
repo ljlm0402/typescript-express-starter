@@ -62,14 +62,18 @@ describe('Testing Users', () => {
     it('response Create User', async () => {
       const userData: CreateUserDto = {
         email: 'test@email.com',
-        password: 'q1w2e3r4!',
+        password: 'q1w2e3r4',
       };
 
       const usersRoute = new UsersRoute();
       const users = usersRoute.usersController.userService.users;
 
       users.findOne = jest.fn().mockReturnValue(null);
-      users.create = jest.fn().mockReturnValue({ _id: '60706478aad6c9ad19a31c84', ...userData, password: await bcrypt.hash(userData.password, 10) });
+      users.create = jest.fn().mockReturnValue({
+        _id: '60706478aad6c9ad19a31c84',
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
 
       (mongoose as any).connect = jest.fn();
       const app = new App([usersRoute]);
@@ -82,7 +86,7 @@ describe('Testing Users', () => {
       const userId = '60706478aad6c9ad19a31c84';
       const userData: CreateUserDto = {
         email: 'test@email.com',
-        password: 'z1x2c3v4!',
+        password: 'q1w2e3r4',
       };
 
       const usersRoute = new UsersRoute();

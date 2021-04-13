@@ -75,7 +75,11 @@ describe('Testing Users', () => {
       const userRepository = getRepository(users);
 
       userRepository.findOne = jest.fn().mockReturnValue(null);
-      userRepository.save = jest.fn().mockReturnValue({ id: 1, email: userData.email, password: await bcrypt.hash(userData.password, 10) });
+      userRepository.save = jest.fn().mockReturnValue({
+        id: 1,
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
 
       const app = new App([usersRoute]);
       return request(app.getServer()).post(`${usersRoute.path}`).send(userData).expect(201);
@@ -94,9 +98,21 @@ describe('Testing Users', () => {
       const users = usersRoute.usersController.userService.users;
       const userRepository = getRepository(users);
 
-      userRepository.findOne = jest.fn().mockReturnValue({ id: userId, email: userData.email, password: await bcrypt.hash(userData.password, 10) });
-      userRepository.update = jest.fn().mockReturnValue({ generatedMaps: [], raw: [], affected: 1 });
-      userRepository.findOne = jest.fn().mockReturnValue({ id: userId, email: userData.email, password: await bcrypt.hash(userData.password, 10) });
+      userRepository.findOne = jest.fn().mockReturnValue({
+        id: userId,
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
+      userRepository.update = jest.fn().mockReturnValue({
+        generatedMaps: [],
+        raw: [],
+        affected: 1,
+      });
+      userRepository.findOne = jest.fn().mockReturnValue({
+        id: userId,
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
 
       const app = new App([usersRoute]);
       return request(app.getServer()).put(`${usersRoute.path}/${userId}`).send(userData).expect(200);
@@ -111,7 +127,11 @@ describe('Testing Users', () => {
       const users = usersRoute.usersController.userService.users;
       const userRepository = getRepository(users);
 
-      userRepository.findOne = jest.fn().mockReturnValue({ id: userId, email: 'a@email.com', password: await bcrypt.hash('q1w2e3r4!', 10) });
+      userRepository.findOne = jest.fn().mockReturnValue({
+        id: userId,
+        email: 'a@email.com',
+        password: await bcrypt.hash('q1w2e3r4!', 10),
+      });
 
       const app = new App([usersRoute]);
       return request(app.getServer()).delete(`${usersRoute.path}/${userId}`).expect(200);

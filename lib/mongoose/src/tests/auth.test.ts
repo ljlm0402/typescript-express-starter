@@ -21,7 +21,11 @@ describe('Testing Auth', () => {
       const users = authRoute.authController.authService.users;
 
       users.findOne = jest.fn().mockReturnValue(null);
-      users.create = jest.fn().mockReturnValue({ _id: '60706478aad6c9ad19a31c84', ...userData, password: await bcrypt.hash(userData.password, 10) });
+      users.create = jest.fn().mockReturnValue({
+        _id: '60706478aad6c9ad19a31c84',
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
 
       (mongoose as any).connect = jest.fn();
       const app = new App([authRoute]);
@@ -41,7 +45,7 @@ describe('Testing Auth', () => {
 
       users.findOne = jest.fn().mockReturnValue({
         _id: '60706478aad6c9ad19a31c84',
-        email: 'test@email.com',
+        email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
 

@@ -29,7 +29,7 @@ describe('Testing Auth', () => {
       userRepository.findOne = jest.fn().mockReturnValue(null);
       userRepository.save = jest.fn().mockReturnValue({
         id: 1,
-        ...userData,
+        email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
       });
 
@@ -49,7 +49,11 @@ describe('Testing Auth', () => {
       const users = authRoute.authController.authService.users;
       const userRepository = getRepository(users);
 
-      userRepository.findOne = jest.fn().mockReturnValue({ id: 1, email: userData.email, password: await bcrypt.hash(userData.password, 10) });
+      userRepository.findOne = jest.fn().mockReturnValue({
+        id: 1,
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
+      });
 
       const app = new App([authRoute]);
       return request(app.getServer())
