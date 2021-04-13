@@ -1,8 +1,9 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
     "target": "es2017",
     "lib": ["es2017", "esnext.asynciterable"],
-    "typeRoots": ["./node_modules/@types"],
+    "typeRoots": ["node_modules/@types"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -11,11 +12,28 @@
     "module": "commonjs",
     "pretty": true,
     "sourceMap": true,
-    "outDir": "./build",
+    "declaration": true,
+    "outDir": "./dist",
     "allowJs": true,
     "noEmit": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "baseUrl": "src",
+    "paths": {
+      "@app": ["app"],
+      "@controllers/*": ["controllers/*"],
+      "@databases": ["databases"],
+      "@dtos/*": ["dtos/*"],
+      "@entity/*": ["entity/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
-  "include": ["./src/**/*", ".env"],
+  "include": ["src/**/*.ts", "src/**/*.json", ".env"],
   "exclude": ["node_modules"]
 }

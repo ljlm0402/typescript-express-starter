@@ -1,3 +1,5 @@
+process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
+
 import 'reflect-metadata';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
@@ -9,10 +11,10 @@ import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { createConnection } from 'typeorm';
-import { dbConnection } from './database';
-import Routes from './interfaces/routes.interface';
-import errorMiddleware from './middlewares/error.middleware';
-import { logger, stream } from './utils/logger';
+import { dbConnection } from '@databases';
+import Routes from '@interfaces/routes.interface';
+import errorMiddleware from '@middlewares/error.middleware';
+import { logger, stream } from '@utils/logger';
 
 class App {
   public app: express.Application;
@@ -33,7 +35,10 @@ class App {
 
   public listen() {
     this.app.listen(this.port, () => {
+      logger.info(`=================================`);
+      logger.info(`======= ENV: ${this.env} =======`);
       logger.info(`🚀 App listening on the port ${this.port}`);
+      logger.info(`=================================`);
     });
   }
 
@@ -42,20 +47,16 @@ class App {
   }
 
   private connectToDatabase() {
-    createConnection(dbConnection)
-      .then(() => {
-        logger.info('🟢 The database is connected.');
-      })
-      .catch((error: Error) => {
-        logger.error(`🔴 Unable to connect to the database: ${error}.`);
-      });
+    if (this.env !== 'test') {
+      createConnection(dbConnection);
+    }
   }
 
   private initializeMiddlewares() {
     if (this.env === 'production') {
       this.app.use(morgan('combined', { stream }));
       this.app.use(cors({ origin: 'your.domain.com', credentials: true }));
-    } else if (this.env === 'development') {
+    } else {
       this.app.use(morgan('dev', { stream }));
       this.app.use(cors({ origin: true, credentials: true }));
     }
