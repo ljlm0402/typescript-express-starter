@@ -170,6 +170,11 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 │   └── settings.json
 │
 ├── /src
+│   ├── /configs
+│   │   ├── development.json
+│   │   ├── production.json
+│   │   └── test.json
+│   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
 │   │   ├── index.controller.ts

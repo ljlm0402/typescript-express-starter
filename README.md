@@ -176,6 +176,11 @@ Modify `*.http` file in http folder to your source code.
 │   └── settings.json
 │
 ├── /src
+│   ├── /configs
+│   │   ├── development.json
+│   │   ├── production.json
+│   │   └── test.json
+│   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
 │   │   ├── index.controller.ts
