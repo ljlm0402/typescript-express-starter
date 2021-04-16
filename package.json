@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -42,6 +42,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "edit-json-file": "^1.5.0",
+    "gitignore": "^0.6.0",
     "inquirer": "^6.5.2",
     "ncp": "^2.0.0",
     "ora": "^4.0.3"
