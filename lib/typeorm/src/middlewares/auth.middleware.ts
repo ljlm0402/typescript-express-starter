@@ -8,11 +8,11 @@ import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 
 const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
-    const cookies = req.cookies;
+    const Authorization = req.cookies['Authorization'] || req.header('Authorization').split('Bearer ')[1] || null;
 
-    if (cookies && cookies.Authorization) {
+    if (Authorization) {
       const secretKey: string = config.get('secretKey');
-      const verificationResponse = (await jwt.verify(cookies.Authorization, secretKey)) as DataStoredInToken;
+      const verificationResponse = (await jwt.verify(Authorization, secretKey)) as DataStoredInToken;
       const userId = verificationResponse.id;
 
       const userRepository = getRepository(UserEntity);
