@@ -121,7 +121,7 @@ $ npx typescript-express-starter "project name"
 
 수정을 원하시면 `nginx.conf` 파일을 수정해주시면 됩니다.
 
-### ✨ ESLint, Pretiiter - 코드 포맷터
+### ✨ ESLint, Prettier - 코드 포맷터
 
 2019년, TSLint 지원이 종료 되어 ESLint를 적용하였습니다.
 
