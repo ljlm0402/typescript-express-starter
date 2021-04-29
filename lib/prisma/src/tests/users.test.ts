@@ -108,14 +108,18 @@ describe('Testing Users', () => {
   describe('[DELETE] /users/:id', () => {
     it('response Delete user', async () => {
       const userId = 1;
-
+      const userData: CreateUserDto = {
+        email: 'test@email.com',
+        password: 'q1w2e3r4',
+      };
+      
       const usersRoute = new UserRoute();
       const users = usersRoute.usersController.userService.users;
 
       users.findUnique = jest.fn().mockReturnValue({
         id: userId,
-        email: 'a@email.com',
-        password: await bcrypt.hash('q1w2e3r4!', 10),
+        email: userData.email,
+        password: await bcrypt.hash(userData.password, 10),
       });    
       users.delete = jest.fn().mockReturnValue({
         id: userId,
