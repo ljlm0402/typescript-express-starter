@@ -1,5 +1,5 @@
 import request from 'supertest';
-import App from '@app';
+import App from '@/app';
 import { CreateUserDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import userModel from '@models/users.model';

@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import request from 'supertest';
 import { PrismaClient, User } from '@prisma/client';
-import App from '@app';
+import App from '@/app';
 import { CreateUserDto } from '@dtos/users.dto';
 import UserRoute from '@routes/users.route';
 
@@ -112,7 +112,7 @@ describe('Testing Users', () => {
         email: 'test@email.com',
         password: 'q1w2e3r4',
       };
-      
+
       const usersRoute = new UserRoute();
       const users = usersRoute.usersController.userService.users;
 
@@ -120,7 +120,7 @@ describe('Testing Users', () => {
         id: userId,
         email: userData.email,
         password: await bcrypt.hash(userData.password, 10),
-      });    
+      });
       users.delete = jest.fn().mockReturnValue({
         id: userId,
         email: userData.email,

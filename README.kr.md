@@ -63,14 +63,15 @@ $ npx typescript-express-starter "project name"
 
 #### 템플릿 종류
 
-| 이름              | 설명                                                                                                                                                                            |
-| :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Default           | Express 기본                                                                                                                                                                    |
-| Sequlize          | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                               |
-| Mongoose          | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
-| TypeORM           | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
-| Prisma            | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
-| Knex (developing) | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
+| 이름             | 설명                                                                                                                                                                            |
+| :--------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Default          | Express 기본                                                                                                                                                                    |
+| Sequlize         | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                               |
+| Mongoose         | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
+| TypeORM          | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
+| Prisma           | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
+| Knex (개발중)    | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
+| GraphQL (개발중) | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
 
 ## 🛎 Script 명령어
 
@@ -294,6 +295,10 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
 
 - Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
+
+- n2ptune [https://github.com/n2ptune](https://github.com/n2ptune)
+
+- michael r [https://github.com/alanmynah](https://github.com/alanmynah)
 
 ## 📬 이슈를 남겨주세요
 

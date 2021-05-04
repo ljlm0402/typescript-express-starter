@@ -21,7 +21,7 @@
     "importHelpers": true,
     "baseUrl": "src",
     "paths": {
-      "@app": ["app"],
+      "@/*": ["*"],
       "@controllers/*": ["controllers/*"],
       "@dtos/*": ["dtos/*"],
       "@exceptions/*": ["exceptions/*"],

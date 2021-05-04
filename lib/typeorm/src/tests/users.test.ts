@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import request from 'supertest';
 import { createConnection, getRepository } from 'typeorm';
-import App from '@app';
+import App from '@/app';
 import { dbConnection } from '@databases';
 import { CreateUserDto } from '@dtos/users.dto';
 import UserRoute from '@routes/users.route';
