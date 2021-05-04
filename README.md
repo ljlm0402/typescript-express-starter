@@ -302,6 +302,10 @@ Modify `*.http` file in http folder to your source code.
 
 - Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
 
+- n2ptune [https://github.com/n2ptune](https://github.com/n2ptune)
+
+- michael r [https://github.com/alanmynah](https://github.com/alanmynah)
+
 ## 📬 Please request an issue
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.

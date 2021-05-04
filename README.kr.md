@@ -296,6 +296,10 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
 
+- n2ptune [https://github.com/n2ptune](https://github.com/n2ptune)
+
+- michael r [https://github.com/alanmynah](https://github.com/alanmynah)
+
 ## 📬 이슈를 남겨주세요
 
 추후 추가하고자하는 템플릿, 질문, 기능을 적어 주시면 최선을 다해 답변하고 반영하겠습니다.
