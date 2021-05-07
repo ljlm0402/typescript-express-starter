@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import { getRepository } from 'typeorm';
 import { CreateUserDto } from '@dtos/users.dto';
 import { UserEntity } from '@entity/users.entity';
-import HttpException from '@exceptions/HttpException';
+import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 
