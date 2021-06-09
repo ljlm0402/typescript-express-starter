@@ -1,7 +1,7 @@
 {
     "env": "development",
     "dbConfig": {
-        "host": "localhost",
+        "host": "mysql",
         "user": "root",
         "password": "password",
         "database": "sequelize",
