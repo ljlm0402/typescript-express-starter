@@ -67,15 +67,16 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name                 | Desc                                                                                       |
-| :------------------- | :----------------------------------------------------------------------------------------- |
-| Default              | Express Default                                                                            |
-| Sequlize             | Easy to use multi SQL dialect ROM for Node.js                                              |
-| Mongoose             | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment               |
-| TypeORM              | An ORM that can run in Node.js and Others                                                  |
-| Prisma               | Modern Database Access for TypeScript & Node.js                                            |
-| Knex (Developing)    | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                         |
-| GraphQL (Developing) | query language for APIs and a runtime for fulfilling those queries with your existing data |
+| Name                 | Desc                                                                                                         |
+| :------------------- | :----------------------------------------------------------------------------------------------------------- |
+| Default              | Express Default                                                                                              |
+| Routing Controllers  | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage |
+| Sequlize             | Easy to use multi SQL dialect ROM for Node.js                                                                |
+| Mongoose             | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                 |
+| TypeORM              | An ORM that can run in Node.js and Others                                                                    |
+| Prisma               | Modern Database Access for TypeScript & Node.js                                                              |
+| Knex (Developing)    | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                           |
+| GraphQL (Developing) | query language for APIs and a runtime for fulfilling those queries with your existing data                   |
 
 ## 🛎 Available Commands for the Server
 

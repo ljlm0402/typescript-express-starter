@@ -3,6 +3,7 @@ process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
@@ -11,7 +12,7 @@ import { connect, set } from 'mongoose';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { dbConnection } from '@databases';
-import Routes from '@interfaces/routes.interface';
+import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 
@@ -54,14 +55,8 @@ class App {
   }
 
   private initializeMiddlewares() {
-    if (this.env === 'production') {
-      this.app.use(morgan('combined', { stream }));
-      this.app.use(cors({ origin: 'your.domain.com', credentials: true }));
-    } else {
-      this.app.use(morgan('dev', { stream }));
-      this.app.use(cors({ origin: true, credentials: true }));
-    }
-
+    this.app.use(morgan(config.get('log.format'), { stream }));
+    this.app.use(cors({ origin: config.get('cors.origin'), credentials: config.get('cors.credentials') }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());

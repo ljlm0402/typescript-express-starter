@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { PrismaClient, User } from '@prisma/client';
 import { CreateUserDto } from '@dtos/users.dto';
-import HttpException from '@exceptions/HttpException';
+import { HttpException } from '@exceptions/HttpException';
 import { isEmpty } from '@utils/util';
 
 class UserService {

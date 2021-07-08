@@ -3,6 +3,7 @@ process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
 import 'reflect-metadata';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
@@ -12,7 +13,7 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { createConnection } from 'typeorm';
 import { dbConnection } from '@databases';
-import Routes from '@interfaces/routes.interface';
+import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 
@@ -26,7 +27,7 @@ class App {
     this.port = process.env.PORT || 3000;
     this.env = process.env.NODE_ENV || 'development';
 
-    this.connectToDatabase();
+    this.env !== 'test' && this.connectToDatabase();
     this.initializeMiddlewares();
     this.initializeRoutes(routes);
     this.initializeSwagger();
@@ -47,20 +48,12 @@ class App {
   }
 
   private connectToDatabase() {
-    if (this.env !== 'test') {
-      createConnection(dbConnection);
-    }
+    createConnection(dbConnection);
   }
 
   private initializeMiddlewares() {
-    if (this.env === 'production') {
-      this.app.use(morgan('combined', { stream }));
-      this.app.use(cors({ origin: 'your.domain.com', credentials: true }));
-    } else {
-      this.app.use(morgan('dev', { stream }));
-      this.app.use(cors({ origin: true, credentials: true }));
-    }
-
+    this.app.use(morgan(config.get('log.format'), { stream }));
+    this.app.use(cors({ origin: config.get('cors.origin'), credentials: config.get('cors.credentials') }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());

@@ -5,5 +5,13 @@
         "database": "mongoose",
         "port": 27017
     },
-    "secretKey": "secretKey"
+    "secretKey": "secretKey",
+    "log": {
+        "format": "dev",
+        "dir": "../logs"
+    },
+    "cors": {
+        "origin": true,
+        "credentials": true
+    }
 }
