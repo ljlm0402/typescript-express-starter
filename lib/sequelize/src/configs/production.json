@@ -10,5 +10,13 @@
             "max": 5
         }
     },
-    "secretKey": "secretKey"
+    "secretKey": "secretKey",
+    "log": {
+        "format": "combined",
+        "dir": "../logs"
+    },
+    "cors": {
+        "origin": "your.domain.com",
+        "credentials": true
+    }
 }
