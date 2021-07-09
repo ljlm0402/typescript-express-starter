@@ -4,6 +4,7 @@ import { CreateUserDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import userService from '@services/users.service';
 import { validationMiddleware } from '@middlewares/validation.middleware';
+
 @Controller()
 export class UsersController {
   public userService = new userService();

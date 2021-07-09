@@ -1,7 +1,7 @@
 import request from 'supertest';
 import App from '@/app';
+import { AuthController } from '@controllers/auth.controller';
 import { CreateUserDto } from '@dtos/users.dto';
-import AuthRoute from '@routes/auth.route';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
@@ -14,9 +14,8 @@ describe('Testing Auth', () => {
         email: 'test@email.com',
         password: 'q1w2e3r4',
       };
-      const authRoute = new AuthRoute();
-      const app = new App([authRoute]);
 
+      const app = new App([AuthController]);
       return request(app.getServer()).post('/signup').send(userData);
     });
   });
@@ -24,13 +23,11 @@ describe('Testing Auth', () => {
   describe('[POST] /login', () => {
     it('response should have the Set-Cookie header with the Authorization token', async () => {
       const userData: CreateUserDto = {
-        email: 'test@email.com',
+        email: 'lim@gmail.com',
         password: 'q1w2e3r4',
       };
 
-      const authRoute = new AuthRoute();
-      const app = new App([authRoute]);
-
+      const app = new App([AuthController]);
       return request(app.getServer())
         .post('/login')
         .send(userData)
