@@ -23,10 +23,9 @@
 ## Check List (체크 사항) ✅
 
 <!-- to check an item, place an "x" in the box -->
+<!-- 항목을 확인하려면 상자에 "x"표시 -->
 
 - [ ] Issue (이슈)
 - [ ] Tests (테스트)
 - [ ] Ready to be merged (병합 준비 완료)
-      <!-- In your opinion, is this ready to be merged as soon as it's reviewed? -->
 - [ ] Added myself to contributors table (기여자 추가)
-      <!-- this is optional, see the contributing guidelines for instructions -->
