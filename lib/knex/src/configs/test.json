@@ -1,0 +1,19 @@
+{
+    "env": "test",
+    "dbConfig": {
+        "host": "localhost",
+        "user": "root",
+        "password": "password",
+        "database": "test",
+        "port": 3306
+    },
+    "secretKey": "secretKey",
+    "log": {
+        "format": "dev",
+        "dir": "../logs"
+    },
+    "cors": {
+        "origin": true,
+        "credentials": true
+    }
+}

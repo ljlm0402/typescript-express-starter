@@ -1,0 +1,35 @@
+# auth API
+
+###
+# baseURL
+@baseURL = http://localhost:3000
+
+###
+# signup
+POST {{baseURL}}/signup
+Content-Type: application/json
+
+{
+    "email": "example@gmail.com",
+	"password": "qwer1234"
+}
+
+###
+# Login
+POST {{baseURL}}/login
+Content-Type: application/json
+
+{
+    "email": "lim@gmail.com",
+	"password": "q1w2e3r4"
+}
+
+###
+# Logout
+POST {{baseURL}}/logout
+Content-Type: application/json
+
+{
+    "email": "lim@gmail.com",
+	"password": "q1w2e3r4"
+}
