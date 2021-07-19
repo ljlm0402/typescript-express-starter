@@ -18,18 +18,24 @@
 
 <br />
 
-<p align="center">
-  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md">🇺🇸</a>
-  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md">🇰🇷</a>
-</p>
+## 번역본 - 자신이 원하는 언어로 읽으세요
+
+- [🇺🇸 영어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
+- [🇰🇷 한국어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
+
+> 번역을 도와주실 분은 이슈 남겨주시기 바랍니다. 💜
 
 <br />
 
-## 🤔 Express는 무엇인가요 ?
+## 웹 사이트 - 프로젝트 소개 및 홍보
 
-Node.js를 위한 빠르고 개방적인 간결한 웹 프레임워크입니다.
+- [🌐 morioh](https://morioh.com/p/8cd90da6e9c5?fbclid=IwAR1C7YigUYGRMNjNK9GuUjvSNwn192yD0ynlA5IanV-7y_j_5mlhdaralGU)
 
-## 😎 나의 오픈소스를 소개합니다.
+> 웹 사이트 및 블로그에 소개를 원하시는 분은 이슈 남겨주시기 바랍니다. 💙
+
+<br />
+
+## 😎 프로젝트를 소개합니다.
 
 Express는 유형 정의에 취약한 JavaScript로 구성 되어있습니다.
 
@@ -38,6 +44,10 @@ Express는 유형 정의에 취약한 JavaScript로 구성 되어있습니다.
 패키지는 JavaScript 대신 TypeScript를 사용하도록 구성되어 있습니다.
 
 > 참고 : [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript)
+
+## 🤔 Express는 무엇인가요 ?
+
+Node.js를 위한 빠르고 개방적인 간결한 웹 프레임워크입니다.
 
 ## 🚀 시작하기
 
@@ -301,8 +311,12 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - michael r [https://github.com/alanmynah](https://github.com/alanmynah)
 
+- Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
+
 ## 📬 이슈를 남겨주세요
 
 추후 추가하고자하는 템플릿, 질문, 기능을 적어 주시면 최선을 다해 답변하고 반영하겠습니다.
 
-저의 오픈소스에 대해 관심을 가져주셔서 감사합니다. ( ･∀･)ﾉｼ
+저의 오픈소스에 대해 관심을 가져주셔서 감사합니다.
+
+# (๑˃̵ᴗ˂̵)و

@@ -1,5 +1,6 @@
 process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
 
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import config from 'config';
@@ -25,7 +26,7 @@ class App {
 
     this.initializeMiddlewares();
     this.initializeRoutes(Controllers);
-    this.initializeSwagger();
+    this.initializeSwagger(Controllers);
     this.initializeErrorHandling();
   }
 
@@ -63,10 +64,37 @@ class App {
     });
   }
 
-  private initializeSwagger() {
+  private initializeSwagger(controllers: Function[]) {
+    const { defaultMetadataStorage } = require('class-transformer/cjs/storage');
+
+    const schemas = validationMetadatasToSchemas({
+      classTransformerMetadataStorage: defaultMetadataStorage,
+      refPointerPrefix: '#/components/schemas/',
+    });
+
+    const routingControllersOptions = {
+      controllers: controllers,
+    };
+
     const storage = getMetadataArgsStorage();
-    const specs = routingControllersToSpec(storage);
-    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+    const spec = routingControllersToSpec(storage, routingControllersOptions, {
+      components: {
+        schemas,
+        securitySchemes: {
+          basicAuth: {
+            scheme: 'basic',
+            type: 'http',
+          },
+        },
+      },
+      info: {
+        description: 'Generated with `routing-controllers-openapi`',
+        title: 'A sample API',
+        version: '1.0.0',
+      },
+    });
+
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spec));
   }
 
   private initializeErrorHandling() {
