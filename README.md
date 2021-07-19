@@ -18,16 +18,22 @@
 
 <br />
 
-<p align="center">
-  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md">🇺🇸</a>
-  <a href="https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md">🇰🇷</a>
-</p>
+## Translations - read in your own language
+
+- [🇺🇸 Engligsh](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
+- [🇰🇷 Korean](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
+
+> Want to translate to your own language? please open an issue 💜
 
 <br />
 
-## 🤔 What is Express ?
+## Web Site - Project Introduction
 
-Express is a fast, open and concise web framework and is a Node.js based project.
+- [🌐 morioh](https://morioh.com/p/8cd90da6e9c5?fbclid=IwAR1C7YigUYGRMNjNK9GuUjvSNwn192yD0ynlA5IanV-7y_j_5mlhdaralGU)
+
+> Want to be featured on your blog or site? please open an issue 💙
+
+<br />
 
 ## 😎 Introducing The Project
 
@@ -38,6 +44,10 @@ That's why we avoid supersets with starter packages that introduce TypeScript.
 The package is configured to use TypeScript instead of JavaScript.
 
 > The project referred to [express-generator-typescript](https://github.com/seanpmaxwell/express-generator-typescript) by [seanpmaxwell](https://github.com/seanpmaxwell) 👍
+
+## 🤔 What is Express ?
+
+Express is a fast, open and concise web framework and is a Node.js based project.
 
 ## 🚀 Quick Start
 
@@ -307,8 +317,12 @@ Modify `*.http` file in http folder to your source code.
 
 - michael r [https://github.com/alanmynah](https://github.com/alanmynah)
 
+- Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
+
 ## 📬 Please request an issue
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
 
-Thank you very much for your interest in our package. ( ･∀･)ﾉｼ
+Thank you very much for your interest in our package.
+
+# (๑˃̵ᴗ˂̵)و
