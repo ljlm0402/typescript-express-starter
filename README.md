@@ -20,7 +20,7 @@
 
 ## Translations - read in your own language
 
-- [🇺🇸 Engligsh](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
+- [🇺🇸 English](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 Korean](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
 
 > Want to translate to your own language? please open an issue 💜
