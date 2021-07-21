@@ -9,7 +9,7 @@ RUN npm install
 
 EXPOSE 3000
 
-# Dvelopment build stage
+# Development build stage
 FROM common-build-stage as development-build-stage
 
 ENV NODE_ENV development
