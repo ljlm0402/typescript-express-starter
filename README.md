@@ -319,6 +319,8 @@ Modify `*.http` file in http folder to your source code.
 
 - Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
 
+- Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
+
 ## 📬 Please request an issue
 
 In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
