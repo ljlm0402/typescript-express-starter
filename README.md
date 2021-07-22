@@ -10,10 +10,33 @@
 <h4 align="center">🚀 Express RESTful API Boilerplate Using TypeScript</h4>
 
 <p align="center">
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm Version" /></a>
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="Package License" /></a>
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="Release Version" /></a>
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm Downloads" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm Version" />
+    </a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="npm Release Version" />
+    </a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm Package License" />
+    </a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm Downloads" />
+    </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/ljlm0402/typescript-express-starter/stargazers" target="_blank">
+    <img src="https://img.shields.io/github/stars/ljlm0402/typescript-express-starter" alt="github Stars" />
+  </a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/network/members" target="_blank">
+    <img src="https://img.shields.io/github/forks/ljlm0402/typescript-express-starter" alt="github Forks" />
+  </a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/stargazers" target="_blank">
+    <img src="https://img.shields.io/github/contributors/ljlm0402/typescript-express-starter" alt="github Contributors" />
+  </a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/issues" target="_blank">
+    <img src="https://img.shields.io/github/issues/ljlm0402/typescript-express-starter" alt="github Issues" />
+  </a>
 </p>
 
 <br />

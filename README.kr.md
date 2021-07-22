@@ -10,10 +10,33 @@
 <h4 align="center">🚀 타입스크립트 기반의 익스프레스 보일러 플레이트 스타터 패키지</h4>
 
 <p align="center">
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm 버전" /></a>
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="패키지 라이선스" /></a>
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="릴리즈 버전" /></a>
-    <a href="http://npm.im/typescript-express-starter" target="_blank"><img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" /></a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm 버전" />
+    </a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="npm 릴리즈 버전" />
+    </a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm 패키지 라이선스" />
+    </a>
+    <a href="http://npm.im/typescript-express-starter" target="_blank">
+      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" />
+    </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/ljlm0402/typescript-express-starter/stargazers" target="_blank">
+    <img src="https://img.shields.io/github/stars/ljlm0402/typescript-express-starter" alt="github 스타"/>
+  </a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/network/members" target="_blank">
+    <img src="https://img.shields.io/github/forks/ljlm0402/typescript-express-starter" alt="github 포크" />
+  </a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/stargazers" target="_blank">
+    <img src="https://img.shields.io/github/contributors/ljlm0402/typescript-express-starter" alt="github 컨트리뷰터" />
+  </a>
+  <a href="https://github.com/ljlm0402/typescript-express-starter/issues" target="_blank">
+    <img src="https://img.shields.io/github/issues/ljlm0402/typescript-express-starter" alt="github 이슈" />
+  </a>
 </p>
 
 <br />
