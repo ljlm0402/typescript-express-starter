@@ -13,7 +13,9 @@
     "lint:fix": "npm run lint -- --fix",
     "prisma:init": "prisma init",
     "prisma:migrate": "prisma migrate dev --preview-feature",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "prisma generate",
+    "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
+    "deploy:dev": "pm2 start ecosystem.config.js --only dev"
   },
   "prisma": {
     "schema": "src/prisma/schema.prisma"
@@ -36,6 +38,7 @@
     "jest": "^27.0.6",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "pm2": "^5.1.0",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6",
     "ts-jest": "^27.0.3",

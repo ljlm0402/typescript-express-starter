@@ -6,15 +6,15 @@ labels: "\U0001F41E Bug"
 assignees: "ljlm0402"
 ---
 
-### Describe the Bug(버그 설명)
+### Describe the Bug (버그 설명)
 
 <!-- A clear and concise description of what the bug is. -->
 
-### Version to Reproduce(현재 사용한 버전)
+### Version to Reproduce (현재 사용한 버전)
 
 <!-- Please tell me the version of the environment you reproduced. -->
 
-### Steps to Reproduce(재현 순서)
+### Steps to Reproduce (재현 순서)
 
 <!--
 1. Go to '...'
@@ -25,11 +25,11 @@ assignees: "ljlm0402"
 If applicable, add a link to a test case (as a zip file or link to a repository we can clone).
 -->
 
-### Expected Behavior(예상 동작)
+### Expected Behavior (예상 동작)
 
 <!-- A clear and concise description of what you expected to happen. -->
 
-### Actual Behavior(실제 동작)
+### Actual Behavior (실제 동작)
 
 <!--
 A clear and concise description of what actually happened.
@@ -37,10 +37,10 @@ A clear and concise description of what actually happened.
 If applicable, add screenshots to help explain your problem.
 -->
 
-### Additional Context(추가 사항)
+### Additional Context (추가 사항)
 
 <!-- Add any other context about the problem here. -->
 
-### Capture screen(캡쳐 화면)
+### Capture screen (캡쳐 화면)
 
 <!-- Please screech the error screen. -->

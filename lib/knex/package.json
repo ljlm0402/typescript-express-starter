@@ -15,7 +15,9 @@
     "migrate": "knex migrate:latest --knexfile=knexfile.ts --verbose",
     "rollback": "knex migrate:rollback --knexfile=knexfile.ts --verbose",
     "make:seeder": "knex seed:make --knexfile=knexfile.ts -x ts --env development",
-    "make:migration": "knex migrate:make --knexfile=knexfile.ts -x ts --env development"
+    "make:migration": "knex migrate:make --knexfile=knexfile.ts -x ts --env development",
+    "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
+    "deploy:dev": "pm2 start ecosystem.config.js --only dev"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
@@ -36,6 +38,7 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "objection": "^2.2.15",
+    "pm2": "^5.1.0",
     "swagger-jsdoc": "^6.0.0",
     "swagger-ui-express": "^4.1.6",
     "winston": "^3.3.3",
