@@ -306,21 +306,13 @@ Modify `ecosystem.config.js` file to your source code.
 └── tsconfig.json
 ```
 
-## 📬 Recommended Commit Message
+## ⭐️ Stargazers
 
-| When             | Commit Message     |
-| :--------------- | :----------------- |
-| Add Feature      | ✨ Add Feature     |
-| Fix Bug          | 🐞 Fix Bug         |
-| Refactoring Code | 🛠 Refactoring Code |
-| Install Package  | 📦 Install Package |
-| Fix Readme       | 📚 Fix Readme      |
-| Update Version   | 🌼 Update Version  |
-| New Template     | 🎉 New Template    |
+[![Stargazers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/stars/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/stargazers)
 
-## 💳 License
+## 🍴 Forkers
 
-[MIT](LICENSE)
+[![Forkers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/forks/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/network/members)
 
 ## 🤝 Contributors
 
@@ -361,6 +353,22 @@ Modify `ecosystem.config.js` file to your source code.
 - Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
 
 - Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
+
+## 💳 License
+
+[MIT](LICENSE)
+
+## 📬 Recommended Commit Message
+
+| When             | Commit Message     |
+| :--------------- | :----------------- |
+| Add Feature      | ✨ Add Feature     |
+| Fix Bug          | 🐞 Fix Bug         |
+| Refactoring Code | 🛠 Refactoring Code |
+| Install Package  | 📦 Install Package |
+| Fix Readme       | 📚 Fix Readme      |
+| Update Version   | 🌼 Update Version  |
+| New Template     | 🎉 New Template    |
 
 ## 📬 Please request an issue
 
