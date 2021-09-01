@@ -301,21 +301,13 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 └── tsconfig.json
 ```
 
-## 📬 커밋 메시지 정의
+## ⭐️ 주신분들
 
-| 언제               | 메시지                |
-| :----------------- | :-------------------- |
-| 기능 추가          | ✨ 기능 추가          |
-| 버그 수정          | 🐞 버그 수정          |
-| 코드 개선          | 🛠 코드 개선           |
-| 패키지 설치        | 📦 패키지 설치        |
-| 문서 수정          | 📚 문서 수정          |
-| 버전 업데이트      | 🌼 버전 업데이트      |
-| 새로운 템플릿 추가 | 🎉 새로운 템플릿 추가 |
+[![Stargazers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/stars/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/stargazers)
 
-## 💳 라이센스
+## 🍴 해주신분들
 
-[MIT](LICENSE)
+[![Forkers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/forks/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/network/members)
 
 ## 🤝 도움을 주신분들
 
@@ -356,6 +348,22 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
 
 - Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
+
+## 💳 라이센스
+
+[MIT](LICENSE)
+
+## 📬 커밋 메시지 정의
+
+| 언제               | 메시지                |
+| :----------------- | :-------------------- |
+| 기능 추가          | ✨ 기능 추가          |
+| 버그 수정          | 🐞 버그 수정          |
+| 코드 개선          | 🛠 코드 개선           |
+| 패키지 설치        | 📦 패키지 설치        |
+| 문서 수정          | 📚 문서 수정          |
+| 버전 업데이트      | 🌼 버전 업데이트      |
+| 새로운 템플릿 추가 | 🎉 새로운 템플릿 추가 |
 
 ## 📬 이슈를 남겨주세요
 
