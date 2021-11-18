@@ -354,6 +354,8 @@ Modify `ecosystem.config.js` file to your source code.
 
 - Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
 
+- oricc [https://github.com/oricc](https://github.com/oricc)
+
 ## 💳 License
 
 [MIT](LICENSE)

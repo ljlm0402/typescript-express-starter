@@ -349,6 +349,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
 
+- oricc [https://github.com/oricc](https://github.com/oricc)
+
 ## 💳 라이센스
 
 [MIT](LICENSE)
