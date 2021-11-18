@@ -13,7 +13,7 @@
     "pretty": true,
     "sourceMap": true,
     "declaration": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "allowJs": true,
     "noEmit": false,
     "esModuleInterop": true,
