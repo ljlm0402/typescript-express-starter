@@ -1,38 +1,34 @@
-# users API
-
-###
 # baseURL
 @baseURL = http://localhost:3000
 
 ###
 # Find All Users
-GET {{baseURL}}/users
+GET {{ baseURL }}/users
 
 ###
 # Find User By Id
-GET {{baseURL}}/users/1
-
+GET {{ baseURL }}/users/1
 
 ###
-# Add User
-POST {{baseURL}}/users
+# Create User
+POST {{ baseURL }}/users
 Content-Type: application/json
 
 {
-    "email": "example@gmail.com",
-	"password": "qwer1234"
+    "email": "example@email.com",
+	"password": "password"
 }
 
 ###
-# Edit User By Id
-PUT {{baseURL}}/users/1
+# Modify User By Id
+PUT {{ baseURL }}/users/1
 Content-Type: application/json
 
 {
-    "email": "example@gmail.com",
-	"password": "qwer1234"
+    "email": "example@email.com",
+	"password": "password"
 }
 
 ###
-# Del User By Id
-DELETE {{baseURL}}/users/1
+# Delete User By Id
+DELETE {{ baseURL }}/users/1
