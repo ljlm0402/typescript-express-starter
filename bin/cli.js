@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
 /*****************************************************************
- * Create new typescript-express-starter project.
- * By AGUMON <ljlm0402@gmail.com>
- * December 18, 2019.
+ * Typescript Express Starter
+ * 2019.12.18 ~ 🎮
+ * Made By AGUMON 🦖
+ * https://github.com/ljlm0402/typescript-express-starter
  *****************************************************************/
 
 const path = require("path");
