@@ -104,7 +104,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 | :------------------- | :----------------------------------------------------------------------------------------------------------- |
 | Default              | Express Default                                                                                              |
 | Routing Controllers  | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage |
-| Sequlize             | Easy to use multi SQL dialect ROM for Node.js                                                                |
+| Sequelize            | Easy to use multi SQL dialect ORM for Node.js                                                                |
 | Mongoose             | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                 |
 | TypeORM              | An ORM that can run in Node.js and Others                                                                    |
 | Prisma               | Modern Database Access for TypeScript & Node.js                                                              |
