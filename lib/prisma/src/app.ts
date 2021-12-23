@@ -1,9 +1,8 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
-
+import '@/index';
+import config from 'config';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
-import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';

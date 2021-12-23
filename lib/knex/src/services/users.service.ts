@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt';
+import { hash } from 'bcrypt';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
@@ -24,7 +24,7 @@ class UserService {
     const findUser: User = await Users.query().select().from('users').where('email', '=', userData.email).first();
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const hashedPassword = await hash(userData.password, 10);
     const createUserData: User = await Users.query()
       .insert({ ...userData, password: hashedPassword })
       .into('users');
@@ -38,7 +38,7 @@ class UserService {
     const findUser: User[] = await Users.query().select().from('users').where('id', '=', userId);
     if (!findUser) throw new HttpException(409, "You're not user");
 
-    const hashedPassword = await bcrypt.hash(userData.password, 10);
+    const hashedPassword = await hash(userData.password, 10);
     await Users.query()
       .update({ ...userData, password: hashedPassword })
       .where('id', '=', userId)

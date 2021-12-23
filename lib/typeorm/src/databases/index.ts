@@ -1,5 +1,5 @@
 import config from 'config';
-import path from 'path';
+import { join } from 'path';
 import { ConnectionOptions } from 'typeorm';
 import { dbConfig } from '@interfaces/db.interface';
 
@@ -13,11 +13,11 @@ export const dbConnection: ConnectionOptions = {
   database: database,
   synchronize: true,
   logging: false,
-  entities: [path.join(__dirname, '../**/*.entity{.ts,.js}')],
-  migrations: [path.join(__dirname, '../**/*.migration{.ts,.js}')],
-  subscribers: [path.join(__dirname, '../**/*.subscriber{.ts,.js}')],
+  entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
+  migrations: [join(__dirname, '../**/*.migration{.ts,.js}')],
+  subscribers: [join(__dirname, '../**/*.subscriber{.ts,.js}')],
   cli: {
-    entitiesDir: 'src/entity',
+    entitiesDir: 'src/entities',
     migrationsDir: 'src/migration',
     subscribersDir: 'src/subscriber',
   },

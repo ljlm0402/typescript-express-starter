@@ -35,7 +35,7 @@ services:
     environment:
       POSTGRESQL_USERNAME: root
       POSTGRESQL_PASSWORD: password
-      POSTGRESQL_DATABASE: typeorm
+      POSTGRESQL_DATABASE: test
     ports:
       - '5432:5432'
     networks:

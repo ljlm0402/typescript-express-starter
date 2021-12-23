@@ -19,11 +19,6 @@ services:
     container_name: server
     ports:
       - '3000:3000'
-    environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
-      MYSQL_HOST: mysql
-      MYSQL_DATABASE: prisma
     volumes:
       - ./:/app
       - /app/node_modules
@@ -40,7 +35,7 @@ services:
     environment:
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: prisma
+      MYSQL_DATABASE: test
     ports:
       - '3306:3306'
     networks:

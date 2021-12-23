@@ -4,7 +4,7 @@
         "host": "localhost",
         "user": "root",
         "password": "password",
-        "database": "sequelize",
+        "database": "test",
         "pool": {
             "min": 0,
             "max": 5
