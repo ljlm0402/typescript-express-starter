@@ -1,0 +1,49 @@
+# baseURL
+@baseURL = http://localhost:3000/graphql
+
+###
+# User Signup
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+    signup (userData: {
+        email: "example@email.com",
+        password: "password"
+    }) {
+        id,
+        email,
+        password
+    }
+}
+
+###
+# User Login
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+    login (userData: {
+        email: "example@email.com",
+        password: "password"
+    }) {
+        email,
+        password
+    }
+}
+
+###
+# User Logout
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjM5MDQ3MjM3LCJleHAiOjE2MzkwNTA4Mzd9.HD0AvZl1s-mycKxo0IJ1QT-oSKhjeArXrlNBffZUanY;
+
+mutation {
+    logout {
+        email,
+        password
+    }
+}

@@ -1,0 +1,78 @@
+# baseURL
+@baseURL = http://localhost:3000/graphql
+
+###
+# Find All Users
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+    getUsers {
+        id,
+        email,
+        password
+    }
+}
+
+###
+# Find User By Id
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+query {
+    getUserById(userId: 1) {
+        id,
+        email,
+        password
+    }
+}
+
+###
+# Create User
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+    createUser (userData: {
+        email: "example@email.com",
+        password: "password"
+    }) {
+        id,
+        email,
+        password
+    }
+}
+
+###
+# Modify User By Id
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+    updateUser (userId: 1, userData: {
+        email: "example@email.com",
+        password: "password"
+    }) {
+        id,
+        email,
+        password
+    }
+}
+
+###
+# Delete User By Id
+POST {{ baseURL }}
+Content-Type: application/json
+X-REQUEST-TYPE: GraphQL
+
+mutation {
+    deleteUser (userId: 1) {
+        id,
+        email,
+        password
+    }
+}

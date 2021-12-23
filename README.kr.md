@@ -100,12 +100,12 @@ $ npx typescript-express-starter "project name"
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Default             | Express 기본                                                                                                                                                                    |
 | Routing Controllers | 데코레이터 사용량이 많은 구조화되고 선언적이며 아름답게 구성된 클래스 기반 컨트롤러 생성                                                                                        |
-| Sequlize            | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                               |
+| Sequelize           | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                               |
 | Mongoose            | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
 | TypeORM             | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
 | Prisma              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
 | Knex                | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
-| GraphQL (개발중)    | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
+| GraphQL             | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
 
 ## 🛎 Script 명령어
 
@@ -145,24 +145,24 @@ $ npx typescript-express-starter "project name"
 
 > [Simple Icons](https://simpleicons.org/)
 
-### 🐳 도커 :: 컨테이너 플랫폼
+### 🐳 Docker :: 컨테이너 플랫폼
 
-[도커](https://docs.docker.com/)란, 컨테이너 기반의 오픈소스 가상화 플랫폼이다.
+[Docker](https://docs.docker.com/)란, 컨테이너 기반의 오픈소스 가상화 플랫폼이다.
 
-[도커 설치 홈페이지](https://docs.docker.com/get-docker/)에 접속해서 설치를 해줍니다.
+[설치 홈페이지](https://docs.docker.com/get-docker/)에 접속해서 설치를 해줍니다.
 
 - 백그라운드에서 컨테이너를 시작하고 실행 : `docker-compose up -d`
 - 컨테이너를 중지하고 컨테이너, 네트워크, 볼륨 및 이미지를 제거 : `docker-compose down`
 
 수정을 원하시면 `docker-compose.yml`과 `Dockerfile`를 수정해주시면 됩니다.
 
-### ♻️ 엔진엑스 :: 웹 서버
+### ♻️ Nginx :: 웹 서버
 
-[엔진엑스](https://www.nginx.com/) 역방향 프록시,로드 밸런서, 메일 프록시 및 HTTP 캐시로도 사용할 수있는 웹 서버입니다.
+[Nginx](https://www.nginx.com/) 역방향 프록시,로드 밸런서, 메일 프록시 및 HTTP 캐시로도 사용할 수있는 웹 서버입니다.
 
 프록시는 일반적으로 여러 서버에로드를 분산하거나, 다른 웹 사이트의 콘텐츠를 원활하게 표시하거나, HTTP 이외의 프로토콜을 통해 처리 요청을 애플리케이션 서버에 전달하는 데 사용됩니다.
 
-엔진엑스가 요청을 프록시하면 지정된 프록시 서버로 요청을 보내고 응답을 가져 와서 클라이언트로 다시 보냅니다.
+Nginx 요청을 프록시하면 지정된 프록시 서버로 요청을 보내고 응답을 가져 와서 클라이언트로 다시 보냅니다.
 
 수정을 원하시면 `nginx.conf` 파일을 수정해주시면 됩니다.
 
@@ -188,13 +188,13 @@ $ npx typescript-express-starter "project name"
 
 > 2019년, TSLint 지원이 종료 되어 ESLint를 적용하였습니다.
 
-### 📗 스웨거 :: API 문서화
+### 📗 Swagger :: API 문서화
 
-[스웨거](https://swagger.io/)는 개발자가 REST 웹 서비스를 설계, 빌드, 문서화, 소비하는 일을 도와주는 대형 도구 생태계의 지원을 받는 오픈 소스 소프트웨어 프레임워크이다.
+[Swagger](https://swagger.io/)는 개발자가 REST 웹 서비스를 설계, 빌드, 문서화, 소비하는 일을 도와주는 대형 도구 생태계의 지원을 받는 오픈 소스 소프트웨어 프레임워크이다.
 
 API를 대규모로 설계하고 문서화하는 데 용이하게 사용합니다.
 
-스웨거 URL은 `http://localhost:3000/api-docs` 으로 작성했습니다.
+Swagger URL은 `http://localhost:3000/api-docs` 으로 작성했습니다.
 
 수정을 원하시면 `swagger.yaml` 파일을 수정해주시면 됩니다.
 
@@ -363,6 +363,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
 
 - oricc [https://github.com/oricc](https://github.com/oricc)
+
+- Dustin Newbold [https://github.com/dustinnewbold](https://github.com/dustinnewbold)
 
 ## 💳 라이센스
 
