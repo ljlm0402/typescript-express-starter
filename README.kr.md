@@ -215,6 +215,17 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 수정을 원하시면 `ecosystem.config.js` 파일을 수정해주시면 됩니다.
 
+### 🏎 SWC :: 강하고 빠른 자바스크립트 / 타입스크립트 컴파일러
+
+[SWC](https://swc.rs/)는 차세대 고속 개발자 도구를 위한 확장 가능한 Rust 기반 플랫폼입니다.
+
+`SWC는 단일 스레드에서 Babel보다 20배, 4개 코어에서 70배 빠릅니다.`
+
+- swc 빌드 :: `npm run build`
+- tsc 빌드 :: `npm run build:tsc`
+
+수정을 원하시면 `.swcrc` 파일을 수정해주시면 됩니다.
+
 ## 🗂 코드 구조 (default)
 
 ```bash
@@ -277,6 +288,7 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 │   │   └── vaildateEnv.ts
 │   │
 │   ├── app.ts
+│   ├── index.ts
 │   └── server.ts
 │
 ├── .dockerignore
@@ -288,6 +300,7 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ├── .huskyrc
 ├── .lintstagedrc.json
 ├── .prettierrc
+├── .swcrc
 ├── docker-compose.yml
 ├── Dockerfile
 ├── ecosystem.config.js

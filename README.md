@@ -220,6 +220,17 @@ Modify `*.http` file in src/http folder to your source code.
 
 Modify `ecosystem.config.js` file to your source code.
 
+### 🏎 SWC :: a super-fast JavaScript / TypeScript compiler
+
+[SWC](https://swc.rs/) is an extensible Rust-based platform for the next generation of fast developer tools.
+
+`SWC is 20x faster than Babel on a single thread and 70x faster on four cores.`
+
+- swc build :: `npm run build`
+- tsc build :: `npm run build:tsc`
+
+Modify `.swcrc` file to your source code.
+
 ## 🗂 Code Structure (default)
 
 ```bash
@@ -282,6 +293,7 @@ Modify `ecosystem.config.js` file to your source code.
 │   │   └── vaildateEnv.ts
 │   │
 │   ├── app.ts
+│   ├── index.ts
 │   └── server.ts
 │
 ├── .dockerignore
@@ -293,6 +305,7 @@ Modify `ecosystem.config.js` file to your source code.
 ├── .huskyrc
 ├── .lintstagedrc.json
 ├── .prettierrc
+├── .swcrc
 ├── docker-compose.yml
 ├── Dockerfile
 ├── ecosystem.config.js
