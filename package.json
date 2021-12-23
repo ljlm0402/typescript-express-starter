@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "6.2.1",
+  "version": "6.3.0",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -14,7 +14,6 @@
     "typeorm",
     "knex",
     "prisma",
-    "querybuilder",
     "jest",
     "nodemon",
     "jsonwebtoken",
@@ -32,7 +31,8 @@
     "mysql",
     "mariadb",
     "mongodb",
-    "postgresql"
+    "postgresql",
+    "swc"
   ],
   "main": "bin/cli.js",
   "bin": {
@@ -50,6 +50,13 @@
     "ora": "^4.0.3"
   },
   "devDependencies": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">= 10.13.0",
+    "npm": ">= 6.11.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ljlm0402/typescript-express-starter.git"
