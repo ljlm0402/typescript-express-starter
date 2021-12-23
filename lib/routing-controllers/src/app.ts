@@ -1,5 +1,6 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
-
+import 'reflect-metadata';
+import '@/index';
+import { defaultMetadataStorage } from 'class-transformer';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
@@ -65,8 +66,6 @@ class App {
   }
 
   private initializeSwagger(controllers: Function[]) {
-    const { defaultMetadataStorage } = require('class-transformer/cjs/storage');
-
     const schemas = validationMetadatasToSchemas({
       classTransformerMetadataStorage: defaultMetadataStorage,
       refPointerPrefix: '#/components/schemas/',
