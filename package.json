@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "6.3.0",
+  "version": "7.0.0",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -14,6 +14,8 @@
     "typeorm",
     "knex",
     "prisma",
+    "graphql",
+    "apollo",
     "jest",
     "nodemon",
     "jsonwebtoken",
