@@ -5,8 +5,8 @@
     ],
     "ext": "js,ts,json",
     "ignore": [
-        "src/**/*.spec.ts",
-        "src/**/*.test.ts"
+        "src/logs/*",
+        "src/**/*.{spec,test}.ts"
     ],
     "exec": "ts-node -r tsconfig-paths/register --transpile-only src/server.ts"
 }
