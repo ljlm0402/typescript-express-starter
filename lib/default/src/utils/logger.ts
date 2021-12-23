@@ -1,14 +1,14 @@
 import config from 'config';
-import fs from 'fs';
-import path from 'path';
+import { existsSync, mkdirSync } from 'fs';
+import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
 
 // logs dir
-const logDir: string = path.join(__dirname, config.get('log.dir'));
+const logDir: string = join(__dirname, config.get('log.dir'));
 
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
+if (!existsSync(logDir)) {
+  mkdirSync(logDir);
 }
 
 // Define log format
