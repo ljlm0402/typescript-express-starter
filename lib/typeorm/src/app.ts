@@ -1,6 +1,5 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/configs';
-
 import 'reflect-metadata';
+import '@/index';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import config from 'config';
