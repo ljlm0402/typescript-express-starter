@@ -7,7 +7,8 @@
   "scripts": {
     "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
     "dev": "cross-env NODE_ENV=development nodemon",
-    "build": "tsc && tsc-alias",
+    "build": "swc src -d dist --source-maps --copy-files",
+    "build:tsc": "tsc && tsc-alias",
     "test": "jest --forceExit --detectOpenHandles",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
@@ -27,7 +28,6 @@
     "config": "^3.3.6",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
     "dotenv": "^9.0.2",
     "envalid": "^7.1.0",
     "express": "^4.17.1",
@@ -44,6 +44,8 @@
     "winston-daily-rotate-file": "^4.5.5"
   },
   "devDependencies": {
+    "@swc/cli": "^0.1.51",
+    "@swc/core": "^1.2.108",
     "@types/bcrypt": "^5.0.0",
     "@types/compression": "^1.7.0",
     "@types/config": "0.0.38",
@@ -64,6 +66,7 @@
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
