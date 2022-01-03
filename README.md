@@ -46,7 +46,7 @@
 - [🇺🇸 English](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 Korean](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
 
-> Want to translate to your own language? please open an issue 💜
+> Want to translate to your own language? please open an [issue](https://github.com/ljlm0402/typescript-express-starter/issues/new?assignees=ljlm0402&labels=%F0%9F%92%B1+Translations&template=translations-language---.md&title=) 💜
 
 <br />
 
@@ -54,7 +54,7 @@
 
 - [💁🏻‍♂️ Dylan Iqbal :: A TypeScript Express Starter App](https://bit.ly/3rrZFZ9)
 
-> Want to be featured on your blog or site? please open an issue 💙
+> Want to be featured on your blog or site? please open an [issue](https://github.com/ljlm0402/typescript-express-starter/issues/new?assignees=ljlm0402&labels=%F0%9F%91%80+Introducetion&template=introducetion-project---.md&title=) 💙
 
 <br />
 
@@ -100,7 +100,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name                | Desc                                                                                                         |
+| Name                | Description                                                                                                  |
 | :------------------ | :----------------------------------------------------------------------------------------------------------- |
 | Default             | Express Default                                                                                              |
 | Routing Controllers | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage |
@@ -110,6 +110,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 | Prisma              | Modern Database Access for TypeScript & Node.js                                                              |
 | Knex                | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                           |
 | GraphQL             | query language for APIs and a runtime for fulfilling those queries with your existing data                   |
+| Typegoose 🚧 (Dev)  | Define Mongoose models using TypeScript classes                                                              |
 
 ## 🛎 Available Commands for the Server
 
