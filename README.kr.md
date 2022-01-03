@@ -46,7 +46,7 @@
 - [🇺🇸 영어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 한국어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
 
-> 번역을 도와주실 분은 이슈 남겨주시기 바랍니다. 💜
+> 번역을 도와주실 분은 [이슈](https://github.com/ljlm0402/typescript-express-starter/issues/new?assignees=ljlm0402&labels=%F0%9F%92%B1+Translations&template=translations-language---.md&title=) 남겨주시기 바랍니다. 💜
 
 <br />
 
@@ -54,7 +54,7 @@
 
 - [💁🏻‍♂️ Dylan Iqbal :: A TypeScript Express Starter App](https://bit.ly/3rrZFZ9)
 
-> 웹 사이트 및 블로그에 소개를 원하시는 분은 이슈 남겨주시기 바랍니다. 💙
+> 웹 사이트 및 블로그에 소개를 원하시는 분은 [이슈](https://github.com/ljlm0402/typescript-express-starter/issues/new?assignees=ljlm0402&labels=%F0%9F%91%80+Introducetion&template=introducetion-project---.md&title=) 남겨주시기 바랍니다. 💙
 
 <br />
 
@@ -100,12 +100,13 @@ $ npx typescript-express-starter "project name"
 | :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | Default             | Express 기본                                                                                                                                                                    |
 | Routing Controllers | 데코레이터 사용량이 많은 구조화되고 선언적이며 아름답게 구성된 클래스 기반 컨트롤러 생성                                                                                        |
-| Sequelize           | Postgres, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                               |
+| Sequelize           | PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                             |
 | Mongoose            | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
 | TypeORM             | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
 | Prisma              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
 | Knex                | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
 | GraphQL             | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
+| Typegoose 🚧 (Dev)  | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
 
 ## 🛎 Script 명령어
 
