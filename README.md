@@ -110,13 +110,13 @@ Start your typescript-express-starter app in development mode at `http://localho
 | Prisma              | Modern Database Access for TypeScript & Node.js                                                              |
 | Knex                | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                           |
 | GraphQL             | query language for APIs and a runtime for fulfilling those queries with your existing data                   |
-| Typegoose 🚧 (Dev)  | Define Mongoose models using TypeScript classes                                                              |
+| Typegoose           | Define Mongoose models using TypeScript classes                                                              |
 
 ## 🛎 Available Commands for the Server
 
 - Run the Server in production mode : `npm run start` or `Start typescript-express-starter` in VS Code
 - Run the Server in development mode : `npm run dev` or `Dev typescript-express-starter` in VS Code
-- Run all unit-tests : `npm run test` or `Test typescript-express-starter` in VS Code
+- Run all unit-tests : `npm test` or `Test typescript-express-starter` in VS Code
 - Check for linting errors : `npm run lint` or `Lint typescript-express-starter` in VS Code
 - Fix for linting : `npm run lint:fix` or `Lint:Fix typescript-express-starter` in VS Code
 
@@ -372,6 +372,8 @@ Modify `.swcrc` file to your source code.
 - oricc [https://github.com/oricc](https://github.com/oricc)
 
 - Dustin Newbold [https://github.com/dustinnewbold](https://github.com/dustinnewbold)
+
+- WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
 
 ## 💳 License
 

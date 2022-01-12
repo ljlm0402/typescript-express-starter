@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "routing-controllers-openapi",
     "sequelize",
     "mongoose",
+    "typegoose",
     "typeorm",
     "knex",
     "prisma",

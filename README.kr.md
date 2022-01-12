@@ -106,13 +106,13 @@ $ npx typescript-express-starter "project name"
 | Prisma              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
 | Knex                | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
 | GraphQL             | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
-| Typegoose 🚧 (Dev)  | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
+| Typegoose           | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
 
 ## 🛎 Script 명령어
 
 - 프로덕션 모드 실행 : `npm run start` 아니면 `Start typescript-express-starter` VS Code 로
 - 개발 모드 실행 : `npm run dev` 아니면 `Dev typescript-express-starter` VS Code 로
-- 단위 테스트 : `npm run test` 아니면 `Test typescript-express-starter` VS Code 로
+- 단위 테스트 : `npm test` 아니면 `Test typescript-express-starter` VS Code 로
 - 코드 포맷터 검사 : `npm run lint` 아니면 `Lint typescript-express-starter` VS Code 로
 - 코드 포맷터 적용 : `npm run lint:fix` 아니면 `Lint:Fix typescript-express-starter` VS Code 로
 
@@ -367,6 +367,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - oricc [https://github.com/oricc](https://github.com/oricc)
 
 - Dustin Newbold [https://github.com/dustinnewbold](https://github.com/dustinnewbold)
+
+- WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
 
 ## 💳 라이센스
 
