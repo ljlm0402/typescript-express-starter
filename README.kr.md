@@ -106,7 +106,7 @@ $ npx typescript-express-starter "project name"
 | Prisma              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
 | Knex                | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
 | GraphQL             | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
-| Typegoose 🚧 (Dev)  | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
+| Typegoose           | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
 
 ## 🛎 Script 명령어
 

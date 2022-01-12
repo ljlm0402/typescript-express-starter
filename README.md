@@ -110,7 +110,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 | Prisma              | Modern Database Access for TypeScript & Node.js                                                              |
 | Knex                | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                           |
 | GraphQL             | query language for APIs and a runtime for fulfilling those queries with your existing data                   |
-| Typegoose 🚧 (Dev)  | Define Mongoose models using TypeScript classes                                                              |
+| Typegoose           | Define Mongoose models using TypeScript classes                                                              |
 
 ## 🛎 Available Commands for the Server
 
