@@ -223,8 +223,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 `SWC는 단일 스레드에서 Babel보다 20배, 4개 코어에서 70배 빠릅니다.`
 
-- swc 빌드 :: `npm run build`
-- tsc 빌드 :: `npm run build:tsc`
+- tsc 빌드 :: `npm run build`
+- swc 빌드 :: `npm run build:swc`
 
 수정을 원하시면 `.swcrc` 파일을 수정해주시면 됩니다.
 
