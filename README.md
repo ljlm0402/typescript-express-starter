@@ -228,8 +228,8 @@ Modify `ecosystem.config.js` file to your source code.
 
 `SWC is 20x faster than Babel on a single thread and 70x faster on four cores.`
 
-- swc build :: `npm run build`
-- tsc build :: `npm run build:tsc`
+- tsc build :: `npm run build`
+- swc build :: `npm run build:swc`
 
 Modify `.swcrc` file to your source code.
 
