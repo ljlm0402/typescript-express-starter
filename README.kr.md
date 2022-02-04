@@ -370,6 +370,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
 
+- David Stewart [https://github.com/davidjmstewart](https://github.com/davidjmstewart)
+
 ## 💳 라이센스
 
 [MIT](LICENSE)
