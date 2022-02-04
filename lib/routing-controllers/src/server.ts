@@ -1,5 +1,3 @@
-import 'dotenv/config';
-import '@/index';
 import App from '@/app';
 import { AuthController } from '@controllers/auth.controller';
 import { IndexController } from '@controllers/index.controller';

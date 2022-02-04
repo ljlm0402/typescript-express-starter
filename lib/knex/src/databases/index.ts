@@ -1,18 +1,16 @@
-import config from 'config';
 import Knex from 'knex';
-import { dbConfig } from '@interfaces/db.interface';
+import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from '@config';
 
-const { host, port, user, password, database }: dbConfig = config.get('dbConfig');
 const dbConnection = {
   client: 'mysql',
   connection: {
     charset: 'utf8',
     timezone: 'UTC',
-    host: host,
-    port: port,
-    user: user,
-    password: password,
-    database: database,
+    host: DB_HOST,
+    port: DB_PORT,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_DATABASE,
   },
   pool: {
     min: 2,

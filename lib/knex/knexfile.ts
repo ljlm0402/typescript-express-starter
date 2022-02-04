@@ -1,19 +1,15 @@
-process.env['NODE_CONFIG_DIR'] = __dirname + '/src/configs';
+import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from './src/config';
 
-import config from 'config';
-import { dbConfig } from './src/interfaces/db.interface';
-
-const { host, user, password, database, port }: dbConfig = config.get('dbConfig');
 export = {
   client: 'mysql',
   connection: {
     charset: 'utf8',
     timezone: 'UTC',
-    host: host,
-    user: user,
-    password: password,
-    database: database,
-    port: port,
+    host: DB_HOST,
+    port: DB_PORT,
+    user: DB_USER,
+    password: DB_PASSWORD,
+    database: DB_DATABASE
   },
   migrations: {
     directory: 'src/databases/migrations',
