@@ -1,10 +1,8 @@
 import 'reflect-metadata';
-import '@/index';
 import { defaultMetadataStorage } from 'class-transformer';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import config from 'config';
 import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
@@ -12,18 +10,19 @@ import morgan from 'morgan';
 import { useExpressServer, getMetadataArgsStorage } from 'routing-controllers';
 import { routingControllersToSpec } from 'routing-controllers-openapi';
 import swaggerUi from 'swagger-ui-express';
+import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
 
 class App {
   public app: express.Application;
-  public port: string | number;
   public env: string;
+  public port: string | number;
 
   constructor(Controllers: Function[]) {
     this.app = express();
-    this.port = process.env.PORT || 3000;
-    this.env = process.env.NODE_ENV || 'development';
+    this.env = NODE_ENV || 'development';
+    this.port = PORT || 3000;
 
     this.initializeMiddlewares();
     this.initializeRoutes(Controllers);
@@ -45,7 +44,7 @@ class App {
   }
 
   private initializeMiddlewares() {
-    this.app.use(morgan(config.get('log.format'), { stream }));
+    this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(hpp());
     this.app.use(helmet());
     this.app.use(compression());
@@ -57,8 +56,8 @@ class App {
   private initializeRoutes(controllers: Function[]) {
     useExpressServer(this.app, {
       cors: {
-        origin: config.get('cors.origin'),
-        credentials: config.get('cors.credentials'),
+        origin: ORIGIN,
+        credentials: CREDENTIALS,
       },
       controllers: controllers,
       defaultErrorHandler: false,

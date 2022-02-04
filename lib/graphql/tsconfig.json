@@ -22,6 +22,7 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
+      "@config": ["config"],
       "@databases": ["databases"],
       "@dtos/*": ["dtos/*"],
       "@entities/*": ["entities/*"],

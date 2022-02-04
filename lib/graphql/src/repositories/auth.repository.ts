@@ -1,7 +1,7 @@
 import { hash, compare } from 'bcrypt';
-import config from 'config';
 import { sign } from 'jsonwebtoken';
 import { EntityRepository } from 'typeorm';
+import { SECRET_KEY } from '@config';
 import { CreateUserDto } from '@dtos/users.dto';
 import { UserEntity } from '@entities/users.entity';
 import { HttpException } from '@exceptions/HttpException';
@@ -49,7 +49,7 @@ export default class AuthRepository {
 
   public createToken(user: User): TokenData {
     const dataStoredInToken: DataStoredInToken = { id: user.id };
-    const secretKey: string = config.get('secretKey');
+    const secretKey: string = SECRET_KEY;
     const expiresIn: number = 60 * 60;
 
     return { expiresIn, token: sign(dataStoredInToken, secretKey, { expiresIn }) };

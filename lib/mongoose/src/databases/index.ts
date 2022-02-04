@@ -1,10 +1,7 @@
-import config from 'config';
-import { dbConfig } from '@interfaces/db.interface';
-
-const { host, port, database }: dbConfig = config.get('dbConfig');
+import { DB_HOST, DB_PORT, DB_DATABASE } from '@config';
 
 export const dbConnection = {
-  url: `mongodb://${host}:${port}/${database}`,
+  url: `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
   options: {
     useNewUrlParser: true,
     useUnifiedTopology: true,
