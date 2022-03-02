@@ -243,9 +243,7 @@ Modify `.swcrc` file to your source code.
 │
 ├── /src
 │   ├── /configs
-│   │   ├── development.json
-│   │   ├── production.json
-│   │   └── test.json
+│   │   ├── index.ts
 │   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
