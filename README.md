@@ -300,7 +300,9 @@ Modify `.swcrc` file to your source code.
 │
 ├── .dockerignore
 ├── .editorconfig
-├── .env
+├── .env.development.local
+├── .env.production.local
+├── .env.test.local
 ├── .eslintignore
 ├── .eslintrc
 ├── .gitignore
