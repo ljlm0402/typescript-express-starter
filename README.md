@@ -243,9 +243,7 @@ Modify `.swcrc` file to your source code.
 │
 ├── /src
 │   ├── /configs
-│   │   ├── development.json
-│   │   ├── production.json
-│   │   └── test.json
+│   │   ├── index.ts
 │   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
@@ -300,7 +298,9 @@ Modify `.swcrc` file to your source code.
 │
 ├── .dockerignore
 ├── .editorconfig
-├── .env
+├── .env.development.local
+├── .env.production.local
+├── .env.test.local
 ├── .eslintignore
 ├── .eslintrc
 ├── .gitignore
