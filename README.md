@@ -100,17 +100,18 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name                | Description                                                                                                  |
-| :------------------ | :----------------------------------------------------------------------------------------------------------- |
-| Default             | Express Default                                                                                              |
-| Routing Controllers | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage |
-| Sequelize           | Easy to use multi SQL dialect ORM for Node.js                                                                |
-| Mongoose            | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                 |
-| TypeORM             | An ORM that can run in Node.js and Others                                                                    |
-| Prisma              | Modern Database Access for TypeScript & Node.js                                                              |
-| Knex                | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                           |
-| GraphQL             | query language for APIs and a runtime for fulfilling those queries with your existing data                   |
-| Typegoose           | Define Mongoose models using TypeScript classes                                                              |
+| Name                | Description                                                                                                                                                 |
+| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default             | Express Default                                                                                                                                             |
+| Routing Controllers | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                                |
+| Sequelize           | Easy to use multi SQL dialect ORM for Node.js                                                                                                               |
+| Mongoose            | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                                |
+| TypeORM             | An ORM that can run in Node.js and Others                                                                                                                   |
+| Prisma              | Modern Database Access for TypeScript & Node.js                                                                                                             |
+| Knex                | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                          |
+| GraphQL             | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                  |
+| Typegoose           | Define Mongoose models using TypeScript classes                                                                                                             |
+| mikro-orm (Develop) | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases. |
 
 ## 🛎 Available Commands for the Server
 
@@ -376,6 +377,8 @@ Modify `.swcrc` file to your source code.
 - WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
 
 - David Stewart [https://github.com/davidjmstewart](https://github.com/davidjmstewart)
+
+- JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
 
 ## 💳 License
 
