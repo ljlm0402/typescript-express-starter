@@ -107,6 +107,7 @@ $ npx typescript-express-starter "project name"
 | Knex                | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
 | GraphQL             | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
 | Typegoose           | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
+| mikro-orm (개발중)  | 데이터 매퍼, 작업 단위 및 아이덴티티 맵 패턴을 기반으로 하는 Node.js용 TypeScript ORM. MongoDB, MySQL, MariaDB, PostgreSQL 및 SQLite 데이터베이스를 지원합니다.                 |
 
 ## 🛎 Script 명령어
 
@@ -371,6 +372,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
 
 - David Stewart [https://github.com/davidjmstewart](https://github.com/davidjmstewart)
+
+- JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
 
 ## 💳 라이센스
 
