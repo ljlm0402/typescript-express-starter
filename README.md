@@ -9,6 +9,12 @@
 
 <h4 align="center">🚀 Express RESTful API Boilerplate Using TypeScript</h4>
 
+<p align ="center">
+  <a href="https://nodei.co/npm/typescript-express-starter" target="_blank">
+    <img src="https://nodei.co/npm/typescript-express-starter.png" alt="npm Info" />
+  </a>
+</p>
+
 <p align="center">
     <a href="http://npm.im/typescript-express-starter" target="_blank">
       <img src="https://img.shields.io/npm/v/typescript-express-starter.svg" alt="npm Version" />
@@ -45,16 +51,6 @@
 
 - [🇺🇸 English](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 Korean](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
-
-> Want to translate to your own language? please open an [issue](https://github.com/ljlm0402/typescript-express-starter/issues/new?assignees=ljlm0402&labels=%F0%9F%92%B1+Translations&template=translations-language---.md&title=) 💜
-
-<br />
-
-## Web Site - Project Introduction
-
-- [💁🏻‍♂️ Dylan Iqbal :: A TypeScript Express Starter App](https://bit.ly/3rrZFZ9)
-
-> Want to be featured on your blog or site? please open an [issue](https://github.com/ljlm0402/typescript-express-starter/issues/new?assignees=ljlm0402&labels=%F0%9F%91%80+Introducetion&template=introducetion-project---.md&title=) 💙
 
 <br />
 
@@ -100,18 +96,19 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name                | Description                                                                                                                                                 |
-| :------------------ | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Default             | Express Default                                                                                                                                             |
-| Routing Controllers | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                                |
-| Sequelize           | Easy to use multi SQL dialect ORM for Node.js                                                                                                               |
-| Mongoose            | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                                |
-| TypeORM             | An ORM that can run in Node.js and Others                                                                                                                   |
-| Prisma              | Modern Database Access for TypeScript & Node.js                                                                                                             |
-| Knex                | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                          |
-| GraphQL             | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                  |
-| Typegoose           | Define Mongoose models using TypeScript classes                                                                                                             |
-| mikro-orm (Develop) | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases. |
+| Name                                                                                     | Description                                                                                                                                                |
+| :--------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default                                                                                  | Express Default                                                                                                                                            |
+| [Routing Controllers](https://github.com/typestack/routing-controllers)                  | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                               |
+| [Sequelize](https://github.com/sequelize/sequelize)                                      | Easy to use multi SQL dialect ORM for Node.js                                                                                                              |
+| [Mongoose](https://github.com/Automattic/mongoose)                                       | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                               |
+| [TypeORM](https://github.com/typeorm/typeorm)                                            | An ORM that can run in Node.js and Others                                                                                                                  |
+| [Prisma](https://github.com/prisma/prisma)                                               | Modern Database Access for TypeScript & Node.js                                                                                                            |
+| [Knex](https://github.com/knex/knex)                                                     | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                         |
+| [GraphQL](https://github.com/graphql/graphql-js)                                         | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
+| [Typegoose](https://github.com/typegoose/typegoose)                                      | Define Mongoose models using TypeScript classes                                                                                                            |
+| [Mikro ORM](https://github.com/mikro-orm/mikro-orm) (Develop)                            | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
+| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript) (Develop) | Decorators and some other features for sequelize                                                                                                           |
 
 ## 🛎 Available Commands for the Server
 
