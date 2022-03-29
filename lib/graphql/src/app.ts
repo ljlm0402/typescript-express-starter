@@ -50,9 +50,12 @@ class App {
   }
 
   private initializeMiddlewares() {
+    if (this.env === 'production') {
+      this.app.use(hpp());
+      this.app.use(helmet());
+    }
+
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
-    this.app.use(hpp());
-    this.app.use(helmet());
     this.app.use(compression());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
@@ -68,7 +71,7 @@ class App {
     const apolloServer = new ApolloServer({
       schema: schema,
       plugins: [
-        NODE_ENV === 'production'
+        this.env === 'production'
           ? ApolloServerPluginLandingPageProductionDefault({ footer: false })
           : ApolloServerPluginLandingPageLocalDefault({ footer: false }),
       ],
