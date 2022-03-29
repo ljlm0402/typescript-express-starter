@@ -30,7 +30,7 @@ export default class UserRepository {
     if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
     const hashedPassword = await hash(userData.password, 10);
-    const createUserData: User = await UserEntity.save({ ...userData, password: hashedPassword });
+    const createUserData: User = await UserEntity.create({ ...userData, password: hashedPassword }).save();
 
     return createUserData;
   }
