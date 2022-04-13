@@ -11,8 +11,10 @@ const app = new App([usersRoute]);
 
 let userId: string;
 
-// MikroORM Seeding
-// https://mikro-orm.io/docs/seeding#use-in-tests
+/**
+ ** MikroORM Seeding
+ ** https://mikro-orm.io/docs/seeding#use-in-tests
+ */
 
 beforeAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
