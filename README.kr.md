@@ -235,10 +235,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 │   └── settings.json
 │
 ├── /src
-│   ├── /configs
-│   │   ├── development.json
-│   │   ├── production.json
-│   │   └── test.json
+│   ├── /config
+│   │   └── index.ts
 │   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
@@ -288,7 +286,6 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 │   │   └── vaildateEnv.ts
 │   │
 │   ├── app.ts
-│   ├── index.ts
 │   └── server.ts
 │
 ├── .dockerignore

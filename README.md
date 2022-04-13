@@ -240,8 +240,8 @@ Modify `.swcrc` file to your source code.
 │   └── settings.json
 │
 ├── /src
-│   ├── /configs
-│   │   ├── index.ts
+│   ├── /config
+│   │   └── index.ts
 │   │
 │   ├── /controllers
 │   │   ├── auth.controller.ts
@@ -291,7 +291,6 @@ Modify `.swcrc` file to your source code.
 │   │   └── vaildateEnv.ts
 │   │
 │   ├── app.ts
-│   ├── index.ts
 │   └── server.ts
 │
 ├── .dockerignore
