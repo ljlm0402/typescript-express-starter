@@ -369,6 +369,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
 
+- Tamzid Karim [Tamzid Karim](https://github.com/tamzidkarim)
+
 ## 💳 라이센스
 
 [MIT](LICENSE)
