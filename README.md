@@ -376,6 +376,8 @@ Modify `.swcrc` file to your source code.
 
 - JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
 
+- Tamzid Karim [Tamzid Karim](https://github.com/tamzidkarim)
+
 ## 💳 License
 
 [MIT](LICENSE)
