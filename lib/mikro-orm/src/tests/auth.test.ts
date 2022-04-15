@@ -1,8 +1,8 @@
 import request from 'supertest';
 import App from '../app';
+import { DI } from '../databases';
 import { CreateUserDto } from '../dtos/users.dto';
 import AuthRoute from '../routes/auth.route';
-import { DI } from '../databases';
 
 const authRoute = new AuthRoute();
 
