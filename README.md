@@ -107,7 +107,7 @@ Start your typescript-express-starter app in development mode at `http://localho
 | [Knex](https://github.com/knex/knex)                                                     | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                         |
 | [GraphQL](https://github.com/graphql/graphql-js)                                         | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
 | [Typegoose](https://github.com/typegoose/typegoose)                                      | Define Mongoose models using TypeScript classes                                                                                                            |
-| [Mikro ORM](https://github.com/mikro-orm/mikro-orm) (Develop)                            | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
+| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                                      | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
 | [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript) (Develop) | Decorators and some other features for sequelize                                                                                                           |
 
 ## 🛎 Available Commands for the Server

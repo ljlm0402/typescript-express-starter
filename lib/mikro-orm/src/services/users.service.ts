@@ -1,10 +1,10 @@
 import { hash } from 'bcrypt';
+import { wrap } from '@mikro-orm/core';
+import { DI } from '@databases';
 import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/HttpException';
-import { DI } from '@/databases';
+import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
-import { User } from '@/entities';
-import { wrap } from '@mikro-orm/core';
 
 class UserService {
   public async findAllUser(): Promise<User[]> {
@@ -40,7 +40,7 @@ class UserService {
 
     if (userData.email) {
       const findUser: User = await DI.userRepository.findOne({ email: userData.email });
-      if (findUser && findUser.id != userId) throw new HttpException(409, `You're email ${userData.email} already exists`);
+      if (findUser && findUser.id !== userId) throw new HttpException(409, `You're email ${userData.email} already exists`);
     }
 
     if (userData.password) {

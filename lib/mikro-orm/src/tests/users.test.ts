@@ -1,9 +1,8 @@
 import request from 'supertest';
 import App from '../app';
+import { DI } from '../databases';
 import { CreateUserDto } from '../dtos/users.dto';
 import UsersRoute from '../routes/users.route';
-
-import { DI } from '../databases';
 
 const usersRoute = new UsersRoute();
 

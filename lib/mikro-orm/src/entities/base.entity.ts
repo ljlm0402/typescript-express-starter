@@ -5,12 +5,12 @@ export abstract class BaseEntity {
   @PrimaryKey()
   _id!: ObjectId;
 
-  @SerializedPrimaryKey()
+  @SerializedPrimaryKey({ type: 'text' })
   id!: string;
 
-  @Property()
+  @Property({ type: 'date' })
   createdAt = new Date();
 
-  @Property({ onUpdate: () => new Date() })
+  @Property({ type: 'date', onUpdate: () => new Date() })
   updatedAt = new Date();
 }

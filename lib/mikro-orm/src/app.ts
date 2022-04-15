@@ -10,10 +10,10 @@ import swaggerUi from 'swagger-ui-express';
 import { logger, stream } from '@utils/logger';
 import { MikroORM, RequestContext } from '@mikro-orm/core';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
+import { DI, dbOptions } from '@databases';
+import { UserEntity } from '@entities/users.entity';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
-import { DI, options } from '@/databases';
-import { User } from '@/entities';
 
 class App {
   public app: express.Application;
@@ -48,9 +48,9 @@ class App {
 
   private async connectToDatabase() {
     try {
-      DI.orm = await MikroORM.init(options);
+      DI.orm = await MikroORM.init(dbOptions);
       DI.em = DI.orm.em.fork();
-      DI.userRepository = DI.orm.em.fork().getRepository(User);
+      DI.userRepository = DI.orm.em.fork().getRepository(UserEntity);
     } catch (error) {
       logger.error(error);
     }
