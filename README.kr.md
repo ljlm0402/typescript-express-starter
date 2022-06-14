@@ -371,6 +371,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 - Tamzid Karim [Tamzid Karim](https://github.com/tamzidkarim)
 
+- Andrija Milojević [https://github.com/andrija29](https://github.com/andrija29)
+
 ## 💳 라이센스
 
 [MIT](LICENSE)
