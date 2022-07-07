@@ -377,6 +377,8 @@ Modify `.swcrc` file to your source code.
 
 - David Stewart [https://github.com/davidjmstewart](https://github.com/davidjmstewart)
 
+- Florian Mifsud [https://github.com/florianmifsud](https://github.com/florianmifsud)
+
 ## 💳 License
 
 [MIT](LICENSE)
