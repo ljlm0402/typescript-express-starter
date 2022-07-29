@@ -12,10 +12,10 @@ import { isEmpty } from '@utils/util';
 @EntityRepository(UserEntity)
 export default class AuthRepository {
   public async userSignUp(userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
+    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
-    if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
+    if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
     const hashedPassword = await hash(userData.password, 10);
     const createUserData: User = await UserEntity.create({ ...userData, password: hashedPassword }).save();
@@ -24,13 +24,13 @@ export default class AuthRepository {
   }
 
   public async userLogIn(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
-    if (isEmpty(userData)) throw new HttpException(400, "You're not userData");
+    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
-    if (!findUser) throw new HttpException(409, `You're email ${userData.email} not found`);
+    if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
 
     const isPasswordMatching: boolean = await compare(userData.password, findUser.password);
-    if (!isPasswordMatching) throw new HttpException(409, "You're password not matching");
+    if (!isPasswordMatching) throw new HttpException(409, "Password is not matching");
 
     const tokenData = this.createToken(findUser);
     const cookie = this.createCookie(tokenData);
@@ -39,10 +39,10 @@ export default class AuthRepository {
   }
 
   public async userLogOut(userId: number): Promise<User> {
-    if (isEmpty(userId)) throw new HttpException(400, "You're not userId");
+    if (isEmpty(userId)) throw new HttpException(400, "userId is empty");
 
     const findUser: User = await UserEntity.findOne({ where: { id: userId } });
-    if (!findUser) throw new HttpException(409, "You're not user");
+    if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     return findUser;
   }
