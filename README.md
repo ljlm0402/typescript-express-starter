@@ -377,8 +377,6 @@ Modify `.swcrc` file to your source code.
 - JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
 
 - Tamzid Karim [Tamzid Karim](https://github.com/tamzidkarim)
-  
-- Engjell Avdiu [https://github.com/engjellavdiu](https://github.com/engjellavdiu)
 
 - Andrija Milojević [https://github.com/andrija29](https://github.com/andrija29)
 
