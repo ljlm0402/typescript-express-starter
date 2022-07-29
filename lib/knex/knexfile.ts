@@ -1,6 +1,6 @@
 import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from './src/config';
 
-export = {
+const dbConfig = {
   client: 'mysql',
   connection: {
     charset: 'utf8',
@@ -9,7 +9,7 @@ export = {
     port: DB_PORT,
     user: DB_USER,
     password: DB_PASSWORD,
-    database: DB_DATABASE
+    database: DB_DATABASE,
   },
   migrations: {
     directory: 'src/databases/migrations',
@@ -21,3 +21,5 @@ export = {
     // stub: 'src/databases/stubs',
   },
 };
+
+export default dbConfig;
