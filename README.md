@@ -380,6 +380,12 @@ Modify `.swcrc` file to your source code.
   
 - Engjell Avdiu [https://github.com/engjellavdiu](https://github.com/engjellavdiu)
 
+- Andrija Milojević [https://github.com/andrija29](https://github.com/andrija29)
+
+- Engjell Avdiu [https://github.com/engjellavdiu](https://github.com/engjellavdiu)
+
+- Florian Mifsud [https://github.com/florianmifsud](https://github.com/florianmifsud)
+
 ## 💳 License
 
 [MIT](LICENSE)

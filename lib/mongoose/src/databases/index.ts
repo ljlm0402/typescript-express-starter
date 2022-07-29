@@ -4,7 +4,6 @@ export const dbConnection = {
   url: `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`,
   options: {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
+    useUnifiedTopology: true
   },
 };
