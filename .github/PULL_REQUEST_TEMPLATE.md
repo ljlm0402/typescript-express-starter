@@ -3,6 +3,11 @@
 <!-- List up changes so that reviewer can quickly understand the important parts -->
 <!-- 리뷰어가 중점적으로 봐야 하는 부분을 바로 알 수 있도록 변경된 내용을 나열 합니다. -->
 
+### Screenshot for work content (작업 내용 스크린샷) 📸
+
+<!-- Please attach a screenshot for your work content -->
+<!-- 작업 내용 대한 스크린샷을 첨부해주세요. -->
+
 ## Links (링크) 🔗
 
 - Issue Links (이슈 링크)

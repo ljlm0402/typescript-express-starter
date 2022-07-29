@@ -108,8 +108,6 @@ definitions:
         - email
         - password
     properties:
-      id:
-        description: user Id
       email:
         type: string
         description: user Email
