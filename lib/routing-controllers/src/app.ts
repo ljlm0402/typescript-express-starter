@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { defaultMetadataStorage } from 'class-transformer';
+import { defaultMetadataStorage } from 'class-transformer/cjs/storage';
 import { validationMetadatasToSchemas } from 'class-validator-jsonschema';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
