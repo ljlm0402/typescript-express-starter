@@ -29,7 +29,7 @@ class App {
     this.initializeApp(routes);
   }
 
-  private async initializeApp(routes: Routes[]){
+  private async initializeApp(routes: Routes[]) {
     this.initializeMiddlewares();
     await this.connectToDatabase();
     this.initializeRoutes(routes);
