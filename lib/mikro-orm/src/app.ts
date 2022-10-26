@@ -26,8 +26,12 @@ class App {
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
+    this.initializeApp(routes);
+  }
+
+  private async initializeApp(routes: Routes[]) {
     this.initializeMiddlewares();
-    this.connectToDatabase();
+    await this.connectToDatabase();
     this.initializeRoutes(routes);
     this.initializeSwagger();
     this.initializeErrorHandling();
@@ -49,8 +53,8 @@ class App {
   private async connectToDatabase() {
     try {
       DI.orm = await MikroORM.init(dbOptions);
-      DI.em = DI.orm.em.fork();
-      DI.userRepository = DI.orm.em.fork().getRepository(UserEntity);
+      DI.em = DI.orm.em;
+      DI.userRepository = DI.orm.em.getRepository(UserEntity);
     } catch (error) {
       logger.error(error);
     }
