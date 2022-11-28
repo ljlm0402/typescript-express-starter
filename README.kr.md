@@ -92,19 +92,29 @@ $ npx typescript-express-starter "project name"
 
 #### 템플릿 종류
 
-| 이름                                                                                    | 설명                                                                                                                                                                            |
-| :-------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Default                                                                                 | Express 기본                                                                                                                                                                    |
-| [Routing Controllers](https://github.com/typestack/routing-controllers)                 | 데코레이터 사용량이 많은 구조화되고 선언적이며 아름답게 구성된 클래스 기반 컨트롤러 생성                                                                                        |
-| [Sequelize](https://github.com/sequelize/sequelize)                                     | PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                             |
-| [Mongoose](https://github.com/Automattic/mongoose)                                      | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
-| [TypeORM](https://github.com/typeorm/typeorm)                                           | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
-| [Prisma](https://github.com/prisma/prisma)                                              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
-| [Knex](https://github.com/knex/knex)                                                    | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
-| [GraphQL](https://github.com/graphql/graphql-js)                                        | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
-| [Typegoose](https://github.com/typegoose/typegoose)                                     | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
-| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                                     | 데이터 매퍼, 작업 단위 및 아이덴티티 맵 패턴을 기반으로 하는 Node.js용 TypeScript ORM. MongoDB, MySQL, MariaDB, PostgreSQL 및 SQLite 데이터베이스를 지원                        |
-| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript) (개발중) | 데코레이터 및 Sequelize를 위한 몇 가지 기능                                                                                                                                     |
+| 이름                                                                    | 설명                                                                                                                                                                            |
+| :---------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Default                                                                 | Express 기본                                                                                                                                                                    |
+| [routing controllers](https://github.com/typestack/routing-controllers) | 데코레이터 사용량이 많은 구조화되고 선언적이며 아름답게 구성된 클래스 기반 컨트롤러 생성                                                                                        |
+| [Sequelize](https://github.com/sequelize/sequelize)                     | PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                             |
+| [Mongoose](https://github.com/Automattic/mongoose)                      | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
+| [TypeORM](https://github.com/typeorm/typeorm)                           | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
+| [Prisma](https://github.com/prisma/prisma)                              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
+| [Knex](https://github.com/knex/knex)                                    | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
+| [GraphQL](https://github.com/graphql/graphql-js)                        | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
+| [Typegoose](https://github.com/typegoose/typegoose)                     | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
+| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                     | 데이터 매퍼, 작업 단위 및 아이덴티티 맵 패턴을 기반으로 하는 Node.js용 TypeScript ORM. MongoDB, MySQL, MariaDB, PostgreSQL 및 SQLite 데이터베이스를 지원                        |
+
+#### 추후 개발 할 템플릿
+
+| 이름                                                                            | 설명                                                                |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------ |
+| [Node Postgres](https://node-postgres.com/)                                     | PostgreSQL 데이터베이스와 인터페이스하기 위한 node.js 모듈          |
+| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | 데코레이터 및 Sequelize를 위한 몇 가지 기능                         |
+| [TS SQL](https://github.com/codemix/ts-sql)                                     | SQL 데이터베이스는 TypeScript 유형 주석으로 순전히 구현             |
+| [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | InversifyJS를 사용한 Express 애플리케이션 개발을 위한 일부 유틸리티 |
+| [postgress Typescript]()                                                        |                                                                     |
+| [graphql-prisma]()                                                              |                                                                     |
 
 ## 🛎 Script 명령어
 
@@ -225,6 +235,12 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 - swc 빌드 :: `npm run build:swc`
 
 수정을 원하시면 `.swcrc` 파일을 수정해주시면 됩니다.
+
+### 💄 Makefile :: Linux에서 반복 적으로 발생하는 컴파일을 쉽게하기위해서 사용하는 make 프로그램의 설정 파일
+
+- 도움말 :: `make help`
+
+수정을 원하시면 `Makefile` 파일을 수정해주시면 됩니다.
 
 ## 🗂 코드 구조 (default)
 

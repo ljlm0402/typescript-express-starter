@@ -96,19 +96,29 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name                                                                                     | Description                                                                                                                                                |
-| :--------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Default                                                                                  | Express Default                                                                                                                                            |
-| [Routing Controllers](https://github.com/typestack/routing-controllers)                  | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                               |
-| [Sequelize](https://github.com/sequelize/sequelize)                                      | Easy to use multi SQL dialect ORM for Node.js                                                                                                              |
-| [Mongoose](https://github.com/Automattic/mongoose)                                       | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                               |
-| [TypeORM](https://github.com/typeorm/typeorm)                                            | An ORM that can run in Node.js and Others                                                                                                                  |
-| [Prisma](https://github.com/prisma/prisma)                                               | Modern Database Access for TypeScript & Node.js                                                                                                            |
-| [Knex](https://github.com/knex/knex)                                                     | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                         |
-| [GraphQL](https://github.com/graphql/graphql-js)                                         | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
-| [Typegoose](https://github.com/typegoose/typegoose)                                      | Define Mongoose models using TypeScript classes                                                                                                            |
-| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                                      | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
-| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript) (Develop) | Decorators and some other features for sequelize                                                                                                           |
+| Name                                                                    | Description                                                                                                                                                |
+| :---------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default                                                                 | Express Default                                                                                                                                            |
+| [Routing Controllers](https://github.com/typestack/routing-controllers) | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                               |
+| [Sequelize](https://github.com/sequelize/sequelize)                     | Easy to use multi SQL dialect ORM for Node.js                                                                                                              |
+| [Mongoose](https://github.com/Automattic/mongoose)                      | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                               |
+| [TypeORM](https://github.com/typeorm/typeorm)                           | An ORM that can run in Node.js and Others                                                                                                                  |
+| [Prisma](https://github.com/prisma/prisma)                              | Modern Database Access for TypeScript & Node.js                                                                                                            |
+| [Knex](https://github.com/knex/knex)                                    | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                         |
+| [GraphQL](https://github.com/graphql/graphql-js)                        | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
+| [Typegoose](https://github.com/typegoose/typegoose)                     | Define Mongoose models using TypeScript classes                                                                                                            |
+| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                     | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
+
+#### Template to be developed
+
+| Name                                                                            | Description                                                                                    |
+| :------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------- |
+| [Node Postgres](https://node-postgres.com/)                                     | node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database |
+| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | Decorators and some other features for sequelize                                               |
+| [TS SQL](https://github.com/codemix/ts-sql)                                     | A SQL database implemented purely in TypeScript type annotations                               |
+| [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | Some utilities for the development of Express application with InversifyJS                     |
+| [postgress typescript]()                                                        |                                                                                                |
+| [graphql prisma]()                                                              |                                                                                                |
 
 ## 🛎 Available Commands for the Server
 
@@ -230,6 +240,14 @@ Modify `ecosystem.config.js` file to your source code.
 - swc build :: `npm run build:swc`
 
 Modify `.swcrc` file to your source code.
+
+### 💄 Makefile :: This is a setting file of the make program used to make the compilation that occurs repeatedly on Linux
+
+[Makefile](https://makefiletutorial.com/)s are used to help decide which parts of a large program need to be recompiled.
+
+- help :: `make help`
+
+Modify `Makefile` file to your source code.
 
 ## 🗂 Code Structure (default)
 
