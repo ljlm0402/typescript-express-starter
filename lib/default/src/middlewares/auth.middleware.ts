@@ -1,19 +1,27 @@
 import { NextFunction, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import { SECRET_KEY } from '@config';
-import { HttpException } from '@exceptions/HttpException';
+import { HttpException } from '@exceptions/httpException';
 import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
-import userModel from '@models/users.model';
+import { UserModel } from '@models/users.model';
 
-const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
+const getAuthorization = req => {
+  const coockie = req.cookies['Authorization'];
+  if (coockie) return coockie;
+
+  const header = req.header('Authorization');
+  if (header) return header.split('Bearer ')[1];
+
+  return null;
+};
+
+export const AuthMiddleware = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   try {
-    const Authorization = req.cookies['Authorization'] || (req.header('Authorization') ? req.header('Authorization').split('Bearer ')[1] : null);
+    const Authorization = getAuthorization(req);
 
     if (Authorization) {
-      const secretKey: string = SECRET_KEY;
-      const verificationResponse = (await verify(Authorization, secretKey)) as DataStoredInToken;
-      const userId = verificationResponse.id;
-      const findUser = userModel.find(user => user.id === userId);
+      const { id } = (await verify(Authorization, SECRET_KEY)) as DataStoredInToken;
+      const findUser = UserModel.find(user => user.id === id);
 
       if (findUser) {
         req.user = findUser;
@@ -28,5 +36,3 @@ const authMiddleware = async (req: RequestWithUser, res: Response, next: NextFun
     next(new HttpException(401, 'Wrong authentication token'));
   }
 };
-
-export default authMiddleware;
