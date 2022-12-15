@@ -3,6 +3,7 @@ import { join } from 'path';
 import winston from 'winston';
 import winstonDaily from 'winston-daily-rotate-file';
 import { LOG_DIR } from '@config';
+import { HttpException } from '@exceptions/httpException';
 
 // logs dir
 const logDir: string = join(__dirname, LOG_DIR);
@@ -72,4 +73,5 @@ export const errorLogger = error => {
   }
 
   logger.error(message);
+  throw new HttpException(400, message);
 };

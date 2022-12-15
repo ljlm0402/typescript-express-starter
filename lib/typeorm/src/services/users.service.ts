@@ -1,13 +1,14 @@
 import { hash } from 'bcrypt';
 import { EntityRepository, Repository } from 'typeorm';
-import { CreateUserDto } from '@dtos/users.dto';
+import { Service } from 'typedi';
 import { UserEntity } from '@entities/users.entity';
-import { HttpException } from '@exceptions/HttpException';
+import { HttpException } from '@/exceptions/httpException';
 import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 
+@Service()
 @EntityRepository()
-class UserService extends Repository<UserEntity> {
+export class UserService extends Repository<UserEntity> {
   public async findAllUser(): Promise<User[]> {
     const users: User[] = await UserEntity.find();
     return users;
@@ -22,7 +23,7 @@ class UserService extends Repository<UserEntity> {
     return findUser;
   }
 
-  public async createUser(userData: CreateUserDto): Promise<User> {
+  public async createUser(userData: User): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
@@ -34,7 +35,7 @@ class UserService extends Repository<UserEntity> {
     return createUserData;
   }
 
-  public async updateUser(userId: number, userData: CreateUserDto): Promise<User> {
+  public async updateUser(userId: number, userData: User): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     const findUser: User = await UserEntity.findOne({ where: { id: userId } });
@@ -57,5 +58,3 @@ class UserService extends Repository<UserEntity> {
     return findUser;
   }
 }
-
-export default UserService;

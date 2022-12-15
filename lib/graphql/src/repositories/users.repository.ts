@@ -1,13 +1,12 @@
 import { hash } from 'bcrypt';
 import { EntityRepository } from 'typeorm';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
 import { UserEntity } from '@entities/users.entity';
-import { HttpException } from '@exceptions/HttpException';
+import { HttpException } from '@exceptions/httpException';
 import { User } from '@interfaces/users.interface';
-import { isEmpty } from '@utils/util';
 
-@EntityRepository()
-export default class UserRepository {
+@EntityRepository(UserEntity)
+export class UserRepository {
   public async userFindAll(): Promise<User[]> {
     const users: User[] = await UserEntity.find();
 
@@ -15,8 +14,6 @@ export default class UserRepository {
   }
 
   public async userFindById(userId: number): Promise<User> {
-    if (isEmpty(userId)) throw new HttpException(400, "UserId is empty");
-
     const user: User = await UserEntity.findOne({ where: { id: userId } });
     if (!user) throw new HttpException(409, "User doesn't exist");
 
@@ -24,8 +21,6 @@ export default class UserRepository {
   }
 
   public async userCreate(userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
     const findUser: User = await UserEntity.findOne({ where: { email: userData.email } });
     if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
@@ -35,9 +30,7 @@ export default class UserRepository {
     return createUserData;
   }
 
-  public async userUpdate(userId: number, userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
+  public async userUpdate(userId: number, userData: UpdateUserDto): Promise<User> {
     const findUser: User = await UserEntity.findOne({ where: { id: userId } });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
@@ -49,8 +42,6 @@ export default class UserRepository {
   }
 
   public async userDelete(userId: number): Promise<User> {
-    if (isEmpty(userId)) throw new HttpException(400, "User doesn't existId");
-
     const findUser: User = await UserEntity.findOne({ where: { id: userId } });
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 

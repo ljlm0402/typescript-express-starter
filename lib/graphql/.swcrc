@@ -22,7 +22,7 @@
     "paths": {
       "@/*": ["*"],
       "@config": ["config"],
-      "@databases": ["databases"],
+      "@database": ["database"],
       "@dtos/*": ["dtos/*"],
       "@entities/*": ["entities/*"],
       "@exceptions/*": ["exceptions/*"],

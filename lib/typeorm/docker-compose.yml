@@ -1,43 +1,50 @@
-version: '3.7'
+version: "3.7"
 
 services:
   proxy:
-    image: nginx:alpine
     container_name: proxy
+    image: nginx:alpine
     ports:
-      - '80:80'
+      - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf
-    restart: 'unless-stopped'
+    restart: "unless-stopped"
     networks:
       - backend
+
   server:
+    container_name: server
     build:
       context: ./
-      target: development-build-stage
-      dockerfile: Dockerfile
-    container_name: server
+      dockerfile: Dockerfile.dev
     ports:
-      - '3000:3000'
+      - "3000:3000"
+    environment:
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_HOST: pg
+      DB_PORT: 5432
+      DB_DATABASE: dev
     volumes:
       - ./:/app
       - /app/node_modules
-    restart: 'unless-stopped'
+    restart: "unless-stopped"
     networks:
       - backend
     links:
       - pg
     depends_on:
       - pg
+
   pg:
-    image: bitnami/postgresql:11-debian-9
     container_name: pg
+    image: postgres:14.5-alpine
     environment:
-      POSTGRESQL_USERNAME: root
-      POSTGRESQL_PASSWORD: password
-      POSTGRESQL_DATABASE: test
+      DB_USER: root
+      DB_PASSWORD: password
+      DB_DATABASE: dev
     ports:
-      - '5432:5432'
+      - "5432:5432"
     networks:
       - backend
 

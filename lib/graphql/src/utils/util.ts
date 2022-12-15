@@ -4,7 +4,7 @@
  * @returns {Boolean} true & false
  * @description this value is Empty Check
  */
- export const isEmpty = (value: string | number | object): boolean => {
+export const isEmpty = (value: string | number | object): boolean => {
   if (value === null) {
     return true;
   } else if (typeof value !== 'number' && value === '') {

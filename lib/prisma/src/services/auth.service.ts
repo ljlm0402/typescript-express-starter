@@ -1,13 +1,16 @@
+import { PrismaClient } from '@prisma/client';
 import { compare, hash } from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { PrismaClient, User } from '@prisma/client';
+import { Service } from 'typedi';
 import { SECRET_KEY } from '@config';
 import { CreateUserDto } from '@dtos/users.dto';
-import { HttpException } from '@exceptions/HttpException';
+import { HttpException } from '@exceptions/httpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
+import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 
-class AuthService {
+@Service()
+export class AuthService {
   public users = new PrismaClient().user;
 
   public async signup(userData: CreateUserDto): Promise<User> {
@@ -58,5 +61,3 @@ class AuthService {
     return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn};`;
   }
 }
-
-export default AuthService;

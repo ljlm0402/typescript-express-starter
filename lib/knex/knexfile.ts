@@ -1,25 +1,23 @@
 import { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_DATABASE } from './src/config';
 
-const dbConfig = {
+export const dbConfig = {
   client: 'mysql',
   connection: {
     charset: 'utf8',
     timezone: 'UTC',
-    host: DB_HOST,
-    port: DB_PORT,
     user: DB_USER,
     password: DB_PASSWORD,
+    host: DB_HOST,
+    port: DB_PORT,
     database: DB_DATABASE,
   },
   migrations: {
-    directory: 'src/databases/migrations',
+    directory: 'src/database/migrations',
     tableName: 'migrations',
-    // stub: 'src/databases/stubs',
+    // stub: 'src/database/stubs',
   },
   seeds: {
-    directory: 'src/databases/seeds',
-    // stub: 'src/databases/stubs',
+    directory: 'src/database/seeds',
+    // stub: 'src/database/stubs',
   },
 };
-
-export default dbConfig;

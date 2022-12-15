@@ -13,6 +13,4 @@ class User {
   public updatedAt?: Date;
 }
 
-const UserModel = getModelForClass(User);
-
-export default UserModel;
+export const UserModel = getModelForClass(User);

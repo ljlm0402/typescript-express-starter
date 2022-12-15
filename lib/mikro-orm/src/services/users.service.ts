@@ -1,12 +1,13 @@
-import { hash } from 'bcrypt';
 import { wrap } from '@mikro-orm/core';
-import { DI } from '@databases';
-import { CreateUserDto } from '@dtos/users.dto';
-import { HttpException } from '@exceptions/HttpException';
+import { hash } from 'bcrypt';
+import { Service } from 'typedi';
+import { DI } from '@database';
+import { HttpException } from '@exceptions/httpException';
 import { User } from '@interfaces/users.interface';
 import { isEmpty } from '@utils/util';
 
-class UserService {
+@Service()
+export class UserService {
   public async findAllUser(): Promise<User[]> {
     const users: User[] = await DI.userRepository.findAll();
     return users;
@@ -21,7 +22,7 @@ class UserService {
     return findUser;
   }
 
-  public async createUser(userData: CreateUserDto): Promise<User> {
+  public async createUser(userData: User): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     const findUser: User = await DI.userRepository.findOne({ email: userData.email });
@@ -35,7 +36,7 @@ class UserService {
     return createUserData;
   }
 
-  public async updateUser(userId: string, userData: CreateUserDto): Promise<User> {
+  public async updateUser(userId: string, userData: User): Promise<User> {
     if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
 
     if (userData.email) {
@@ -64,5 +65,3 @@ class UserService {
     return findUser;
   }
 }
-
-export default UserService;
