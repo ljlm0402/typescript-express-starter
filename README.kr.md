@@ -23,10 +23,10 @@
       <img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="npm 릴리즈 버전" />
     </a>
     <a href="http://npm.im/typescript-express-starter" target="_blank">
-      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm 패키지 라이선스" />
+      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" />
     </a>
     <a href="http://npm.im/typescript-express-starter" target="_blank">
-      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" />
+      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm 패키지 라이선스" />
     </a>
 </p>
 
@@ -47,10 +47,8 @@
 
 <br />
 
-## 번역본 - 자신이 원하는 언어로 읽으세요
-
-- [🇺🇸 영어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 한국어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
+- [🇺🇸 영어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 
 <br />
 
@@ -126,34 +124,28 @@ $ npx typescript-express-starter "project name"
 
 ## 💎 프로젝트 기능
 
-- Application
-
-  - ![](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff)
-    ![](https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff)
-    ![](https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff)
-    ![](https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff)
-
-- DevOps
-
-  - ![](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff)
-    ![](https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff)
-    ![](https://img.shields.io/badge/-PM2-2B037A?style=for-the-badge&logo=PM2&logoColor=fff)
-    ![](https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff)
-    ![](https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000)
-    ![](https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff)
-    ![](https://img.shields.io/badge/-SWC-FFFFFF?style=for-the-badge&logo=swc&logoColor=FBE1A6)
-
-- Utilities
-
-  - ![](https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000)
-
-- Database
-  - ![](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff)
-    ![](https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff)
-    ![](https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff)
-    ![](https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff)
-
-> [Simple Icons](https://simpleicons.org/)
+<p>
+  <img src="https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff" />&nbsp;&nbsp;
+</p>
+<p>
+  <img src="https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff" />
+  <img src="https://img.shields.io/badge/-PM2-2B037A?style=for-the-badge&logo=PM2&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000" />
+  <img src="https://img.shields.io/badge/-SWC-FFFFFF?style=for-the-badge&logo=swc&logoColor=FBE1A6" />
+</p>
+<p>
+  <img src="https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" />
+</p>
 
 ### 🐳 Docker :: 컨테이너 플랫폼
 
@@ -246,67 +238,65 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 ```bash
 │
-├── /.vscode
-│   ├── launch.json
-│   └── settings.json
+├──📂 .vscode
+│  ├── launch.json
+│  └── settings.json
 │
-├── /src
-│   ├── /config
-│   │   └── index.ts
-│   │
-│   ├── /controllers
-│   │   ├── auth.controller.ts
-│   │   ├── index.controller.ts
-│   │   └── users.controller.ts
-│   │
-│   ├── /dtos
-│   │   └── users.dto.ts
-│   │
-│   ├── /exceptions
-│   │   └── HttpException.ts
-│   │
-│   ├── /http
-│   │   ├── auth.http
-│   │   └── users.http
-│   │
-│   ├── /interfaces
-│   │   ├── auth.interface.ts
-│   │   ├── routes.interface.ts
-│   │   └── users.interface.ts
-│   │
-│   ├── /middlewares
-│   │   ├── auth.middleware.ts
-│   │   ├── error.middleware.ts
-│   │   └── validation.middleware.ts
-│   │
-│   ├── /models
-│   │   └── users.model.ts
-│   │
-│   ├── /routes
-│   │   ├── auth.route.ts
-│   │   ├── index.route.ts
-│   │   └── users.route.ts
-│   │
-│   ├── /services
-│   │   ├── auth.service.ts
-│   │   └── users.service.ts
-│   │
-│   ├── /tests
-│   │   ├── auth.test.ts
-│   │   ├── index.test.ts
-│   │   └── users.test.ts
-│   │
-│   ├── /utils
-│   │   ├── logger.ts
-│   │   ├── util.ts
-│   │   └── vaildateEnv.ts
-│   │
-│   ├── app.ts
-│   └── server.ts
+├──📂 src
+│  ├──📂 config
+│  │  └── index.ts
+│  │
+│  ├──📂 controllers
+│  │  ├── auth.controller.ts
+│  │  └── users.controller.ts
+│  │
+│  ├──📂 dtos
+│  │  └── users.dto.ts
+│  │
+│  ├──📂 exceptions
+│  │  └── httpException.ts
+│  │
+│  ├──📂 http
+│  │  ├── auth.http
+│  │  └── users.http
+│  │
+│  ├──📂 interfaces
+│  │  ├── auth.interface.ts
+│  │  ├── routes.interface.ts
+│  │  └── users.interface.ts
+│  │
+│  ├──📂 middlewares
+│  │  ├── auth.middleware.ts
+│  │  ├── error.middleware.ts
+│  │  └── validation.middleware.ts
+│  │
+│  ├──📂 models
+│  │  └── users.model.ts
+│  │
+│  ├──📂 routes
+│  │  ├── auth.route.ts
+│  │  └── users.route.ts
+│  │
+│  ├──📂 services
+│  │  ├── auth.service.ts
+│  │  └── users.service.ts
+│  │
+│  ├──📂 test
+│  │  ├── auth.test.ts
+│  │  └── users.test.ts
+│  │
+│  ├──📂 utils
+│  │  ├── logger.ts
+│  │  └── vaildateEnv.ts
+│  │
+│  ├── app.ts
+│  └── server.ts
 │
 ├── .dockerignore
 ├── .editorconfig
-├── .env
+├── .env.development.local
+├── .env.production.local
+├── .env.test.local
 ├── .eslintignore
 ├── .eslintrc
 ├── .gitignore
@@ -315,7 +305,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ├── .prettierrc
 ├── .swcrc
 ├── docker-compose.yml
-├── Dockerfile
+├── Dockerfile.dev
+├── Dockerfile.prod
 ├── ecosystem.config.js
 ├── jest.config.js
 ├── Makefile
@@ -327,23 +318,23 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 └── tsconfig.json
 ```
 
-## ⭐️ 주신분들
+## ⭐️ 응원해주신 분들
 
 [![Stargazers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/stars/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/stargazers)
 
-## 🍴 해주신분들
+## 🍴 참고하시는 분들
 
 [![Forkers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/forks/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/network/members)
 
-## 🤝 도움을 주신분들
+## 🤝 도움주신 분들
 
-<img src="https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter" alt="기여자">
+[![Contributors repo roster for @ljlm0402/typescript-express-starter](https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/graphs/contributors)
 
-## 💳 라이센스
+## 💳 라이선스
 
 [MIT](LICENSE)
 
-## 📬 커밋 메시지 정의
+## 📑 커밋 메시지 정의
 
 | 언제               | 메시지                |
 | :----------------- | :-------------------- |
@@ -357,8 +348,10 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 ## 📬 이슈를 남겨주세요
 
-추후 추가하고자하는 템플릿, 질문, 기능을 적어 주시면 최선을 다해 답변하고 반영하겠습니다.
+건의 사항이나 질문 등을 이슈로 남겨주세요.
 
-저의 오픈소스에 대해 관심을 가져주셔서 감사합니다.
+최선을 다해 답변하고 반영하겠습니다.
 
-# (๑˃̵ᴗ˂̵)و
+관심을 가져주셔서 감사합니다.
+
+# ദ്ദി*ˊᗜˋ*)
