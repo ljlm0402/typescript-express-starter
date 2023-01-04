@@ -4,7 +4,6 @@ import { CreateUserDto } from '@dtos/users.dto';
 import { HttpException } from '@exceptions/httpException';
 import { User } from '@interfaces/users.interface';
 import { UserModel } from '@models/users.model';
-import { isEmpty } from '@utils/util';
 
 @Service()
 export class UserService {

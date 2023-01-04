@@ -4,7 +4,6 @@ import { Service } from 'typedi';
 import { DI } from '@database';
 import { HttpException } from '@exceptions/httpException';
 import { User } from '@interfaces/users.interface';
-import { isEmpty } from '@utils/util';
 
 @Service()
 export class UserService {
@@ -14,8 +13,6 @@ export class UserService {
   }
 
   public async findUserById(userId: string): Promise<User> {
-    if (isEmpty(userId)) throw new HttpException(400, "UserId is empty");
-
     const findUser: User = await DI.userRepository.findOne(userId);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
@@ -23,8 +20,6 @@ export class UserService {
   }
 
   public async createUser(userData: User): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
     const findUser: User = await DI.userRepository.findOne({ email: userData.email });
     if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
@@ -37,8 +32,6 @@ export class UserService {
   }
 
   public async updateUser(userId: string, userData: User): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
     if (userData.email) {
       const findUser: User = await DI.userRepository.findOne({ email: userData.email });
       if (findUser && findUser.id !== userId) throw new HttpException(409, `This email ${userData.email} already exists`);

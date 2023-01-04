@@ -7,8 +7,6 @@ import { HttpException } from '@exceptions/httpException';
 import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { User } from '@interfaces/users.interface';
 import { UserModel } from '@models/users.model';
-import { isEmpty } from '@utils/util';
-
 
 const createToken = (user: User): TokenData => {
   const dataStoredInToken: DataStoredInToken = { id: user.id };
@@ -24,8 +22,6 @@ const createCookie = (tokenData: TokenData): string => {
 @Service()
 export class AuthService {
   public async signup(userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
     const findUser: User = UserModel.find(user => user.email === userData.email);
     if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
@@ -36,8 +32,6 @@ export class AuthService {
   }
 
   public async login(userData: CreateUserDto): Promise<{ cookie: string; findUser: User }> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
     const findUser: User = UserModel.find(user => user.email === userData.email);
     if (!findUser) throw new HttpException(409, `This email ${userData.email} was not found`);
 
@@ -51,8 +45,6 @@ export class AuthService {
   }
 
   public async logout(userData: User): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
     const findUser: User = UserModel.find(user => user.email === userData.email && user.password === userData.password);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
