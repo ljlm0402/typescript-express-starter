@@ -45,8 +45,8 @@ class App {
     return this.app;
   }
 
-  private connectToDatabase() {
-    createConnection(dbConnection);
+  private async connectToDatabase() {
+    await createConnection(dbConnection)
   }
 
   private initializeMiddlewares() {
