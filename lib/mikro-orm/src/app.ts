@@ -14,6 +14,7 @@ import { DI, dbOptions } from '@databases';
 import { UserEntity } from '@entities/users.entity';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
+import "reflect-metadata";
 
 class App {
   public app: express.Application;

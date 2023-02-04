@@ -14,6 +14,7 @@ import { dbConnection } from '@databases';
 import { authMiddleware, authChecker } from '@middlewares/auth.middleware';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, responseLogger, errorLogger } from '@utils/logger';
+import "reflect-metadata";
 
 class App {
   public app: express.Application;

@@ -12,6 +12,7 @@ import DB from '@databases';
 import { Routes } from '@interfaces/routes.interface';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
+import "reflect-metadata";
 
 class App {
   public app: express.Application;
