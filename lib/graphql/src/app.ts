@@ -10,12 +10,12 @@ import hpp from 'hpp';
 import { buildSchema } from 'type-graphql';
 import { createConnection } from 'typeorm';
 import { NODE_ENV, PORT, ORIGIN, CREDENTIALS } from '@config';
-import { dbConnection } from '@databases';
-import { authMiddleware, authChecker } from '@middlewares/auth.middleware';
-import errorMiddleware from '@middlewares/error.middleware';
+import { dbConnection } from '@database';
+import { AuthMiddleware, AuthCheckerMiddleware } from '@middlewares/auth.middleware';
+import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, responseLogger, errorLogger } from '@utils/logger';
 
-class App {
+export class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
@@ -65,7 +65,7 @@ class App {
   private async initApolloServer(resolvers) {
     const schema = await buildSchema({
       resolvers: resolvers,
-      authChecker: authChecker,
+      authChecker: AuthCheckerMiddleware,
     });
 
     const apolloServer = new ApolloServer({
@@ -77,7 +77,7 @@ class App {
       ],
       context: async ({ req }) => {
         try {
-          const user = await authMiddleware(req);
+          const user = await AuthMiddleware(req);
           return { user };
         } catch (error) {
           throw new Error(error);
@@ -89,19 +89,20 @@ class App {
         return response;
       },
       formatError: error => {
-        errorLogger(error);
-
-        return error;
+        try {
+          errorLogger(error);
+          return error;
+        } catch (err) {
+          return new Error(err);
+        }
       },
     });
 
     await apolloServer.start();
-    apolloServer.applyMiddleware({ app: this.app, cors: ORIGIN, path: '/graphql' });
+    apolloServer.applyMiddleware({ app: this.app, cors: false, path: '/graphql' });
   }
 
   private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
+    this.app.use(ErrorMiddleware);
   }
 }
-
-export default App;

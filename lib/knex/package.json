@@ -37,8 +37,10 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "objection": "^3.0.1",
+    "reflect-metadata": "^0.1.13",
     "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.5.0",
+    "typedi": "^0.10.0",
     "winston": "^3.8.1",
     "winston-daily-rotate-file": "^4.7.1"
   },

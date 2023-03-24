@@ -23,10 +23,10 @@
       <img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="npm Release Version" />
     </a>
     <a href="http://npm.im/typescript-express-starter" target="_blank">
-      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm Package License" />
+      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm Downloads" />
     </a>
     <a href="http://npm.im/typescript-express-starter" target="_blank">
-      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm Downloads" />
+      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm Package License" />
     </a>
 </p>
 
@@ -47,10 +47,8 @@
 
 <br />
 
-## Translations - read in your own language
-
-- [🇺🇸 English](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 Korean](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
+- [🇺🇸 English](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 
 <br />
 
@@ -96,19 +94,29 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 #### Template Type
 
-| Name                                                                                     | Description                                                                                                                                                |
-| :--------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Default                                                                                  | Express Default                                                                                                                                            |
-| [Routing Controllers](https://github.com/typestack/routing-controllers)                  | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                               |
-| [Sequelize](https://github.com/sequelize/sequelize)                                      | Easy to use multi SQL dialect ORM for Node.js                                                                                                              |
-| [Mongoose](https://github.com/Automattic/mongoose)                                       | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                               |
-| [TypeORM](https://github.com/typeorm/typeorm)                                            | An ORM that can run in Node.js and Others                                                                                                                  |
-| [Prisma](https://github.com/prisma/prisma)                                               | Modern Database Access for TypeScript & Node.js                                                                                                            |
-| [Knex](https://github.com/knex/knex)                                                     | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                         |
-| [GraphQL](https://github.com/graphql/graphql-js)                                         | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
-| [Typegoose](https://github.com/typegoose/typegoose)                                      | Define Mongoose models using TypeScript classes                                                                                                            |
-| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                                      | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
-| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript) (Develop) | Decorators and some other features for sequelize                                                                                                           |
+| Name                                                                    | Description                                                                                                                                                |
+| :---------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Default                                                                 | Express Default                                                                                                                                            |
+| [Routing Controllers](https://github.com/typestack/routing-controllers) | Create structured, declarative and beautifully organized class-based controllers with heavy decorators usage                                               |
+| [Sequelize](https://github.com/sequelize/sequelize)                     | Easy to use multi SQL dialect ORM for Node.js                                                                                                              |
+| [Mongoose](https://github.com/Automattic/mongoose)                      | MongoDB Object Modeling(ODM) designed to work in an asynchronous environment                                                                               |
+| [TypeORM](https://github.com/typeorm/typeorm)                           | An ORM that can run in Node.js and Others                                                                                                                  |
+| [Prisma](https://github.com/prisma/prisma)                              | Modern Database Access for TypeScript & Node.js                                                                                                            |
+| [Knex](https://github.com/knex/knex)                                    | SQL query builder for Postgres, MySQL, MariaDB, SQLite3 and Oracle                                                                                         |
+| [GraphQL](https://github.com/graphql/graphql-js)                        | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
+| [Typegoose](https://github.com/typegoose/typegoose)                     | Define Mongoose models using TypeScript classes                                                                                                            |
+| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                     | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
+| [Node Postgres](https://node-postgres.com/)                             | node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database                                                             |
+
+#### Template to be developed
+
+| Name                                                                            | Description                                                                |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------------- |
+| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | Decorators and some other features for sequelize                           |
+| [TS SQL](https://github.com/codemix/ts-sql)                                     | A SQL database implemented purely in TypeScript type annotations           |
+| [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | Some utilities for the development of Express application with InversifyJS |
+| [postgress typescript]()                                                        |                                                                            |
+| [graphql prisma]()                                                              |                                                                            |
 
 ## 🛎 Available Commands for the Server
 
@@ -120,34 +128,28 @@ Start your typescript-express-starter app in development mode at `http://localho
 
 ## 💎 The Package Features
 
-- Application
-
-  - ![](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff)
-    ![](https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff)
-    ![](https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff)
-    ![](https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff)
-
-- DevOps
-
-  - ![](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff)
-    ![](https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff)
-    ![](https://img.shields.io/badge/-PM2-2B037A?style=for-the-badge&logo=PM2&logoColor=fff)
-    ![](https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff)
-    ![](https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000)
-    ![](https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff)
-    ![](https://img.shields.io/badge/-SWC-FFFFFF?style=for-the-badge&logo=swc&logoColor=FBE1A6)
-
-- Utilities
-
-  - ![](https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000)
-
-- Database
-  - ![](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff)
-    ![](https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff)
-    ![](https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff)
-    ![](https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff)
-
-> [Simple Icons](https://simpleicons.org/)
+<p>
+  <img src="https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff" />&nbsp;&nbsp;
+</p>
+<p>
+  <img src="https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff" />
+  <img src="https://img.shields.io/badge/-PM2-2B037A?style=for-the-badge&logo=PM2&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000" />
+  <img src="https://img.shields.io/badge/-SWC-FFFFFF?style=for-the-badge&logo=swc&logoColor=FBE1A6" />
+</p>
+<p>
+  <img src="https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" />
+</p>
 
 ### 🐳 Docker :: Container Platform
 
@@ -231,67 +233,71 @@ Modify `ecosystem.config.js` file to your source code.
 
 Modify `.swcrc` file to your source code.
 
+### 💄 Makefile :: This is a setting file of the make program used to make the compilation that occurs repeatedly on Linux
+
+[Makefile](https://makefiletutorial.com/)s are used to help decide which parts of a large program need to be recompiled.
+
+- help :: `make help`
+
+Modify `Makefile` file to your source code.
+
 ## 🗂 Code Structure (default)
 
-```bash
+```sh
 │
-├── /.vscode
-│   ├── launch.json
-│   └── settings.json
+├──📂 .vscode
+│  ├── launch.json
+│  └── settings.json
 │
-├── /src
-│   ├── /config
-│   │   └── index.ts
-│   │
-│   ├── /controllers
-│   │   ├── auth.controller.ts
-│   │   ├── index.controller.ts
-│   │   └── users.controller.ts
-│   │
-│   ├── /dtos
-│   │   └── users.dto.ts
-│   │
-│   ├── /exceptions
-│   │   └── HttpException.ts
-│   │
-│   ├── /http
-│   │   ├── auth.http
-│   │   └── users.http
-│   │
-│   ├── /interfaces
-│   │   ├── auth.interface.ts
-│   │   ├── routes.interface.ts
-│   │   └── users.interface.ts
-│   │
-│   ├── /middlewares
-│   │   ├── auth.middleware.ts
-│   │   ├── error.middleware.ts
-│   │   └── validation.middleware.ts
-│   │
-│   ├── /models
-│   │   └── users.model.ts
-│   │
-│   ├── /routes
-│   │   ├── auth.route.ts
-│   │   ├── index.route.ts
-│   │   └── users.route.ts
-│   │
-│   ├── /services
-│   │   ├── auth.service.ts
-│   │   └── users.service.ts
-│   │
-│   ├── /tests
-│   │   ├── auth.test.ts
-│   │   ├── index.test.ts
-│   │   └── users.test.ts
-│   │
-│   ├── /utils
-│   │   ├── logger.ts
-│   │   ├── util.ts
-│   │   └── vaildateEnv.ts
-│   │
-│   ├── app.ts
-│   └── server.ts
+├──📂 src
+│  ├──📂 config
+│  │  └── index.ts
+│  │
+│  ├──📂 controllers
+│  │  ├── auth.controller.ts
+│  │  └── users.controller.ts
+│  │
+│  ├──📂 dtos
+│  │  └── users.dto.ts
+│  │
+│  ├──📂 exceptions
+│  │  └── httpException.ts
+│  │
+│  ├──📂 http
+│  │  ├── auth.http
+│  │  └── users.http
+│  │
+│  ├──📂 interfaces
+│  │  ├── auth.interface.ts
+│  │  ├── routes.interface.ts
+│  │  └── users.interface.ts
+│  │
+│  ├──📂 middlewares
+│  │  ├── auth.middleware.ts
+│  │  ├── error.middleware.ts
+│  │  └── validation.middleware.ts
+│  │
+│  ├──📂 models
+│  │  └── users.model.ts
+│  │
+│  ├──📂 routes
+│  │  ├── auth.route.ts
+│  │  └── users.route.ts
+│  │
+│  ├──📂 services
+│  │  ├── auth.service.ts
+│  │  └── users.service.ts
+│  │
+│  ├──📂 test
+│  │  ├── auth.test.ts
+│  │  └── users.test.ts
+│  │
+│  ├──📂 utils
+│  │  ├── logger.ts
+│  │  └── vaildateEnv.ts
+│  │
+│  ├── app.ts
+│  └── server.ts
 │
 ├── .dockerignore
 ├── .editorconfig
@@ -306,7 +312,8 @@ Modify `.swcrc` file to your source code.
 ├── .prettierrc
 ├── .swcrc
 ├── docker-compose.yml
-├── Dockerfile
+├── Dockerfile.dev
+├── Dockerfile.prod
 ├── ecosystem.config.js
 ├── jest.config.js
 ├── Makefile
@@ -328,67 +335,13 @@ Modify `.swcrc` file to your source code.
 
 ## 🤝 Contributors
 
-<img src="https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter" alt="Contributors">
-
-- Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
-
-- João Silva [https://github.com/joaopms](https://github.com/joaopms)
-
-- BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
-
-- Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
-
-- Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
-
-- strama4 [https://github.com/strama4](https://github.com/strama4)
-
-- sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
-
-- Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
-
-- Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
-
-- Malavan [https://github.com/malavancs](https://github.com/malavancs)
-
-- Jon Gallant [https://github.com/jongio](https://github.com/jongio)
-
-- Kuba Rozkwitalski [https://github.com/kubarozkwitalski](https://github.com/kubarozkwitalski)
-
-- Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
-
-- Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
-
-- n2ptune [https://github.com/n2ptune](https://github.com/n2ptune)
-
-- michael r [https://github.com/alanmynah](https://github.com/alanmynah)
-
-- Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
-
-- Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
-
-- oricc [https://github.com/oricc](https://github.com/oricc)
-
-- Dustin Newbold [https://github.com/dustinnewbold](https://github.com/dustinnewbold)
-
-- WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
-
-- David Stewart [https://github.com/davidjmstewart](https://github.com/davidjmstewart)
-
-- JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
-
-- Tamzid Karim [Tamzid Karim](https://github.com/tamzidkarim)
-
-- Andrija Milojević [https://github.com/andrija29](https://github.com/andrija29)
-
-- Engjell Avdiu [https://github.com/engjellavdiu](https://github.com/engjellavdiu)
-
-- Florian Mifsud [https://github.com/florianmifsud](https://github.com/florianmifsud)
+[![Contributors repo roster for @ljlm0402/typescript-express-starter](https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/graphs/contributors)
 
 ## 💳 License
 
 [MIT](LICENSE)
 
-## 📬 Recommended Commit Message
+## 📑 Recommended Commit Message
 
 | When             | Commit Message     |
 | :--------------- | :----------------- |
@@ -402,8 +355,10 @@ Modify `.swcrc` file to your source code.
 
 ## 📬 Please request an issue
 
-In the future, please write down your desired template, questions, and features to be added, and we will try our best to answer and reflect them.
+Please leave a question or question as an issue.
 
-Thank you very much for your interest in our package.
+I will do my best to answer and reflect.
 
-# (๑˃̵ᴗ˂̵)و
+Thank you for your interest.
+
+# ദ്ദി*ˊᗜˋ*)

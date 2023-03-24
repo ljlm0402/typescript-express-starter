@@ -23,10 +23,10 @@
       <img src="https://img.shields.io/github/v/release/ljlm0402/typescript-express-starter" alt="npm 릴리즈 버전" />
     </a>
     <a href="http://npm.im/typescript-express-starter" target="_blank">
-      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm 패키지 라이선스" />
+      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" />
     </a>
     <a href="http://npm.im/typescript-express-starter" target="_blank">
-      <img src="https://img.shields.io/npm/dm/typescript-express-starter.svg" alt="npm 다운로드 수" />
+      <img src="https://img.shields.io/npm/l/typescript-express-starter.svg" alt="npm 패키지 라이선스" />
     </a>
 </p>
 
@@ -47,10 +47,8 @@
 
 <br />
 
-## 번역본 - 자신이 원하는 언어로 읽으세요
-
-- [🇺🇸 영어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 - [🇰🇷 한국어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.kr.md)
+- [🇺🇸 영어](https://github.com/ljlm0402/typescript-express-starter/blob/master/README.md)
 
 <br />
 
@@ -92,19 +90,29 @@ $ npx typescript-express-starter "project name"
 
 #### 템플릿 종류
 
-| 이름                                                                                    | 설명                                                                                                                                                                            |
-| :-------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Default                                                                                 | Express 기본                                                                                                                                                                    |
-| [Routing Controllers](https://github.com/typestack/routing-controllers)                 | 데코레이터 사용량이 많은 구조화되고 선언적이며 아름답게 구성된 클래스 기반 컨트롤러 생성                                                                                        |
-| [Sequelize](https://github.com/sequelize/sequelize)                                     | PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                             |
-| [Mongoose](https://github.com/Automattic/mongoose)                                      | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
-| [TypeORM](https://github.com/typeorm/typeorm)                                           | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
-| [Prisma](https://github.com/prisma/prisma)                                              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
-| [Knex](https://github.com/knex/knex)                                                    | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
-| [GraphQL](https://github.com/graphql/graphql-js)                                        | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
-| [Typegoose](https://github.com/typegoose/typegoose)                                     | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
-| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                                     | 데이터 매퍼, 작업 단위 및 아이덴티티 맵 패턴을 기반으로 하는 Node.js용 TypeScript ORM. MongoDB, MySQL, MariaDB, PostgreSQL 및 SQLite 데이터베이스를 지원                        |
-| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript) (개발중) | 데코레이터 및 Sequelize를 위한 몇 가지 기능                                                                                                                                     |
+| 이름                                                                    | 설명                                                                                                                                                                            |
+| :---------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Default                                                                 | Express 기본                                                                                                                                                                    |
+| [routing controllers](https://github.com/typestack/routing-controllers) | 데코레이터 사용량이 많은 구조화되고 선언적이며 아름답게 구성된 클래스 기반 컨트롤러 생성                                                                                        |
+| [Sequelize](https://github.com/sequelize/sequelize)                     | PostgreSQL, MySQL, MariaDB, SQLite, Microsoft SQL Server를 지원하는 Promise 패턴 기반의 Node.js ORM                                                                             |
+| [Mongoose](https://github.com/Automattic/mongoose)                      | Node.js와 MongoDB를 위한 ODM(Object Data Mapping) 라이브러리                                                                                                                    |
+| [TypeORM](https://github.com/typeorm/typeorm)                           | 자바스크립트, 타입스크립트과 함께 사용되어 Node.js, React Native, Expo에서 실행될 수 있는 ORM                                                                                   |
+| [Prisma](https://github.com/prisma/prisma)                              | 데이터베이스에 데이터를 프로그래밍 언어의 객체와 매핑하여 기존에 SQL로 작성하던 데이터를 수정, 테이블 구조 변경등의 작업을 객체를 통해 프로그래밍적으로 할 수 있도록 해주는 ORM |
+| [Knex](https://github.com/knex/knex)                                    | 쿼리 빌더를 위한 라이브러리                                                                                                                                                     |
+| [GraphQL](https://github.com/graphql/graphql-js)                        | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
+| [Typegoose](https://github.com/typegoose/typegoose)                     | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
+| [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                     | 데이터 매퍼, 작업 단위 및 아이덴티티 맵 패턴을 기반으로 하는 Node.js용 TypeScript ORM. MongoDB, MySQL, MariaDB, PostgreSQL 및 SQLite 데이터베이스를 지원                        |
+| [Node Postgres](https://node-postgres.com/)                             | PostgreSQL 데이터베이스와 인터페이스하기 위한 node.js 모듈                                                                                                                      |
+
+#### 추후 개발 할 템플릿
+
+| 이름                                                                            | 설명                                                                |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------ |
+| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | 데코레이터 및 Sequelize를 위한 몇 가지 기능                         |
+| [TS SQL](https://github.com/codemix/ts-sql)                                     | SQL 데이터베이스는 TypeScript 유형 주석으로 순전히 구현             |
+| [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | InversifyJS를 사용한 Express 애플리케이션 개발을 위한 일부 유틸리티 |
+| [postgress Typescript]()                                                        |                                                                     |
+| [graphql-prisma]()                                                              |                                                                     |
 
 ## 🛎 Script 명령어
 
@@ -116,34 +124,28 @@ $ npx typescript-express-starter "project name"
 
 ## 💎 프로젝트 기능
 
-- Application
-
-  - ![](https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff)
-    ![](https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff)
-    ![](https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff)
-    ![](https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff)
-
-- DevOps
-
-  - ![](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff)
-    ![](https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff)
-    ![](https://img.shields.io/badge/-PM2-2B037A?style=for-the-badge&logo=PM2&logoColor=fff)
-    ![](https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff)
-    ![](https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000)
-    ![](https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff)
-    ![](https://img.shields.io/badge/-SWC-FFFFFF?style=for-the-badge&logo=swc&logoColor=FBE1A6)
-
-- Utilities
-
-  - ![](https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000)
-
-- Database
-  - ![](https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff)
-    ![](https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff)
-    ![](https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff)
-    ![](https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff)
-
-> [Simple Icons](https://simpleicons.org/)
+<p>
+  <img src="https://img.shields.io/badge/-TypeScript-007ACC?style=for-the-badge&logo=TypeScript&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Node.js-339933?style=for-the-badge&logo=Node.js&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-NPM-CB3837?style=for-the-badge&logo=NPM&logoColor=fff" />&nbsp;&nbsp;
+</p>
+<p>
+  <img src="https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-NGINX-269539?style=for-the-badge&logo=NGINX&logoColor=fff" />
+  <img src="https://img.shields.io/badge/-PM2-2B037A?style=for-the-badge&logo=PM2&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Nodemon-76D04B?style=for-the-badge&logo=Nodemon&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=000" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Jest-C21325?style=for-the-badge&logo=Jest&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=000" />
+  <img src="https://img.shields.io/badge/-SWC-FFFFFF?style=for-the-badge&logo=swc&logoColor=FBE1A6" />
+</p>
+<p>
+  <img src="https://img.shields.io/badge/-MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-MariaDB-003545?style=for-the-badge&logo=MariaDB&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-PostgreSQL-336791?style=for-the-badge&logo=PostgreSQL&logoColor=fff" />&nbsp;&nbsp;
+  <img src="https://img.shields.io/badge/-MongoDB-47A248?style=for-the-badge&logo=MongoDB&logoColor=fff" />
+</p>
 
 ### 🐳 Docker :: 컨테이너 플랫폼
 
@@ -226,71 +228,75 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 수정을 원하시면 `.swcrc` 파일을 수정해주시면 됩니다.
 
+### 💄 Makefile :: Linux에서 반복 적으로 발생하는 컴파일을 쉽게하기위해서 사용하는 make 프로그램의 설정 파일
+
+- 도움말 :: `make help`
+
+수정을 원하시면 `Makefile` 파일을 수정해주시면 됩니다.
+
 ## 🗂 코드 구조 (default)
 
 ```bash
 │
-├── /.vscode
-│   ├── launch.json
-│   └── settings.json
+├──📂 .vscode
+│  ├── launch.json
+│  └── settings.json
 │
-├── /src
-│   ├── /config
-│   │   └── index.ts
-│   │
-│   ├── /controllers
-│   │   ├── auth.controller.ts
-│   │   ├── index.controller.ts
-│   │   └── users.controller.ts
-│   │
-│   ├── /dtos
-│   │   └── users.dto.ts
-│   │
-│   ├── /exceptions
-│   │   └── HttpException.ts
-│   │
-│   ├── /http
-│   │   ├── auth.http
-│   │   └── users.http
-│   │
-│   ├── /interfaces
-│   │   ├── auth.interface.ts
-│   │   ├── routes.interface.ts
-│   │   └── users.interface.ts
-│   │
-│   ├── /middlewares
-│   │   ├── auth.middleware.ts
-│   │   ├── error.middleware.ts
-│   │   └── validation.middleware.ts
-│   │
-│   ├── /models
-│   │   └── users.model.ts
-│   │
-│   ├── /routes
-│   │   ├── auth.route.ts
-│   │   ├── index.route.ts
-│   │   └── users.route.ts
-│   │
-│   ├── /services
-│   │   ├── auth.service.ts
-│   │   └── users.service.ts
-│   │
-│   ├── /tests
-│   │   ├── auth.test.ts
-│   │   ├── index.test.ts
-│   │   └── users.test.ts
-│   │
-│   ├── /utils
-│   │   ├── logger.ts
-│   │   ├── util.ts
-│   │   └── vaildateEnv.ts
-│   │
-│   ├── app.ts
-│   └── server.ts
+├──📂 src
+│  ├──📂 config
+│  │  └── index.ts
+│  │
+│  ├──📂 controllers
+│  │  ├── auth.controller.ts
+│  │  └── users.controller.ts
+│  │
+│  ├──📂 dtos
+│  │  └── users.dto.ts
+│  │
+│  ├──📂 exceptions
+│  │  └── httpException.ts
+│  │
+│  ├──📂 http
+│  │  ├── auth.http
+│  │  └── users.http
+│  │
+│  ├──📂 interfaces
+│  │  ├── auth.interface.ts
+│  │  ├── routes.interface.ts
+│  │  └── users.interface.ts
+│  │
+│  ├──📂 middlewares
+│  │  ├── auth.middleware.ts
+│  │  ├── error.middleware.ts
+│  │  └── validation.middleware.ts
+│  │
+│  ├──📂 models
+│  │  └── users.model.ts
+│  │
+│  ├──📂 routes
+│  │  ├── auth.route.ts
+│  │  └── users.route.ts
+│  │
+│  ├──📂 services
+│  │  ├── auth.service.ts
+│  │  └── users.service.ts
+│  │
+│  ├──📂 test
+│  │  ├── auth.test.ts
+│  │  └── users.test.ts
+│  │
+│  ├──📂 utils
+│  │  ├── logger.ts
+│  │  └── vaildateEnv.ts
+│  │
+│  ├── app.ts
+│  └── server.ts
 │
 ├── .dockerignore
 ├── .editorconfig
-├── .env
+├── .env.development.local
+├── .env.production.local
+├── .env.test.local
 ├── .eslintignore
 ├── .eslintrc
 ├── .gitignore
@@ -299,7 +305,8 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 ├── .prettierrc
 ├── .swcrc
 ├── docker-compose.yml
-├── Dockerfile
+├── Dockerfile.dev
+├── Dockerfile.prod
 ├── ecosystem.config.js
 ├── jest.config.js
 ├── Makefile
@@ -311,77 +318,23 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 └── tsconfig.json
 ```
 
-## ⭐️ 주신분들
+## ⭐️ 응원해주신 분들
 
 [![Stargazers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/stars/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/stargazers)
 
-## 🍴 해주신분들
+## 🍴 참고하시는 분들
 
 [![Forkers repo roster for @ljlm0402/typescript-express-starter](https://reporoster.com/forks/ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/network/members)
 
-## 🤝 도움을 주신분들
+## 🤝 도움주신 분들
 
-<img src="https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter" alt="기여자">
+[![Contributors repo roster for @ljlm0402/typescript-express-starter](https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/graphs/contributors)
 
-- Jeongwon Kim [https://github.com/swtpumpkin](https://github.com/swtpumpkin)
-
-- João Silva [https://github.com/joaopms](https://github.com/joaopms)
-
-- BitYoungjae [https://github.com/BitYoungjae](https://github.com/BitYoungjae)
-
-- Paolo Tagliani [https://github.com/pablosproject](https://github.com/pablosproject)
-
-- Lloyd Park [https://github.com/yeondam88](https://github.com/yeondam88)
-
-- strama4 [https://github.com/strama4](https://github.com/strama4)
-
-- sonbyungjun [https://github.com/sonbyungjun](https://github.com/sonbyungjun)
-
-- Sean Maxwell [https://github.com/seanpmaxwell](https://github.com/seanpmaxwell)
-
-- Ed Guy [https://github.com/edguy3](https://github.com/edguy3)
-
-- Malavan [https://github.com/malavancs](https://github.com/malavancs)
-
-- Jon Gallant [https://github.com/jongio](https://github.com/jongio)
-
-- Kuba Rozkwitalski [https://github.com/kubarozkwitalski](https://github.com/kubarozkwitalski)
-
-- Craig Harman [https://github.com/craigharman](https://github.com/craigharman)
-
-- Edward Teixeira Dias Junior [https://github.com/edward-teixeira](https://github.com/edward-teixeira)
-
-- n2ptune [https://github.com/n2ptune](https://github.com/n2ptune)
-
-- michael r [https://github.com/alanmynah](https://github.com/alanmynah)
-
-- Benjamin [https://github.com/benjaminudoh10](https://github.com/benjaminudoh10)
-
-- Amrik Singh [https://github.com/AmrikSD](https://github.com/AmrikSD)
-
-- oricc [https://github.com/oricc](https://github.com/oricc)
-
-- Dustin Newbold [https://github.com/dustinnewbold](https://github.com/dustinnewbold)
-
-- WhatIfWeDigDeeper [https://github.com/WhatIfWeDigDeeper](https://github.com/WhatIfWeDigDeeper)
-
-- David Stewart [https://github.com/davidjmstewart](https://github.com/davidjmstewart)
-
-- JagTheFriend [JagTheFriend](https://github.com/JagTheFriend)
-
-- Tamzid Karim [Tamzid Karim](https://github.com/tamzidkarim)
-
-- Andrija Milojević [https://github.com/andrija29](https://github.com/andrija29)
-
-- Engjell Avdiu [https://github.com/engjellavdiu](https://github.com/engjellavdiu)
-
-- Florian Mifsud [https://github.com/florianmifsud](https://github.com/florianmifsud)
-
-## 💳 라이센스
+## 💳 라이선스
 
 [MIT](LICENSE)
 
-## 📬 커밋 메시지 정의
+## 📑 커밋 메시지 정의
 
 | 언제               | 메시지                |
 | :----------------- | :-------------------- |
@@ -395,8 +348,10 @@ VSCode Extension에서 [REST Client](https://marketplace.visualstudio.com/items?
 
 ## 📬 이슈를 남겨주세요
 
-추후 추가하고자하는 템플릿, 질문, 기능을 적어 주시면 최선을 다해 답변하고 반영하겠습니다.
+건의 사항이나 질문 등을 이슈로 남겨주세요.
 
-저의 오픈소스에 대해 관심을 가져주셔서 감사합니다.
+최선을 다해 답변하고 반영하겠습니다.
 
-# (๑˃̵ᴗ˂̵)و
+관심을 가져주셔서 감사합니다.
+
+# ദ്ദി*ˊᗜˋ*)

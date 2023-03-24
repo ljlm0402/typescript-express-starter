@@ -1,29 +1,25 @@
-import { hash } from 'bcrypt';
 import { wrap } from '@mikro-orm/core';
-import { DI } from '@databases';
-import { CreateUserDto } from '@dtos/users.dto';
-import { HttpException } from '@exceptions/HttpException';
+import { hash } from 'bcrypt';
+import { Service } from 'typedi';
+import { DI } from '@database';
+import { HttpException } from '@exceptions/httpException';
 import { User } from '@interfaces/users.interface';
-import { isEmpty } from '@utils/util';
 
-class UserService {
+@Service()
+export class UserService {
   public async findAllUser(): Promise<User[]> {
     const users: User[] = await DI.userRepository.findAll();
     return users;
   }
 
   public async findUserById(userId: string): Promise<User> {
-    if (isEmpty(userId)) throw new HttpException(400, "UserId is empty");
-
     const findUser: User = await DI.userRepository.findOne(userId);
     if (!findUser) throw new HttpException(409, "User doesn't exist");
 
     return findUser;
   }
 
-  public async createUser(userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
+  public async createUser(userData: User): Promise<User> {
     const findUser: User = await DI.userRepository.findOne({ email: userData.email });
     if (findUser) throw new HttpException(409, `This email ${userData.email} already exists`);
 
@@ -35,9 +31,7 @@ class UserService {
     return createUserData;
   }
 
-  public async updateUser(userId: string, userData: CreateUserDto): Promise<User> {
-    if (isEmpty(userData)) throw new HttpException(400, "userData is empty");
-
+  public async updateUser(userId: string, userData: User): Promise<User> {
     if (userData.email) {
       const findUser: User = await DI.userRepository.findOne({ email: userData.email });
       if (findUser && findUser.id !== userId) throw new HttpException(409, `This email ${userData.email} already exists`);
@@ -64,5 +58,3 @@ class UserService {
     return findUser;
   }
 }
-
-export default UserService;

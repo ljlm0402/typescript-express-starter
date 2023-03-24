@@ -1,49 +1,51 @@
 import { Controller, Param, Body, Get, Post, Put, Delete, HttpCode, UseBefore } from 'routing-controllers';
 import { OpenAPI } from 'routing-controllers-openapi';
+import { Container } from 'typedi';
 import { CreateUserDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
-import userService from '@services/users.service';
-import { validationMiddleware } from '@middlewares/validation.middleware';
+import { ValidationMiddleware } from '@middlewares/validation.middleware';
+import { UserService } from '@services/users.service';
 
 @Controller()
-export class UsersController {
-  public userService = new userService();
+export class UserController {
+  public path = '/users'
+  public user = Container.get(UserService);
 
   @Get('/users')
   @OpenAPI({ summary: 'Return a list of users' })
   async getUsers() {
-    const findAllUsersData: User[] = await this.userService.findAllUser();
+    const findAllUsersData: User[] = await this.user.findAllUser();
     return { data: findAllUsersData, message: 'findAll' };
   }
 
   @Get('/users/:id')
   @OpenAPI({ summary: 'Return find a user' })
   async getUserById(@Param('id') userId: number) {
-    const findOneUserData: User = await this.userService.findUserById(userId);
+    const findOneUserData: User = await this.user.findUserById(userId);
     return { data: findOneUserData, message: 'findOne' };
   }
 
   @Post('/users')
   @HttpCode(201)
-  @UseBefore(validationMiddleware(CreateUserDto, 'body'))
+  @UseBefore(ValidationMiddleware(CreateUserDto, 'body'))
   @OpenAPI({ summary: 'Create a new user' })
-  async createUser(@Body() userData: CreateUserDto) {
-    const createUserData: User = await this.userService.createUser(userData);
+  async createUser(@Body() userData: User) {
+    const createUserData: User = await this.user.createUser(userData);
     return { data: createUserData, message: 'created' };
   }
 
   @Put('/users/:id')
-  @UseBefore(validationMiddleware(CreateUserDto, 'body', true))
+  @UseBefore(ValidationMiddleware(CreateUserDto, 'body', true))
   @OpenAPI({ summary: 'Update a user' })
-  async updateUser(@Param('id') userId: number, @Body() userData: CreateUserDto) {
-    const updateUserData: User[] = await this.userService.updateUser(userId, userData);
+  async updateUser(@Param('id') userId: number, @Body() userData: User) {
+    const updateUserData: User[] = await this.user.updateUser(userId, userData);
     return { data: updateUserData, message: 'updated' };
   }
 
   @Delete('/users/:id')
   @OpenAPI({ summary: 'Delete a user' })
   async deleteUser(@Param('id') userId: number) {
-    const deleteUserData: User[] = await this.userService.deleteUser(userId);
+    const deleteUserData: User[] = await this.user.deleteUser(userId);
     return { data: deleteUserData, message: 'deleted' };
   }
 }

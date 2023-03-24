@@ -1,10 +1,10 @@
 import { Authorized, Arg, Ctx, Mutation, Resolver } from 'type-graphql';
 import { CreateUserDto } from '@dtos/users.dto';
-import AuthRepository from '@repositories/auth.repository';
+import { AuthRepository } from '@repositories/auth.repository';
 import { User } from '@typedefs/users.type';
 
 @Resolver()
-export class authResolver extends AuthRepository {
+export class AuthResolver extends AuthRepository {
   @Mutation(() => User, {
     description: 'User signup',
   })

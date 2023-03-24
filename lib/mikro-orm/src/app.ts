@@ -1,3 +1,5 @@
+import 'reflect-metadata';
+import { MikroORM, RequestContext } from '@mikro-orm/core';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
@@ -7,31 +9,25 @@ import hpp from 'hpp';
 import morgan from 'morgan';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import { logger, stream } from '@utils/logger';
-import { MikroORM, RequestContext } from '@mikro-orm/core';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
-import { DI, dbOptions } from '@databases';
+import { DI, dbOptions } from '@database';
 import { UserEntity } from '@entities/users.entity';
 import { Routes } from '@interfaces/routes.interface';
-import errorMiddleware from '@middlewares/error.middleware';
+import { ErrorMiddleware } from '@middlewares/error.middleware';
+import { logger, stream } from '@utils/logger';
 
-class App {
+export class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
-  public host: string;
 
   constructor(routes: Routes[]) {
     this.app = express();
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
-    this.initializeApp(routes);
-  }
-
-  private async initializeApp(routes: Routes[]) {
+    this.connectToDatabase();
     this.initializeMiddlewares();
-    await this.connectToDatabase();
     this.initializeRoutes(routes);
     this.initializeSwagger();
     this.initializeErrorHandling();
@@ -95,8 +91,6 @@ class App {
   }
 
   private initializeErrorHandling() {
-    this.app.use(errorMiddleware);
+    this.app.use(ErrorMiddleware);
   }
 }
-
-export default App;

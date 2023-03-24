@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "9.2.0",
+  "version": "10.0.0",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -16,6 +16,7 @@
     "typegoose",
     "mikro-orm",
     "routing-controllers",
+    "node-postgres",
     "logger",
     "swagger",
     "jest",

@@ -1,11 +1,10 @@
-import App from '@/app';
-import validateEnv from '@utils/validateEnv';
+import { App } from '@/app';
+import { AuthResolver } from '@resolvers/auth.resolver';
+import { UserResolver } from '@resolvers/users.resolver';
+import { ValidateEnv } from '@utils/validateEnv';
 
-import { authResolver } from '@resolvers/auth.resolver';
-import { userResolver } from '@resolvers/users.resolver';
+ValidateEnv();
 
-validateEnv();
-
-const app = new App([authResolver, userResolver]);
+const app = new App([AuthResolver, UserResolver]);
 
 app.listen();

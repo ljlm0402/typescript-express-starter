@@ -3,15 +3,25 @@ import { AuthChecker } from 'type-graphql';
 import { getRepository } from 'typeorm';
 import { SECRET_KEY } from '@config';
 import { UserEntity } from '@entities/users.entity';
-import { HttpException } from '@exceptions/HttpException';
+import { HttpException } from '@exceptions/httpException';
 import { RequestWithUser, DataStoredInToken } from '@interfaces/auth.interface';
 
-export const authMiddleware = async req => {
+const getAuthorization = req => {
+  const cookie = req.cookies['Authorization'];
+  if (cookie) return cookie;
+
+  const header = req.header('Authorization');
+  if (header) return header.split('Bearer ')[1];
+
+  return null;
+};
+
+export const AuthMiddleware = async req => {
   try {
-    const Authorization = req.cookies['Authorization'] || (req.header('Authorization') ? req.header('Authorization').split('Bearer ')[1] : null);
+    const Authorization = getAuthorization(req);
+
     if (Authorization) {
-      const secretKey: string = SECRET_KEY;
-      const { id } = (await verify(Authorization, secretKey)) as DataStoredInToken;
+      const { id } = verify(Authorization, SECRET_KEY) as DataStoredInToken;
       const userRepository = getRepository(UserEntity);
       const findUser = await userRepository.findOne(id, { select: ['id', 'email', 'password'] });
       return findUser;
@@ -23,7 +33,7 @@ export const authMiddleware = async req => {
   }
 };
 
-export const authChecker: AuthChecker<RequestWithUser> = async ({ context: { user } }) => {
+export const AuthCheckerMiddleware: AuthChecker<RequestWithUser> = async ({ context: { user } }) => {
   if (!user) {
     throw new HttpException(404, 'Authentication token missing');
   }
