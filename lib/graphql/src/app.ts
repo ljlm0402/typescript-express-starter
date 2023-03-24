@@ -8,7 +8,6 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import { buildSchema } from 'type-graphql';
-import { createConnection } from 'typeorm';
 import { NODE_ENV, PORT, ORIGIN, CREDENTIALS } from '@config';
 import { dbConnection } from '@database';
 import { AuthMiddleware, AuthCheckerMiddleware } from '@middlewares/auth.middleware';
@@ -45,8 +44,8 @@ export class App {
     return this.app;
   }
 
-  private connectToDatabase() {
-    createConnection(dbConnection);
+  private async connectToDatabase() {
+    await dbConnection();
   }
 
   private initializeMiddlewares() {

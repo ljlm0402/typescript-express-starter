@@ -6,11 +6,10 @@ import express from 'express';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
-import { Model } from 'objection';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
-import { knex } from '@database';
+import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
@@ -45,8 +44,8 @@ export class App {
     return this.app;
   }
 
-  private connectToDatabase() {
-    Model.knex(knex());
+  private async connectToDatabase() {
+    await dbConnection();
   }
 
   private initializeMiddlewares() {

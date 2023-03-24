@@ -44,8 +44,8 @@ export class App {
     return this.app;
   }
 
-  private connectToDatabase() {
-    DB.sequelize.sync({ force: false });
+  private async connectToDatabase() {
+    await DB.sequelize.sync({ force: false });
   }
 
   private initializeMiddlewares() {
