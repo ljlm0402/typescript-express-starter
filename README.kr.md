@@ -102,12 +102,12 @@ $ npx typescript-express-starter "project name"
 | [GraphQL](https://github.com/graphql/graphql-js)                        | API 용 쿼리 언어이며 기존 데이터로 이러한 쿼리를 수행하기위한 런타임                                                                                                            |
 | [Typegoose](https://github.com/typegoose/typegoose)                     | 타입스크립트 클래스를 사용하여 몽구스 모델 정의                                                                                                                                 |
 | [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                     | 데이터 매퍼, 작업 단위 및 아이덴티티 맵 패턴을 기반으로 하는 Node.js용 TypeScript ORM. MongoDB, MySQL, MariaDB, PostgreSQL 및 SQLite 데이터베이스를 지원                        |
+| [Node Postgres](https://node-postgres.com/)                             | PostgreSQL 데이터베이스와 인터페이스하기 위한 node.js 모듈                                                                                                                      |
 
 #### 추후 개발 할 템플릿
 
 | 이름                                                                            | 설명                                                                |
 | :------------------------------------------------------------------------------ | :------------------------------------------------------------------ |
-| [Node Postgres](https://node-postgres.com/)                                     | PostgreSQL 데이터베이스와 인터페이스하기 위한 node.js 모듈          |
 | [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | 데코레이터 및 Sequelize를 위한 몇 가지 기능                         |
 | [TS SQL](https://github.com/codemix/ts-sql)                                     | SQL 데이터베이스는 TypeScript 유형 주석으로 순전히 구현             |
 | [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | InversifyJS를 사용한 Express 애플리케이션 개발을 위한 일부 유틸리티 |

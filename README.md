@@ -106,17 +106,17 @@ Start your typescript-express-starter app in development mode at `http://localho
 | [GraphQL](https://github.com/graphql/graphql-js)                        | query language for APIs and a runtime for fulfilling those queries with your existing data                                                                 |
 | [Typegoose](https://github.com/typegoose/typegoose)                     | Define Mongoose models using TypeScript classes                                                                                                            |
 | [Mikro ORM](https://github.com/mikro-orm/mikro-orm)                     | TypeScript ORM for Node.js based on Data Mapper, Unit of Work and Identity Map patterns. Supports MongoDB, MySQL, MariaDB, PostgreSQL and SQLite databases |
+| [Node Postgres](https://node-postgres.com/)                             | node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database                                                             |
 
 #### Template to be developed
 
-| Name                                                                            | Description                                                                                    |
-| :------------------------------------------------------------------------------ | :--------------------------------------------------------------------------------------------- |
-| [Node Postgres](https://node-postgres.com/)                                     | node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database |
-| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | Decorators and some other features for sequelize                                               |
-| [TS SQL](https://github.com/codemix/ts-sql)                                     | A SQL database implemented purely in TypeScript type annotations                               |
-| [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | Some utilities for the development of Express application with InversifyJS                     |
-| [postgress typescript]()                                                        |                                                                                                |
-| [graphql prisma]()                                                              |                                                                                                |
+| Name                                                                            | Description                                                                |
+| :------------------------------------------------------------------------------ | :------------------------------------------------------------------------- |
+| [Sequelize Typescript](https://github.com/RobinBuschmann/sequelize-typescript)  | Decorators and some other features for sequelize                           |
+| [TS SQL](https://github.com/codemix/ts-sql)                                     | A SQL database implemented purely in TypeScript type annotations           |
+| [inversify-express-utils](https://github.com/inversify/inversify-express-utils) | Some utilities for the development of Express application with InversifyJS |
+| [postgress typescript]()                                                        |                                                                            |
+| [graphql prisma]()                                                              |                                                                            |
 
 ## 🛎 Available Commands for the Server
 
