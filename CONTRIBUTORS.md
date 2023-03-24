@@ -55,3 +55,7 @@
 - Rashid [https://github.com/rashidmya](https://github.com/rashidmya)
 
 - JoshuaOLoduca [https://github.com/JoshuaOLoduca](https://github.com/JoshuaOLoduca)
+
+- Markus Laubscher [https://github.com/markuslaubscher](https://github.com/markuslaubscher)
+
+- coder-palak [https://github.com/coder-palak](https://github.com/coder-palak)
