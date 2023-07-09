@@ -2,7 +2,7 @@ import { hash } from 'bcrypt';
 import { EntityRepository, Repository } from 'typeorm';
 import { Service } from 'typedi';
 import { UserEntity } from '@entities/users.entity';
-import { HttpException } from '@/exceptions/httpException';
+import { HttpException } from '@/exceptions/HttpException';
 import { User } from '@interfaces/users.interface';
 
 @Service()
