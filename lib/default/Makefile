@@ -25,7 +25,7 @@ build: ## Build the container image - Production
 	docker build -t ${APP_NAME}\
 		-f Dockerfile.prod .
 
-build-dev: ## Build the container image - Dvelopment
+build-dev: ## Build the container image - Development
 	docker build -t ${APP_NAME}\
 		-f Dockerfile.dev .
 
