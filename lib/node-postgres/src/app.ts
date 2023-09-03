@@ -44,8 +44,8 @@ export class App {
     return this.app;
   }
 
-  private connectToDatabase() {
-    client.connect();
+  private async connectToDatabase() {
+    await client.connect();
   }
 
   private initializeMiddlewares() {

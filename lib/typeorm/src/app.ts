@@ -8,7 +8,6 @@ import morgan from 'morgan';
 import compression from 'compression';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import { createConnection } from 'typeorm';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { dbConnection } from '@database';
 import { Routes } from '@interfaces/routes.interface';
@@ -46,7 +45,7 @@ export class App {
   }
 
   private async connectToDatabase() {
-    await createConnection(dbConnection)
+    await dbConnection();
   }
 
   private initializeMiddlewares() {

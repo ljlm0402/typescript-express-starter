@@ -105,3 +105,6 @@ dist
 
 # Package-lock json file
 package-lock.json
+
+# VScode file
+.vscode

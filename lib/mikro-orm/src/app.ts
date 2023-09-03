@@ -53,8 +53,9 @@ export class App {
       DI.userRepository = DI.orm.em.getRepository(UserEntity);
     } catch (error) {
       logger.error(error);
+    } finally {
+      this.app.use((_1, _2, next) => RequestContext.create(DI.orm.em, next));
     }
-    this.app.use((_1, _2, next) => RequestContext.create(DI.orm.em, next));
   }
 
   private initializeMiddlewares() {

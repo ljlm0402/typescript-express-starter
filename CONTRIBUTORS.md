@@ -60,4 +60,10 @@
 
 - coder-palak [https://github.com/coder-palak](https://github.com/coder-palak)
 
+- H2RO [https://github.com/primary-1](https://github.com/primary-1)
+
+- Emmanuel Yeboah [https://github.com/noelzappy](https://github.com/noelzappy)
+
+- Jonathan Felicity [https://github.com/jonathanfelicity](https://github.com/jonathanfelicity)
+
 - Hichem Fantar [https://github.com/hichemfantar](https://github.com/hichemfantar)
