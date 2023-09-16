@@ -20,11 +20,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DB_USER: root
-      DB_PASSWORD: password
-      DB_HOST: pg
-      DB_PORT: 5432
-      DB_DATABASE: dev
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_HOST: pg
+      POSTGRES_PORT: 5432
+      POSTGRES_DATABASE: dev
     volumes:
       - ./:/app
       - /app/node_modules
@@ -40,9 +40,9 @@ services:
     container_name: pg
     image: postgres:14.5-alpine
     environment:
-      DB_USER: root
-      DB_PASSWORD: password
-      DB_DATABASE: dev
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dev
     ports:
       - "5432:5432"
     networks:

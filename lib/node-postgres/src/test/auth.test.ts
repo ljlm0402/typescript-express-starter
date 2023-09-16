@@ -1,15 +1,17 @@
 import request from 'supertest';
 import { App } from '@/app';
+import pg from '@database';
 import { CreateUserDto } from '@dtos/users.dto';
 import { AuthRoute } from '@routes/auth.route';
 
 afterAll(async () => {
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
+  pg.end();
 });
 
 describe('Testing Auth', () => {
   describe('[POST] /signup', () => {
-    it('response should have the Create userData', () => {
+    it('response should have the Create userData', async () => {
       const userData: CreateUserDto = {
         email: 'example@email.com',
         password: 'password',
@@ -17,7 +19,10 @@ describe('Testing Auth', () => {
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
-      return request(app.getServer()).post('/signup').send(userData);
+      return await request(app.getServer())
+      .post('/signup')
+      .send(userData)
+      .expect(201);
     });
   });
 
@@ -31,7 +36,7 @@ describe('Testing Auth', () => {
       const authRoute = new AuthRoute();
       const app = new App([authRoute]);
 
-      return request(app.getServer())
+      return await request(app.getServer())
         .post('/login')
         .send(userData)
         .expect('Set-Cookie', /^Authorization=.+/);

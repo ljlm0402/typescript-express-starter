@@ -1,15 +1,15 @@
 import { join } from 'path';
 import { createConnection, ConnectionOptions } from 'typeorm';
-import { DB_USER, DB_PASSWORD, DB_HOST, DB_PORT, DB_DATABASE } from '@config';
+import { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_PORT, POSTGRES_DATABASE } from '@config';
 
 export const dbConnection = async () => {
   const dbConfig: ConnectionOptions = {
     type: 'postgres',
-    username: DB_USER,
-    password: DB_PASSWORD,
-    host: DB_HOST,
-    port: Number(DB_PORT),
-    database: DB_DATABASE,
+    username: POSTGRES_USER,
+    password: POSTGRES_PASSWORD,
+    host: POSTGRES_HOST,
+    port: +POSTGRES_PORT,
+    database: POSTGRES_DATABASE,
     synchronize: true,
     logging: false,
     entities: [join(__dirname, '../**/*.entity{.ts,.js}')],
