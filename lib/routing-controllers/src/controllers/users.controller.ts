@@ -27,7 +27,7 @@ export class UserController {
 
   @Post('/users')
   @HttpCode(201)
-  @UseBefore(ValidationMiddleware(CreateUserDto, 'body'))
+  @UseBefore(ValidationMiddleware(CreateUserDto))
   @OpenAPI({ summary: 'Create a new user' })
   async createUser(@Body() userData: User) {
     const createUserData: User = await this.user.createUser(userData);
@@ -35,7 +35,7 @@ export class UserController {
   }
 
   @Put('/users/:id')
-  @UseBefore(ValidationMiddleware(CreateUserDto, 'body', true))
+  @UseBefore(ValidationMiddleware(CreateUserDto, true))
   @OpenAPI({ summary: 'Update a user' })
   async updateUser(@Param('id') userId: number, @Body() userData: User) {
     const updateUserData: User[] = await this.user.updateUser(userId, userData);
