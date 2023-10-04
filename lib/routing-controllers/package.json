@@ -10,7 +10,7 @@
     "build": "swc src -d dist --source-maps --copy-files",
     "build:tsc": "tsc && tsc-alias",
     "test": "jest --forceExit --detectOpenHandles",
-    "lint": "eslint --ignore-path .gitignore --ext .ts src/",
+    "lint": "eslint --ignore-path .gitignore --ext .ts src",
     "lint:fix": "npm run lint -- --fix",
     "deploy:prod": "npm run build && pm2 start ecosystem.config.js --only prod",
     "deploy:dev": "pm2 start ecosystem.config.js --only dev"

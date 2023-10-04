@@ -13,7 +13,7 @@ export class AuthController {
   public auth = Container.get(AuthService);
 
   @Post('/signup')
-  @UseBefore(ValidationMiddleware(CreateUserDto, 'body'))
+  @UseBefore(ValidationMiddleware(CreateUserDto))
   @HttpCode(201)
   async signUp(@Body() userData: User) {
     const signUpUserData: User = await this.auth.signup(userData);
@@ -21,7 +21,7 @@ export class AuthController {
   }
 
   @Post('/login')
-  @UseBefore(ValidationMiddleware(CreateUserDto, 'body'))
+  @UseBefore(ValidationMiddleware(CreateUserDto))
   async logIn(@Res() res: Response, @Body() userData: User) {
     const { cookie, findUser } = await this.auth.login(userData);
 
