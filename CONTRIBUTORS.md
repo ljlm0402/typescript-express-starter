@@ -67,3 +67,5 @@
 - Jonathan Felicity [https://github.com/jonathanfelicity](https://github.com/jonathanfelicity)
 
 - Hichem Fantar [https://github.com/hichemfantar](https://github.com/hichemfantar)
+
+- Gabriel Ignat [https://github.com/ignat](https://github.com/ignatg)
