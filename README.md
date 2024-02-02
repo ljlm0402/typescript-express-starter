@@ -355,7 +355,7 @@ Modify `Makefile` file to your source code.
 
 ## 📬 Please request an issue
 
-Please leave a question or question as an issue.
+Please leave a question or any questions as an issue.
 
 I will do my best to answer and reflect.
 
