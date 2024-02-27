@@ -1,6 +1,6 @@
 import { Knex } from 'knex';
 
-const up = (knex: Knex): Promise<void> => {
+export const up = (knex: Knex): Promise<void> => {
   return knex.schema.createTable('users', table => {
     table.bigIncrements('id').unsigned().primary();
     table.string('email', 45).notNullable();
@@ -10,8 +10,6 @@ const up = (knex: Knex): Promise<void> => {
   });
 };
 
-const down = (knex: Knex): Promise<void> => {
+export const down = (knex: Knex): Promise<void> => {
   return knex.schema.dropTable('users');
 };
-
-export default { up, down };
