@@ -41,6 +41,9 @@ importers:
       recast:
         specifier: ^0.23.11
         version: 0.23.11
+      ts-morph:
+        specifier: ^26.0.0
+        version: 26.0.0
     devDependencies:
       '@babel/parser':
         specifier: ^7.28.5
@@ -54,9 +57,6 @@ importers:
       prettier:
         specifier: ^3.7.4
         version: 3.7.4
-      ts-morph:
-        specifier: ^26.0.0
-        version: 26.0.0
 
 packages:
 
