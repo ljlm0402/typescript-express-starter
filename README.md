@@ -94,11 +94,41 @@ npm install -g typescript-express-starter
 # Run the interactive CLI
 typescript-express-starter
 
-# Follow the prompts to:
-# 1. Choose package manager (npm/pnpm/yarn)
-# 2. Select project template (default/prisma/sequelize/etc.)
-# 3. Enter project name
-# 4. Pick development tools (linting/testing/docker/etc.)
+┌  📘 TypeScript Express Starter
+│
+◆  Which package manager do you want to use?
+│  ● npm
+│  ○ pnpm
+│  ○ yarn
+│
+◆  Choose a template:
+│  ● Express TypeScript (Basic Express + TypeScript starter)
+│
+◆  Enter your project name:
+│  your-project-name
+│
+◆  Select a tool for "Linter":
+│  ● None
+│  ○ Biome
+│  ○ ESLint & Prettier
+│  ○ Oxlint
+│
+◆  Select a tool for "Compiler":
+│  ● None
+│  ○ tsup
+│  ○ SWC
+│
+◆  Select a tool for "Testing":
+│  ● None
+│  ○ Jest
+│  ○ Vitest
+│
+✔ 📦 Base dependencies installed!
+│
+◆  Initialize git and make first commit?
+│  ● Yes / ○ No
+│
+└ 🎉 Project setup complete!
 
 # Navigate to your project
 cd your-project-name
@@ -108,10 +138,9 @@ npm run dev
 ```
 
 **Generated Project Features:**
+
 - 🌐 Express server: `http://localhost:3000/`
-- 📚 Auto-generated API docs: `http://localhost:3000/api-docs`
 - 🔄 Hot reload with nodemon
-- 🧪 Testing setup included
 
 ## 📂 Generated Project Structure
 
@@ -123,7 +152,7 @@ your-project/
 │   ├── config/           # Configuration files, environment settings
 │   ├── controllers/      # Request handling & response logic
 │   ├── dtos/             # Data Transfer Objects for request/response
-│   ├── entities/         # Database entities/models (if ORM selected)
+│   ├── entities/         # Database entities (if using ORM)
 │   ├── exceptions/       # Custom exception classes
 │   ├── interfaces/       # TypeScript interfaces and type definitions
 │   ├── middlewares/      # Middlewares (logging, auth, error handling)
@@ -133,27 +162,34 @@ your-project/
 │   ├── utils/            # Utility/helper functions
 │   ├── app.ts            # Express app initialization
 │   └── server.ts         # Server entry point
-├── .env*                 # Environment variables (multiple stages)
-├── nodemon.json          # Development server configuration
-├── package.json          # Dependencies and scripts
-├── tsconfig.json         # TypeScript configuration
-└── docker-compose.yml    # Docker setup (if selected)
+├── .env                   # Environment variables file
+├── .env.development.local # Development environment variables
+├── .env.production.local  # Production environment variables
+├── .env.test.local        # Test environment variables
+├── nodemon.json           # Nodemon configuration
+├── package.json           # Project dependencies and scripts
+└── tsconfig.json          # TypeScript configuration
 ```
 
 ## 🛠 Development Tools Available
 
 Choose from these categories during project setup:
 
-| Category      | Available Tools          | Description                                     |
-| ------------- | ------------------------ | ----------------------------------------------- |
-| **Linter**    | `biome`, `eslint`        | Code formatting & linting (Biome is all-in-one) |
-| **Bundler**   | `swc`, `tsup`           | Fast TypeScript compilation and bundling       |
-| **Testing**   | `jest`, `vitest`        | Unit & integration testing frameworks          |
-| **Process**   | `pm2`                   | Production process management                   |
-| **CI/CD**     | `github`                | GitHub Actions workflows                        |
-| **Git Hooks** | `husky`                 | Pre-commit hooks for quality control           |
-| **Container** | `docker`                | Docker & docker-compose configuration          |
-| **API Docs**  | `swagger`               | OpenAPI/Swagger documentation                  |
+| Category    | Available Tools   | Description                                     |
+| ----------- | ----------------- | ----------------------------------------------- |
+| **Linter**  | `biome`, `eslint` | Code formatting & linting (Biome is all-in-one) |
+| **Bundler** | `swc`, `tsup`     | Fast TypeScript compilation and bundling        |
+| **Testing** | `jest`, `vitest`  | Unit & integration testing frameworks           |
+
+### To be added later (currently in progress):
+
+| Category      | Available Tools | Description                           |
+| ------------- | --------------- | ------------------------------------- |
+| **Process**   | `pm2`           | Production process management         |
+| **CI/CD**     | `github`        | GitHub Actions workflows              |
+| **Git Hooks** | `husky`         | Pre-commit hooks for quality control  |
+| **Container** | `docker`        | Docker & docker-compose configuration |
+| **API Docs**  | `swagger`       | OpenAPI/Swagger documentation         |
 
 **Smart Selection**: The CLI automatically resolves tool dependencies and compatibility.
 
@@ -162,54 +198,55 @@ Choose from these categories during project setup:
 Current template status (more coming soon!):
 
 ### ✅ **Currently Available**
-| Template   | Description                    | Status |
-| ---------- | ------------------------------ | ------ |
-| `default`  | Express + TypeScript starter   | ✅ Active |
+
+| Template  | Description                  | Status    |
+| --------- | ---------------------------- | --------- |
+| `default` | Express + TypeScript starter | ✅ Active |
 
 ### 🚧 **Coming Soon**
 
 #### **ORM/Database Integration**
-| Template           | Description                    | Priority |
-| ------------------ | ------------------------------ | -------- |
-| `prisma`           | Type-safe database client with auto-generated types         | 🔥 High  |
-| `drizzle`          | TypeScript-first ORM with zero runtime overhead              | 🔥 High  |
-| `mikro-orm`        | Data Mapper ORM pattern for TypeScript           | 🔥 High  |
-| `mongoose`         | Elegant MongoDB ODM for Node.js         | 🔥 High  |
-| `node-postgres`    | High-performance PostgreSQL native driver      | 🚧 In Dev |
-| `knex`             | Flexible SQL query builder & migrations      | 🚧 In Dev |
-| `typeorm`          | Decorator-based Active Record ORM            | 🚧 In Dev |
-| `sequelize`        | Mature Promise-based SQL ORM                  | 🚧 In Dev |
-| `typegoose`        | TypeScript-friendly Mongoose alternative            | 🚧 In Dev |
+
+| Template        | Description                                         | Priority       |
+| --------------- | --------------------------------------------------- | -------------- |
+| `prisma`        | Type-safe database client with auto-generated types | 🔥 In progress |
+| `drizzle`       | TypeScript-first ORM with zero runtime overhead     | 🔥 In progress |
+| `mongoose`      | Elegant MongoDB ODM for Node.js                     | 🔥 In progress |
+| `mikro-orm`     | Data Mapper ORM pattern for TypeScript              | 🚧 Knowledge   |
+| `node-postgres` | High-performance PostgreSQL native driver           | 🚧 Knowledge   |
+| `knex`          | Flexible SQL query builder & migrations             | 🚧 Knowledge   |
+| `typeorm`       | Decorator-based Active Record ORM                   | 🚧 Knowledge   |
+| `sequelize`     | Mature Promise-based SQL ORM                        | 🚧 Knowledge   |
+| `typegoose`     | TypeScript-friendly Mongoose alternative            | 🚧 Knowledge   |
 
 #### **Architecture/Controller Style**
-| Template           | Description                    | Priority |
-| ------------------ | ------------------------------ | -------- |
-| `graphql`          | GraphQL API schema with Apollo Server        | 🚧 In Dev |
+
+| Template  | Description                           | Priority     |
+| --------- | ------------------------------------- | ------------ |
+| `graphql` | GraphQL API schema with Apollo Server | 🚧 Knowledge |
 
 > **Note**: Currently focusing on the `default` template. Additional templates will be activated as they're completed and tested.
 
 ## 🤔 Why Use This CLI?
 
 ### vs. Manual Setup
-| Aspect           | Manual Setup                      | TypeScript Express Starter CLI        |
-| ---------------- | --------------------------------- | ------------------------------------- |
-| **Time**         | 🔴 Hours of configuration          | ✅ 2-3 minutes interactive setup      |
-| **Configuration** | 🔴 Manual dependency management    | ✅ Auto-resolved, compatible versions  |
+
+| Aspect             | Manual Setup                    | TypeScript Express Starter CLI        |
+| ------------------ | ------------------------------- | ------------------------------------- |
+| **Time**           | 🔴 Hours of configuration       | ✅ 2-3 minutes interactive setup      |
+| **Configuration**  | 🔴 Manual dependency management | ✅ Auto-resolved, compatible versions |
 | **Best Practices** | 🔴 Research required            | ✅ Pre-configured industry standards  |
-| **Consistency**  | 🔴 Varies by developer           | ✅ Standardized project structure     |
-| **Updates**      | 🔴 Manual maintenance             | ✅ CLI updates bring new features     |
+| **Consistency**    | 🔴 Varies by developer          | ✅ Standardized project structure     |
+| **Updates**        | 🔴 Manual maintenance           | ✅ CLI updates bring new features     |
 
 ### vs. Other Generators
-| Feature          | TypeScript Express Starter | Other Generators |
-| ---------------- | -------------------------- | ---------------- |
-| **Database Choice** | ✅ 10+ options planned       | Limited options  |
-| **Tool Selection**  | ✅ Mix & match dev tools    | Fixed stack      |
+
+| Feature              | TypeScript Express Starter | Other Generators |
+| -------------------- | -------------------------- | ---------------- |
+| **Database Choice**  | ✅ 10+ options planned     | Limited options  |
+| **Tool Selection**   | ✅ Mix & match dev tools   | Fixed stack      |
 | **TypeScript First** | ✅ Built for TypeScript    | Often JS-first   |
 | **Production Ready** | ✅ Docker, PM2 included    | Basic setup      |
-
-## 📄 License
-
-MIT(LICENSE) © AGUMON (ljlm0402)
 
 ## ⭐️ Stargazers
 
@@ -222,3 +259,13 @@ MIT(LICENSE) © AGUMON (ljlm0402)
 ## 🤝 Contributors
 
 [![Contributors repo roster for @ljlm0402/typescript-express-starter](https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/graphs/contributors)
+
+## 💳 License
+
+[MIT](LICENSE)
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/ljlm0402">AGUMON</a> 🦖
+</p>

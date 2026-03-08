@@ -1,0 +1,133 @@
+# ===========================================
+# {{TEMPLATE_NAME}} Template - Development Environment
+# 표준화된 Docker Compose 설정
+# ===========================================
+
+version: '3.8'
+
+services:
+  # 메인 애플리케이션 서비스
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-app-dev
+    ports:
+      - '${PORT:-{{DEFAULT_PORT}}}:{{DEFAULT_PORT}}'
+    volumes:
+      # 소스 코드 핫 리로드
+      - .:/app
+      - /app/node_modules
+      # 로그 디렉토리 영속화
+      - ./logs:/app/logs
+    environment:
+{{#each ENVIRONMENT}}
+      - {{@key}}={{this}}
+{{/each}}
+    depends_on:
+      {{DATABASE_SERVICE}}:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:{{DEFAULT_PORT}}/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+{{#if DATABASE_CONFIG}}
+  # {{DATABASE_CONFIG.type}} 데이터베이스
+  {{DATABASE_CONFIG.service}}:
+    image: {{DATABASE_CONFIG.image}}
+    container_name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-{{DATABASE_CONFIG.service}}-dev
+    environment:
+{{#each DATABASE_CONFIG.environment}}
+      - {{@key}}={{this}}
+{{/each}}
+    ports:
+      - '${DB_PORT:-{{DATABASE_CONFIG.defaultPort}}}:{{DATABASE_CONFIG.defaultPort}}'
+    volumes:
+{{#each DATABASE_CONFIG.volumes}}
+      - {{this}}
+{{/each}}
+      - ./docker/{{DATABASE_CONFIG.service}}/init:/docker-entrypoint-initdb.d
+    healthcheck:
+{{#each DATABASE_CONFIG.healthCheck.test}}
+      test: {{this}}
+{{/each}}
+      interval: {{DATABASE_CONFIG.healthCheck.interval}}
+      timeout: {{DATABASE_CONFIG.healthCheck.timeout}}
+      retries: {{DATABASE_CONFIG.healthCheck.retries}}
+    restart: unless-stopped
+    networks:
+      - app-network
+{{/if}}
+
+{{#if ADMIN_TOOL}}
+  # {{ADMIN_TOOL.service}} (선택사항 - 데이터베이스 관리)
+  {{ADMIN_TOOL.service}}:
+    image: {{ADMIN_TOOL.image}}
+    container_name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-{{ADMIN_TOOL.service}}
+    profiles:
+{{#each ADMIN_TOOL.profiles}}
+      - {{this}} # docker-compose --profile {{this}} up 으로 실행
+{{/each}}
+    environment:
+{{#each ADMIN_TOOL.environment}}
+      - {{@key}}={{this}}
+{{/each}}
+    ports:
+      - '${{{ADMIN_TOOL.service|upper}}_PORT:-{{ADMIN_TOOL.port}}}:{{ADMIN_TOOL.defaultPort}}'
+{{#if ADMIN_TOOL.volumes}}
+    volumes:
+{{#each ADMIN_TOOL.volumes}}
+      - {{this}}
+{{/each}}
+{{/if}}
+    depends_on:
+      {{DATABASE_SERVICE}}:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+{{/if}}
+
+{{#if CACHE_SERVICE}}
+  # Redis (선택사항 - 캐싱/세션)
+  {{CACHE_SERVICE.service}}:
+    image: {{CACHE_SERVICE.image}}
+    container_name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-{{CACHE_SERVICE.service}}
+    profiles:
+{{#each CACHE_SERVICE.profiles}}
+      - {{this}}
+{{/each}}
+    ports:
+      - '${REDIS_PORT:-{{CACHE_SERVICE.defaultPort}}}:{{CACHE_SERVICE.defaultPort}}'
+    restart: unless-stopped
+    networks:
+      - app-network
+{{/if}}
+
+networks:
+  app-network:
+    driver: bridge
+    name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-network
+
+volumes:
+{{#if DATABASE_CONFIG}}
+  {{DATABASE_CONFIG.service}}_data:
+    name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-{{DATABASE_CONFIG.service}}-dev-data
+{{/if}}
+{{#if ADMIN_TOOL.volumes}}
+{{#each ADMIN_TOOL.volumeNames}}
+  {{this}}:
+    name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-{{this}}
+{{/each}}
+{{/if}}
+{{#if CACHE_SERVICE.volumes}}
+{{#each CACHE_SERVICE.volumes}}
+  {{this}}:
+    name: ${COMPOSE_PROJECT_NAME:-{{CONTAINER_NAME}}}-{{this}}
+{{/each}}
+{{/if}}

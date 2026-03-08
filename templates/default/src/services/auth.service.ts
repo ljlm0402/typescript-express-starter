@@ -6,6 +6,7 @@ import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { User, type UserCreateData } from '@entities/user.entity';
 import { UsersRepository } from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';
+import { logger } from '@utils/logger';
 
 @injectable()
 export class AuthService {
@@ -60,7 +61,7 @@ export class AuthService {
   public async logout(user: User): Promise<void> {
     // 로그아웃은 실제 서비스에서는 서버에서 세션/리프레시토큰을 블랙리스트 처리 등 구현 가능
     // 여기서는 클라이언트의 쿠키를 삭제하면 충분
-    console.log(`User with email ${user.email} logged out.`);
+    logger.info(`User with email ${user.email} logged out.`);
 
     return;
   }

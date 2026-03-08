@@ -1,0 +1,89 @@
+# ===========================================
+# TypeScript Express Template - {{TEMPLATE_NAME}}
+# 프로덕션 환경용 Dockerfile (Multi-stage build)
+# ===========================================
+
+# Build stage
+FROM node:{{NODE_VERSION}}-alpine AS builder
+
+WORKDIR /app
+
+# 패키지 파일 복사
+COPY package*.json ./
+{{#if PNPM_LOCK}}
+COPY pnpm-lock.yaml ./
+{{/if}}
+
+# 의존성 설치 (개발 의존성 포함)
+{{#if PNPM_LOCK}}
+RUN corepack enable pnpm && pnpm install --frozen-lockfile
+{{else}}
+RUN npm ci
+{{/if}}
+
+# 소스 코드 복사
+COPY . .
+
+{{#if ORM_BUILD_SETUP}}
+# {{ORM_NAME}} 빌드 설정
+{{ORM_BUILD_SETUP}}
+{{/if}}
+
+# 애플리케이션 빌드
+RUN {{BUILD_COMMAND}}
+
+# Production stage
+FROM node:{{NODE_VERSION}}-alpine AS production
+
+# 보안을 위한 시스템 업데이트
+RUN apk update && apk upgrade && apk add --no-cache dumb-init tzdata
+
+# 시간대 설정
+ENV TZ=Asia/Seoul
+
+# 비루트 사용자 생성
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nodejs -u 1001
+
+WORKDIR /app
+
+# 패키지 파일 복사
+COPY package*.json ./
+{{#if PNPM_LOCK}}
+COPY pnpm-lock.yaml ./
+{{/if}}
+
+# 프로덕션 의존성만 설치
+{{#if PNPM_LOCK}}
+RUN corepack enable pnpm && pnpm install --prod --frozen-lockfile && pnpm store prune
+{{else}}
+RUN npm ci --only=production && npm cache clean --force
+{{/if}}
+
+# 빌드된 애플리케이션 복사
+COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
+
+{{#if ORM_PROD_SETUP}}
+# {{ORM_NAME}} 프로덕션 설정
+{{ORM_PROD_SETUP}}
+{{/if}}
+
+# 로그 디렉토리 생성
+RUN mkdir -p logs && chown -R nodejs:nodejs logs
+
+# 프로덕션 환경변수
+ENV NODE_ENV=production
+ENV PORT={{DEFAULT_PORT}}
+
+# 헬스 체크
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:{{DEFAULT_PORT}}/health || exit 1
+
+# 비루트 사용자로 전환
+USER nodejs
+
+# 애플리케이션 포트 노출
+EXPOSE {{DEFAULT_PORT}}
+
+# 프로덕션 서버 시작
+CMD ["dumb-init", "node", "dist/server.js"]

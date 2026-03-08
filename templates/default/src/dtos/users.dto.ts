@@ -6,14 +6,14 @@ export const emailSchema = z
   .min(1, { message: 'Email is required' })
   .max(254, { message: 'Email is too long (max 254 characters)' })
   .email({ message: 'Invalid email format' })
-  .transform((email) => email.toLowerCase().trim());
+  .transform(email => email.toLowerCase().trim());
 
 // 비밀번호 스키마 - Entity의 검증 규칙과 일치
 export const passwordSchema = z
   .string()
   .min(8, { message: 'Password must be at least 8 characters long' })
   .max(128, { message: 'Password is too long (max 128 characters)' })
-  .refine((password) => /\d/.test(password) && /[a-zA-Z]/.test(password), {
+  .refine(password => /\d/.test(password) && /[a-zA-Z]/.test(password), {
     message: 'Password must contain at least one letter and one number',
   });
 

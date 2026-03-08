@@ -20,6 +20,7 @@ import path from 'path';
 // Config and constants
 import { CONFIG, getEnvironmentConfig } from './config.js';
 import { PACKAGE_MANAGER, TEMPLATES_VALUES, DEVTOOLS_VALUES } from './common.js';
+import { getBenchmarkInfo } from './presets.js';
 
 // Database configuration
 import { TEMPLATE_DB, generateDockerCompose } from './db-map.js';
@@ -33,6 +34,7 @@ import {
   validateProjectPath,
   sanitizeInput,
   validateNodeVersion,
+  validateAllTemplates,
 } from './validators.js';
 
 // Performance optimizations
@@ -109,12 +111,28 @@ function resolveDependencies(selected) {
 
 // 파일 복사
 async function copyDevtoolFiles(devtool, destDir) {
+  // 도구 카테고리에 따른 경로 매핑
+  const categoryPathMap = {
+    Linter: 'core',
+    Compiler: 'build',
+    Testing: 'test',
+    'API development': 'api',
+    Infrastructure: 'infrastructure',
+    'Git Tools': 'core',
+    Deployment: 'core',
+  };
+
+  const categoryPath = categoryPathMap[devtool.category] || '';
+
   for (const file of devtool.files) {
-    const src = path.join(CONFIG.paths.devtools, devtool.value, file);
+    const src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, file);
     const dst = path.join(destDir, file);
+
     if (await fs.pathExists(src)) {
       await fs.copy(src, dst, { overwrite: true });
-      console.log(chalk.gray(`  ⎯ ${file} copied.`));
+      console.log(chalk.gray(`  ‗ ${file} copied.`));
+    } else {
+      console.log(chalk.yellow(`  ⚠️ ${file} not found at ${src}`));
     }
   }
 }
@@ -185,7 +203,31 @@ async function main() {
   // 1. Node 버전 체크
   validateNodeVersion(CONFIG.minNodeVersion);
 
-  // 2. CLI 최신버전 안내
+  // 2. 템플릿 무결성 검증
+  try {
+    const templateResults = validateAllTemplates();
+    const violations = Object.entries(templateResults).filter(([_, result]) => !result.valid);
+
+    if (violations.length > 0) {
+      const violationList = violations
+        .map(([name, result]) => `${name}: ${result.violations.join(', ')}`)
+        .join('\n');
+
+      throw new CLIError(
+        `Template integrity violations found:\n${violationList}`,
+        'template-integrity',
+        'Run "node bin/validate-templates.js" to fix these issues',
+      );
+    }
+  } catch (error) {
+    if (error instanceof CLIError) {
+      throw error;
+    }
+    // Other validation errors are non-critical, just log them
+    console.warn(chalk.yellow('⚠️  Template validation warning:'), error.message);
+  }
+
+  // 3. CLI 최신버전 안내
   await checkForUpdate();
 
   const config = getEnvironmentConfig();
@@ -214,9 +256,9 @@ async function main() {
 
   const options = TEMPLATES_VALUES.filter((t) => t.active && templateDirs.includes(t.value)).map(
     (t) => ({
-      label: t.name, // UI에 표시될 이름
+      label: t.name, // UI에 표시될 이름 (✅ 포함)
       value: t.value, // 선택 값
-      hint: t.desc, // 오른쪽에 표시될 설명
+      hint: t.desc, // 설명
     }),
   );
 
@@ -255,7 +297,8 @@ async function main() {
     } else break;
   }
 
-  // 6. 개발 도구 옵션 선택 (category 기준으로 그룹화)
+  // 6. 개발 도구 카테고리별 선택
+  let devtoolValues = [];
   const groupedDevtools = DEVTOOLS_VALUES.reduce((acc, tool) => {
     const cat = tool.category || 'Others';
     if (!acc[cat]) acc[cat] = [];
@@ -263,16 +306,15 @@ async function main() {
     return acc;
   }, {});
 
-  // 6-1. 개발 도구 옵션 선택 (category별 하나씩만 선택하는 방식)
-  let devtoolValues = [];
   for (const [category, tools] of Object.entries(groupedDevtools)) {
     const picked = await select({
       message: `Select a tool for "${category}":`,
       options: [
         { label: 'None', value: null },
         ...tools.map(({ name, value, desc }) => ({
-          label: `${name} (${desc})`,
+          label: `${name}`,
           value,
+          hint: `${desc} ${getBenchmarkInfo({ value }, template)}`,
         })),
       ],
       initialValue: null,
@@ -296,6 +338,8 @@ async function main() {
   }
 
   // [1-1] Testing 도구를 선택한 경우에만 /src/test 예제 복사
+  // 주석: 이제 files 배열에 'src/test'가 포함되어 copyDevtoolFiles에서 자동 처리됨
+  /*
   const testDevtool = devtoolValues
     .map((val) => DEVTOOLS_VALUES.find((d) => d.value === val))
     .find((tool) => tool && tool.category === 'Testing');
@@ -308,6 +352,7 @@ async function main() {
       console.log(chalk.gray(`  ⎯ test files for ${testDevtool.name} copied.`));
     }
   }
+  */
 
   // [2] 개발 도구 파일/패키지/스크립트/코드패치
   for (const val of devtoolValues) {
@@ -323,6 +368,16 @@ async function main() {
 
     // [2-2] 개발 도구 - 스크립트 추가 등
     if (Object.keys(tool.scripts).length) await updatePackageJson(tool.scripts, destDir);
+
+    // [2-2-1] 개발 도구 - postInstall 함수 실행 (Jest 타입 설정 등)
+    if (tool.postInstall && typeof tool.postInstall === 'function') {
+      try {
+        tool.postInstall(destDir);
+        console.log(chalk.gray(`  ⎯ ${tool.name} postInstall completed.`));
+      } catch (error) {
+        console.log(chalk.yellow(`  ⚠️ ${tool.name} postInstall warning:`, error.message));
+      }
+    }
 
     // [2-3] 개발 도구 - Docker 선택 한 경우, docker-compose.yml 생성
     if (tool.value === 'docker') await generateCompose(template, destDir);

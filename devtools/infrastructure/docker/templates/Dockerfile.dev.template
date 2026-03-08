@@ -1,0 +1,48 @@
+# ===========================================
+# TypeScript Express Template - {{TEMPLATE_NAME}}
+# 개발 환경용 Dockerfile
+# ===========================================
+
+FROM node:{{NODE_VERSION}}-alpine
+
+# 개발용 도구 설치
+RUN apk add --no-cache curl git tzdata
+
+# 시간대 설정
+ENV TZ=Asia/Seoul
+
+WORKDIR /app
+
+# 패키지 설치
+COPY package*.json ./
+{{#if PNPM_LOCK}}
+RUN corepack enable pnpm && pnpm install
+{{else}}
+RUN npm install
+{{/if}}
+
+# 개발용 환경변수 설정
+ENV NODE_ENV=development
+ENV LOG_LEVEL=debug
+ENV PORT={{DEFAULT_PORT}}
+
+# 소스 코드 복사
+COPY . .
+
+{{#if ORM_SETUP}}
+# {{ORM_NAME}} 설정
+{{ORM_SETUP}}
+{{/if}}
+
+# 로그 디렉토리 생성
+RUN mkdir -p logs
+
+# 헬스 체크
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:{{DEFAULT_PORT}}/health || exit 1
+
+# 애플리케이션 포트 노출
+EXPOSE {{DEFAULT_PORT}}
+
+# 개발 서버 시작
+CMD ["{{START_COMMAND}}"]

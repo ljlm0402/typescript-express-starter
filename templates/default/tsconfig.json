@@ -8,7 +8,6 @@
     "sourceMap": true,
     "strict": true,
     "lib": ["es2020", "esnext.asynciterable"],
-
     "baseUrl": "src",
     "paths": {
       "@/*": ["*"],
@@ -24,7 +23,6 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"]
     },
-
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
@@ -34,8 +32,13 @@
     "emitDecoratorMetadata": true,
     "pretty": true,
     "allowJs": false,
-    "noEmit": false
+    "noEmit": false,
+    "skipLibCheck": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "types": ["node", "jest"]
   },
   "include": ["src/**/*.ts", "src/**/*.json"],
-  "exclude": ["node_modules", "dist", "coverage", "logs", "src/http"]
+  "exclude": ["node_modules", "dist", "coverage", "logs", "src/http", "**/unit_disabled/**"]
 }

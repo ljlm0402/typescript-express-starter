@@ -55,7 +55,7 @@ class App {
         limit: this.env === 'production' ? 100 : 1000,
         standardHeaders: true,
         legacyHeaders: false,
-        skip: (req) =>
+        skip: req =>
           this.env !== 'production' ||
           ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.ip ?? ''),
       }),
@@ -104,7 +104,7 @@ class App {
   }
 
   private initializeRoutes(routes: Routes[], apiPrefix: string) {
-    routes.forEach((route) => {
+    routes.forEach(route => {
       this.app.use(apiPrefix, route.router);
     });
   }

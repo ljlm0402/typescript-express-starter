@@ -77,11 +77,41 @@ npm install -g typescript-express-starter
 # 대화형 CLI 실행
 typescript-express-starter
 
-# 프롬프트에 따라 다음을 선택:
-# 1. 패키지 매니저 선택 (npm/pnpm/yarn)
-# 2. 프로젝트 템플릿 선택 (default/prisma/sequelize/등)
-# 3. 프로젝트 이름 입력
-# 4. 개발 도구 선택 (린팅/테스트/도커/등)
+┌  📘 TypeScript Express Starter
+│
+◆  Which package manager do you want to use?
+│  ● npm
+│  ○ pnpm
+│  ○ yarn
+│
+◆  Choose a template:
+│  ● Express TypeScript (Basic Express + TypeScript starter)
+│
+◆  Enter your project name:
+│  your-project-name
+│
+◆  Select a tool for "Linter":
+│  ● None
+│  ○ Biome
+│  ○ ESLint & Prettier
+│  ○ Oxlint
+│
+◆  Select a tool for "Compiler":
+│  ● None
+│  ○ tsup
+│  ○ SWC
+│
+◆  Select a tool for "Testing":
+│  ● None
+│  ○ Jest
+│  ○ Vitest
+│
+✔ 📦 Base dependencies installed!
+│
+◆  Initialize git and make first commit?
+│  ● Yes / ○ No
+│
+└ 🎉 Project setup complete!
 
 # 프로젝트로 이동
 cd your-project-name
@@ -91,51 +121,57 @@ npm run dev
 ```
 
 **생성된 프로젝트 기능:**
+
 - 🌐 Express 서버: `http://localhost:3000/`
-- 📚 자동 생성된 API 문서: `http://localhost:3000/api-docs`
 - 🔄 nodemon을 통한 핫 리로드
-- 🧪 테스트 설정 포함
 
 ## 📂 프로젝트 구조
 
 ```bash
-src/
- ├── config/           # 환경 변수, 설정 파일
- ├── controllers/      # 요청 처리 및 응답 반환
- ├── dtos/             # 요청/응답 데이터 구조 정의
- ├── exceptions/       # 커스텀 예외 클래스
- ├── interfaces/       # 타입/인터페이스 정의
- ├── middlewares/      # 미들웨어 (로그, 인증, 에러 처리 등)
- ├── repositories/     # 데이터베이스 접근 로직
- ├── routes/           # 라우팅 정의
- ├── services/         # 비즈니스 로직
- ├── utils/            # 유틸리티 함수
- ├── app.ts            # Express 앱 초기화
- └── server.ts         # 서버 실행 엔트리 포인트
+your-project/
+├── src/
+│   ├── config/           # 환경 변수, 설정 파일
+│   ├── controllers/      # 요청 처리 및 응답 반환
+│   ├── dtos/             # 요청/응답 데이터 구조 정의
+│   ├── entities/         # 데이터베이스 엔티티 정의 (ORM 사용 시)
+│   ├── exceptions/       # 커스텀 예외 클래스
+│   ├── interfaces/       # 타입/인터페이스 정의
+│   ├── middlewares/      # 미들웨어 (로그, 인증, 에러 처리 등)
+│   ├── repositories/     # 데이터베이스 접근 로직
+│   ├── routes/           # 라우팅 정의
+│   ├── services/         # 비즈니스 로직
+│   ├── utils/            # 유틸리티 함수
+│   ├── app.ts            # Express 앱 초기화
+│   └── server.ts         # 서버 실행 엔트리 포인트
+├── .env                   # 환경 변수 파일
+├── .env.development.local # 개발 환경 변수
+├── .env.production.local  # 운영 환경 변수
+├── .env.test.local        # 테스트 환경 변수
+├── nodemon.json           # Nodemon 환경 변수
+├── package.json           # 프로젝트 의존성 및 스크립트
+└── tsconfig.json          # TypeScript 환경 변수
 
-.env                   # 기본 환경 변수
-.env.development.local # 개발 환경 변수
-.env.production.local  # 운영 환경 변수
-.env.test.local        # 테스트 환경 변수
-nodemon.json           # Nodemon 환경 변수
-swagger.yaml           # Swagger API 문서 정의
-tsconfig.jsnon         # TypeScript 환경 변수
 ```
 
 ## 🛠 사용 가능한 개발 도구
 
 프로젝트 설정 중 다음 카테고리에서 선택할 수 있습니다:
 
-| 카테고리   | 사용 가능한 도구        | 설명                                    |
-| ---------- | ------------------------ | ------------------------------------------- |
-| **린터**   | `biome`, `eslint`        | 코드 포맷팅 및 린팅 (Biome은 올인원) |
-| **번들러** | `swc`, `tsup`           | 빠른 TypeScript 컴파일 및 번들링     |
-| **테스트** | `jest`, `vitest`        | 단위 및 통합 테스트 프레임워크        |
-| **프로세스** | `pm2`                   | 프로덕션 프로세스 관리               |
-| **CI/CD**  | `github`                | GitHub Actions 워크플로우               |
-| **Git 훅** | `husky`                 | 품질 관리를 위한 Pre-commit 훅       |
-| **컨테이너** | `docker`                | Docker 및 docker-compose 구성          |
-| **API 문서** | `swagger`               | OpenAPI/Swagger 문서                   |
+| 카테고리   | 사용 가능한 도구  | 설명                                 |
+| ---------- | ----------------- | ------------------------------------ |
+| **린터**   | `biome`, `eslint` | 코드 포맷팅 및 린팅 (Biome은 올인원) |
+| **번들러** | `swc`, `tsup`     | 빠른 TypeScript 컴파일 및 번들링     |
+| **테스트** | `jest`, `vitest`  | 단위 및 통합 테스트 프레임워크       |
+
+### 나중에 추가될 예정 (현재 개발 중):
+
+| 카테고리     | 사용 가능한 도구 | 설명                           |
+| ------------ | ---------------- | ------------------------------ |
+| **프로세스** | `pm2`            | 프로덕션 프로세스 관리         |
+| **CI/CD**    | `github`         | GitHub Actions 워크플로우      |
+| **Git 훅**   | `husky`          | 품질 관리를 위한 Pre-commit 훅 |
+| **컨테이너** | `docker`         | Docker 및 docker-compose 구성  |
+| **API 문서** | `swagger`        | OpenAPI/Swagger 문서           |
 
 **스마트 선택**: CLI가 도구 의존성과 호환성을 자동으로 해결합니다.
 
@@ -144,54 +180,55 @@ tsconfig.jsnon         # TypeScript 환경 변수
 현재 템플릿 상태 (더 많은 템플릿 추가 예정!):
 
 ### ✅ **현재 사용 가능**
-| 템플릿   | 설명                        | 상태 |
-| ---------- | ------------------------------ | ------ |
-| `default`  | Express + TypeScript 스타터   | ✅ 활성 |
+
+| 템플릿    | 설명                        | 상태    |
+| --------- | --------------------------- | ------- |
+| `default` | Express + TypeScript 스타터 | ✅ 활성 |
 
 ### 🚧 **개발 예정**
 
 #### **ORM/데이터베이스 연동**
-| 템플릿           | 설명                    | 우선순위 |
-| ------------------ | ------------------------------ | -------- |
-| `prisma`           | 타입 안전 데이터베이스 클라이언트, 자동 타입 생성         | 🔥 높음  |
-| `drizzle`          | 런타임 오버헤드 없는 TypeScript 우선 ORM              | 🔥 높음  |
-| `mikro-orm`        | TypeScript용 Data Mapper ORM 패턴           | 🔥 높음  |
-| `mongoose`         | Node.js용 우아한 MongoDB ODM         | 🔥 높음  |
-| `node-postgres`    | 고성능 PostgreSQL 원시 드라이버 (pg)      | 🚧 개발 중 |
-| `knex`             | 유연한 SQL 쿼리 빌더 및 마이그레이션      | 🚧 개발 중 |
-| `typeorm`          | 데코레이터 기반 Active Record ORM            | 🚧 개발 중 |
-| `sequelize`        | 성숙한 Promise 기반 SQL ORM                  | 🚧 개발 중 |
-| `typegoose`        | TypeScript 친화적 Mongoose 대안            | 🚧 개발 중 |
+
+| 템플릿          | 설명                                              | 우선순위   |
+| --------------- | ------------------------------------------------- | ---------- |
+| `prisma`        | 타입 안전 데이터베이스 클라이언트, 자동 타입 생성 | 🔥 개발 중 |
+| `drizzle`       | 런타임 오버헤드 없는 TypeScript 우선 ORM          | 🔥 개발 중 |
+| `mongoose`      | Node.js용 우아한 MongoDB ODM                      | 🔥 개발 중 |
+| `mikro-orm`     | TypeScript용 Data Mapper ORM 패턴                 | 🚧 검토 중 |
+| `node-postgres` | 고성능 PostgreSQL 원시 드라이버                   | 🚧 검토 중 |
+| `knex`          | 유연한 SQL 쿼리 빌더 및 마이그레이션              | 🚧 검토 중 |
+| `typeorm`       | 데코레이터 기반 Active Record ORM                 | 🚧 검토 중 |
+| `sequelize`     | 성숙한 Promise 기반 SQL ORM                       | 🚧 검토 중 |
+| `typegoose`     | TypeScript 친화적 Mongoose 대안                   | 🚧 검토 중 |
 
 #### **아키텍처/컨트롤러 스타일**
-| 템플릿           | 설명                    | 우선순위 |
-| ------------------ | ------------------------------ | -------- |
-| `graphql`          | Apollo Server 기반 GraphQL API 스키마        | 🚧 개발 중 |
+
+| 템플릿    | 설명                                  | 우선순위   |
+| --------- | ------------------------------------- | ---------- |
+| `graphql` | Apollo Server 기반 GraphQL API 스키마 | 🚧 검토 중 |
 
 > **참고**: 현재 `default` 템플릿에 집중하고 있습니다. 추가 템플릿은 완성 및 테스트가 끝나면 활성화될 예정입니다.
 
 ## 🤔 이 CLI를 사용하는 이유?
 
 ### vs. 수동 설정
-| 측면           | 수동 설정                      | TypeScript Express Starter CLI        |
-| ---------------- | --------------------------------- | ------------------------------------- |
-| **시간**         | 🔴 수 시간의 구성 작업          | ✅ 2-3분 대화형 설정      |
-| **구성** | 🔴 수동 의존성 관리    | ✅ 자동 해결, 호환 버전  |
-| **모범 사례** | 🔴 연구 필요            | ✅ 사전 구성된 업계 표준  |
-| **일관성**  | 🔴 개발자마다 다름           | ✅ 표준화된 프로젝트 구조     |
-| **업데이트**      | 🔴 수동 유지보수             | ✅ CLI 업데이트로 새 기능 제공     |
+
+| 측면          | 수동 설정              | TypeScript Express Starter CLI |
+| ------------- | ---------------------- | ------------------------------ |
+| **시간**      | 🔴 수 시간의 구성 작업 | ✅ 2-3분 대화형 설정           |
+| **구성**      | 🔴 수동 의존성 관리    | ✅ 자동 해결, 호환 버전        |
+| **모범 사례** | 🔴 연구 필요           | ✅ 사전 구성된 업계 표준       |
+| **일관성**    | 🔴 개발자마다 다름     | ✅ 표준화된 프로젝트 구조      |
+| **업데이트**  | 🔴 수동 유지보수       | ✅ CLI 업데이트로 새 기능 제공 |
 
 ### vs. 다른 생성기
-| 기능          | TypeScript Express Starter | 다른 생성기 |
-| ---------------- | -------------------------- | ---------------- |
-| **데이터베이스 선택** | ✅ 10개 이상 옵션 계획       | 제한된 옵션  |
-| **도구 선택**  | ✅ 믹스 앤 매치 개발 도구    | 고정된 스택      |
-| **TypeScript 우선** | ✅ TypeScript를 위해 제작    | 주로 JS 우선   |
-| **프로덕션 준비** | ✅ Docker, PM2 포함    | 기본 설정      |
 
-## 📄 라이선스
-
-MIT(LICENSE) © AGUMON (ljlm0402)
+| 기능                  | TypeScript Express Starter | 다른 생성기  |
+| --------------------- | -------------------------- | ------------ |
+| **데이터베이스 선택** | ✅ 10개 이상 옵션 계획     | 제한된 옵션  |
+| **도구 선택**         | ✅ 믹스 앤 매치 개발 도구  | 고정된 스택  |
+| **TypeScript 우선**   | ✅ TypeScript를 위해 제작  | 주로 JS 우선 |
+| **프로덕션 준비**     | ✅ Docker, PM2 포함        | 기본 설정    |
 
 ## ⭐️ 응원해주신 분들
 
@@ -204,3 +241,13 @@ MIT(LICENSE) © AGUMON (ljlm0402)
 ## 🤝 도움주신 분들
 
 [![Contributors repo roster for @ljlm0402/typescript-express-starter](https://contributors-img.web.app/image?repo=ljlm0402/typescript-express-starter)](https://github.com/ljlm0402/typescript-express-starter/graphs/contributors)
+
+## 💳 라이선스
+
+[MIT](LICENSE)
+
+---
+
+<p align="center">
+  Made with ❤️ by <a href="https://github.com/ljlm0402">AGUMON</a> 🦖
+</p>
