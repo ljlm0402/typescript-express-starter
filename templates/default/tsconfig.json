@@ -37,7 +37,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "isolatedModules": true,
-    "types": ["node", "jest"]
+    "types": ["node"]
   },
   "include": ["src/**/*.ts", "src/**/*.json"],
   "exclude": ["node_modules", "dist", "coverage", "logs", "src/http", "**/unit_disabled/**"]

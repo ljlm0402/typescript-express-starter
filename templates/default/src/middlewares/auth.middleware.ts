@@ -2,22 +2,22 @@ import type { Request, Response, NextFunction } from 'express';
 import { verify, TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 import { container } from 'tsyringe';
 import { SECRET_KEY } from '@config/env';
-import { HttpException } from '@exceptions/httpException';
-import { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
+import { HttpException } from '@exceptions/http.exception';
+import type { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
 import { UsersRepository } from '@repositories/users.repository';
 
 const getAuthorization = (req: RequestWithUser) => {
-  const cookie = req.cookies['Authorization'];
+  const cookie = req.cookies.Authorization;
   if (cookie) return cookie;
 
   const header = req.header('Authorization');
-  if (header && header.startsWith('Bearer ')) {
+  if (header?.startsWith('Bearer ')) {
     return header.replace('Bearer ', '').trim();
   }
   return null;
 };
 
-export const AuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const AuthMiddleware = async (req: Request, _res: Response, next: NextFunction) => {
   try {
     const userReq = req as RequestWithUser;
     const token = getAuthorization(userReq);

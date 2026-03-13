@@ -1,8 +1,20 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.6.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git"
+  },
   "files": {
-    "include": ["src/**/*.ts"],
-    "ignore": ["node_modules/**", "dist/**", "build/**", "coverage/**", "*.js", "*.d.ts"]
+    "ignoreUnknown": false,
+    "includes": [
+      "**/*.ts",
+      "!node_modules/**",
+      "!dist/**", 
+      "!build/**",
+      "!coverage/**",
+      "!**/*.js",
+      "!**/*.d.ts"
+    ]
   },
   "javascript": {
     "parser": {
@@ -13,32 +25,53 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 100,
-    "quoteStyle": "single",
-    "trailingComma": "all",
-    "semiColons": "always",
-    "arrowParentheses": "avoid",
-    "formatWithErrors": false
+    "lineWidth": 100
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "recommended": false,
       "style": {
-        "noExplicitAny": "off",
+        "useConst": "warn",
         "noNonNullAssertion": "off",
-        "noVar": "off",
-        "useImportType": "off"
+        "noParameterAssign": "off"
       },
       "suspicious": {
-        "noExplicitAny": "off"
+        "noConsole": { 
+          "level": "warn", 
+          "options": { "allow": ["log", "error"] } 
+        }
       },
       "complexity": {
+        "noStaticOnlyClass": "off",
         "useArrowFunction": "off"
-      }
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "useParseIntRadix": "off"
+      },
+      "performance": {}
     }
   },
-  "organizeImports": {
-    "enabled": true
-  }
+  "overrides": [
+    {
+      "includes": [
+        "**/*.spec.ts",
+        "**/*.test.ts", 
+        "**/test/**/*.ts",
+        "**/__tests__/**/*.ts",
+        "jest.config.*"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ]
 }

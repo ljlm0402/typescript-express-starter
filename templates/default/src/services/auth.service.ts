@@ -1,8 +1,8 @@
 import { sign } from 'jsonwebtoken';
-import { injectable, inject } from 'tsyringe';
+import { injectable, container } from 'tsyringe';
 import { NODE_ENV, SECRET_KEY } from '@config/env';
-import { HttpException } from '@exceptions/httpException';
-import { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
+import { HttpException } from '@exceptions/http.exception';
+import type { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { User, type UserCreateData } from '@entities/user.entity';
 import { UsersRepository } from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';
@@ -10,7 +10,11 @@ import { logger } from '@utils/logger';
 
 @injectable()
 export class AuthService {
-  constructor(@inject(UsersRepository) private usersRepository: IUsersRepository) {}
+  private readonly usersRepository: IUsersRepository;
+
+  constructor() {
+    this.usersRepository = container.resolve(UsersRepository);
+  }
 
   private createToken(user: User): TokenData {
     if (!SECRET_KEY) throw new Error('SECRET_KEY is not defined');

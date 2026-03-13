@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: ${COMPOSE_PROJECT_NAME:-app}-dev
+    ports:
+      - '${PORT:-3000}:3000'
+    volumes:
+      # 소스 코드 핫 리로드
+      - .:/app
+      - /app/node_modules
+      # 로그 디렉토리 영속화
+      - ./logs:/app/logs
+    environment:
+      - NODE_ENV=development
+      - MONGODB_URL=${MONGODB_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - LOG_LEVEL=debug
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - backend
+
+  mongo:
+    container_name: ${COMPOSE_PROJECT_NAME:-app}-mongo
+    image: mongo:7
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-password}
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE:-app_db}
+    volumes:
+      - mongodata:/data/db
+      - ./database/mongodb/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mongodata:
+    driver: local

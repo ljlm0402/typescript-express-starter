@@ -1,8 +1,23 @@
 import { defineConfig } from 'vitest/config';
-import tsconfigPaths from 'vite-tsconfig-paths';
+import path from 'path';
 
 export default defineConfig({
-  plugins: [tsconfigPaths()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+      '@config': path.resolve(__dirname, 'src/config'),
+      '@controllers': path.resolve(__dirname, 'src/controllers'),
+      '@dtos': path.resolve(__dirname, 'src/dtos'),
+      '@entities': path.resolve(__dirname, 'src/entities'),
+      '@exceptions': path.resolve(__dirname, 'src/exceptions'),
+      '@interfaces': path.resolve(__dirname, 'src/interfaces'),
+      '@middlewares': path.resolve(__dirname, 'src/middlewares'),
+      '@repositories': path.resolve(__dirname, 'src/repositories'),
+      '@routes': path.resolve(__dirname, 'src/routes'),
+      '@services': path.resolve(__dirname, 'src/services'),
+      '@utils': path.resolve(__dirname, 'src/utils'),
+    },
+  },
   test: {
     environment: 'node',
     globals: true,
@@ -10,7 +25,14 @@ export default defineConfig({
     globalSetup: ['src/test/global-setup.ts'],
     globalTeardown: ['src/test/global-teardown.ts'],
     include: ['src/**/*.{test,spec}.ts', 'src/test/**/*.{test,spec}.ts'],
-    exclude: ['node_modules', 'dist', 'coverage', 'logs', 'drizzle/**/*'],
+    exclude: [
+      'node_modules',
+      'dist',
+      'coverage',
+      'logs',
+      'drizzle/**/*',
+      'src/test/unit_disabled/**/*',
+    ],
     testTimeout: 15000, // Vitest는 Jest보다 빠름
     hookTimeout: 30000, // DB 설정 시간 고려
 

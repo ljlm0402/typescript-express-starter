@@ -23,7 +23,7 @@ import { PACKAGE_MANAGER, TEMPLATES_VALUES, DEVTOOLS_VALUES } from './common.js'
 import { getBenchmarkInfo } from './presets.js';
 
 // Database configuration
-import { TEMPLATE_DB, generateDockerCompose } from './db-map.js';
+import { TEMPLATE_DB, generateDockerFiles, generateDockerCompose } from './db-map.js';
 
 // Error handling
 import { CLIError, NetworkError, FileSystemError, printError } from './errors.js';
@@ -110,7 +110,7 @@ function resolveDependencies(selected) {
 }
 
 // 파일 복사
-async function copyDevtoolFiles(devtool, destDir) {
+async function copyDevtoolFiles(devtool, destDir, template = 'default') {
   // 도구 카테고리에 따른 경로 매핑
   const categoryPathMap = {
     Linter: 'core',
@@ -122,11 +122,49 @@ async function copyDevtoolFiles(devtool, destDir) {
     Deployment: 'core',
   };
 
+  // 템플릿 이름을 devtools 파일명 prefix로 매핑
+  const templateToPrefix = {
+    'drizzle-postgresql': 'drizzle',
+    'prisma-postgresql': 'prisma',
+    'mongoose-mongodb': 'mongoose',
+    'typegoose-mongodb': 'typegoose',
+    default: null,
+  };
+
   const categoryPath = categoryPathMap[devtool.category] || '';
 
   for (const file of devtool.files) {
-    const src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, file);
+    let src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, file);
     const dst = path.join(destDir, file);
+
+    // 템플릿별 특화 설정 파일 우선 검색
+    if (template !== 'default' && templateToPrefix[template]) {
+      const prefix = templateToPrefix[template];
+      let templateSpecificFile;
+
+      if (file.includes('.config.')) {
+        // jest.config.cjs -> drizzle.jest.config.cjs
+        templateSpecificFile = `${prefix}.${file}`;
+      } else if (file.startsWith('.')) {
+        // .prettierrc -> drizzle.prettierrc
+        templateSpecificFile = `${prefix}${file}`;
+      } else {
+        // 일반 파일이나 디렉토리인 경우
+        templateSpecificFile = `${prefix}.${file}`;
+      }
+
+      const templateSpecificSrc = path.join(
+        CONFIG.paths.devtools,
+        categoryPath,
+        devtool.value,
+        templateSpecificFile,
+      );
+
+      if (await fs.pathExists(templateSpecificSrc)) {
+        src = templateSpecificSrc;
+        console.log(chalk.cyan(`  ✓ Using template-specific config: ${templateSpecificFile}`));
+      }
+    }
 
     if (await fs.pathExists(src)) {
       await fs.copy(src, dst, { overwrite: true });
@@ -156,9 +194,16 @@ async function installPackages(pkgs, pkgManager, dev = true, destDir = process.c
 }
 
 // package.json 수정 (스크립트 추가 등)
-async function updatePackageJson(scripts, destDir) {
+async function updatePackageJson(scripts, destDir, projectName = null) {
   const pkgPath = path.join(destDir, 'package.json');
   const file = editJsonFile(pkgPath, { autosave: true });
+
+  // 프로젝트 이름이 제공된 경우 package.json의 name 필드 업데이트
+  if (projectName) {
+    file.set('name', projectName);
+    console.log(chalk.gray(`  ⎯ package.json name updated to: ${projectName}`));
+  }
+
   Object.entries(scripts).forEach(([k, v]) => file.set(`scripts.${k}`, v));
   if (!file.get('scripts.prepare') && fs.existsSync(path.join(destDir, '.huskyrc'))) {
     file.set('scripts.prepare', 'husky install');
@@ -166,7 +211,7 @@ async function updatePackageJson(scripts, destDir) {
   file.save();
 }
 
-// docker-compose 생성
+// docker-compose 생성 (호환성 유지용)
 async function generateCompose(template, destDir) {
   try {
     const composeYml = generateDockerCompose(template);
@@ -337,6 +382,9 @@ async function main() {
     return process.exit(1);
   }
 
+  // [1-0] package.json name 필드 업데이트
+  await updatePackageJson({}, destDir, projectName);
+
   // [1-1] Testing 도구를 선택한 경우에만 /src/test 예제 복사
   // 주석: 이제 files 배열에 'src/test'가 포함되어 copyDevtoolFiles에서 자동 처리됨
   /*
@@ -360,7 +408,7 @@ async function main() {
     if (!tool) continue;
 
     spinner.start(`Setting up ${tool.name}...`);
-    await copyDevtoolFiles(tool, destDir);
+    await copyDevtoolFiles(tool, destDir, template);
 
     // [2-1] 개발 도구 - 패키지 설치
     if (tool.pkgs?.length > 0) await installPackages(tool.pkgs, pkgManager, false, destDir);
@@ -379,8 +427,17 @@ async function main() {
       }
     }
 
-    // [2-3] 개발 도구 - Docker 선택 한 경우, docker-compose.yml 생성
-    if (tool.value === 'docker') await generateCompose(template, destDir);
+    // [2-3] 개발 도구 - Docker 선택 한 경우, 파일 기반 Docker 설정 생성
+    if (tool.value === 'docker') {
+      try {
+        await generateDockerFiles(template, destDir);
+        console.log(chalk.gray(`  ⎯ Docker environment configured for ${template}`));
+      } catch (error) {
+        console.log(chalk.yellow(`  ⚠️ Docker setup warning: ${error.message}`));
+        // Fallback to legacy method
+        await generateCompose(template, destDir);
+      }
+    }
 
     // [2-4] 개발 도구 - Swagger 선택 시에만 app.ts AST 패치
     if (tool.value === 'swagger') {
@@ -396,11 +453,29 @@ async function main() {
   spinner.succeed('📦 Base dependencies installed!');
 
   // [4] git 첫 커밋 옵션
-  await gitInitAndFirstCommit(destDir);
+  // await gitInitAndFirstCommit(destDir);
 
   outro(chalk.greenBright('\n🎉 Project setup complete!\n'));
   console.log(chalk.cyan(`   $ cd ${projectName}`));
   console.log(chalk.cyan(`   $ ${pkgManager} run dev\n`));
+
+  // Docker를 선택한 경우 사용법 안내
+  const hasDocker = devtoolValues.includes('docker');
+  if (hasDocker) {
+    const dbType = TEMPLATE_DB[template];
+    console.log(chalk.yellow('🐳 Docker setup:'));
+    console.log(chalk.gray(`   $ ${pkgManager} run docker:dev   # Start development environment`));
+    if (dbType) {
+      console.log(
+        chalk.gray(`   $ ${pkgManager} run db:migrate   # Run migrations (if applicable)`),
+      );
+      console.log(
+        chalk.gray(`   $ ${pkgManager} run db:seed      # Insert sample data (if applicable)`),
+      );
+    }
+    console.log(chalk.gray(`   $ ${pkgManager} run docker:down  # Stop containers\n`));
+  }
+
   console.log(chalk.gray('✨ Happy hacking!\n'));
 }
 

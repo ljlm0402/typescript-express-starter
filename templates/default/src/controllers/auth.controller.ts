@@ -1,13 +1,17 @@
 import type { Request, Response, RequestHandler } from 'express';
-import { injectable, inject } from 'tsyringe';
-import { RequestWithUser } from '@interfaces/auth.interface';
-import { type UserCreateData } from '@entities/user.entity';
+import { injectable, container } from 'tsyringe';
+import type { RequestWithUser } from '@interfaces/auth.interface';
+import type { UserCreateData } from '@entities/user.entity';
 import { asyncHandler } from '@utils/asyncHandler';
 import { AuthService } from '@services/auth.service';
 
 @injectable()
 export class AuthController {
-  constructor(@inject(AuthService) private readonly authService: AuthService) {}
+  private readonly authService: AuthService;
+
+  constructor() {
+    this.authService = container.resolve(AuthService);
+  }
 
   public signUp: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
     const userData: UserCreateData = req.body;

@@ -1,5 +1,5 @@
-import { existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { existsSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 import pino from 'pino';
 import { LOG_DIR, LOG_LEVEL, NODE_ENV } from '@config/env';
 

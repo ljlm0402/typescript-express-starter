@@ -58,18 +58,18 @@ export const TEMPLATES_VALUES = [
     /** Drizzle ORM + PostgreSQL 템플릿 */
     name: 'Drizzle + PostgreSQL',
     value: 'drizzle-postgresql',
-    desc: 'Modern SQL toolkit with type safety',
-    active: false,
-    tags: ['orm', 'drizzle', 'postgresql', 'verified'],
-    version: 'v1.0.0',
+    desc: 'Modern SQL toolkit with type safety + full devtools',
+    active: true,
+    tags: ['orm', 'drizzle', 'postgresql', 'verified', 'enhanced'],
+    version: 'v1.1.0',
     maintainer: 'core',
-    lastUpdated: '2026-02-23',
+    lastUpdated: '2026-03-11',
     devtoolsCompatibility: '100%',
     verificationStatus: 'complete',
     complexity: 'intermediate',
     maturity: 'stable',
-    performanceRating: 'A',
-    recommendedFor: ['중규모 프로젝트', '타입 안전성 중요', '성능 최적화'],
+    performanceRating: 'A+',
+    recommendedFor: ['중규모 프로젝트', '타입 안전성 중요', '성능 최적화', '코드 품질'],
     learningCurve: 'moderate',
     enterpriseReady: true,
   },
@@ -255,7 +255,7 @@ export const DEVTOOLS_VALUES = [
     category: 'Linter',
     files: ['.biome.json', '.biomeignore'],
     pkgs: [],
-    devPkgs: ['@biomejs/biome@2.1.4'],
+    devPkgs: ['@biomejs/biome@2.4.6'],
     scripts: {
       lint: 'biome lint .',
       check: 'biome check .',
@@ -275,7 +275,7 @@ export const DEVTOOLS_VALUES = [
       'eslint-config-prettier@^10.1.1',
       'globals@^15.10.0',
       'prettier@3.6.2',
-      'typescript-eslint@8.13.0',
+      'typescript-eslint@8.57.0',
     ],
     scripts: {
       lint: 'eslint --ext .ts src/',
@@ -371,7 +371,7 @@ export const DEVTOOLS_VALUES = [
     name: 'Jest',
     value: 'jest',
     category: 'Testing',
-    files: ['jest.config.cjs', 'jest.config.ts', 'src/test'],
+    files: ['jest.config.cjs', 'jest.config.ts', 'jest.unit.config.cjs', 'src/test'],
     pkgs: [],
     devPkgs: [
       '@types/supertest@6.0.3',
@@ -382,9 +382,9 @@ export const DEVTOOLS_VALUES = [
       'ts-node@10.9.2',
     ],
     scripts: {
-      test: 'jest --config jest.config.cjs',
-      'test:e2e': 'jest --config jest.config.cjs --testPathPatterns=e2e',
-      'test:unit': 'jest --config jest.config.cjs --testPathPatterns=unit',
+      test: 'jest --config jest.config.cjs --verbose --runInBand --no-coverage',
+      'test:e2e': 'jest --config jest.config.cjs --testPathPatterns=e2e --verbose --runInBand',
+      'test:unit': 'jest --config jest.config.cjs --testPathPatterns=unit --verbose --runInBand',
     },
     postInstall: (projectPath) => {
       // Jest types를 tsconfig.json에 추가
@@ -447,16 +447,22 @@ export const DEVTOOLS_VALUES = [
   // },
 
   // == [Infrastructure] == //
-  // {
-  //   name: 'Docker',
-  //   value: 'docker',
-  //   category: 'Infrastructure',
-  //   files: ['.dockerignore', 'Dockerfile.dev', 'Dockerfile.prod', 'nginx.conf', 'Makefile'],
-  //   pkgs: [],
-  //   devPkgs: [],
-  //   scripts: {},
-  //   desc: 'Containerized dev & prod environment',
-  // },
+  {
+    name: 'Docker',
+    value: 'docker',
+    category: 'Infrastructure',
+    files: [], // generateDockerFiles() 함수로 동적 처리
+    pkgs: [],
+    devPkgs: [],
+    scripts: {
+      'docker:dev': 'docker-compose -f docker-compose.yml up --build',
+      'docker:down': 'docker-compose down',
+      'docker:reset': 'docker-compose down -v && docker-compose up --build',
+      'docker:prod': 'docker build -f Dockerfile.prod -t ${npm_package_name}:latest .',
+    },
+    desc: 'Containerized development and production environment',
+    postInstall: null, // Docker 설정은 starter.js에서 별도 처리
+  },
 
   // == [Git Tools] == //
   // {

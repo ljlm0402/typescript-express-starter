@@ -1,13 +1,19 @@
+import fs from 'fs-extra';
+import path from 'path';
+
 export const TEMPLATE_DB = {
   default: null,
+  'drizzle-postgresql': 'postgres',
+  'prisma-postgresql': 'postgres',
+  'mongoose-mongodb': 'mongodb',
   graphql: 'postgres',
   knex: 'mysql',
-  mikroorm: 'mongo',
-  mongoose: 'mongo',
+  mikroorm: 'postgres',
+  mongoose: 'mongodb',
   'node-postgres': 'postgres',
   prisma: 'mysql',
   sequelize: 'mysql',
-  typegoose: 'mongo',
+  typegoose: 'mongodb',
   typeorm: 'postgres',
 };
 
@@ -45,7 +51,7 @@ const DB_SERVICES = {
     networks:
       - backend
   `,
-  mongo: `
+  mongodb: `
   mongo:
     container_name: mongo
     image: mongo:7
@@ -67,7 +73,7 @@ const DB_SERVICES = {
 const DB_SERVICE_NAMES = {
   postgres: 'pg',
   mysql: 'mysql',
-  mongo: 'mongo',
+  mongodb: 'mongo',
 };
 
 // 서비스 생성 헬퍼 함수
@@ -134,13 +140,65 @@ volumes:
 volumes:
   mysqldata:
     driver: local`,
-    mongo: `
+    mongodb: `
 volumes:
   mongodata:
     driver: local`,
   };
 
   return volumeMap[dbType] || '';
+}
+
+// 파일 기반 Docker 설정 생성 (권장)
+export async function generateDockerFiles(template, destDir) {
+  const dbType = validateDbTemplate(template);
+
+  try {
+    // 공통 Dockerfile들 복사
+    const dockerCommonPath = path.resolve(process.cwd(), 'devtools/infrastructure/docker/common');
+    const dockerfiles = ['Dockerfile.dev', 'Dockerfile.prod', '.dockerignore'];
+
+    for (const file of dockerfiles) {
+      const srcPath = path.join(dockerCommonPath, file);
+      const destPath = path.join(destDir, file);
+
+      if (await fs.pathExists(srcPath)) {
+        await fs.copy(srcPath, destPath);
+        console.log(`  ⎯ ${file} copied from common template`);
+      }
+    }
+
+    // DB별 docker-compose.yml 복사
+    if (dbType) {
+      const dbComposePath = path.resolve(
+        process.cwd(),
+        `devtools/infrastructure/docker/database/${dbType}.compose.yml`,
+      );
+      const composeDestPath = path.join(destDir, 'docker-compose.yml');
+
+      if (await fs.pathExists(dbComposePath)) {
+        await fs.copy(dbComposePath, composeDestPath);
+        console.log(`  ⎯ docker-compose.yml copied for ${dbType} database`);
+      } else {
+        // 파일이 없으면 동적 생성 fallback
+        console.log(`  ⚠️ ${dbType}.compose.yml not found, using dynamic generation`);
+        const dynamicCompose = generateDockerCompose(template);
+        await fs.writeFile(composeDestPath, dynamicCompose, 'utf8');
+        console.log(`  ⎯ docker-compose.yml generated dynamically for ${dbType}`);
+      }
+    } else {
+      // 데이터베이스 없는 경우 기본 compose 생성
+      const basicCompose = generateServices();
+      const composeDestPath = path.join(destDir, 'docker-compose.yml');
+      await fs.writeFile(composeDestPath, basicCompose, 'utf8');
+      console.log(`  ⎯ basic docker-compose.yml generated (no database)`);
+    }
+
+    return dbType;
+  } catch (error) {
+    console.error(`Docker setup error: ${error.message}`);
+    throw error;
+  }
 }
 
 // 설정 검증 함수

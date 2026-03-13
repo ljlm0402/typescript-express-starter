@@ -7,13 +7,11 @@ export default defineConfig({
   outDir: 'dist',
   clean: true,
   sourcemap: true,
-  dts: false,
+  dts: true,
   minify: false,
   splitting: false,
+  bundle: true,
   treeshake: true,
-  // Drizzle 특화 설정
-  external: ['drizzle-orm', 'drizzle-kit'],
-  noExternal: [],
   esbuildOptions(options) {
     options.alias = {
       '@': './src',

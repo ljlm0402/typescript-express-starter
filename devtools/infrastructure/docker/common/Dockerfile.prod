@@ -1,0 +1,69 @@
+FROM node:22-alpine AS builder
+
+# 시간대 설정
+RUN apk add --no-cache tzdata && \
+    ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+WORKDIR /app
+
+# 패키지 파일 복사
+COPY package*.json ./
+COPY pnpm-lock.yaml* ./
+
+# 전체 의존성 설치 (빌드에 필요한 devDependencies 포함)
+RUN if [ -f pnpm-lock.yaml ]; then \
+      corepack enable pnpm && pnpm install --frozen-lockfile; \
+    else \
+      npm ci; \
+    fi
+
+# 소스 코드 복사 및 빌드
+COPY . .
+RUN if [ -f pnpm-lock.yaml ]; then \
+      pnpm run build; \
+    else \
+      npm run build; \
+    fi
+
+# 프로덕션용 의존성만 설치
+RUN if [ -f pnpm-lock.yaml ]; then \
+      rm -rf node_modules && pnpm install --prod --frozen-lockfile; \
+    else \
+      rm -rf node_modules && npm ci --only=production; \
+    fi
+
+# 프로덕션 런너
+FROM node:22-alpine AS runner
+
+# 시간대 설정 및 헬스체크 도구
+RUN apk add --no-cache tzdata wget && \
+    ln -sf /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+# 보안: non-root 사용자 생성
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -S appuser -u 1001 -G appgroup
+
+WORKDIR /app
+
+# 빌드된 파일 복사
+COPY --from=builder --chown=appuser:appgroup /app/dist ./dist
+COPY --from=builder --chown=appuser:appgroup /app/node_modules ./node_modules
+COPY --from=builder --chown=appuser:appgroup /app/package*.json ./
+
+# 프로덕션 환경변수
+ENV NODE_ENV=production \
+    TZ=Asia/Seoul \
+    PORT=3000
+
+# non-root 사용자로 전환
+USER appuser
+
+# 포트 노출
+EXPOSE 3000
+
+# 헬스체크 (wget 사용)
+HEALTHCHECK --interval=30s --timeout=3s --start-period=15s --retries=3 \
+  CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
+
+# 프로덕션 서버 실행
+CMD ["node", "dist/server.js"]

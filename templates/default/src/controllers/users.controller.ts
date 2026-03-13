@@ -1,12 +1,16 @@
 import type { Request, Response, RequestHandler } from 'express';
-import { injectable, inject } from 'tsyringe';
-import { type UserCreateData } from '@entities/user.entity';
+import { injectable, container } from 'tsyringe';
+import type { UserCreateData } from '@entities/user.entity';
 import { asyncHandler } from '@utils/asyncHandler';
 import { UsersService } from '@services/users.service';
 
 @injectable()
 export class UsersController {
-  constructor(@inject(UsersService) private readonly userService: UsersService) {}
+  private readonly userService: UsersService;
+
+  constructor() {
+    this.userService = container.resolve(UsersService);
+  }
 
   getUsers: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
     const page = parseInt(req.query.page as string) || 1;
@@ -16,7 +20,7 @@ export class UsersController {
     // 페이지네이션 파라미터가 있으면 페이지네이션, 없으면 전체 목록
     if (req.query.page || req.query.limit) {
       const result = await this.userService.getAllUsersPaginated({ page, limit, search });
-      const userResponses = result.users.map(user => user.toResponse());
+      const userResponses = result.users.map((user) => user.toResponse());
 
       res.json({
         data: userResponses,
@@ -28,7 +32,7 @@ export class UsersController {
       });
     } else {
       const users = await this.userService.getAllUsers();
-      const userResponses = users.map(user => user.toResponse());
+      const userResponses = users.map((user) => user.toResponse());
 
       res.json({ data: userResponses, message: 'findAll' });
     }

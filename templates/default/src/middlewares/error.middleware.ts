@@ -1,11 +1,11 @@
-import { Request, Response, NextFunction } from 'express';
-import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
+import type { Request, Response, NextFunction } from 'express';
+import type { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { ZodError } from 'zod';
 import { NODE_ENV } from '@config/env';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 import {
-  StandardErrorResponse,
-  ValidationErrorDetail,
+  type StandardErrorResponse,
+  type ValidationErrorDetail,
   HTTP_ERROR_MESSAGES,
 } from '@interfaces/error.interface';
 import { logger } from '@utils/logger';

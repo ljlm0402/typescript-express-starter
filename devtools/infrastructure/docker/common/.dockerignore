@@ -1,0 +1,116 @@
+# ===========================================
+# Docker 이미지 최적화를 위한 제외 파일들
+# ===========================================
+
+# Node.js Dependencies & Debug
+node_modules/
+.pnpm-store/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+
+# Production Build Output (빌드 스테이지에서 생성)
+dist/
+build/
+*.tsbuildinfo
+coverage/
+
+# Environment Files (보안상 제외, .env.example만 포함)
+.env
+.env.*
+!.env.example
+
+# Development Tools & IDE
+.vscode/
+*.code-workspace
+.idea/
+*.swp
+*.swo
+*~
+
+# 로그 파일
+logs/
+*.log
+
+# 테스트 파일들
+__tests__/
+**/*.test.*
+**/*.spec.*
+test/
+tests/
+jest.config.*
+
+# Development Configuration
+.eslintrc.*
+.prettierrc*
+nodemon.json
+tsc*.json
+tsconfig*.json
+
+# Git 관련
+.git/
+.gitignore
+.gitattributes
+
+# 문서 파일
+README*.md
+CHANGELOG.md
+LICENSE*
+*.md
+docs/
+
+# Docker 관련 파일
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 임시 파일
+*.tmp
+*.temp
+.cache/
+
+# Logs
+logs/
+*.log
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Temporary folders
+tmp/
+temp/
+
+# Git
+.git/
+.gitignore
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Testing
+test-results/
+playwright-report/
+
+# Database files
+*.sqlite
+*.db
+
+# Cache directories
+.npm
+.eslintcache
+.next/
+.cache/

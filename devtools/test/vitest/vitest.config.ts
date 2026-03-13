@@ -7,14 +7,36 @@ export default defineConfig({
     globals: true,
     root: './src',
     include: ['**/*.{test,spec}.ts'],
-    exclude: ['**/unit_disabled/**', '**/node_modules/**'],
+    exclude: ['**/unit_disabled/**', '**/node_modules/**', '**/dist/**', '**/logs/**'],
     setupFiles: ['./test/setup.ts'],
+    testTimeout: 15000,
+    hookTimeout: 30000,
+
+    poolOptions: {
+      threads: {
+        singleThread: false,
+        isolate: true,
+      },
+    },
+
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'html', 'lcov'],
-      exclude: ['node_modules/', 'dist/', '**/*.d.ts', 'src/server.ts'],
+      reporter: ['text', 'html', 'lcov', 'json'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        '**/*.d.ts',
+        'src/server.ts',
+        'src/test/**',
+        'src/**/index.ts',
+      ],
+      thresholds: {
+        branches: 85,
+        functions: 85,
+        lines: 85,
+        statements: 85,
+      },
     },
-    testTimeout: 10000,
   },
   resolve: {
     alias: {

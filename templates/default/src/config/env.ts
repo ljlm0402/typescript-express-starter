@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
-import { existsSync } from 'fs';
-import { resolve } from 'path';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { z } from 'zod';
 
 /**
@@ -46,12 +46,8 @@ const EnvSchema = z
  */
 const parsed = EnvSchema.safeParse(process.env);
 if (!parsed.success) {
-  // console.error('\n❌ Invalid environment variables:\n');
-  // console.error(parsed.error.format());
-  /* eslint-disable no-console */
   console.error('\n❌ Invalid environment variables:\n');
   console.error(parsed.error.format());
-  /* eslint-enable no-console */
   process.exit(1);
 }
 const env = parsed.data;
@@ -78,5 +74,5 @@ export const API_SERVER_URL = env.API_SERVER_URL;
 // CORS Origins를 배열로도 제공 (없으면 [])
 export const CORS_ORIGIN_LIST =
   env.CORS_ORIGINS?.split(',')
-    .map(s => s.trim())
+    .map((s) => s.trim())
     .filter(Boolean) ?? [];

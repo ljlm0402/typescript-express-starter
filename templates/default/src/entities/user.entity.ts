@@ -1,5 +1,5 @@
 import { hash, compare } from 'bcryptjs';
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
 export interface UserPersistenceData {
   id: string;

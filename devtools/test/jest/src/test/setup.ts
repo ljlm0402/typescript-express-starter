@@ -2,16 +2,6 @@
 import 'reflect-metadata';
 import express, { Express } from 'express';
 
-console.log('🧪 Test setup initialized');
-
-beforeAll(async () => {
-  console.log('🚀 Test environment starting...');
-});
-
-afterAll(async () => {
-  console.log('🏁 Test environment cleanup...');
-});
-
 // createTestApp - 실제 Express 앱 생성
 export const createTestApp = (): Express => {
   const app = express();

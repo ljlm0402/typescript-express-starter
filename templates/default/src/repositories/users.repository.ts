@@ -1,4 +1,5 @@
 import { singleton } from 'tsyringe';
+import { HttpException } from '@exceptions/http.exception';
 import { User, type UserPersistenceData } from '@entities/user.entity';
 
 // 단순한 쿼리 옵션
@@ -33,7 +34,7 @@ export class UsersRepository implements IUsersRepository {
   private users: UserPersistenceData[] = [];
 
   async findAll(): Promise<User[]> {
-    return this.users.map(userData => User.fromPersistence(userData));
+    return this.users.map((userData) => User.fromPersistence(userData));
   }
 
   async findAllPaginated(options: SimpleQuery): Promise<SimplePaginatedResult> {
@@ -43,7 +44,7 @@ export class UsersRepository implements IUsersRepository {
     let filteredUsers = this.users;
     if (search) {
       const searchLower = search.toLowerCase();
-      filteredUsers = this.users.filter(user => user.email.toLowerCase().includes(searchLower));
+      filteredUsers = this.users.filter((user) => user.email.toLowerCase().includes(searchLower));
     }
 
     // 페이지네이션 계산
@@ -52,7 +53,7 @@ export class UsersRepository implements IUsersRepository {
     const offset = (page - 1) * limit;
     const paginatedUsers = filteredUsers.slice(offset, offset + limit);
 
-    const users = paginatedUsers.map(userData => User.fromPersistence(userData));
+    const users = paginatedUsers.map((userData) => User.fromPersistence(userData));
 
     return {
       users,
@@ -67,16 +68,22 @@ export class UsersRepository implements IUsersRepository {
     if (!search) return this.users.length;
 
     const searchLower = search.toLowerCase();
-    return this.users.filter(user => user.email.toLowerCase().includes(searchLower)).length;
+    return this.users.filter((user) => user.email.toLowerCase().includes(searchLower)).length;
   }
 
   async findById(id: string): Promise<User | undefined> {
-    const userData = this.users.find(u => u.id === id);
+    // UUID 형식 검증
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(id)) {
+      throw new HttpException(404, 'User not found');
+    }
+
+    const userData = this.users.find((u) => u.id === id);
     return userData ? User.fromPersistence(userData) : undefined;
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
-    const userData = this.users.find(u => u.email === email.toLowerCase());
+    const userData = this.users.find((u) => u.email === email.toLowerCase());
     return userData ? User.fromPersistence(userData) : undefined;
   }
 
@@ -87,7 +94,13 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async update(id: string, user: User): Promise<User | undefined> {
-    const idx = this.users.findIndex(u => u.id === id);
+    // UUID 형식 검증
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(id)) {
+      throw new Error('Invalid user ID format');
+    }
+
+    const idx = this.users.findIndex((u) => u.id === id);
     if (idx === -1) return undefined;
 
     this.users[idx] = user.toPersistence();
@@ -95,7 +108,13 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    const idx = this.users.findIndex(u => u.id === id);
+    // UUID 형식 검증
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(id)) {
+      throw new Error('Invalid user ID format');
+    }
+
+    const idx = this.users.findIndex((u) => u.id === id);
     if (idx === -1) return false;
     this.users.splice(idx, 1);
     return true;

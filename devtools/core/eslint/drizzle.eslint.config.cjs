@@ -48,30 +48,11 @@ module.exports = [
       ],
     },
   },
-  // 테스트 파일에 대한 특별 규칙
   {
-    files: [
-      '**/*.spec.ts',
-      '**/*.test.ts',
-      '**/test/**/*.ts',
-      '**/__tests__/**/*.ts',
-      'jest.config.*',
-    ],
-    languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: 'module',
-      globals: {
-        ...globals.node,
-        ...globals.es2022,
-        ...globals.jest,
-      },
-    },
+    files: ['**/*.test.ts', '**/*.spec.ts'],
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off', // 테스트에서 any 허용
-      'no-console': 'off', // 테스트에서 console 허용
-      '@typescript-eslint/no-unused-vars': 'off', // 테스트에서 unused imports 허용
-      'no-useless-escape': 'off', // 테스트에서 escape 허용
-      '@typescript-eslint/no-var-requires': 'off', // CommonJS require 허용
+      '@typescript-eslint/no-explicit-any': 'off', // 테스트에서는 any 타입 허용
+      'no-console': 'off', // 테스트에서는 console 사용 허용
     },
   },
 ];
