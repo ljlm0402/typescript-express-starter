@@ -72,9 +72,10 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findById(id: string): Promise<User | undefined> {
-    // UUID 형식 검증
+    // UUID 형식 검증 (user_ prefix 허용)
+    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    if (!uuidRegex.test(id)) {
+    if (!uuidRegex.test(cleanId)) {
       throw new HttpException(404, 'User not found');
     }
 
@@ -94,9 +95,10 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async update(id: string, user: User): Promise<User | undefined> {
-    // UUID 형식 검증
+    // UUID 형식 검증 (user_ prefix 허용)
+    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    if (!uuidRegex.test(id)) {
+    if (!uuidRegex.test(cleanId)) {
       throw new Error('Invalid user ID format');
     }
 
@@ -108,9 +110,10 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    // UUID 형식 검증
+    // UUID 형식 검증 (user_ prefix 허용)
+    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
     const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    if (!uuidRegex.test(id)) {
+    if (!uuidRegex.test(cleanId)) {
       throw new Error('Invalid user ID format');
     }
 

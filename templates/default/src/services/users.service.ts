@@ -12,8 +12,12 @@ import type { IUsersRepository } from '@repositories/users.repository';
 export class UsersService {
   private readonly usersRepository: IUsersRepository;
 
-  constructor() {
-    this.usersRepository = container.resolve(UsersRepository);
+  constructor(usersRepository?: IUsersRepository) {
+    if (usersRepository) {
+      this.usersRepository = usersRepository;
+    } else {
+      this.usersRepository = container.resolve(UsersRepository);
+    }
   }
 
   async getAllUsers(): Promise<User[]> {

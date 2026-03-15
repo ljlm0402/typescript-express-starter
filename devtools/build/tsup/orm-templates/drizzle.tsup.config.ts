@@ -7,12 +7,12 @@ export default defineConfig({
   outDir: 'dist',
   clean: true,
   sourcemap: true,
-  dts: true,
+  dts: false,
   minify: false,
   splitting: false,
   bundle: true,
   treeshake: true,
-  esbuildOptions(options) {
+  esbuildOptions(options: { alias?: Record<string, string>; keepNames?: boolean }) {
     options.alias = {
       '@': './src',
       '@config': './src/config',

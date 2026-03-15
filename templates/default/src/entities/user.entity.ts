@@ -26,7 +26,8 @@ export class User {
   // 팩토리 메서드 - 새로운 사용자 생성
   static async create(data: UserCreateData): Promise<User> {
     const id = User.generateId();
-    const validatedEmail = User.validateEmail(data.email);
+    const validatedEmail = User.normalizeEmail(data.email);
+    User.validateEmail(validatedEmail);
     const hashedPassword = await User.hashPassword(data.password);
 
     return new User(id, validatedEmail, hashedPassword);
@@ -87,8 +88,8 @@ export class User {
     return trimmedEmail.toLowerCase();
   }
 
-  // 도메인 규칙 - 패스워드 검증
-  private static validatePassword(password: string): void {
+  // 도메인 규칙 - 패스워드 검증 (테스트를 위해 public)
+  static validatePassword(password: string): void {
     if (!password || typeof password !== 'string') {
       throw new Error('Password is required');
     }
@@ -118,7 +119,26 @@ export class User {
 
   // ID 생성
   private static generateId(): string {
-    return crypto.randomUUID();
+    return `user_${crypto.randomUUID()}`;
+  }
+
+  // 정적 메서드 - 이메일 정규화 (테스트 호환성)
+  static normalizeEmail(email: string): string {
+    if (!email || typeof email !== 'string') {
+      throw new Error('Email is required');
+    }
+
+    const trimmedEmail = email.trim();
+    if (trimmedEmail.length === 0) {
+      throw new Error('Email cannot be empty');
+    }
+
+    return trimmedEmail.toLowerCase();
+  }
+
+  // Prisma 호환 메서드 (테스트 호환성)
+  static fromPrisma(data: UserPersistenceData): User {
+    return User.fromPersistence(data);
   }
 
   // Getter들 - 외부에서 직접 수정 불가능

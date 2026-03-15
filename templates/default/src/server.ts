@@ -3,12 +3,16 @@ import '@config/env';
 import { container } from 'tsyringe';
 import App from '@/app';
 import { UsersRepository } from '@repositories/users.repository';
+import { AuthService } from '@services/auth.service';
+import { UsersService } from '@services/users.service';
 import { AuthRoute } from '@routes/auth.route';
 import { UsersRoute } from '@routes/users.route';
 import { logger } from '@utils/logger';
 
 // DI 등록
 container.registerInstance(UsersRepository, new UsersRepository());
+container.registerSingleton(AuthService);
+container.registerSingleton(UsersService);
 
 // 라우트 인스턴스 생성
 const routes = [container.resolve(AuthRoute), container.resolve(UsersRoute)];

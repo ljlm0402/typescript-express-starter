@@ -310,7 +310,7 @@ export const DEVTOOLS_VALUES = [
     category: 'Compiler',
     files: ['tsup.config.ts'],
     pkgs: [],
-    devPkgs: ['tsup@8.5.0'],
+    devPkgs: ['tsup@8.5.0', '@swc/core@1.9.3'],
     scripts: {
       'start:tsup': 'node -r tsconfig-paths/register dist/server.js',
       'build:tsup': 'tsup --config tsup.config.ts',
@@ -371,7 +371,7 @@ export const DEVTOOLS_VALUES = [
     name: 'Jest',
     value: 'jest',
     category: 'Testing',
-    files: ['jest.config.cjs', 'jest.config.ts', 'jest.unit.config.cjs', 'src/test'],
+    files: ['jest.config.ts', 'jest.unit.config.cjs', 'src/test', '.watchmanconfig'],
     pkgs: [],
     devPkgs: [
       '@types/supertest@6.0.3',
@@ -382,9 +382,9 @@ export const DEVTOOLS_VALUES = [
       'ts-node@10.9.2',
     ],
     scripts: {
-      test: 'jest --config jest.config.cjs --verbose --runInBand --no-coverage',
-      'test:e2e': 'jest --config jest.config.cjs --testPathPatterns=e2e --verbose --runInBand',
-      'test:unit': 'jest --config jest.config.cjs --testPathPatterns=unit --verbose --runInBand',
+      test: 'jest --config jest.config.ts --verbose --runInBand --no-coverage',
+      'test:e2e': 'jest --config jest.config.ts --testPathPatterns=e2e --verbose --runInBand',
+      'test:unit': 'jest --config jest.config.ts --testPathPatterns=unit --verbose --runInBand',
     },
     postInstall: (projectPath) => {
       // Jest types를 tsconfig.json에 추가
@@ -424,9 +424,10 @@ export const DEVTOOLS_VALUES = [
       'vitest@3.2.4',
     ],
     scripts: {
-      test: 'vitest',
-      'test:unit': 'vitest src/test/unit',
-      'test:e2e': 'vitest src/test/e2e',
+      test: 'vitest --run',
+      'test:watch': 'vitest',
+      'test:unit': 'vitest src/test/unit --run',
+      'test:e2e': 'vitest src/test/e2e --run',
       'test:ci': 'vitest run --coverage',
       'test:ci:unit': 'vitest run src/test/unit --coverage',
       'test:ci:e2e': 'vitest run src/test/e2e --coverage',

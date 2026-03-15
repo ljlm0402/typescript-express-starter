@@ -4,7 +4,7 @@ export default defineConfig({
   entry: ['src/server.ts'], // CLI 등 추가시 여러 entry도 가능
   outDir: 'dist', // 출력 디렉토리
   format: ['cjs'], // 필요시 'esm'도 ['cjs', 'esm']
-  dts: true, // 타입 선언 파일(.d.ts) 생성
+  dts: false, // 앱 템플릿은 선언 파일 생성 비활성화
   sourcemap: true, // 소스맵 생성
   clean: true, // 빌드 전 dist 폴더 정리
   target: 'es2020', // 트랜스파일 대상

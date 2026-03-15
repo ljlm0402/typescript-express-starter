@@ -12,8 +12,12 @@ import { logger } from '@utils/logger';
 export class AuthService {
   private readonly usersRepository: IUsersRepository;
 
-  constructor() {
-    this.usersRepository = container.resolve(UsersRepository);
+  constructor(usersRepository?: IUsersRepository) {
+    if (usersRepository) {
+      this.usersRepository = usersRepository;
+    } else {
+      this.usersRepository = container.resolve(UsersRepository);
+    }
   }
 
   private createToken(user: User): TokenData {
