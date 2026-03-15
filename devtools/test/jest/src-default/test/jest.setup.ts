@@ -12,4 +12,4 @@ process.exit = ((code?: number) => {
   
   // 강제 종료
   originalExit(code);
-}) as any;
+}) as typeof process.exit;
