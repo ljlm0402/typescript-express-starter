@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: ${COMPOSE_PROJECT_NAME:-app}-dev
+    ports:
+      - '${PORT:-3000}:3000'
+    volumes:
+      # 소스 코드 핫 리로드
+      - .:/app
+      - /app/node_modules
+      # 로그 디렉토리 영속화
+      - ./logs:/app/logs
+    environment:
+      - NODE_ENV=development
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - LOG_LEVEL=debug
+    depends_on:
+      pg:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - backend
+
+  pg:
+    container_name: ${COMPOSE_PROJECT_NAME:-app}-pg
+    image: postgres:16-alpine
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/postgres/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-app_db}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  pgdata:
+    driver: local

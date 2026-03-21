@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
 import { NODE_ENV, PORT, LOG_FORMAT, CREDENTIALS, CORS_ORIGIN_LIST } from '@config/env';
-import { Routes } from '@interfaces/routes.interface';
+import type { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { NotFoundMiddleware } from '@middlewares/notFound.middleware';
 import { logger, stream } from '@utils/logger';
@@ -105,7 +105,7 @@ class App {
 
   private initializeRoutes(routes: Routes[], apiPrefix: string) {
     routes.forEach((route) => {
-      this.app.use(apiPrefix, route.router);
+      this.app.use(apiPrefix + route.path, route.router);
     });
   }
 

@@ -1,0 +1,51 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true,
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true,
+    },
+    "target": "es2020",
+    "externalHelpers": true,
+    "keepClassNames": true,
+    "loose": true,
+    "minify": {
+      "compress": {
+        "dead_code": true,
+        "drop_console": false,
+        "drop_debugger": true,
+        "keep_fargs": true,
+        "pure_getters": true,
+        "unused": true,
+      },
+      "mangle": false,
+    },
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["*"],
+      "@config/*": ["config/*"],
+      "@controllers/*": ["controllers/*"],
+      "@dtos/*": ["dtos/*"],
+      "@entities/*": ["entities/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@interfaces/*": ["interfaces/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@models/*": ["models/*"],
+      "@repositories/*": ["repositories/*"],
+      "@routes/*": ["routes/*"],
+      "@services/*": ["services/*"],
+      "@utils/*": ["utils/*"],
+    },
+  },
+  "module": {
+    "type": "commonjs",
+    "strict": false,
+    "strictMode": true,
+  },
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts", "coverage", "logs"],
+}

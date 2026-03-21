@@ -1,6 +1,6 @@
 import { config } from 'dotenv';
-import { existsSync } from 'fs';
-import { resolve } from 'path';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { z } from 'zod';
 
 /**

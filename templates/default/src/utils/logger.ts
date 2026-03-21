@@ -1,5 +1,5 @@
-import { existsSync, mkdirSync } from 'fs';
-import { join } from 'path';
+import { existsSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
 import pino from 'pino';
 import { LOG_DIR, LOG_LEVEL, NODE_ENV } from '@config/env';
 
@@ -13,16 +13,11 @@ const projectRoot = process.cwd(); // 현재 프로세스 실행 디렉토리
 const logDir = join(projectRoot, logRoot);
 
 // 로그 디렉토리 생성 (에러 핸들링 포함)
-try {
-  if (!existsSync(logDir)) {
-    mkdirSync(logDir, { recursive: true });
-    console.log(`[Logger Init] Created log directory: ${logDir}`);
-  } else {
-    console.log(`[Logger Init] Log directory already exists: ${logDir}`);
-  }
-} catch (error) {
-  console.error(`[Logger Init] Failed to create log directory: ${logDir}`, error);
-  throw error;
+if (!existsSync(logDir)) {
+  mkdirSync(logDir, { recursive: true });
+  // console.log(`[Logger Init] Created log directory: ${logDir}`);
+} else {
+  // console.log(`[Logger Init] Log directory already exists: ${logDir}`);
 }
 
 // 파일 로깅용 경로
@@ -45,7 +40,7 @@ const transport = pino.transport({
             dateFormat: 'yyyy-MM-dd',
             extension: '.log',
             mkdir: true,
-            symlink: true, // current.log 심볼릭 링크 생성
+            symlink: false, // 심볼릭 링크 비활성화로 충돌 방지
             limit: { count: 30 }, // 30개 보관
             // limit: { count: 30, removeOtherLogFiles: false }, // PM2/클러스터면 주의
           },
@@ -61,7 +56,7 @@ const transport = pino.transport({
             dateFormat: 'yyyy-MM-dd',
             extension: '.log',
             mkdir: true,
-            symlink: true,
+            symlink: false, // 심볼릭 링크 비활성화로 충돌 방지
             limit: { count: 60 },
           },
         },

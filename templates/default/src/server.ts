@@ -3,29 +3,33 @@ import '@config/env';
 import { container } from 'tsyringe';
 import App from '@/app';
 import { UsersRepository } from '@repositories/users.repository';
+import { AuthService } from '@services/auth.service';
+import { UsersService } from '@services/users.service';
 import { AuthRoute } from '@routes/auth.route';
 import { UsersRoute } from '@routes/users.route';
+import { logger } from '@utils/logger';
 
 // DI 등록
 container.registerInstance(UsersRepository, new UsersRepository());
+container.registerSingleton(AuthService);
+container.registerSingleton(UsersService);
 
-// 라우트 모듈을 필요에 따라 동적으로 배열화 가능
-const routes = [container.resolve(UsersRoute), container.resolve(AuthRoute)];
+// 라우트 인스턴스 생성
+const routes = [container.resolve(AuthRoute), container.resolve(UsersRoute)];
 
-// API prefix는 app.ts에서 기본값 세팅, 필요하면 인자로 전달
+// 앱 인스턴스 생성
 const appInstance = new App(routes);
 
-// listen()이 서버 객체(http.Server)를 반환하도록 app.ts를 살짝 수정
-const server = appInstance.listen(); // PORT를 쓰려면 이렇게 전달도 가능
+// 서버 시작
+const server = appInstance.listen();
 
-// Graceful Shutdown: 운영환경에서 필수!
+// Graceful Shutdown
 if (server && typeof server.close === 'function') {
   ['SIGINT', 'SIGTERM'].forEach((signal) => {
     process.on(signal, () => {
-      console.log(`Received ${signal}, closing server...`);
+      logger.info(`Received ${signal}, closing server...`);
       server.close(() => {
-        console.log('HTTP server closed gracefully');
-        // 필요하면 DB/Redis 등 외부 자원 해제 코드 추가
+        logger.info('HTTP server closed gracefully');
         process.exit(0);
       });
     });

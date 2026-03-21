@@ -1,22 +1,26 @@
-import type { Request, Response } from 'express';
-import { injectable, inject } from 'tsyringe';
-import { RequestWithUser } from '@interfaces/auth.interface';
-import { type UserCreateData } from '@entities/user.entity';
-import { AuthService } from '@services/auth.service';
+import type { Request, Response, RequestHandler } from 'express';
+import { injectable, container } from 'tsyringe';
+import type { RequestWithUser } from '@interfaces/auth.interface';
+import type { UserCreateData } from '@entities/user.entity';
 import { asyncHandler } from '@utils/asyncHandler';
+import { AuthService } from '@services/auth.service';
 
 @injectable()
 export class AuthController {
-  constructor(@inject(AuthService) private readonly authService: AuthService) {}
+  private readonly authService: AuthService;
 
-  public signUp = asyncHandler(async (req: Request, res: Response) => {
+  constructor() {
+    this.authService = container.resolve(AuthService);
+  }
+
+  public signUp: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
     const userData: UserCreateData = req.body;
     const signUpUserData = await this.authService.signup(userData);
 
     res.status(201).json({ data: signUpUserData.toResponse(), message: 'signup' });
   });
 
-  public logIn = asyncHandler(async (req: Request, res: Response) => {
+  public logIn: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
     const loginData: { email: string; password: string } = req.body;
     const { cookie, user } = await this.authService.login(loginData);
 
@@ -24,7 +28,7 @@ export class AuthController {
     res.status(200).json({ data: user.toResponse(), message: 'login' });
   });
 
-  public logOut = asyncHandler(async (req: Request, res: Response) => {
+  public logOut: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
     const userReq = req as RequestWithUser;
     const user = userReq.user;
     await this.authService.logout(user);

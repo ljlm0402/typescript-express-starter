@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "11.0.1",
+  "version": "11.1.1",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -35,7 +35,18 @@
     "typescript-express-starter": "bin/starter.js"
   },
   "scripts": {
-    "start": "node bin/starter.js"
+    "start": "node bin/starter.js",
+    "analyze": "node bin/analyze-project.js",
+    "project-doctor": "node bin/project-doctor.js",
+    "profile": "node bin/performance-profiler.js",
+    "validate-templates": "node bin/validate-templates.js",
+    "clean-templates": "npm run validate-templates",
+    "dev:preset-info": "node bin/preset-info.js",
+    "dev:preset-benchmarks": "node bin/preset-info.js --benchmarks",
+    "dev:test-presets": "node -e \"import('./bin/presets.js').then(m => console.log('Presets:', Object.keys(m.PRESETS)))\"",
+    "test:compat": "node scripts/compat/compat-test.mjs",
+    "test:compat:clean": "node scripts/compat/compat-test.mjs --clean",
+    "test:compat:single": "node scripts/compat/compat-test.mjs --tool"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
@@ -46,6 +57,7 @@
     "fs-extra": "^11.3.3",
     "gitignore": "^0.7.0",
     "inquirer": "^12.11.1",
+    "minimist": "^1.2.8",
     "ncp": "^2.0.0",
     "ora": "^8.2.0",
     "recast": "^0.23.11",

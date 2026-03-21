@@ -1,0 +1,77 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.4.6/schema.json",
+  "vcs": {
+    "enabled": false,
+    "clientKind": "git"
+  },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": [
+      "**/*.ts",
+      "!node_modules/**",
+      "!dist/**", 
+      "!build/**",
+      "!coverage/**",
+      "!**/*.js",
+      "!**/*.d.ts"
+    ]
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    }
+  },
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  },
+  "linter": {
+    "enabled": true,
+    "rules": {
+      "recommended": false,
+      "style": {
+        "useConst": "warn",
+        "noNonNullAssertion": "off",
+        "noParameterAssign": "off"
+      },
+      "suspicious": {
+        "noConsole": { 
+          "level": "warn", 
+          "options": { "allow": ["log", "error"] } 
+        }
+      },
+      "complexity": {
+        "noStaticOnlyClass": "off",
+        "useArrowFunction": "off"
+      },
+      "correctness": {
+        "noUnusedVariables": "warn",
+        "useParseIntRadix": "off"
+      },
+      "performance": {}
+    }
+  },
+  "overrides": [
+    {
+      "includes": [
+        "**/*.spec.ts",
+        "**/*.test.ts", 
+        "**/test/**/*.ts",
+        "**/__tests__/**/*.ts",
+        "jest.config.*"
+      ],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noConsole": "off"
+          },
+          "correctness": {
+            "noUnusedVariables": "off"
+          }
+        }
+      }
+    }
+  ]
+}

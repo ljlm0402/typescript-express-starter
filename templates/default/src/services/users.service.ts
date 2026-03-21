@@ -1,15 +1,31 @@
-import { injectable, inject } from 'tsyringe';
-import { HttpException } from '@exceptions/httpException';
+import { injectable, container } from 'tsyringe';
+import { HttpException } from '@exceptions/http.exception';
 import { User, type UserCreateData } from '@entities/user.entity';
-import { UsersRepository } from '@repositories/users.repository';
+import {
+  UsersRepository,
+  type SimpleQuery,
+  type SimplePaginatedResult,
+} from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';
 
 @injectable()
 export class UsersService {
-  constructor(@inject(UsersRepository) private usersRepository: IUsersRepository) {}
+  private readonly usersRepository: IUsersRepository;
+
+  constructor(usersRepository?: IUsersRepository) {
+    if (usersRepository) {
+      this.usersRepository = usersRepository;
+    } else {
+      this.usersRepository = container.resolve(UsersRepository);
+    }
+  }
 
   async getAllUsers(): Promise<User[]> {
     return this.usersRepository.findAll();
+  }
+
+  async getAllUsersPaginated(options: SimpleQuery): Promise<SimplePaginatedResult> {
+    return this.usersRepository.findAllPaginated(options);
   }
 
   async getUserById(id: string): Promise<User> {
