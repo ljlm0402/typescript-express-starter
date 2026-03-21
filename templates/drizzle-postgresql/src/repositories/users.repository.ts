@@ -1,4 +1,3 @@
-import { singleton } from 'tsyringe';
 import { eq } from 'drizzle-orm';
 import { db } from '@config/database';
 import { users, User, NewUser } from '@config/schema';
@@ -13,7 +12,6 @@ export interface IUsersRepository {
   reset(): Promise<void>; // 테스트용 메소드
 }
 
-@singleton()
 export class UsersRepository implements IUsersRepository {
   async findAll(): Promise<User[]> {
     const result = await db.select().from(users);

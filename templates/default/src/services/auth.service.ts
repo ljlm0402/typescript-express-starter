@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken';
-import { injectable, container } from 'tsyringe';
+import { container } from 'tsyringe';
 import { NODE_ENV, SECRET_KEY } from '@config/env';
 import { HttpException } from '@exceptions/http.exception';
 import type { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
@@ -8,7 +8,6 @@ import { UsersRepository } from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';
 import { logger } from '@utils/logger';
 
-@injectable()
 export class AuthService {
   private readonly usersRepository: IUsersRepository;
 

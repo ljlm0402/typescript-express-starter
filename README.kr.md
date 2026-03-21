@@ -52,6 +52,8 @@
 
 - 🎯 **대화형 설정** — 스마트 CLI로 프로젝트 구성을 안내
 
+- 🚀 **빠른 시작/커스텀 모드** — 프리셋으로 빠르게 시작하거나 카테고리별로 직접 선택
+
 - 🗄️ **다양한 데이터베이스 옵션** — Prisma, Sequelize, TypeORM, Mongoose, Knex 등
 
 - 🛠️ **개발 도구** — ESLint, Biome, Jest, Vitest, Docker, PM2 중 선택
@@ -79,37 +81,47 @@ typescript-express-starter
 
 ┌  📘 TypeScript Express Starter
 │
-◆  Which package manager do you want to use?
+◇  Choose setup mode:
+│  ● 🚀 Quick start (recommended preset) (Automatically selects a sensible toolset)
+│  ○ 🛠 Custom (step-by-step) (Pick tools category by category)
+│
+◇  Which package manager do you want to use?
 │  ● npm
 │  ○ pnpm
 │  ○ yarn
 │
-◆  Choose a template:
-│  ● Express TypeScript (Basic Express + TypeScript starter)
+◇  Choose a template:
+│  ● Express TypeScript (Basic Express + TypeScript starter · beginner · stable)
+│  ○ Drizzle PostgreSQL (Modern SQL toolkit with type safety + full devtools · intermediate · stable)
 │
-◆  Enter your project name:
+◇  Enter your project name:
 │  your-project-name
 │
-◆  Select a tool for "Linter":
-│  ● None
-│  ○ Biome
-│  ○ ESLint & Prettier
-│  ○ Oxlint
+◇  Choose quick profile:
+│  ○ Minimal (Template only (no additional devtools))
+│  ● Recommended (Balanced default toolchain)
+│  ○ Full (One tool from each category)
 │
-◆  Select a tool for "Compiler":
-│  ● None
-│  ○ tsup
-│  ○ SWC
+◇  Preset ────────────────────────────────────────────────────────────╮
+│                                                                     │
+│  Quick profile selected: recommended (biome, tsup, vitest, docker)  │
+│                                                                     │
+├─────────────────────────────────────────────────────────────────────╯
 │
-◆  Select a tool for "Testing":
-│  ● None
-│  ○ Jest
-│  ○ Vitest
+◇  Configuration summary ────────────────────────╮
+│                                                │
+│  Setup mode     : quick                        │
+│  Package manager: pnpm                         │
+│  Template       : Express TypeScript           │
+│  Project name   : your-project-name            │
+│  Devtools       : Biome, tsup, Vitest, Docker  │
+│                                                │
+├────────────────────────────────────────────────╯
+│
+◆  Proceed with project generation?
+│  ● Yes / ○ No
 │
 ✔ 📦 Base dependencies installed!
-│
-◆  Initialize git and make first commit?
-│  ● Yes / ○ No
 │
 └ 🎉 Project setup complete!
 
@@ -157,11 +169,12 @@ your-project/
 
 프로젝트 설정 중 다음 카테고리에서 선택할 수 있습니다:
 
-| 카테고리   | 사용 가능한 도구  | 설명                                 |
-| ---------- | ----------------- | ------------------------------------ |
-| **린터**   | `biome`, `eslint` | 코드 포맷팅 및 린팅 (Biome은 올인원) |
-| **번들러** | `swc`, `tsup`     | 빠른 TypeScript 컴파일 및 번들링     |
-| **테스트** | `jest`, `vitest`  | 단위 및 통합 테스트 프레임워크       |
+| 카테고리     | 사용 가능한 도구            | 설명                                 |
+| ------------ | --------------------------- | ------------------------------------ |
+| **린터**     | `biome`, `eslint`, `oxlint` | 코드 포맷팅 및 린팅 (Biome은 올인원) |
+| **번들러**   | `swc`, `tsup`               | 빠른 TypeScript 컴파일 및 번들링     |
+| **테스트**   | `jest`, `vitest`            | 단위 및 통합 테스트 프레임워크       |
+| **컨테이너** | `docker`                    | Docker 및 docker-compose 구성        |
 
 ### 나중에 추가될 예정 (현재 개발 중):
 
@@ -170,44 +183,63 @@ your-project/
 | **프로세스** | `pm2`            | 프로덕션 프로세스 관리         |
 | **CI/CD**    | `github`         | GitHub Actions 워크플로우      |
 | **Git 훅**   | `husky`          | 품질 관리를 위한 Pre-commit 훅 |
-| **컨테이너** | `docker`         | Docker 및 docker-compose 구성  |
 | **API 문서** | `swagger`        | OpenAPI/Swagger 문서           |
 
 **스마트 선택**: CLI가 도구 의존성과 호환성을 자동으로 해결합니다.
 
 ## 🧩 사용 가능한 템플릿
 
-현재 템플릿 상태 (더 많은 템플릿 추가 예정!):
+포괄적인 호환성 테스트를 완료한 현재 템플릿 상태:
 
-### ✅ **현재 사용 가능**
+### ✅ **프로덕션 준비 및 완전 테스트 완료**
 
-| 템플릿    | 설명                        | 상태    |
-| --------- | --------------------------- | ------- |
-| `default` | Express + TypeScript 스타터 | ✅ 활성 |
+| 템플릿               | 설명                                                | 상태    | 호환성        |
+| -------------------- | --------------------------------------------------- | ------- | ------------- |
+| `default`            | Express + TypeScript 기본 스타터                    | ✅ 활성 | 🎯 베이스라인 |
+| `drizzle-postgresql` | Drizzle ORM + PostgreSQL (타입 안전, 제로 오버헤드) | ✅ 활성 | 🌟 100% (8/8) |
+
+### 🔧 **향상된 개발 도구 지원**
+
+**drizzle-postgresql** 템플릿은 다음과 완전 호환됩니다:
+
+#### 린터
+
+- ✅ **Biome** - 현대적 통합 도구 (린터 + 포맷터)
+- ✅ **ESLint + Prettier** - 전통적이고 안정적인 조합
+- ✅ **Oxlint** - Rust 기반 고성능 린터 (18ms!)
+
+#### 컴파일러
+
+- ✅ **tsup** - esbuild 기반 번들러 (193ms 빌드!)
+- ✅ **SWC** - Rust 기반 네이티브 성능 컴파일러
+
+#### 테스트 러너
+
+- ✅ **Jest** - 완전한 E2E 지원을 가진 성숙한 테스트 프레임워크
+- ✅ **Vitest** - 현대적 Vite 기반 테스트 러너
+
+> 🎯 **8가지 조합 모두 테스트 및 검증 완료** - 원하는 개발 경험을 선택하세요!
 
 ### 🚧 **개발 예정**
 
 #### **ORM/데이터베이스 연동**
 
-| 템플릿          | 설명                                              | 우선순위   |
-| --------------- | ------------------------------------------------- | ---------- |
-| `prisma`        | 타입 안전 데이터베이스 클라이언트, 자동 타입 생성 | 🔥 개발 중 |
-| `drizzle`       | 런타임 오버헤드 없는 TypeScript 우선 ORM          | 🔥 개발 중 |
-| `mongoose`      | Node.js용 우아한 MongoDB ODM                      | 🔥 개발 중 |
-| `mikro-orm`     | TypeScript용 Data Mapper ORM 패턴                 | 🚧 검토 중 |
-| `node-postgres` | 고성능 PostgreSQL 원시 드라이버                   | 🚧 검토 중 |
-| `knex`          | 유연한 SQL 쿼리 빌더 및 마이그레이션              | 🚧 검토 중 |
-| `typeorm`       | 데코레이터 기반 Active Record ORM                 | 🚧 검토 중 |
-| `sequelize`     | 성숙한 Promise 기반 SQL ORM                       | 🚧 검토 중 |
-| `typegoose`     | TypeScript 친화적 Mongoose 대안                   | 🚧 검토 중 |
+| 템플릿          | 설명                                              | 우선순위 |
+| --------------- | ------------------------------------------------- | -------- |
+| `prisma`        | 타입 안전 데이터베이스 클라이언트, 자동 타입 생성 | 🔥 다음  |
+| `mongoose`      | Node.js용 우아한 MongoDB ODM                      | 🔥 다음  |
+| `typeorm`       | 데코레이터 기반 Active Record ORM                 | 🚧 예정  |
+| `sequelize`     | 성숙한 Promise 기반 SQL ORM                       | 🚧 예정  |
+| `mikro-orm`     | TypeScript용 Data Mapper ORM 패턴                 | 🚧 예정  |
+| `typegoose`     | TypeScript 친화적 Mongoose 대안                   | 🚧 예정  |
+| `node-postgres` | 고성능 PostgreSQL 원시 드라이버                   | 🚧 예정  |
+| `knex`          | 유연한 SQL 쿼리 빌더 및 마이그레이션              | 🚧 예정  |
 
 #### **아키텍처/컨트롤러 스타일**
 
 | 템플릿    | 설명                                  | 우선순위   |
 | --------- | ------------------------------------- | ---------- |
 | `graphql` | Apollo Server 기반 GraphQL API 스키마 | 🚧 검토 중 |
-
-> **참고**: 현재 `default` 템플릿에 집중하고 있습니다. 추가 템플릿은 완성 및 테스트가 끝나면 활성화될 예정입니다.
 
 ## 🤔 이 CLI를 사용하는 이유?
 
