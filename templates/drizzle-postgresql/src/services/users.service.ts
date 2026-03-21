@@ -1,13 +1,11 @@
 import { hash } from 'bcryptjs';
-import { injectable, inject } from 'tsyringe';
 import { HttpException } from '@exceptions/http.exception';
 import { User } from '@config/schema';
 import { UsersRepository } from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';
 
-@injectable()
 export class UsersService {
-  constructor(@inject(UsersRepository) private usersRepository: IUsersRepository) {}
+  constructor(private usersRepository: IUsersRepository) {}
 
   async getAllUsers(): Promise<User[]> {
     return this.usersRepository.findAll();

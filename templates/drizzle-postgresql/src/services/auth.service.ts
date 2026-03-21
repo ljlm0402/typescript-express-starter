@@ -1,4 +1,3 @@
-import { injectable, inject } from 'tsyringe';
 import jwt from 'jsonwebtoken';
 import { UsersRepository } from '@repositories/users.repository';
 import { Hash } from '@utils/hash';
@@ -8,9 +7,8 @@ import { SignupRequest, LoginRequest, AuthResponse } from '@dtos/auth.dto';
 import { UserResponse } from '@interfaces/user.interface';
 import { logger } from '@utils/logger';
 
-@injectable()
 export class AuthService {
-  constructor(@inject(UsersRepository) private usersRepository: UsersRepository) {}
+  constructor(private usersRepository: UsersRepository) {}
 
   /**
    * 회원가입

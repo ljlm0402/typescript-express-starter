@@ -7,6 +7,10 @@ import { AuthRoute } from '@routes/auth.route';
 import { UsersRoute } from '@routes/users.route';
 import { logger } from '@utils/logger';
 
+// 🔧 하이브리드 DI 컨테이너 설정
+// Infrastructure(Repository) - 명시적 관리
+// Business(Service) - 명시적 관리
+// Presentation(Controller/Route) - 자동 주입
 setupContainer();
 
 // 라우트 인스턴스 생성

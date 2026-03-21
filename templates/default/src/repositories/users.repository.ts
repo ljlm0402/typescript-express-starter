@@ -1,4 +1,3 @@
-import { singleton } from 'tsyringe';
 import { HttpException } from '@exceptions/http.exception';
 import { User, type UserPersistenceData } from '@entities/user.entity';
 
@@ -29,7 +28,6 @@ export interface IUsersRepository {
   count(search?: string): Promise<number>;
 }
 
-@singleton()
 export class UsersRepository implements IUsersRepository {
   private users: UserPersistenceData[] = [];
 

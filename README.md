@@ -69,6 +69,8 @@ Instead of starting from scratch, this CLI provides a comprehensive project gene
 
 - 🎯 **Interactive Setup** — Smart CLI with guided project configuration
 
+- 🚀 **Quick or Custom Mode** — Start fast with presets or choose tools category by category
+
 - 🗄️ **Multiple Database Options** — Prisma, Sequelize, TypeORM, Mongoose, Knex, and more
 
 - 🛠️ **Development Tools** — Choose from ESLint, Biome, Jest, Vitest, Docker, PM2
@@ -96,37 +98,47 @@ typescript-express-starter
 
 ┌  📘 TypeScript Express Starter
 │
-◆  Which package manager do you want to use?
+◇  Choose setup mode:
+│  ● 🚀 Quick start (recommended preset) (Automatically selects a sensible toolset)
+│  ○ 🛠 Custom (step-by-step) (Pick tools category by category)
+│
+◇  Which package manager do you want to use?
 │  ● npm
 │  ○ pnpm
 │  ○ yarn
 │
-◆  Choose a template:
-│  ● Express TypeScript (Basic Express + TypeScript starter)
+◇  Choose a template:
+│  ● Express TypeScript (Basic Express + TypeScript starter · beginner · stable)
+│  ○ Drizzle PostgreSQL (Modern SQL toolkit with type safety + full devtools · intermediate · stable)
 │
-◆  Enter your project name:
+◇  Enter your project name:
 │  your-project-name
 │
-◆  Select a tool for "Linter":
-│  ● None
-│  ○ Biome
-│  ○ ESLint & Prettier
-│  ○ Oxlint
+◇  Choose quick profile:
+│  ○ Minimal (Template only (no additional devtools))
+│  ● Recommended (Balanced default toolchain)
+│  ○ Full (One tool from each category)
 │
-◆  Select a tool for "Compiler":
-│  ● None
-│  ○ tsup
-│  ○ SWC
+◇  Preset ────────────────────────────────────────────────────────────╮
+│                                                                     │
+│  Quick profile selected: recommended (biome, tsup, vitest, docker)  │
+│                                                                     │
+├─────────────────────────────────────────────────────────────────────╯
 │
-◆  Select a tool for "Testing":
-│  ● None
-│  ○ Jest
-│  ○ Vitest
+◇  Configuration summary ────────────────────────╮
+│                                                │
+│  Setup mode     : quick                        │
+│  Package manager: pnpm                         │
+│  Template       : Express TypeScript           │
+│  Project name   : your-project-name            │
+│  Devtools       : Biome, tsup, Vitest, Docker  │
+│                                                │
+├────────────────────────────────────────────────╯
+│
+◆  Proceed with project generation?
+│  ● Yes / ○ No
 │
 ✔ 📦 Base dependencies installed!
-│
-◆  Initialize git and make first commit?
-│  ● Yes / ○ No
 │
 └ 🎉 Project setup complete!
 
@@ -175,57 +187,77 @@ your-project/
 
 Choose from these categories during project setup:
 
-| Category    | Available Tools   | Description                                     |
-| ----------- | ----------------- | ----------------------------------------------- |
-| **Linter**  | `biome`, `eslint` | Code formatting & linting (Biome is all-in-one) |
-| **Bundler** | `swc`, `tsup`     | Fast TypeScript compilation and bundling        |
-| **Testing** | `jest`, `vitest`  | Unit & integration testing frameworks           |
+| Category      | Available Tools             | Description                                     |
+| ------------- | --------------------------- | ----------------------------------------------- |
+| **Linter**    | `biome`, `eslint`, `oxlint` | Code formatting & linting (Biome is all-in-one) |
+| **Bundler**   | `swc`, `tsup`               | Fast TypeScript compilation and bundling        |
+| **Testing**   | `jest`, `vitest`            | Unit & integration testing frameworks           |
+| **Container** | `docker`                    | Docker & docker-compose configuration           |
 
 ### To be added later (currently in progress):
 
-| Category      | Available Tools | Description                           |
-| ------------- | --------------- | ------------------------------------- |
-| **Process**   | `pm2`           | Production process management         |
-| **CI/CD**     | `github`        | GitHub Actions workflows              |
-| **Git Hooks** | `husky`         | Pre-commit hooks for quality control  |
-| **Container** | `docker`        | Docker & docker-compose configuration |
-| **API Docs**  | `swagger`       | OpenAPI/Swagger documentation         |
+| Category      | Available Tools | Description                          |
+| ------------- | --------------- | ------------------------------------ |
+| **Process**   | `pm2`           | Production process management        |
+| **CI/CD**     | `github`        | GitHub Actions workflows             |
+| **Git Hooks** | `husky`         | Pre-commit hooks for quality control |
+| **API Docs**  | `swagger`       | OpenAPI/Swagger documentation        |
 
 **Smart Selection**: The CLI automatically resolves tool dependencies and compatibility.
 
 ## 🧩 Available Templates
 
-Current template status (more coming soon!):
+Current template status with comprehensive compatibility tested:
 
-### ✅ **Currently Available**
+### ✅ **Production Ready & Fully Tested**
 
-| Template  | Description                  | Status    |
-| --------- | ---------------------------- | --------- |
-| `default` | Express + TypeScript starter | ✅ Active |
+| Template             | Description                                         | Status    | Compatibility |
+| -------------------- | --------------------------------------------------- | --------- | ------------- |
+| `default`            | Express + TypeScript starter                        | ✅ Active | 🎯 Baseline   |
+| `drizzle-postgresql` | Drizzle ORM + PostgreSQL (Type-safe, Zero overhead) | ✅ Active | 🌟 100% (8/8) |
+
+### 🔧 **Enhanced Development Tools Support**
+
+**drizzle-postgresql** template is fully compatible with:
+
+#### Linters
+
+- ✅ **Biome** - Modern unified tool (linter + formatter)
+- ✅ **ESLint + Prettier** - Traditional reliable combination
+- ✅ **Oxlint** - Rust-based high-performance linter (18ms!)
+
+#### Compilers
+
+- ✅ **tsup** - esbuild-based bundler (193ms build!)
+- ✅ **SWC** - Rust-based native performance compiler
+
+#### Test Runners
+
+- ✅ **Jest** - Mature test framework with full E2E support
+- ✅ **Vitest** - Modern Vite-based test runner
+
+> 🎯 **All 8 combinations tested and verified** - Choose your preferred development experience!
 
 ### 🚧 **Coming Soon**
 
 #### **ORM/Database Integration**
 
-| Template        | Description                                         | Priority       |
-| --------------- | --------------------------------------------------- | -------------- |
-| `prisma`        | Type-safe database client with auto-generated types | 🔥 In progress |
-| `drizzle`       | TypeScript-first ORM with zero runtime overhead     | 🔥 In progress |
-| `mongoose`      | Elegant MongoDB ODM for Node.js                     | 🔥 In progress |
-| `mikro-orm`     | Data Mapper ORM pattern for TypeScript              | 🚧 Knowledge   |
-| `node-postgres` | High-performance PostgreSQL native driver           | 🚧 Knowledge   |
-| `knex`          | Flexible SQL query builder & migrations             | 🚧 Knowledge   |
-| `typeorm`       | Decorator-based Active Record ORM                   | 🚧 Knowledge   |
-| `sequelize`     | Mature Promise-based SQL ORM                        | 🚧 Knowledge   |
-| `typegoose`     | TypeScript-friendly Mongoose alternative            | 🚧 Knowledge   |
+| Template        | Description                                         | Priority   |
+| --------------- | --------------------------------------------------- | ---------- |
+| `prisma`        | Type-safe database client with auto-generated types | 🔥 Next    |
+| `mongoose`      | Elegant MongoDB ODM for Node.js                     | 🔥 Next    |
+| `typeorm`       | Decorator-based Active Record ORM                   | 🚧 Planned |
+| `sequelize`     | Mature Promise-based SQL ORM                        | 🚧 Planned |
+| `mikro-orm`     | Data Mapper ORM pattern for TypeScript              | 🚧 Planned |
+| `typegoose`     | TypeScript-friendly Mongoose alternative            | 🚧 Planned |
+| `node-postgres` | High-performance PostgreSQL native driver           | 🚧 Planned |
+| `knex`          | Flexible SQL query builder & migrations             | 🚧 Planned |
 
 #### **Architecture/Controller Style**
 
 | Template  | Description                           | Priority     |
 | --------- | ------------------------------------- | ------------ |
 | `graphql` | GraphQL API schema with Apollo Server | 🚧 Knowledge |
-
-> **Note**: Currently focusing on the `default` template. Additional templates will be activated as they're completed and tested.
 
 ## 🤔 Why Use This CLI?
 

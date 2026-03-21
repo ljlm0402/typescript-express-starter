@@ -1,4 +1,4 @@
-import { injectable, container } from 'tsyringe';
+import { container } from 'tsyringe';
 import { HttpException } from '@exceptions/http.exception';
 import { User, type UserCreateData } from '@entities/user.entity';
 import {
@@ -8,7 +8,6 @@ import {
 } from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';
 
-@injectable()
 export class UsersService {
   private readonly usersRepository: IUsersRepository;
 
