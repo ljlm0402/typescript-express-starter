@@ -42,6 +42,7 @@ import { versionCache, PackageBatch } from './performance.js';
 
 // AST utilities
 import { injectSwaggerIntoApp } from './ast-utils.js';
+import { createProjectMetadata } from './project-health.js';
 
 const RECOMMENDED_TOOLS = {
   Linter: 'biome',
@@ -115,6 +116,33 @@ function buildSetupSummary({ pkgManager, template, projectName, devtoolValues, s
   ].join('\n');
 }
 
+function shouldCopyTemplatePath(src) {
+  const basename = path.basename(src);
+  const normalized = src.split(path.sep);
+
+  return basename !== '.DS_Store' && !normalized.includes('node_modules');
+}
+
+function getTemplateSpecificDevtoolSource({ devtool, categoryPath, template }) {
+  const compilerConfigMap = {
+    tsup: {
+      default: path.join('default', 'default.tsup.config.ts'),
+      'drizzle-postgresql': path.join('orm-templates', 'drizzle.tsup.config.ts'),
+    },
+    swc: {
+      default: path.join('default', 'default.swcrc'),
+      'drizzle-postgresql': path.join('drizzle', 'drizzle.swcrc'),
+    },
+  };
+
+  const compilerConfig = compilerConfigMap[devtool.value]?.[template];
+  if (devtool.category === 'Compiler' && compilerConfig) {
+    return path.join(CONFIG.paths.devtools, categoryPath, devtool.value, compilerConfig);
+  }
+
+  return null;
+}
+
 // ========== [공통 함수들] ==========
 
 // 최신 CLI 버전 체크 & 선택적 설치
@@ -122,7 +150,7 @@ async function checkForUpdate() {
   try {
     const pkgPath = path.resolve(process.cwd(), 'package.json');
     const localPkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    const pkgName = localPkg.name || 'typescript-express-stater';
+    const pkgName = localPkg.name || 'typescript-express-starter';
     const localVersion = localPkg.version || '0.0.0';
 
     const latest = await versionCache.getLatestVersion(pkgName);
@@ -218,6 +246,16 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
   for (const file of devtool.files) {
     let src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, file);
     const dst = path.join(destDir, file);
+    const templateSpecificCompilerSrc = getTemplateSpecificDevtoolSource({
+      devtool,
+      categoryPath,
+      template,
+    });
+
+    if (templateSpecificCompilerSrc && (await fs.pathExists(templateSpecificCompilerSrc))) {
+      src = templateSpecificCompilerSrc;
+      console.log(chalk.cyan(`  ✓ Using template-specific config: ${path.basename(src)}`));
+    }
 
     // Testing 카테고리의 src/test 파일 특별 처리
     if (devtool.category === 'Testing' && (file === 'src/test' || file.startsWith('src/'))) {
@@ -580,7 +618,10 @@ async function main() {
     if (shouldOverwrite) {
       await fs.emptyDir(destDir);
     }
-    await fs.copy(path.join(CONFIG.paths.templates, template), destDir, { overwrite: true });
+    await fs.copy(path.join(CONFIG.paths.templates, template), destDir, {
+      overwrite: true,
+      filter: shouldCopyTemplatePath,
+    });
     spinner.succeed('Template copied!');
   } catch (e) {
     spinner.fail('Template copy failed!');
@@ -657,6 +698,19 @@ async function main() {
   spinner.start(`Installing base dependencies with ${pkgManager}...`);
   await execa(pkgManager, ['install'], { cwd: destDir, stdio: 'inherit' });
   spinner.succeed('📦 Base dependencies installed!');
+
+  // [3-1] 생성 프로젝트 메타데이터 기록
+  try {
+    createProjectMetadata(destDir, {
+      template,
+      devtools: devtoolValues,
+      preset: setupMode,
+      packageManager: pkgManager,
+    });
+    console.log(chalk.gray('  ⎯ .project-meta.json created.'));
+  } catch (error) {
+    console.log(chalk.yellow(`  ⚠️ Project metadata warning: ${error.message}`));
+  }
 
   // [4] git 첫 커밋 옵션
   // await gitInitAndFirstCommit(destDir);

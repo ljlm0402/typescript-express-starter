@@ -278,8 +278,8 @@ export const DEVTOOLS_VALUES = [
       'typescript-eslint@8.57.0',
     ],
     scripts: {
-      lint: 'eslint --ext .ts src/',
-      'lint:fix': 'npm run lint -- --fix',
+      lint: 'eslint src',
+      'lint:fix': 'eslint src --fix',
       format: 'prettier --check .',
       'format:fix': 'prettier --write .',
     },

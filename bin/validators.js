@@ -7,6 +7,23 @@ import path from 'path';
 import { CONFIG } from './config.js';
 import { ValidationError } from './errors.js';
 
+const TEMPLATE_FORBIDDEN_FILES = [
+  'Dockerfile.dev',
+  'Dockerfile.prod',
+  'docker-compose.yml',
+  'jest.config.js',
+  'jest.config.cjs',
+  'jest.config.ts',
+  'vitest.config.js',
+  'vitest.config.ts',
+  '.swcrc',
+  'tsup.config.js',
+  'tsup.config.ts',
+  'eslint.config.js',
+  'eslint.config.cjs',
+  'eslint.config.ts',
+];
+
 /**
  * Validate project name
  */
@@ -54,9 +71,10 @@ export function validateProjectPath(projectPath) {
 
   const resolved = path.resolve(projectPath);
   const cwd = process.cwd();
+  const relative = path.relative(cwd, resolved);
 
   // Prevent path traversal attacks
-  if (!resolved.startsWith(cwd)) {
+  if (relative.startsWith('..') || path.isAbsolute(relative)) {
     throw new ValidationError(
       'Project path must be within current directory',
       'projectPath',
@@ -150,26 +168,9 @@ export function validateNodeVersion(required = CONFIG.minNodeVersion) {
  * Validate template integrity - ensure templates don't contain DevTools files
  */
 export function validateTemplateIntegrity(templatePath) {
-  const forbiddenFiles = [
-    'Dockerfile.dev',
-    'Dockerfile.prod',
-    'docker-compose.yml',
-    'jest.config.js',
-    'jest.config.cjs',
-    'jest.config.ts',
-    'vitest.config.js',
-    'vitest.config.ts',
-    '.swcrc',
-    'tsup.config.js',
-    'tsup.config.ts',
-    'eslint.config.js',
-    'eslint.config.cjs',
-    'eslint.config.ts',
-  ];
-
   const violations = [];
 
-  for (const file of forbiddenFiles) {
+  for (const file of TEMPLATE_FORBIDDEN_FILES) {
     const filePath = path.join(templatePath, file);
     if (fs.existsSync(filePath)) {
       violations.push(file);
@@ -191,26 +192,9 @@ export function validateTemplateIntegrity(templatePath) {
  * Clean template by removing DevTools files
  */
 export function cleanTemplate(templatePath) {
-  const forbiddenFiles = [
-    'Dockerfile.dev',
-    'Dockerfile.prod',
-    'docker-compose.yml',
-    'jest.config.js',
-    'jest.config.cjs',
-    'jest.config.ts',
-    'vitest.config.js',
-    'vitest.config.ts',
-    '.swcrc',
-    'tsup.config.js',
-    'tsup.config.ts',
-    'eslint.config.js',
-    'eslint.config.cjs',
-    'eslint.config.ts',
-  ];
-
   const removedFiles = [];
 
-  for (const file of forbiddenFiles) {
+  for (const file of TEMPLATE_FORBIDDEN_FILES) {
     const filePath = path.join(templatePath, file);
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath);

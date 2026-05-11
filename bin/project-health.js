@@ -7,6 +7,7 @@ import fs from 'fs';
 import path from 'path';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { detectPackageManager, getAuditCommand, getOutdatedCommand } from './package-manager.js';
 
 const execAsync = promisify(exec);
 
@@ -27,6 +28,7 @@ export const PROJECT_METADATA_SCHEMA = {
     preset: '',
     customizations: {},
   },
+  packageManager: 'npm',
   performance: {
     buildTime: null,
     testTime: null,
@@ -64,6 +66,7 @@ export function createProjectMetadata(projectPath, config) {
       preset: config.preset || 'custom',
       customizations: config.customizations || {},
     },
+    packageManager: config.packageManager || detectPackageManager(projectPath),
   };
 
   const metadataPath = path.join(projectPath, '.project-meta.json');
@@ -96,7 +99,7 @@ export function readProjectMetadata(projectPath) {
  */
 export function updateProjectMetadata(projectPath, updates) {
   const metadata = readProjectMetadata(projectPath) || { ...PROJECT_METADATA_SCHEMA };
-  const updatedMetadata = { ...metadata, ...updates };
+  const updatedMetadata = mergeMetadata(metadata, updates);
 
   const metadataPath = path.join(projectPath, '.project-meta.json');
   fs.writeFileSync(metadataPath, JSON.stringify(updatedMetadata, null, 2));
@@ -104,14 +107,33 @@ export function updateProjectMetadata(projectPath, updates) {
   return updatedMetadata;
 }
 
+function mergeMetadata(base, updates) {
+  const merged = { ...base };
+
+  for (const [key, value] of Object.entries(updates)) {
+    if (
+      value &&
+      typeof value === 'object' &&
+      !Array.isArray(value) &&
+      base[key] &&
+      typeof base[key] === 'object' &&
+      !Array.isArray(base[key])
+    ) {
+      merged[key] = mergeMetadata(base[key], value);
+    } else {
+      merged[key] = value;
+    }
+  }
+
+  return merged;
+}
+
 /**
  * Check project health
  */
 export async function checkProjectHealth(projectPath) {
   const metadata = readProjectMetadata(projectPath);
-  if (!metadata) {
-    throw new Error('No project metadata found. Run from a valid project directory.');
-  }
+  const packageManager = metadata?.packageManager || detectPackageManager(projectPath);
 
   const healthChecks = [];
   let score = 100;
@@ -188,8 +210,11 @@ export async function checkProjectHealth(projectPath) {
 
   // 5. Security checks
   try {
-    const { stdout } = await execAsync('npm audit --json', { cwd: projectPath });
-    const auditResult = JSON.parse(stdout);
+    const auditCommand = getAuditCommand(packageManager);
+    const { stdout } = await execAsync(`${packageManager} ${auditCommand.join(' ')}`, {
+      cwd: projectPath,
+    });
+    const auditResult = JSON.parse(stdout || '{}');
 
     if (auditResult.vulnerabilities && Object.keys(auditResult.vulnerabilities).length > 0) {
       const vulnCount = Object.keys(auditResult.vulnerabilities).length;
@@ -197,7 +222,7 @@ export async function checkProjectHealth(projectPath) {
         type: 'warning',
         category: 'security',
         message: `${vulnCount} security vulnerabilities found`,
-        recommendation: 'Run `npm audit fix` to resolve security issues',
+        recommendation: `Run \`${packageManager} audit\` to inspect security issues`,
       });
       score -= Math.min(vulnCount * 2, 20);
     }
@@ -224,9 +249,15 @@ export async function checkProjectHealth(projectPath) {
  * Check for dependency updates
  */
 export async function checkDependencyUpdates(projectPath) {
+  const metadata = readProjectMetadata(projectPath);
+  const packageManager = metadata?.packageManager || detectPackageManager(projectPath);
+
   try {
-    const { stdout } = await execAsync('npm outdated --json', { cwd: projectPath });
-    const outdated = JSON.parse(stdout);
+    const outdatedCommand = getOutdatedCommand(packageManager);
+    const { stdout } = await execAsync(`${packageManager} ${outdatedCommand.join(' ')}`, {
+      cwd: projectPath,
+    });
+    const outdated = JSON.parse(stdout || '{}');
 
     const updateAvailable = {};
     Object.entries(outdated).forEach(([pkg, info]) => {
@@ -248,6 +279,32 @@ export async function checkDependencyUpdates(projectPath) {
 
     return dependencies;
   } catch (error) {
+    if (error.stdout) {
+      try {
+        const outdated = JSON.parse(error.stdout);
+        const updateAvailable = {};
+        Object.entries(outdated).forEach(([pkg, info]) => {
+          updateAvailable[pkg] = {
+            current: info.current,
+            wanted: info.wanted,
+            latest: info.latest,
+            type: info.type || 'dependencies',
+          };
+        });
+
+        const dependencies = {
+          lastUpdate: new Date().toISOString(),
+          updateAvailable,
+          securityVulnerabilities: [],
+        };
+
+        updateProjectMetadata(projectPath, { dependencies });
+        return dependencies;
+      } catch {
+        // Fall through to the warning below.
+      }
+    }
+
     console.warn('Failed to check dependency updates:', error.message);
     return null;
   }
