@@ -105,6 +105,6 @@ describe('UsersService (with UsersRepository)', () => {
   });
 
   it('deleteUser: should throw if ID does not exist', async () => {
-    await expect(usersService.deleteUser('nonexistent-id')).rejects.toThrow(/Invalid user ID format/);
+    await expect(usersService.deleteUser('nonexistent-id')).rejects.toThrow(/not found/);
   });
 });

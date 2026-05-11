@@ -48,6 +48,13 @@ export class UsersService {
     const existingUser = await this.usersRepository.findById(id);
     if (!existingUser) throw new HttpException(404, 'User not found');
 
+    if (updateData.email && updateData.email !== existingUser.email) {
+      const duplicateUser = await this.usersRepository.findByEmail(updateData.email);
+      if (duplicateUser && !duplicateUser.equals(existingUser)) {
+        throw new HttpException(409, 'Email already exists');
+      }
+    }
+
     // Entity의 도메인 메서드를 사용하여 업데이트
     await existingUser.updateProfile(updateData);
 

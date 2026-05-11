@@ -1,7 +1,9 @@
 import { defineConfig } from 'vitest/config';
-import path from 'path';
+import path from 'node:path';
+import tsconfigPaths from 'vite-tsconfig-paths';
 
 export default defineConfig({
+  plugins: [tsconfigPaths()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src'),
@@ -28,6 +30,7 @@ export default defineConfig({
       'coverage',
       'logs',
       'drizzle/**/*',
+      // 'src/test/unit_disabled/**/*',
     ],
     testTimeout: 15000,
     setupFiles: ['reflect-metadata'],

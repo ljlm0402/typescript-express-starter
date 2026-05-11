@@ -10,8 +10,8 @@ describe('Auth API', () => {
     server = createTestApp(); // Use shared repository for testing
   });
 
-  beforeEach(() => {
-    resetUserDB(); // Reset repository before each test
+  beforeEach(async () => {
+    await resetUserDB(); // Reset repository before each test
   });
 
   it('should successfully register a new user', async () => {

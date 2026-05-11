@@ -30,6 +30,8 @@ export interface IUsersRepository {
 
 export class UsersRepository implements IUsersRepository {
   private users: UserPersistenceData[] = [];
+  private readonly uuidRegex =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
   async findAll(): Promise<User[]> {
     return this.users.map((userData) => User.fromPersistence(userData));
@@ -70,12 +72,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async findById(id: string): Promise<User | undefined> {
-    // UUID 형식 검증 (user_ prefix 허용)
-    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    if (!uuidRegex.test(cleanId)) {
-      throw new HttpException(404, 'User not found');
-    }
+    this.assertValidId(id);
 
     const userData = this.users.find((u) => u.id === id);
     return userData ? User.fromPersistence(userData) : undefined;
@@ -93,12 +90,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async update(id: string, user: User): Promise<User | undefined> {
-    // UUID 형식 검증 (user_ prefix 허용)
-    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    if (!uuidRegex.test(cleanId)) {
-      throw new Error('Invalid user ID format');
-    }
+    this.assertValidId(id);
 
     const idx = this.users.findIndex((u) => u.id === id);
     if (idx === -1) return undefined;
@@ -108,12 +100,7 @@ export class UsersRepository implements IUsersRepository {
   }
 
   async delete(id: string): Promise<boolean> {
-    // UUID 형식 검증 (user_ prefix 허용)
-    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
-    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
-    if (!uuidRegex.test(cleanId)) {
-      throw new Error('Invalid user ID format');
-    }
+    this.assertValidId(id);
 
     const idx = this.users.findIndex((u) => u.id === id);
     if (idx === -1) return false;
@@ -123,5 +110,12 @@ export class UsersRepository implements IUsersRepository {
 
   reset() {
     this.users = [];
+  }
+
+  private assertValidId(id: string): void {
+    const cleanId = id.startsWith('user_') ? id.substring(5) : id;
+    if (!this.uuidRegex.test(cleanId)) {
+      throw new HttpException(404, 'User not found');
+    }
   }
 }

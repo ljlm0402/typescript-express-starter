@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { injectable, container } from 'tsyringe';
 import { AuthController } from '@controllers/auth.controller';
-import { createUserSchema } from '@dtos/users.dto';
+import { createUserSchema, loginUserSchema } from '@dtos/users.dto';
 import type { Routes } from '@interfaces/routes.interface';
 import { AuthMiddleware } from '@middlewares/auth.middleware';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
@@ -19,7 +19,7 @@ export class AuthRoute implements Routes {
 
   private initializeRoutes() {
     this.router.post('/signup', ValidationMiddleware(createUserSchema), this.authController.signUp);
-    this.router.post('/login', ValidationMiddleware(createUserSchema), this.authController.logIn);
+    this.router.post('/login', ValidationMiddleware(loginUserSchema), this.authController.logIn);
     this.router.post('/logout', AuthMiddleware, this.authController.logOut);
   }
 }

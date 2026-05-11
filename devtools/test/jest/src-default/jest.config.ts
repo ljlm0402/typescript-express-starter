@@ -27,6 +27,7 @@ const config: Config = {
   },
   setupFilesAfterEnv: ['<rootDir>/src/test/setup.ts'],
   setupFiles: ['<rootDir>/src/test/jest.setup.ts'],
+  testPathIgnorePatterns: ['/node_modules/', '/dist/', '/logs/'],
   testTimeout: 10000,
 
   // Watchman 비활성화 (macOS 호환성 개선)

@@ -10,8 +10,8 @@ describe('Users API', () => {
     server = createTestApp(); // Initialize server with shared repository
   });
 
-  beforeEach(() => {
-    resetUserDB(); // Reset repository before each test
+  beforeEach(async () => {
+    await resetUserDB(); // Reset repository before each test
   });
 
   it('should create a new user', async () => {
@@ -46,8 +46,7 @@ describe('Users API', () => {
     const id = createRes.body.data.id;
 
     const updateData = {
-      email: user.email, // DTO에서 email 필드 필요
-      password: 'newpassword123'
+      password: 'newpassword123',
     };
     const res = await request(server).put(`${prefix}/users/${id}`).send(updateData);
     expect(res.statusCode).toBe(200);

@@ -24,9 +24,9 @@ export function createTestApp({ mockRepo }: { mockRepo?: IUsersRepository } = {}
   return appInstance.getServer();
 }
 
-export function resetUserDB() {
+export async function resetUserDB() {
   if (sharedRepo) {
-    sharedRepo.reset();
+    await sharedRepo.reset();
   }
 }
 
