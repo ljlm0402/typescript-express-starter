@@ -92,6 +92,25 @@ export const TEMPLATES_VALUES = [
     learningCurve: 'easy',
     enterpriseReady: true,
   },
+  {
+    /** express-cargo - 데코레이터 기반 선언적 검증/바인딩 템플릿 */
+    name: 'Express + Cargo',
+    value: 'express-cargo',
+    desc: 'Declarative validation & binding with decorators',
+    active: true,
+    tags: ['express', 'cargo', 'decorators', 'validation'],
+    version: 'v1.0.0',
+    maintainer: 'core',
+    lastUpdated: '2026-05-21',
+    devtoolsCompatibility: '100%',
+    verificationStatus: 'complete',
+    complexity: 'intermediate',
+    maturity: 'stable',
+    performanceRating: 'A',
+    recommendedFor: ['데코레이터 선호', '선언적 코드 스타일', '빠른 개발'],
+    learningCurve: 'moderate',
+    enterpriseReady: true,
+  },
 
   /**
    * ==== [개발 중인 템플릿들 - DevTools 호환성 테스트 대기 중] ====
