@@ -64,6 +64,12 @@ export const BENCHMARKS = {
     biome: { improvement: '20x', lintTime: '0.13s', description: 'Entity validation' },
     vitest: { improvement: '4.7x', testTime: '3.0s', description: 'TypeORM test optimization' },
   },
+  'express-cargo': {
+    swc: { improvement: '3.4x', buildTime: '0.9s', description: 'Fast decorator compilation' },
+    tsup: { improvement: '3x', buildTime: '1.2s', description: 'Optimized bundling' },
+    biome: { improvement: '22x', lintTime: '0.1s', description: 'Swift validation' },
+    vitest: { improvement: '5.1x', testTime: '2.5s', description: 'Fast testing' },
+  },
 };
 
 // DevTools presets for different development scenarios
