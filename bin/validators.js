@@ -225,7 +225,7 @@ export function cleanTemplate(templatePath) {
  * Validate all templates in the templates directory
  */
 export function validateAllTemplates() {
-  const templatesDir = path.join(process.cwd(), 'templates');
+  const templatesDir = CONFIG.paths.templates;
   const results = {};
 
   if (!fs.existsSync(templatesDir)) {
