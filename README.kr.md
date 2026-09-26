@@ -93,6 +93,7 @@ typescript-express-starter
 ◇  Choose a template:
 │  ● Express TypeScript (Basic Express + TypeScript starter · beginner · stable)
 │  ○ Drizzle PostgreSQL (Modern SQL toolkit with type safety + full devtools · intermediate · stable)
+│  ○ Express + express-cargo (Declarative validation & binding with decorators · intermediate · stable)
 │
 ◇  Enter your project name:
 │  your-project-name
@@ -197,6 +198,7 @@ your-project/
 | -------------------- | --------------------------------------------------- | ------- | ------------- |
 | `default`            | Express + TypeScript 기본 스타터                    | ✅ 활성 | 🎯 베이스라인 |
 | `drizzle-postgresql` | Drizzle ORM + PostgreSQL (타입 안전, 제로 오버헤드) | ✅ 활성 | 🌟 100% (8/8) |
+| `express-cargo`      | 데코레이터 기반 요청 바인딩 & 검증 (express-cargo)  | ✅ 활성 | 🧪 검증 예정  |
 
 ### 🔧 **향상된 개발 도구 지원**
 

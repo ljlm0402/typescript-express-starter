@@ -14,38 +14,39 @@ describe('Users API', () => {
     resetUserDB(); // Reset repository before each test
   });
 
-  const user = { email: 'user1@example.com', password: 'password123' };
-
   it('should create a new user', async () => {
+    const user = getUniqueUser();
     const res = await request(server).post(`${prefix}/users`).send(user);
     expect(res.statusCode).toBe(201);
     expect(res.body.data.email).toBe(user.email);
   });
 
   it('should retrieve all users', async () => {
+    const user = getUniqueUser();
     await request(server).post(`${prefix}/users`).send(user);
     const res = await request(server).get(`${prefix}/users`);
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body.data)).toBe(true);
-    expect(res.body.data[0].email).toBe('user1@example.com');
+    expect(res.body.data[0].email).toBe(user.email);
   });
 
   it('should retrieve a user by id', async () => {
+    const user = getUniqueUser();
     const createRes = await request(server).post(`${prefix}/users`).send(user);
     const id = createRes.body.data.id;
 
     const res = await request(server).get(`${prefix}/users/${id}`);
     expect(res.statusCode).toBe(200);
-    expect(res.body.data.email).toBe('user1@example.com');
+    expect(res.body.data.email).toBe(user.email);
   });
 
   it('should update user information', async () => {
+    const user = getUniqueUser();
     const createRes = await request(server).post(`${prefix}/users`).send(user);
     const id = createRes.body.data.id;
 
     const updateData = {
-      email: user.email, // DTO에서 email 필드 필요
-      password: 'newpassword123'
+      password: 'newpassword123',
     };
     const res = await request(server).put(`${prefix}/users/${id}`).send(updateData);
     expect(res.statusCode).toBe(200);
@@ -53,6 +54,7 @@ describe('Users API', () => {
   });
 
   it('should delete a user', async () => {
+    const user = getUniqueUser();
     const createRes = await request(server).post(`${prefix}/users`).send(user);
     const id = createRes.body.data.id;
 

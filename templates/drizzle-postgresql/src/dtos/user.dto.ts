@@ -1,19 +1,9 @@
-import { z } from 'zod';
+export {
+  createUserSchema as CreateUserDto,
+  updateUserSchema as UpdateUserDto,
+} from './users.dto';
 
-export const CreateUserDto = z.object({
-  email: z.string().email('Invalid email format'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-});
-
-export const UpdateUserDto = z.object({
-  email: z.string().email('Invalid email format').optional(),
-  password: z.string().min(6, 'Password must be at least 6 characters').optional(),
-  firstName: z.string().optional(),
-  lastName: z.string().optional(),
-  isActive: z.boolean().optional(),
-});
-
-export type CreateUserRequest = z.infer<typeof CreateUserDto>;
-export type UpdateUserRequest = z.infer<typeof UpdateUserDto>;
+export type {
+  CreateUserDto as CreateUserRequest,
+  UpdateUserDto as UpdateUserRequest,
+} from './users.dto';

@@ -1,16 +1,18 @@
 import { Router } from 'express';
-import { injectable, inject } from 'tsyringe';
+import { injectable, container } from 'tsyringe';
 import { UsersController } from '@controllers/users.controller';
 import { createUserSchema, updateUserSchema } from '@dtos/users.dto';
-import { Routes } from '@interfaces/routes.interface';
+import type { Routes } from '@interfaces/routes.interface';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
 @injectable()
 export class UsersRoute implements Routes {
   public router: Router = Router();
   public path = '/users';
+  private readonly userController: UsersController;
 
-  constructor(@inject(UsersController) private userController: UsersController) {
+  constructor() {
+    this.userController = container.resolve(UsersController);
     this.initializeRoutes();
   }
 

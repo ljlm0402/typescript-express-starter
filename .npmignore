@@ -6,6 +6,8 @@ Thumbs.db
 .git
 .gitignore
 .github/
+AGENTS.md
+cookies*.txt
 
 # Lint / Format
 .eslintrc
@@ -28,6 +30,14 @@ coverage/
 *.log
 *.tgz
 
+# Generated files inside project templates
+templates/**/node_modules/
+templates/**/dist/
+templates/**/build/
+templates/**/coverage/
+templates/**/logs/
+templates/**/.turbo/
+
 # Environment variables
 .env
 .env.*.local
@@ -35,6 +45,8 @@ coverage/
 # Document
 examples/
 docs/
+scripts/
+temp/
 
 # Lock files
 package-lock.json

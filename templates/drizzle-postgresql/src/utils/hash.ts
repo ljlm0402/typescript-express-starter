@@ -1,19 +1,24 @@
-import bcrypt from 'bcryptjs';
+import { hash, compare } from 'bcryptjs';
 
 export class Hash {
-  private static readonly SALT_ROUNDS = 12;
-
-  /**
-   * 비밀번호 해싱
-   */
   static async hashPassword(password: string): Promise<string> {
-    return bcrypt.hash(password, this.SALT_ROUNDS);
+    if (!password || typeof password !== 'string') {
+      throw new Error('Password is required');
+    }
+    return hash(password, 12);
   }
 
-  /**
-   * 비밀번호 검증
-   */
   static async comparePassword(password: string, hashedPassword: string): Promise<boolean> {
-    return bcrypt.compare(password, hashedPassword);
+    if (!password || !hashedPassword) {
+      return false;
+    }
+    return compare(password, hashedPassword);
+  }
+
+  static async hashText(text: string): Promise<string> {
+    if (!text || typeof text !== 'string') {
+      throw new Error('Text is required');
+    }
+    return hash(text, 10);
   }
 }

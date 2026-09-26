@@ -1,41 +1,65 @@
 import { hash } from 'bcryptjs';
 import { HttpException } from '@exceptions/http.exception';
 import { User } from '@config/schema';
-import { UsersRepository } from '@repositories/users.repository';
+import type { CreateUserDto, UpdateUserDto, UsersQueryDto } from '@dtos/users.dto';
+import type { UserResponse } from '@interfaces/user.interface';
 import type { IUsersRepository } from '@repositories/users.repository';
 
 export class UsersService {
   constructor(private usersRepository: IUsersRepository) {}
 
-  async getAllUsers(): Promise<User[]> {
-    return this.usersRepository.findAll();
+  private toUserResponse(user: User): UserResponse {
+    const { password: _password, ...userResponse } = user;
+    return userResponse;
   }
 
-  async getUserById(id: string): Promise<User> {
+  async getAllUsers(): Promise<UserResponse[]> {
+    const users = await this.usersRepository.findAll();
+    return users.map((user) => this.toUserResponse(user));
+  }
+
+  async getAllUsersPaginated(options: UsersQueryDto) {
+    const result = await this.usersRepository.findAllPaginated(options);
+
+    return {
+      ...result,
+      users: result.users.map((user) => this.toUserResponse(user)),
+    };
+  }
+
+  async getUserById(id: string): Promise<UserResponse> {
     const user = await this.usersRepository.findById(id);
     if (!user) throw new HttpException(404, 'User not found');
-    return user;
+    return this.toUserResponse(user);
   }
 
-  async createUser(user: User): Promise<User> {
-    const exists = await this.usersRepository.findByEmail(user.email);
+  async createUser(user: CreateUserDto): Promise<UserResponse> {
+    const normalizedEmail = user.email.toLowerCase();
+    const exists = await this.usersRepository.findByEmail(normalizedEmail);
     if (exists) throw new HttpException(409, 'Email already exists');
 
     const hashedPassword = await hash(user.password, 10);
     const created = {
-      email: user.email,
+      email: normalizedEmail,
       password: hashedPassword,
-      firstName: null,
-      lastName: null,
-      isActive: true,
+      firstName: user.firstName ?? null,
+      lastName: user.lastName ?? null,
+      isActive: user.isActive ?? true,
     };
     const savedUser = await this.usersRepository.save(created);
-    return savedUser;
+    return this.toUserResponse(savedUser);
   }
 
-  async updateUser(id: string, update: User): Promise<User> {
+  async updateUser(id: string, update: UpdateUserDto): Promise<UserResponse> {
     const exists = await this.usersRepository.findById(id);
     if (!exists) throw new HttpException(404, 'User not found');
+
+    if (update.email && update.email !== exists.email) {
+      const duplicateUser = await this.usersRepository.findByEmail(update.email);
+      if (duplicateUser && duplicateUser.id !== exists.id) {
+        throw new HttpException(409, 'Email already exists');
+      }
+    }
 
     if (typeof update.password === 'string' && update.password.length > 0) {
       update = { ...update, password: await hash(update.password, 10) };
@@ -49,7 +73,7 @@ export class UsersService {
       isActive: update.isActive,
     });
     if (!updated) throw new HttpException(404, 'User not found');
-    return updated;
+    return this.toUserResponse(updated);
   }
 
   async deleteUser(id: string): Promise<void> {

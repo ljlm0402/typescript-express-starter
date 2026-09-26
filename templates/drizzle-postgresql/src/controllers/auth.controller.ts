@@ -1,69 +1,42 @@
-import { Request, Response, NextFunction } from 'express';
-import { injectable, inject } from 'tsyringe';
+import type { Request, Response, RequestHandler } from 'express';
+import { injectable, container } from 'tsyringe';
+import type { RequestWithUser } from '@interfaces/auth.interface';
+import type { LoginRequest, SignupRequest } from '@dtos/auth.dto';
+import { asyncHandler } from '@utils/asyncHandler';
 import { AuthService } from '@services/auth.service';
-import { NODE_ENV } from '@config/env';
-import { AuthRequest } from '@middlewares/auth.middleware';
 
 @injectable()
 export class AuthController {
-  constructor(@inject(AuthService) private readonly authService: AuthService) {}
+  private readonly authService: AuthService;
 
-  /**
-   * 회원가입
-   * POST /api/v1/auth/signup
-   */
-  public signup = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userData = req.body;
-      const result = await this.authService.signup(userData);
+  constructor() {
+    this.authService = container.resolve(AuthService);
+  }
 
-      res.status(201).json(result);
-    } catch (error) {
-      next(error);
-    }
-  };
+  public signUp: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
+    const userData: SignupRequest = req.body;
+    const signUpUserData = await this.authService.signup(userData);
 
-  /**
-   * 로그인
-   * POST /api/v1/auth/login
-   */
-  public login = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userData = req.body;
-      const { response, token } = await this.authService.login(userData);
+    res.status(201).json({ data: signUpUserData, message: 'signup' });
+  });
 
-      // JWT를 HttpOnly 쿠키로 설정
-      res.cookie('Authorization', token, {
-        httpOnly: true,
-        secure: NODE_ENV === 'production',
-        sameSite: 'lax',
-        maxAge: 24 * 60 * 60 * 1000, // 24시간
-        path: '/',
-      });
+  public logIn: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
+    const loginData: LoginRequest = req.body;
+    const { cookie, user } = await this.authService.login(loginData);
 
-      res.status(200).json(response);
-    } catch (error) {
-      next(error);
-    }
-  };
+    res.setHeader('Set-Cookie', [cookie]);
+    res.status(200).json({ data: user, message: 'login' });
+  });
 
-  /**
-   * 로그아웃
-   * POST /api/v1/auth/logout
-   */
-  public logout = async (req: AuthRequest, res: Response, next: NextFunction) => {
-    try {
-      // 쿠키 제거
-      res.clearCookie('Authorization', {
-        httpOnly: true,
-        secure: NODE_ENV === 'production',
-        sameSite: 'lax',
-        path: '/',
-      });
+  public logOut: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
+    const userReq = req as RequestWithUser;
+    await this.authService.logout(userReq.user);
 
-      res.status(200).json({ message: 'logout' });
-    } catch (error) {
-      next(error);
-    }
-  };
+    res.clearCookie('Authorization', {
+      httpOnly: true,
+      path: '/',
+      sameSite: 'lax',
+    });
+    res.status(200).json({ message: 'logout' });
+  });
 }

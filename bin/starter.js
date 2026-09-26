@@ -20,6 +20,9 @@ import path from 'path';
 // Config and constants
 import { CONFIG, getEnvironmentConfig } from './config.js';
 import { PACKAGE_MANAGER, TEMPLATES_VALUES, DEVTOOLS_VALUES } from './common.js';
+import { getCompilerVariantFile, getTestingVariantFolder } from './devtool-variants.js';
+import { ensureEnvironmentFile } from './environment.js';
+import { getRecommendedDevTools } from '../devtools/config/template-mapping.js';
 import { getBenchmarkInfo } from './presets.js';
 
 // Database configuration
@@ -42,12 +45,13 @@ import { versionCache, PackageBatch } from './performance.js';
 
 // AST utilities
 import { injectSwaggerIntoApp } from './ast-utils.js';
+import { createProjectMetadata } from './project-health.js';
 
-const RECOMMENDED_TOOLS = {
-  Linter: 'biome',
-  Compiler: 'tsup',
-  Testing: 'vitest',
-  Infrastructure: null,
+const CATEGORY_RECOMMENDATION_KEYS = {
+  Linter: 'linter',
+  Compiler: 'compiler',
+  Testing: 'testing',
+  Infrastructure: 'infrastructure',
 };
 
 function isNewerVersion(latest, current) {
@@ -81,10 +85,12 @@ function getGroupedDevtools() {
   }, {});
 }
 
-function getPresetDevtools(setupProfile, groupedDevtools) {
+function getPresetDevtools(setupProfile, groupedDevtools, template) {
   if (setupProfile === 'minimal') return [];
 
   const picked = [];
+  const templateRecommendations = getRecommendedDevTools(template);
+
   for (const [category, tools] of Object.entries(groupedDevtools)) {
     if (setupProfile === 'full') {
       const firstTool = tools[0];
@@ -92,7 +98,8 @@ function getPresetDevtools(setupProfile, groupedDevtools) {
       continue;
     }
 
-    const recommendedValue = RECOMMENDED_TOOLS[category];
+    const recommendationKey = CATEGORY_RECOMMENDATION_KEYS[category];
+    const recommendedValue = recommendationKey ? templateRecommendations[recommendationKey] : null;
     const recommendedTool = tools.find((tool) => tool.value === recommendedValue) || tools[0];
     if (recommendedTool) picked.push(recommendedTool.value);
   }
@@ -115,6 +122,23 @@ function buildSetupSummary({ pkgManager, template, projectName, devtoolValues, s
   ].join('\n');
 }
 
+function shouldCopyTemplatePath(src) {
+  const basename = path.basename(src);
+  const normalized = src.split(path.sep);
+  const ignoredSegments = new Set(['node_modules', 'dist', 'coverage', 'logs', '.turbo']);
+
+  return basename !== '.DS_Store' && !normalized.some((segment) => ignoredSegments.has(segment));
+}
+
+function getTemplateSpecificDevtoolSource({ devtool, categoryPath, template }) {
+  const compilerConfig = getCompilerVariantFile(devtool.value, template);
+  if (devtool.category === 'Compiler' && compilerConfig) {
+    return path.join(CONFIG.paths.devtools, categoryPath, devtool.value, compilerConfig);
+  }
+
+  return null;
+}
+
 // ========== [공통 함수들] ==========
 
 // 최신 CLI 버전 체크 & 선택적 설치
@@ -122,7 +146,7 @@ async function checkForUpdate() {
   try {
     const pkgPath = path.resolve(process.cwd(), 'package.json');
     const localPkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
-    const pkgName = localPkg.name || 'typescript-express-stater';
+    const pkgName = localPkg.name || 'typescript-express-starter';
     const localVersion = localPkg.version || '0.0.0';
 
     const latest = await versionCache.getLatestVersion(pkgName);
@@ -195,33 +219,25 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
     Deployment: 'core',
   };
 
-  // 템플릿 이름을 devtools 파일명 prefix로 매핑
-  const templateToPrefix = {
-    'drizzle-postgresql': 'drizzle',
-    'prisma-postgresql': 'prisma',
-    'mongoose-mongodb': 'mongoose',
-    'typegoose-mongodb': 'typegoose',
-    default: null,
-  };
-
-  // 템플릿별 src 폴더 매핑 (Testing 카테고리용)
-  const templateToSrcFolder = {
-    'drizzle-postgresql': 'src-drizzle',
-    'prisma-postgresql': 'src-prisma',
-    // 'mongoose-mongodb': 'src-default',
-    // 'typegoose-mongodb': 'src-default',
-    default: 'src-default',
-  };
-
   const categoryPath = categoryPathMap[devtool.category] || '';
 
   for (const file of devtool.files) {
     let src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, file);
     const dst = path.join(destDir, file);
+    const templateSpecificCompilerSrc = getTemplateSpecificDevtoolSource({
+      devtool,
+      categoryPath,
+      template,
+    });
+
+    if (templateSpecificCompilerSrc && (await fs.pathExists(templateSpecificCompilerSrc))) {
+      src = templateSpecificCompilerSrc;
+      console.log(chalk.cyan(`  ✓ Using template-specific config: ${path.basename(src)}`));
+    }
 
     // Testing 카테고리의 src/test 파일 특별 처리
     if (devtool.category === 'Testing' && (file === 'src/test' || file.startsWith('src/'))) {
-      const srcFolderName = templateToSrcFolder[template] || 'src-default';
+      const srcFolderName = getTestingVariantFolder(devtool.value, template);
       src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, srcFolderName, 'test');
 
       if (await fs.pathExists(src)) {
@@ -244,7 +260,7 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
 
     // Testing 카테고리의 설정 파일 특별 처리 (새로운 구조: src-{template}/설정파일)
     if (devtool.category === 'Testing' && file.includes('.config.')) {
-      const srcFolderName = templateToSrcFolder[template] || 'src-default';
+      const srcFolderName = getTestingVariantFolder(devtool.value, template);
       src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, srcFolderName, file);
 
       if (await fs.pathExists(src)) {
@@ -262,35 +278,6 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
         console.log(chalk.red(`  ✗ ${file} not found at ${src}`));
       }
       continue;
-    }
-
-    // 템플릿별 특화 설정 파일 우선 검색
-    if (template !== 'default' && templateToPrefix[template]) {
-      const prefix = templateToPrefix[template];
-      let templateSpecificFile;
-
-      if (file.includes('.config.')) {
-        // jest.config.cjs -> drizzle.jest.config.cjs
-        templateSpecificFile = `${prefix}.${file}`;
-      } else if (file.startsWith('.')) {
-        // .prettierrc -> drizzle.prettierrc
-        templateSpecificFile = `${prefix}${file}`;
-      } else {
-        // 일반 파일이나 디렉토리인 경우
-        templateSpecificFile = `${prefix}.${file}`;
-      }
-
-      const templateSpecificSrc = path.join(
-        CONFIG.paths.devtools,
-        categoryPath,
-        devtool.value,
-        templateSpecificFile,
-      );
-
-      if (await fs.pathExists(templateSpecificSrc)) {
-        src = templateSpecificSrc;
-        console.log(chalk.cyan(`  ✓ Using template-specific config: ${templateSpecificFile}`));
-      }
     }
 
     if (await fs.pathExists(src)) {
@@ -528,7 +515,7 @@ async function main() {
       initialValue: 'recommended',
     });
     if (isCancel(setupProfile)) return cancel('❌ Aborted.');
-    devtoolValues = getPresetDevtools(setupProfile, groupedDevtools);
+    devtoolValues = getPresetDevtools(setupProfile, groupedDevtools, template);
     note(
       devtoolValues.length > 0
         ? `Quick profile selected: ${setupProfile} (${devtoolValues.join(', ')})`
@@ -580,7 +567,11 @@ async function main() {
     if (shouldOverwrite) {
       await fs.emptyDir(destDir);
     }
-    await fs.copy(path.join(CONFIG.paths.templates, template), destDir, { overwrite: true });
+    await fs.copy(path.join(CONFIG.paths.templates, template), destDir, {
+      overwrite: true,
+      filter: shouldCopyTemplatePath,
+    });
+    await ensureEnvironmentFile(destDir);
     spinner.succeed('Template copied!');
   } catch (e) {
     spinner.fail('Template copy failed!');
@@ -657,6 +648,19 @@ async function main() {
   spinner.start(`Installing base dependencies with ${pkgManager}...`);
   await execa(pkgManager, ['install'], { cwd: destDir, stdio: 'inherit' });
   spinner.succeed('📦 Base dependencies installed!');
+
+  // [3-1] 생성 프로젝트 메타데이터 기록
+  try {
+    createProjectMetadata(destDir, {
+      template,
+      devtools: devtoolValues,
+      preset: setupMode,
+      packageManager: pkgManager,
+    });
+    console.log(chalk.gray('  ⎯ .project-meta.json created.'));
+  } catch (error) {
+    console.log(chalk.yellow(`  ⚠️ Project metadata warning: ${error.message}`));
+  }
 
   // [4] git 첫 커밋 옵션
   // await gitInitAndFirstCommit(destDir);

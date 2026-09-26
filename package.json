@@ -34,8 +34,26 @@
   "bin": {
     "typescript-express-starter": "bin/starter.js"
   },
+  "files": [
+    "bin/",
+    "devtools/",
+    "templates/",
+    "!templates/**/node_modules/**",
+    "!templates/**/dist/**",
+    "!templates/**/build/**",
+    "!templates/**/coverage/**",
+    "!templates/**/logs/**",
+    "!templates/**/.turbo/**",
+    "!templates/**/.DS_Store",
+    "!templates/**/.env",
+    "!templates/**/.env.*.local",
+    "!templates/**/*-lock.json",
+    "!templates/**/pnpm-lock.yaml",
+    "!templates/**/yarn.lock"
+  ],
   "scripts": {
     "start": "node bin/starter.js",
+    "test": "node --test test/*.test.js",
     "analyze": "node bin/analyze-project.js",
     "project-doctor": "node bin/project-doctor.js",
     "profile": "node bin/performance-profiler.js",

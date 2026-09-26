@@ -110,6 +110,7 @@ typescript-express-starter
 ◇  Choose a template:
 │  ● Express TypeScript (Basic Express + TypeScript starter · beginner · stable)
 │  ○ Drizzle PostgreSQL (Modern SQL toolkit with type safety + full devtools · intermediate · stable)
+│  ○ Express + express-cargo (Declarative validation & binding with decorators · intermediate · stable)
 │
 ◇  Enter your project name:
 │  your-project-name
@@ -215,6 +216,7 @@ Current template status with comprehensive compatibility tested:
 | -------------------- | --------------------------------------------------- | --------- | ------------- |
 | `default`            | Express + TypeScript starter                        | ✅ Active | 🎯 Baseline   |
 | `drizzle-postgresql` | Drizzle ORM + PostgreSQL (Type-safe, Zero overhead) | ✅ Active | 🌟 100% (8/8) |
+| `express-cargo`      | Decorator-based request binding & validation        | ✅ Active | 🧪 Pending    |
 
 ### 🔧 **Enhanced Development Tools Support**
 
