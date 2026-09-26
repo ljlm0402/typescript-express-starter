@@ -1,14 +1,15 @@
 {
+  "$schema": "https://json.schemastore.org/swcrc",
   "jsc": {
     "parser": {
       "syntax": "typescript",
       "tsx": false,
       "decorators": true,
-      "dynamicImport": true,
+      "dynamicImport": true
     },
     "transform": {
       "legacyDecorator": true,
-      "decoratorMetadata": true,
+      "decoratorMetadata": true
     },
     "target": "es2022",
     "externalHelpers": true,
@@ -23,11 +24,11 @@
         "keep_fargs": true,
         "pure_getters": true,
         "toplevel": false,
-        "unused": true,
+        "unused": true
       },
-      "mangle": false,
+      "mangle": false
     },
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
       "@config/*": ["config/*"],
@@ -40,14 +41,15 @@
       "@repositories/*": ["repositories/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-    },
+      "@utils/*": ["utils/*"]
+    }
   },
   "module": {
     "type": "commonjs",
     "strict": true,
-    "strictMode": true,
+    "strictMode": true
   },
+  "sourceMaps": true,
   "exclude": [
     "node_modules",
     "dist",
@@ -56,6 +58,6 @@
     "**/*.spec.ts",
     "**/*.test.ts",
     "coverage",
-    "logs",
-  ],
+    "logs"
+  ]
 }

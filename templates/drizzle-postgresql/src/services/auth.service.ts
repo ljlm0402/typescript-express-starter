@@ -1,99 +1,70 @@
-import jwt from 'jsonwebtoken';
+import { sign } from 'jsonwebtoken';
 import { UsersRepository } from '@repositories/users.repository';
 import { Hash } from '@utils/hash';
-import { JWT_SECRET } from '@config/env';
+import { JWT_SECRET, NODE_ENV } from '@config/env';
+import type { User } from '@config/schema';
 import { HttpException } from '@exceptions/http.exception';
-import { SignupRequest, LoginRequest, AuthResponse } from '@dtos/auth.dto';
+import type { SignupRequest, LoginRequest } from '@dtos/auth.dto';
+import type { DataStoredInToken, TokenData } from '@interfaces/auth.interface';
 import { UserResponse } from '@interfaces/user.interface';
 import { logger } from '@utils/logger';
 
 export class AuthService {
   constructor(private usersRepository: UsersRepository) {}
 
-  /**
-   * 회원가입
-   */
-  async signup(userData: SignupRequest): Promise<AuthResponse> {
-    // 이메일 중복 체크
+  private toUserResponse(user: User): UserResponse {
+    const { password: _password, ...userResponse } = user;
+    return userResponse;
+  }
+
+  private createToken(user: User): TokenData {
+    if (!JWT_SECRET) throw new Error('JWT_SECRET is not defined');
+
+    const dataStoredInToken: DataStoredInToken = { id: user.id };
+    const expiresIn = 60 * 60;
+    const token = sign(dataStoredInToken, JWT_SECRET, { expiresIn });
+    return { expiresIn, token };
+  }
+
+  private createCookie(tokenData: TokenData): string {
+    return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${
+      tokenData.expiresIn
+    }; Path=/; SameSite=Lax;${NODE_ENV === 'production' ? ' Secure;' : ''}`;
+  }
+
+  async signup(userData: SignupRequest): Promise<UserResponse> {
     const existingUser = await this.usersRepository.findByEmail(userData.email);
     if (existingUser) {
-      throw new HttpException(400, 'Email already exists');
+      throw new HttpException(409, 'Email already exists');
     }
 
-    // 비밀번호 해싱
     const hashedPassword = await Hash.hashPassword(userData.password);
-
-    // 사용자 생성
     const newUser = await this.usersRepository.save({
       ...userData,
       password: hashedPassword,
     });
 
-    // 비밀번호 필드 제거
-    const userResponse: UserResponse = {
-      id: newUser.id,
-      email: newUser.email,
-      firstName: newUser.firstName,
-      lastName: newUser.lastName,
-      isActive: newUser.isActive,
-      createdAt: newUser.createdAt,
-      updatedAt: newUser.updatedAt,
-    };
-
-    return {
-      data: userResponse,
-      message: 'signup',
-    };
+    return this.toUserResponse(newUser);
   }
 
-  /**
-   * 로그인
-   */
-  async login(userData: LoginRequest): Promise<{ response: AuthResponse; token: string }> {
-    // 사용자 조회
+  async login(userData: LoginRequest): Promise<{ cookie: string; user: UserResponse }> {
     const user = await this.usersRepository.findByEmail(userData.email);
     if (!user || !user.isActive) {
       throw new HttpException(401, 'Invalid credentials');
     }
 
-    // 비밀번호 검증
     const isPasswordValid = await Hash.comparePassword(userData.password, user.password);
     if (!isPasswordValid) {
       throw new HttpException(401, 'Invalid credentials');
     }
 
-    // JWT 토큰 생성
-    const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET as string);
+    const tokenData = this.createToken(user);
+    const cookie = this.createCookie(tokenData);
 
-    // 비밀번호 필드 제거
-    const userResponse: UserResponse = {
-      id: user.id,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      isActive: user.isActive,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
-    };
-
-    return {
-      response: {
-        data: userResponse,
-        message: 'login',
-      },
-      token,
-    };
+    return { cookie, user: this.toUserResponse(user) };
   }
 
-  /**
-   * JWT 토큰 검증
-   */
-  verifyToken(token: string): jwt.JwtPayload | string {
-    try {
-      return jwt.verify(token, JWT_SECRET);
-    } catch (error) {
-      logger.error({ error }, 'JWT verification failed:');
-      throw new HttpException(401, 'Invalid token');
-    }
+  async logout(user: UserResponse): Promise<void> {
+    logger.info(`User with email ${user.email} logged out.`);
   }
 }

@@ -1,48 +1,40 @@
-import { Request, Response, NextFunction } from 'express';
-import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
+import type { Request, Response, NextFunction } from 'express';
+import type { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { ZodError } from 'zod';
 import { NODE_ENV } from '@config/env';
 import { HttpException } from '@exceptions/http.exception';
+import {
+  type StandardErrorResponse,
+  type ValidationErrorDetail,
+  HTTP_ERROR_MESSAGES,
+} from '@interfaces/error.interface';
 import { logger } from '@utils/logger';
 
 type HttpExceptionWithData = HttpException & { data?: unknown };
 type WithStack = { stack?: string };
 
-interface ErrorDetails {
-  code: number;
-  message: string;
-  data?: unknown;
-  stack?: string;
-}
-interface ErrorResponseBody {
-  success: false;
-  error: ErrorDetails;
-}
-
-/** 타입가드들 */
 const isZodError = (e: unknown): e is ZodError => {
   return e instanceof ZodError;
 };
 
-/** jsonwebtoken은 런타임에 따라 클래스 경계 이슈가 있을 수 있어 name 기반 가드 권장 */
 const isTokenExpiredError = (e: unknown): e is TokenExpiredError => {
-  return e instanceof Error && e.name === 'TokenExpiredError';
+  return e instanceof Error && (e as { name?: string }).name === 'TokenExpiredError';
 };
+
 const isJsonWebTokenError = (e: unknown): e is JsonWebTokenError => {
-  return e instanceof Error && e.name === 'JsonWebTokenError';
+  return e instanceof Error && (e as { name?: string }).name === 'JsonWebTokenError';
 };
 
 const toHttpException = (err: unknown): HttpException => {
   if (err instanceof HttpException) return err;
 
   if (isZodError(err)) {
-    // 유효성 검사 오류를 HTTP 오류로 변환
-    const validationErrors = err.issues.map((i) => ({
-      path: i.path.join('.'),
-      message: i.message,
+    const details: ValidationErrorDetail[] = err.issues.map((issue) => ({
+      field: issue.path.join('.'),
+      message: issue.message,
+      value: (issue as { received?: unknown }).received || undefined,
     }));
-    const validationMessage = `Validation failed: ${validationErrors[0]?.message || 'Unknown validation error'}`;
-    return new HttpException(400, validationMessage);
+    return new HttpException(400, 'Validation failed', details);
   }
 
   if (isTokenExpiredError(err)) return new HttpException(401, 'Token expired');
@@ -68,7 +60,10 @@ export const ErrorMiddleware = (
 ) => {
   const httpErr = toHttpException(error);
   const status = httpErr.status || 500;
-  const message = httpErr.message || 'Something went wrong';
+  const message =
+    httpErr.message ||
+    HTTP_ERROR_MESSAGES[status as keyof typeof HTTP_ERROR_MESSAGES] ||
+    'Something went wrong';
 
   if (res.headersSent) return _next(httpErr);
 
@@ -77,14 +72,29 @@ export const ErrorMiddleware = (
     `[${req.method}] ${req.originalUrl} | ${status} | ${message}${stack ? `\n${stack}` : ''}`,
   );
 
-  const body: ErrorResponseBody = {
+  const errorResponse: StandardErrorResponse = {
     success: false,
-    error: { code: status, message },
+    error: {
+      code: status,
+      message,
+      timestamp: new Date().toISOString(),
+      path: req.originalUrl,
+    },
   };
 
-  const maybeData = (httpErr as HttpExceptionWithData).data;
-  if (typeof maybeData !== 'undefined') body.error.data = maybeData;
-  if (NODE_ENV === 'development' && stack) body.error.stack = stack;
+  const maybeDetails = (httpErr as HttpExceptionWithData).data;
+  if (typeof maybeDetails !== 'undefined') {
+    errorResponse.error.details = maybeDetails;
+  }
 
-  res.status(status).json(body);
+  if (NODE_ENV === 'development' && stack) {
+    errorResponse.error.details = {
+      ...(typeof errorResponse.error.details === 'object' && errorResponse.error.details !== null
+        ? errorResponse.error.details
+        : {}),
+      stack,
+    };
+  }
+
+  res.status(status).json(errorResponse);
 };

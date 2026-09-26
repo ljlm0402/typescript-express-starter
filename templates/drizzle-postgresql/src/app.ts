@@ -9,6 +9,7 @@ import morgan from 'morgan';
 import { NODE_ENV, PORT, LOG_FORMAT, CREDENTIALS, CORS_ORIGIN_LIST } from '@config/env';
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
+import { NotFoundMiddleware } from '@middlewares/notFound.middleware';
 import { logger, stream } from '@utils/logger';
 
 class App {
@@ -110,15 +111,7 @@ class App {
   }
 
   private initializeErrorHandling() {
-    // 404 에러 처리
-    this.app.use((req, res) => {
-      res.status(404).json({
-        statusCode: 404,
-        message: `Route ${req.originalUrl} not found`,
-      });
-    });
-
-    // 전역 에러 처리
+    this.app.use(NotFoundMiddleware);
     this.app.use(ErrorMiddleware);
   }
 }

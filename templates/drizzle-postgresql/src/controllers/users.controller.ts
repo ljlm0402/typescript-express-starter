@@ -1,14 +1,35 @@
 import type { Request, Response, RequestHandler } from 'express';
-import { injectable, inject } from 'tsyringe';
-import { User } from '@interfaces/user.interface';
+import { injectable, container } from 'tsyringe';
+import type { CreateUserDto, UpdateUserDto } from '@dtos/users.dto';
+import { usersQuerySchema } from '@dtos/users.dto';
 import { UsersService } from '@services/users.service';
 import { asyncHandler } from '@utils/asyncHandler';
 
 @injectable()
 export class UsersController {
-  constructor(@inject(UsersService) private readonly userService: UsersService) {}
+  private readonly userService: UsersService;
+
+  constructor() {
+    this.userService = container.resolve(UsersService);
+  }
 
   getUsers: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
+    const query = usersQuerySchema.parse(req.query);
+
+    if (req.query.page || req.query.limit) {
+      const result = await this.userService.getAllUsersPaginated(query);
+
+      res.json({
+        data: result.users,
+        page: result.page,
+        limit: result.limit,
+        total: result.total,
+        totalPages: result.totalPages,
+        message: 'findAll',
+      });
+      return;
+    }
+
     const users = await this.userService.getAllUsers();
 
     res.json({ data: users, message: 'findAll' });
@@ -22,7 +43,7 @@ export class UsersController {
   });
 
   createUser: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
-    const userData: User = req.body;
+    const userData: CreateUserDto = req.body;
     const user = await this.userService.createUser(userData);
 
     res.status(201).json({ data: user, message: 'create' });
@@ -30,7 +51,7 @@ export class UsersController {
 
   updateUser: RequestHandler = asyncHandler(async (req: Request, res: Response) => {
     const userId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
-    const userData: User = req.body;
+    const userData: UpdateUserDto = req.body;
     const user = await this.userService.updateUser(userId, userData);
 
     res.json({ data: user, message: 'update' });
@@ -40,6 +61,6 @@ export class UsersController {
     const userId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     await this.userService.deleteUser(userId);
 
-    res.status(204).json({ message: 'delete' });
+    res.status(204).send();
   });
 }

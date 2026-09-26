@@ -69,8 +69,13 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-# .env
-# .env.test
+.env
+.env.*
+!.env.example
+
+# Local credentials and session data
+.npmrc
+cookies*.txt
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -119,3 +124,8 @@ package-lock.json
 
 # Document
 docs/
+
+# 호환성 테스트 결과
+scripts/
+examples/
+temp/

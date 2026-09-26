@@ -1,29 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 import { verify, TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 import { container } from 'tsyringe';
 import { JWT_SECRET } from '@config/env';
 import { HttpException } from '@exceptions/http.exception';
-import { UsersRepository } from '@repositories/user.repository';
+import type { DataStoredInToken, RequestWithUser } from '@interfaces/auth.interface';
+import { UsersRepository } from '@repositories/users.repository';
 import { logger } from '@utils/logger';
-// JWT Payload 타입 정의
-interface JwtPayload {
-  id: string;
-  email: string;
-  iat?: number;
-  exp?: number;
-  [key: string]: unknown;
-}
-export interface AuthRequest extends Request {
-  user?: {
-    id: string;
-    email: string;
-    firstName?: string | null;
-    lastName?: string | null;
-    isActive: boolean;
-  };
-}
 
-const getAuthorization = (req: Request) => {
+const getAuthorization = (req: RequestWithUser) => {
   const cookie = req.cookies?.['Authorization'];
   if (cookie) return cookie;
 
@@ -34,16 +18,17 @@ const getAuthorization = (req: Request) => {
   return null;
 };
 
-export const AuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+export const AuthMiddleware = async (req: Request, _res: Response, next: NextFunction) => {
   try {
-    const token = getAuthorization(req);
+    const userReq = req as RequestWithUser;
+    const token = getAuthorization(userReq);
     if (!token) {
       return next(new HttpException(401, 'Authentication token missing'));
     }
 
-    let payload: JwtPayload;
+    let payload: DataStoredInToken;
     try {
-      payload = verify(token, JWT_SECRET) as JwtPayload;
+      payload = verify(token, JWT_SECRET) as DataStoredInToken;
     } catch (err) {
       if (err instanceof TokenExpiredError) {
         return next(new HttpException(401, 'Authentication token expired'));
@@ -60,8 +45,7 @@ export const AuthMiddleware = async (req: Request, res: Response, next: NextFunc
       return next(new HttpException(401, 'User not found or inactive'));
     }
 
-    // 사용자 정보를 요청 객체에 추가 (비밀번호 제외)
-    (req as AuthRequest).user = {
+    userReq.user = {
       id: findUser.id,
       email: findUser.email,
       firstName: findUser.firstName,
@@ -71,6 +55,7 @@ export const AuthMiddleware = async (req: Request, res: Response, next: NextFunc
 
     next();
   } catch (error) {
+    if (error instanceof HttpException) return next(error);
     logger.error({ error }, 'Authentication error:');
     next(new HttpException(500, 'Authentication middleware error'));
   }

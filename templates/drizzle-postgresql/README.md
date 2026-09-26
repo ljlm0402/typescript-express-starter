@@ -104,7 +104,7 @@ pnpm docker:prod
 
 ### 인증 (Authentication)
 
-- `POST /api/v1/auth/register` - 회원가입
+- `POST /api/v1/auth/signup` - 회원가입
 - `POST /api/v1/auth/login` - 로그인
 - `POST /api/v1/auth/logout` - 로그아웃
 

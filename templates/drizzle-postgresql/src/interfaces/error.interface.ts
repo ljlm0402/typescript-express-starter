@@ -8,7 +8,7 @@ export interface StandardErrorResponse {
   error: {
     code: number;
     message: string;
-    details?: Record<string, unknown>; // any → 구체적 타입
+    details?: unknown;
     timestamp: string;
     path: string;
   };
@@ -47,5 +47,5 @@ export enum ErrorType {
 export interface ValidationErrorDetail {
   field: string;
   message: string;
-  value?: unknown; // any → unknown으로 안전하게 변경
+  value?: unknown;
 }

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: ⎔ Setup nodejs
         uses: actions/setup-node@v4
@@ -23,10 +23,20 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
       - name: 📤 Send Notification to Slack
-        uses: 8398a7/action-slack@v2.6.0
+        uses: slackapi/slack-github-action@v2
         with:
-          status: ${{ job.status }}
-          author_name: Github Actions
+          payload: |
+            {
+              "text": "NPM Publish Status: ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":package: *NPM Publish ${{ job.status }}*\n\n:octocat: *Repository:* ${{ github.repository }}\n:label: *Release:* ${{ github.ref_name }}\n:rocket: *Triggered by:* ${{ github.actor }}"
+                  }
+                }
+              ]
+            }
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

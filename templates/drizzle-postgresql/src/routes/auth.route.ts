@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { injectable, inject } from 'tsyringe';
+import { injectable, container } from 'tsyringe';
 import { AuthController } from '@controllers/auth.controller';
 import { SignupDto, LoginDto } from '@dtos/auth.dto';
-import { Routes } from '@interfaces/routes.interface';
+import type { Routes } from '@interfaces/routes.interface';
 import { AuthMiddleware } from '@middlewares/auth.middleware';
 import { ValidationMiddleware } from '@middlewares/validation.middleware';
 
@@ -10,14 +10,16 @@ import { ValidationMiddleware } from '@middlewares/validation.middleware';
 export class AuthRoute implements Routes {
   public router: Router = Router();
   public path = '/auth';
+  private readonly authController: AuthController;
 
-  constructor(@inject(AuthController) private authController: AuthController) {
+  constructor() {
+    this.authController = container.resolve(AuthController);
     this.initializeRoutes();
   }
 
   private initializeRoutes() {
-    this.router.post('/signup', ValidationMiddleware(SignupDto), this.authController.signup);
-    this.router.post('/login', ValidationMiddleware(LoginDto), this.authController.login);
-    this.router.post('/logout', AuthMiddleware, this.authController.logout);
+    this.router.post('/signup', ValidationMiddleware(SignupDto), this.authController.signUp);
+    this.router.post('/login', ValidationMiddleware(LoginDto), this.authController.logIn);
+    this.router.post('/logout', AuthMiddleware, this.authController.logOut);
   }
 }

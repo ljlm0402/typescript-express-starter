@@ -1,0 +1,174 @@
+# ===========================================
+# Prisma PostgreSQL Template - Production Environment
+# 표준화된 프로덕션용 Docker Compose 설정
+# ===========================================
+
+version: '3.8'
+
+services:
+  # 메인 애플리케이션 서비스 (프로덕션)
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    image: ${TEMPLATE_NAME:-prisma-postgresql}:${VERSION:-latest}
+    container_name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-app-prod
+    ports:
+      - '${PORT:-3000}:3000'
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=${LOG_LEVEL:-warn}
+      - DATABASE_URL=${DATABASE_URL}
+      - PORT=${PORT:-3000}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_EXPIRES_IN=${JWT_EXPIRES_IN:-24h}
+    volumes:
+      # 로그만 영속화 (표준 구조)
+      - ./logs:/app/logs
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    # 리소스 제한
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+        reservations:
+          memory: 512M
+          cpus: '0.25'
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://localhost:3000/health']
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # PostgreSQL 데이터베이스 (프로덕션)
+  postgres:
+    image: postgres:15-alpine
+    container_name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-postgres-prod
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      # 프로덕션용 PostgreSQL 설정
+      - ./docker/postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+      - ./docker/postgres/pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER} -d ${DB_NAME}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always
+    networks:
+      - app-network
+    # 리소스 제한
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '0.8'
+        reservations:
+          memory: 1G
+          cpus: '0.4'
+
+  # Nginx (리버스 프록시, 로드 밸런서)
+  nginx:
+    image: nginx:alpine
+    container_name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-nginx
+    ports:
+      - '${NGINX_PORT:-80}:80'
+      - '${NGINX_SSL_PORT:-443}:443'
+    volumes:
+      - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./logs/nginx:/var/log/nginx
+      # SSL 인증서 (있는 경우)
+      - ./docker/nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      app:
+        condition: service_healthy
+    restart: always
+    networks:
+      - app-network
+
+  # Redis (프로덕션용 캐시)
+  redis:
+    image: redis:7-alpine
+    container_name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-redis-prod
+    profiles:
+      - cache
+    command: redis-server --appendonly yes --maxmemory 256mb --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_prod_data:/data
+    restart: always
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.2'
+
+  # 모니터링 (Prometheus + Grafana)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-prometheus
+    profiles:
+      - monitoring
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./docker/monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+    restart: always
+    networks:
+      - app-network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-grafana
+    profiles:
+      - monitoring
+    ports:
+      - '3001:3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./docker/monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./docker/monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    depends_on:
+      - prometheus
+    restart: always
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+    name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-prod-network
+
+volumes:
+  postgres_prod_data:
+    external: true
+    name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-postgres-prod-data
+  redis_prod_data:
+    name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-redis-prod-data
+  prometheus_data:
+    name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-prometheus-data
+  grafana_data:
+    name: ${COMPOSE_PROJECT_NAME:-prisma-postgresql}-grafana-data
