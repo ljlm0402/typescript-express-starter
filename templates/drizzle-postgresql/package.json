@@ -16,7 +16,7 @@
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.45.1",
     "express": "^5.1.0",
-    "express-rate-limit": "^8.0.1",
+    "express-rate-limit": "^8.2.2",
     "helmet": "^8.1.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.2",
