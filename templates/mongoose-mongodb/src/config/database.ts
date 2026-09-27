@@ -10,7 +10,6 @@ const mongooseOptions: mongoose.ConnectOptions = {
   serverSelectionTimeoutMS: 5000, // 서버 선택 타임아웃
   socketTimeoutMS: 45000, // 소켓 타임아웃
   bufferCommands: false, // 연결되지 않은 상태에서 명령 버퍼링 비활성화
-  bufferMaxEntries: 0, // 버퍼 최대 항목 수
 };
 
 /**

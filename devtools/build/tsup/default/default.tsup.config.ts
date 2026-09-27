@@ -8,7 +8,7 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   outDir: 'dist',
-  target: 'node18',
+  target: 'node22',
   minify: false,
   bundle: true,
   esbuildOptions(options) {

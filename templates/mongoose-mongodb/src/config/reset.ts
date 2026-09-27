@@ -3,18 +3,20 @@
  * 모든 컬렉션을 삭제하고 초기 상태로 되돌립니다.
  */
 
-import { connectToDatabase } from './database';
+import { connectDB } from './database';
 import mongoose from 'mongoose';
 import { logger } from '../utils/logger';
 
 async function resetDatabase(): Promise<void> {
   try {
     // 데이터베이스 연결
-    await connectToDatabase();
+    await connectDB();
     logger.info('Connected to MongoDB for database reset...');
 
     // 모든 컬렉션 가져오기
-    const collections = await mongoose.connection.db.collections();
+    const database = mongoose.connection.db;
+    if (!database) throw new Error('MongoDB connection is not ready');
+    const collections = await database.collections();
 
     if (collections.length === 0) {
       logger.info('No collections found. Database is already empty.');

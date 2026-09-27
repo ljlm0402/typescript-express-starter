@@ -13,17 +13,16 @@ const TEST_VARIANTS = {
   jest: {
     default: 'src-default',
     drizzle: 'src-drizzle',
-    // Keep Prisma on the generic test fixture until a complete src-prisma/test set exists.
-    prisma: 'src-default',
-    mongoose: 'src-default',
-    typegoose: 'src-default',
+    prisma: null,
+    mongoose: null,
+    typegoose: null,
   },
   vitest: {
     default: 'src-default',
     drizzle: 'src-drizzle',
-    prisma: 'src-default',
-    mongoose: 'src-default',
-    typegoose: 'src-default',
+    prisma: null,
+    mongoose: null,
+    typegoose: null,
   },
 };
 
@@ -50,7 +49,13 @@ export function getTemplateFamily(template) {
 
 export function getTestingVariantFolder(toolValue, template) {
   const family = getTemplateFamily(template);
-  return TEST_VARIANTS[toolValue]?.[family] || TEST_VARIANTS[toolValue]?.default || 'src-default';
+  const variant = TEST_VARIANTS[toolValue]?.[family];
+
+  if (!variant) {
+    throw new Error(`${toolValue} does not support the ${family} template family yet`);
+  }
+
+  return variant;
 }
 
 export function getCompilerVariantFile(toolValue, template) {

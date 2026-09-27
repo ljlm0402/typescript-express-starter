@@ -7,7 +7,7 @@ export default defineConfig({
   dts: false, // 앱 템플릿은 선언 파일 생성 비활성화
   sourcemap: true, // 소스맵 생성
   clean: true, // 빌드 전 dist 폴더 정리
-  target: 'es2020', // 트랜스파일 대상
+  target: 'node22', // 트랜스파일 대상
   minify: false, // JS 파일을 압축(minify) 해서 더 작게 만듭니다.
   treeshake: true, //사용하지 않는 코드를 제거합니다. 기본은 true지만 명시
   // alias, swc 옵션은 tsconfig.json 기준으로 자동 적용

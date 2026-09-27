@@ -2,7 +2,7 @@ import type { Request, Response, NextFunction } from 'express';
 import { verify, TokenExpiredError, JsonWebTokenError } from 'jsonwebtoken';
 import { container } from 'tsyringe';
 import { JWT_SECRET } from '@config/env';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 import { IUserRepository } from '@repositories/user.repository';
 import { logger } from '@utils/logger';
 

@@ -16,12 +16,14 @@ import { execa } from 'execa';
 import fs from 'fs-extra';
 import ora from 'ora';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 // Config and constants
 import { CONFIG, getEnvironmentConfig } from './config.js';
 import { PACKAGE_MANAGER, TEMPLATES_VALUES, DEVTOOLS_VALUES } from './common.js';
 import { getCompilerVariantFile, getTestingVariantFolder } from './devtool-variants.js';
 import { ensureEnvironmentFile } from './environment.js';
+import { shouldCopyTemplatePath } from './template-filter.js';
 import { getRecommendedDevTools } from '../devtools/config/template-mapping.js';
 import { getBenchmarkInfo } from './presets.js';
 
@@ -36,12 +38,13 @@ import {
   validateProjectName,
   validateProjectPath,
   sanitizeInput,
+  mergePackageSpecs,
   validateNodeVersion,
   validateAllTemplates,
 } from './validators.js';
 
 // Performance optimizations
-import { versionCache, PackageBatch } from './performance.js';
+import { versionCache } from './performance.js';
 
 // AST utilities
 import { injectSwaggerIntoApp } from './ast-utils.js';
@@ -122,14 +125,6 @@ function buildSetupSummary({ pkgManager, template, projectName, devtoolValues, s
   ].join('\n');
 }
 
-function shouldCopyTemplatePath(src) {
-  const basename = path.basename(src);
-  const normalized = src.split(path.sep);
-  const ignoredSegments = new Set(['node_modules', 'dist', 'coverage', 'logs', '.turbo']);
-
-  return basename !== '.DS_Store' && !normalized.some((segment) => ignoredSegments.has(segment));
-}
-
 function getTemplateSpecificDevtoolSource({ devtool, categoryPath, template }) {
   const compilerConfig = getCompilerVariantFile(devtool.value, template);
   if (devtool.category === 'Compiler' && compilerConfig) {
@@ -144,8 +139,7 @@ function getTemplateSpecificDevtoolSource({ devtool, categoryPath, template }) {
 // 최신 CLI 버전 체크 & 선택적 설치
 async function checkForUpdate() {
   try {
-    const pkgPath = path.resolve(process.cwd(), 'package.json');
-    const localPkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    const localPkg = JSON.parse(fs.readFileSync(CONFIG.paths.packageJson, 'utf8'));
     const pkgName = localPkg.name || 'typescript-express-starter';
     const localVersion = localPkg.version || '0.0.0';
 
@@ -240,21 +234,17 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
       const srcFolderName = getTestingVariantFolder(devtool.value, template);
       src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, srcFolderName, 'test');
 
-      if (await fs.pathExists(src)) {
-        console.log(chalk.cyan(`  ✓ Using template-specific test files: ${srcFolderName}/test`));
-      } else {
-        // fallback to src-default if template-specific src doesn't exist
-        src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, 'src-default', 'test');
-        console.log(chalk.yellow(`  ↻ Falling back to src-default/test`));
+      if (!(await fs.pathExists(src))) {
+        throw new FileSystemError(
+          `Missing ${devtool.value} test fixture for ${template}`,
+          src,
+          'Add and validate a template-family test fixture before enabling this combination',
+        );
       }
 
-      // src/test 폴더를 복사
-      if (await fs.pathExists(src)) {
-        await fs.copy(src, dst, { overwrite: true });
-        console.log(chalk.gray(`  ‗ ${file} copied from ${srcFolderName}.`));
-      } else {
-        console.log(chalk.red(`  ✗ ${file} not found at ${src}`));
-      }
+      console.log(chalk.cyan(`  ✓ Using template-specific test files: ${srcFolderName}/test`));
+      await fs.copy(src, dst, { overwrite: true });
+      console.log(chalk.gray(`  ‗ ${file} copied from ${srcFolderName}.`));
       continue;
     }
 
@@ -263,20 +253,17 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
       const srcFolderName = getTestingVariantFolder(devtool.value, template);
       src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, srcFolderName, file);
 
-      if (await fs.pathExists(src)) {
-        console.log(chalk.cyan(`  ✓ Using template-specific config: ${srcFolderName}/${file}`));
-      } else {
-        // fallback to src-default if template-specific config doesn't exist
-        src = path.join(CONFIG.paths.devtools, categoryPath, devtool.value, 'src-default', file);
-        console.log(chalk.yellow(`  ↻ Falling back to src-default/${file}`));
+      if (!(await fs.pathExists(src))) {
+        throw new FileSystemError(
+          `Missing ${devtool.value} config for ${template}`,
+          src,
+          'Add and validate a template-family config before enabling this combination',
+        );
       }
 
-      if (await fs.pathExists(src)) {
-        await fs.copy(src, dst, { overwrite: true });
-        console.log(chalk.gray(`  ‗ ${file} copied from ${srcFolderName}.`));
-      } else {
-        console.log(chalk.red(`  ✗ ${file} not found at ${src}`));
-      }
+      console.log(chalk.cyan(`  ✓ Using template-specific config: ${srcFolderName}/${file}`));
+      await fs.copy(src, dst, { overwrite: true });
+      console.log(chalk.gray(`  ‗ ${file} copied from ${srcFolderName}.`));
       continue;
     }
 
@@ -290,21 +277,15 @@ async function copyDevtoolFiles(devtool, destDir, template = 'default') {
 }
 
 // 패키지 설치 (성능 최적화된 배치 처리 사용)
-async function installPackages(pkgs, pkgManager, dev = true, destDir = process.cwd()) {
+function recordPackageSpecs(pkgs, dev, destDir) {
   if (!pkgs || pkgs.length === 0) return;
 
-  const batch = new PackageBatch();
-  batch.addMany(pkgs);
-  const resolved = await batch.resolve();
+  const file = editJsonFile(path.join(destDir, 'package.json'), { autosave: true });
+  const section = dev ? 'devDependencies' : 'dependencies';
+  const dependencies = mergePackageSpecs(file.get(section) || {}, pkgs);
 
-  const installCmd =
-    pkgManager === 'npm'
-      ? ['install', dev ? '--save-dev' : '', ...resolved].filter(Boolean)
-      : pkgManager === 'yarn'
-        ? ['add', dev ? '--dev' : '', ...resolved].filter(Boolean)
-        : ['add', dev ? '-D' : '', ...resolved].filter(Boolean);
-
-  await execa(pkgManager, installCmd, { cwd: destDir, stdio: 'inherit' });
+  file.set(section, dependencies);
+  file.save();
 }
 
 // package.json 수정 (스크립트 추가 등)
@@ -356,6 +337,97 @@ async function gitInitAndFirstCommit(destDir) {
       new CLIError('git init/commit failed', 'git', 'Check git is installed and accessible.'),
     );
   }
+}
+
+export async function generateProject({
+  template,
+  destDir,
+  projectName,
+  devtoolValues,
+  pkgManager = 'npm',
+  setupMode = 'custom',
+  overwrite = false,
+  installDependencies = true,
+  writeMetadata = true,
+  quiet = false,
+}) {
+  const spinner = quiet
+    ? {
+        start() {},
+        succeed() {},
+        fail() {},
+        info() {},
+      }
+    : ora('Copying template...').start();
+
+  try {
+    if (overwrite) await fs.emptyDir(destDir);
+    const templateDir = path.join(CONFIG.paths.templates, template);
+    await fs.copy(templateDir, destDir, {
+      overwrite: true,
+      filter: (src) => shouldCopyTemplatePath(src, templateDir),
+    });
+    const gitignorePath = path.join(destDir, '.gitignore');
+    if (!(await fs.pathExists(gitignorePath))) {
+      await fs.copyFile(path.join(CONFIG.paths.devtools, 'project', 'gitignore'), gitignorePath);
+    }
+    await ensureEnvironmentFile(destDir);
+    spinner.succeed('Template copied!');
+  } catch (error) {
+    spinner.fail('Template copy failed!');
+    throw new FileSystemError(
+      error.message,
+      destDir,
+      'Check templates folder and permissions.',
+    );
+  }
+
+  await updatePackageJson({}, destDir, projectName);
+
+  for (const [index, value] of devtoolValues.entries()) {
+    const tool = DEVTOOLS_VALUES.find((candidate) => candidate.value === value);
+    if (!tool) throw new CLIError(`Unknown devtool: ${value}`, 'devtool-selection');
+
+    spinner.start(`Setting up ${tool.name} (${index + 1}/${devtoolValues.length})...`);
+    await copyDevtoolFiles(tool, destDir, template);
+    recordPackageSpecs(tool.pkgs, false, destDir);
+    recordPackageSpecs(tool.devPkgs, true, destDir);
+
+    if (Object.keys(tool.scripts).length) await updatePackageJson(tool.scripts, destDir);
+
+    if (typeof tool.postInstall === 'function') {
+      tool.postInstall(destDir, pkgManager);
+      console.log(chalk.gray(`  ⎯ ${tool.name} postInstall completed.`));
+    }
+
+    if (tool.value === 'docker') {
+      await generateDockerFiles(template, destDir);
+      console.log(chalk.gray(`  ⎯ Docker environment configured for ${template}`));
+    }
+
+    if (tool.value === 'swagger') await injectSwaggerIntoApp(destDir);
+    spinner.succeed(`${tool.name} setup done.`);
+  }
+
+  if (installDependencies) {
+    spinner.start(`Installing dependencies with ${pkgManager}...`);
+    await execa(pkgManager, ['install'], { cwd: destDir, stdio: 'inherit' });
+    spinner.succeed('Dependencies installed!');
+  } else {
+    spinner.info('Dependency installation skipped.');
+  }
+
+  if (writeMetadata) {
+    createProjectMetadata(destDir, {
+      template,
+      devtools: devtoolValues,
+      preset: setupMode,
+      packageManager: pkgManager,
+    });
+    console.log(chalk.gray('  ⎯ .project-meta.json created.'));
+  }
+
+  return destDir;
 }
 
 // ========== [메인 CLI 실행 흐름] ==========
@@ -559,108 +631,16 @@ async function main() {
   });
   if (isCancel(proceed) || !proceed) return cancel('❌ Aborted.');
 
-  // === [진행] ===
-
-  // [1] 템플릿 복사
-  const spinner = ora('Copying template...').start();
-  try {
-    if (shouldOverwrite) {
-      await fs.emptyDir(destDir);
-    }
-    await fs.copy(path.join(CONFIG.paths.templates, template), destDir, {
-      overwrite: true,
-      filter: shouldCopyTemplatePath,
-    });
-    await ensureEnvironmentFile(destDir);
-    spinner.succeed('Template copied!');
-  } catch (e) {
-    spinner.fail('Template copy failed!');
-    printError(new FileSystemError(e.message, destDir, 'Check templates folder and permissions.'));
-    return process.exit(1);
-  }
-
-  // [1-0] package.json name 필드 업데이트
-  await updatePackageJson({}, destDir, projectName);
-
-  // [1-1] Testing 도구를 선택한 경우에만 /src/test 예제 복사
-  // 주석: 이제 files 배열에 'src/test'가 포함되어 copyDevtoolFiles에서 자동 처리됨
-  /*
-  const testDevtool = devtoolValues
-    .map((val) => DEVTOOLS_VALUES.find((d) => d.value === val))
-    .find((tool) => tool && tool.category === 'Testing');
-
-  if (testDevtool) {
-    const devtoolTestDir = path.join(CONFIG.paths.devtools, testDevtool.value, 'src', 'test');
-    const projectTestDir = path.join(destDir, 'src', 'test');
-    if (await fs.pathExists(devtoolTestDir)) {
-      await fs.copy(devtoolTestDir, projectTestDir, { overwrite: true });
-      console.log(chalk.gray(`  ⎯ test files for ${testDevtool.name} copied.`));
-    }
-  }
-  */
-
-  // [2] 개발 도구 파일/패키지/스크립트/코드패치
-  for (const [index, val] of devtoolValues.entries()) {
-    const tool = DEVTOOLS_VALUES.find((d) => d.value === val);
-    if (!tool) continue;
-
-    spinner.start(`Setting up ${tool.name} (${index + 1}/${devtoolValues.length})...`);
-    await copyDevtoolFiles(tool, destDir, template);
-
-    // [2-1] 개발 도구 - 패키지 설치
-    if (tool.pkgs?.length > 0) await installPackages(tool.pkgs, pkgManager, false, destDir);
-    if (tool.devPkgs?.length > 0) await installPackages(tool.devPkgs, pkgManager, true, destDir);
-
-    // [2-2] 개발 도구 - 스크립트 추가 등
-    if (Object.keys(tool.scripts).length) await updatePackageJson(tool.scripts, destDir);
-
-    // [2-2-1] 개발 도구 - postInstall 함수 실행 (Jest 타입 설정 등)
-    if (tool.postInstall && typeof tool.postInstall === 'function') {
-      try {
-        tool.postInstall(destDir);
-        console.log(chalk.gray(`  ⎯ ${tool.name} postInstall completed.`));
-      } catch (error) {
-        console.log(chalk.yellow(`  ⚠️ ${tool.name} postInstall warning:`, error.message));
-      }
-    }
-
-    // [2-3] 개발 도구 - Docker 선택 한 경우, 파일 기반 Docker 설정 생성
-    if (tool.value === 'docker') {
-      try {
-        await generateDockerFiles(template, destDir);
-        console.log(chalk.gray(`  ⎯ Docker environment configured for ${template}`));
-      } catch (error) {
-        console.log(chalk.yellow(`  ⚠️ Docker setup warning: ${error.message}`));
-        // Fallback to legacy method
-        await generateCompose(template, destDir);
-      }
-    }
-
-    // [2-4] 개발 도구 - Swagger 선택 시에만 app.ts AST 패치
-    if (tool.value === 'swagger') {
-      await injectSwaggerIntoApp(destDir);
-    }
-
-    spinner.succeed(`${tool.name} setup done.`);
-  }
-
-  // [3] 템플릿 기본 패키지 설치
-  spinner.start(`Installing base dependencies with ${pkgManager}...`);
-  await execa(pkgManager, ['install'], { cwd: destDir, stdio: 'inherit' });
-  spinner.succeed('📦 Base dependencies installed!');
-
-  // [3-1] 생성 프로젝트 메타데이터 기록
-  try {
-    createProjectMetadata(destDir, {
-      template,
-      devtools: devtoolValues,
-      preset: setupMode,
-      packageManager: pkgManager,
-    });
-    console.log(chalk.gray('  ⎯ .project-meta.json created.'));
-  } catch (error) {
-    console.log(chalk.yellow(`  ⚠️ Project metadata warning: ${error.message}`));
-  }
+  await generateProject({
+    template,
+    destDir,
+    projectName,
+    devtoolValues,
+    pkgManager,
+    setupMode,
+    overwrite: shouldOverwrite,
+    installDependencies: !config.env.dryRun,
+  });
 
   // [4] git 첫 커밋 옵션
   // await gitInitAndFirstCommit(destDir);
@@ -689,11 +669,13 @@ async function main() {
   console.log(chalk.gray('✨ Happy hacking!\n'));
 }
 
-main().catch((err) => {
-  if (err instanceof CLIError) {
-    printError(err);
-  } else {
-    printError(new CLIError('Unexpected error', null, err.message));
-  }
-  process.exit(err.code || 1);
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  main().catch((err) => {
+    if (err instanceof CLIError) {
+      printError(err);
+    } else {
+      printError(new CLIError('Unexpected error', null, err.message));
+    }
+    process.exit(err.code || 1);
+  });
+}

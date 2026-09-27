@@ -38,7 +38,7 @@ export class UserController {
    */
   getUserById = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = req.params;
+      const id = String(req.params.id);
 
       logger.info('Get user by ID request received', { userId: id });
 
@@ -86,7 +86,7 @@ export class UserController {
    */
   updateUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = req.params;
+      const id = String(req.params.id);
       const { email, password } = req.body;
 
       logger.info('Update user request received', { userId: id });
@@ -111,7 +111,7 @@ export class UserController {
    */
   deleteUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      const { id } = req.params;
+      const id = String(req.params.id);
 
       logger.info('Delete user request received', { userId: id });
 

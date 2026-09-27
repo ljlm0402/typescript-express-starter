@@ -1,8 +1,9 @@
 import { sign, verify } from 'jsonwebtoken';
+import type { SignOptions } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 import { JWT_SECRET, JWT_EXPIRES_IN, NODE_ENV } from '@config/env';
 import { HttpException } from '@exceptions/http.exception';
-import { IUser } from '@entities/user.entity';
+import { IUser, IUserResponse } from '@entities/user.entity';
 import { UserRepository, IUserRepository } from '@repositories/user.repository';
 import { hashPassword, comparePassword } from '@utils/hash';
 import { logger } from '@utils/logger';
@@ -27,7 +28,7 @@ interface DataStoredInToken {
  */
 interface LoginResponse {
   cookie: string;
-  user: Omit<IUser, 'password'>;
+  user: IUserResponse;
   token: string;
 }
 
@@ -52,7 +53,7 @@ export class AuthService {
 
     const expiresIn = this.parseExpiresIn(JWT_EXPIRES_IN);
     const token = sign(dataStoredInToken, JWT_SECRET, {
-      expiresIn: JWT_EXPIRES_IN,
+      expiresIn: JWT_EXPIRES_IN as SignOptions['expiresIn'],
     });
 
     return { token, expiresIn };
@@ -94,16 +95,14 @@ export class AuthService {
   /**
    * 사용자 정보에서 비밀번호 제거
    */
-  private sanitizeUser(user: IUser): Omit<IUser, 'password'> {
-    const sanitized = user.toJSON ? user.toJSON() : { ...user };
-    delete (sanitized as any).password;
-    return sanitized;
+  private sanitizeUser(user: IUser): IUserResponse {
+    return user.toJSON<IUserResponse>();
   }
 
   /**
    * 회원가입
    */
-  async signup(userData: { email: string; password: string }): Promise<Omit<IUser, 'password'>> {
+  async signup(userData: { email: string; password: string }): Promise<IUserResponse> {
     try {
       logger.info('Starting user signup', { email: userData.email });
 

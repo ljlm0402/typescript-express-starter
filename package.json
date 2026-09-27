@@ -1,6 +1,6 @@
 {
   "name": "typescript-express-starter",
-  "version": "11.1.1",
+  "version": "11.1.2",
   "description": "Quick and Easy TypeScript Express Starter",
   "author": "AGUMON <ljlm0402@gmail.com>",
   "license": "MIT",
@@ -47,6 +47,8 @@
     "!templates/**/.DS_Store",
     "!templates/**/.env",
     "!templates/**/.env.*.local",
+    "!templates/prisma-postgresql/**",
+    "!templates/mongoose-mongodb/**",
     "!templates/**/*-lock.json",
     "!templates/**/pnpm-lock.yaml",
     "!templates/**/yarn.lock"
@@ -54,6 +56,7 @@
   "scripts": {
     "start": "node bin/starter.js",
     "test": "node --test test/*.test.js",
+    "test:matrix": "node test/run-compatibility-matrix.js",
     "analyze": "node bin/analyze-project.js",
     "project-doctor": "node bin/project-doctor.js",
     "profile": "node bin/performance-profiler.js",
@@ -62,9 +65,7 @@
     "dev:preset-info": "node bin/preset-info.js",
     "dev:preset-benchmarks": "node bin/preset-info.js --benchmarks",
     "dev:test-presets": "node -e \"import('./bin/presets.js').then(m => console.log('Presets:', Object.keys(m.PRESETS)))\"",
-    "test:compat": "node scripts/compat/compat-test.mjs",
-    "test:compat:clean": "node scripts/compat/compat-test.mjs --clean",
-    "test:compat:single": "node scripts/compat/compat-test.mjs --tool"
+    "validate-assets": "node bin/validate-assets.js"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",
@@ -91,7 +92,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">= 16.13.0",
+    "node": ">=22.12.0",
     "npm": ">= 9.11.0"
   },
   "repository": {

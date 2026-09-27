@@ -1,7 +1,7 @@
 import { sign, verify, SignOptions } from 'jsonwebtoken';
 import { injectable, inject } from 'tsyringe';
 import { JWT_SECRET, JWT_EXPIRES_IN, NODE_ENV } from '@config/env';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 import { IUser, IUserCreate, IUserResponse, sanitizeUser } from '@entities/user.entity';
 import { IUserRepository } from '@repositories/user.repository';
 import { hashPassword, comparePassword } from '@utils/hash';

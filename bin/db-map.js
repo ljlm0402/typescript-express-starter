@@ -1,8 +1,10 @@
 import fs from 'fs-extra';
 import path from 'path';
+import { CONFIG } from './config.js';
 
 export const TEMPLATE_DB = {
   default: null,
+  'express-cargo': null,
   'drizzle-postgresql': 'postgres',
   'prisma-postgresql': 'postgres',
   'mongoose-mongodb': 'mongodb',
@@ -19,8 +21,8 @@ export const TEMPLATE_DB = {
 
 const DB_SERVICES = {
   postgres: `
-  pg:
-    container_name: pg
+  postgres:
+    container_name: postgres
     image: postgres:16-alpine
     ports:
       - "5432:5432"
@@ -71,7 +73,7 @@ const DB_SERVICES = {
 
 // DB별 서비스명 맵핑
 const DB_SERVICE_NAMES = {
-  postgres: 'pg',
+  postgres: 'postgres',
   mysql: 'mysql',
   mongodb: 'mongo',
 };
@@ -88,34 +90,19 @@ const generateServices = (dbSnippet = '', dbType = null) => {
   // 볼륨 설정 동적 생성
   const volumes = dbType ? generateVolumes(dbType) : '';
 
-  return `version: '3.9'
-
-services:
-  proxy:
-    container_name: proxy
-    image: nginx:alpine
-    ports:
-      - '80:80'
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - server
-    restart: unless-stopped
-    networks:
-      - backend
-
+  return `services:
   server:
-    container_name: server
+    container_name: \${COMPOSE_PROJECT_NAME:-app}-server
     build:
       context: ./
       dockerfile: Dockerfile.dev
     ports:
-      - '3000:3000'
+      - '\${PORT:-3000}:3000'
     volumes:
       - ./:/app:cached
       - /app/node_modules
     env_file:
-      - .env.development.local
+      - .env
 ${dependsOn}
     restart: unless-stopped
     networks:
@@ -155,24 +142,25 @@ export async function generateDockerFiles(template, destDir) {
 
   try {
     // 공통 Dockerfile들 복사
-    const dockerCommonPath = path.resolve(process.cwd(), 'devtools/infrastructure/docker/common');
+    const dockerCommonPath = path.join(CONFIG.paths.devtools, 'infrastructure/docker/common');
     const dockerfiles = ['Dockerfile.dev', 'Dockerfile.prod', '.dockerignore'];
 
     for (const file of dockerfiles) {
       const srcPath = path.join(dockerCommonPath, file);
       const destPath = path.join(destDir, file);
 
-      if (await fs.pathExists(srcPath)) {
-        await fs.copy(srcPath, destPath);
-        console.log(`  ⎯ ${file} copied from common template`);
+      if (!(await fs.pathExists(srcPath))) {
+        throw new Error(`Required Docker asset not found: ${srcPath}`);
       }
+      await fs.copy(srcPath, destPath);
+      console.log(`  ⎯ ${file} copied from common template`);
     }
 
     // DB별 docker-compose.yml 복사
     if (dbType) {
-      const dbComposePath = path.resolve(
-        process.cwd(),
-        `devtools/infrastructure/docker/database/${dbType}.compose.yml`,
+      const dbComposePath = path.join(
+        CONFIG.paths.devtools,
+        `infrastructure/docker/database/${dbType}.compose.yml`,
       );
       const composeDestPath = path.join(destDir, 'docker-compose.yml');
 
