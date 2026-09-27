@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import morgan from 'morgan';
 import { NODE_ENV, PORT, LOG_FORMAT, CREDENTIALS, CORS_ORIGIN_LIST } from '@config/env';
-import { connectDB, disconnectDB } from '@config/database';
+import { disconnectDB } from '@config/database';
 import { setupContainer } from '@config/container';
 import { Routes } from '@interfaces/routes.interface';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
@@ -24,8 +24,6 @@ class App {
     this.env = NODE_ENV || 'development';
     this.port = PORT || 3000;
 
-    // MongoDB 연결 및 DI Container 설정
-    this.initializeDatabase();
     this.initializeContainer();
 
     this.initializeTrustProxy();
@@ -118,19 +116,6 @@ class App {
   private initializeErrorHandling() {
     this.app.use(NotFoundMiddleware);
     this.app.use(ErrorMiddleware);
-  }
-
-  /**
-   * MongoDB 데이터베이스 초기화
-   */
-  private async initializeDatabase(): Promise<void> {
-    try {
-      await connectDB();
-      logger.info('✅ MongoDB connection initialized');
-    } catch (error) {
-      logger.error('❌ MongoDB connection failed:', error);
-      process.exit(1);
-    }
   }
 
   /**

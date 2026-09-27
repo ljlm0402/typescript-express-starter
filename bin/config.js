@@ -9,7 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export const CONFIG = {
   // Version and compatibility
-  minNodeVersion: 16,
+  minNodeVersion: '22.12.0',
 
   // Default values
   defaultProjectName: 'my-app',
@@ -25,6 +25,8 @@ export const CONFIG = {
 
   // File paths
   paths: {
+    root: path.join(__dirname, '..'),
+    packageJson: path.join(__dirname, '../package.json'),
     templates: path.join(__dirname, '../templates'),
     devtools: path.join(__dirname, '../devtools'),
   },

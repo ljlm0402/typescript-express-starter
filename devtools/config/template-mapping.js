@@ -7,8 +7,9 @@ export const TEMPLATE_DEVTOOLS_CONFIG = {
   default: {
     recommended: {
       linter: 'eslint',
-      formatter: 'prettier',
+      compiler: 'tsup',
       testing: 'vitest',
+      infrastructure: 'docker',
       alternatives: {
         linter: ['biome', 'oxlint'],
         testing: ['jest'],
@@ -23,7 +24,7 @@ export const TEMPLATE_DEVTOOLS_CONFIG = {
       linters: ['eslint', 'biome', 'oxlint'],
       formatters: ['prettier', 'biome'],
       testing: ['jest', 'vitest'],
-      compilers: ['typescript', 'swc'],
+      compilers: ['typescript', 'tsup', 'swc'],
     },
   },
   'prisma-postgresql': {

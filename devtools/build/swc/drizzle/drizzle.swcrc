@@ -53,10 +53,10 @@
   "exclude": [
     "node_modules",
     "dist",
-    "drizzle/**/*",
-    "migrate.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
+    "drizzle/.*",
+    "src/config/migrate\\.ts$",
+    ".*\\.spec\\.ts$",
+    ".*\\.test\\.ts$",
     "coverage",
     "logs"
   ]

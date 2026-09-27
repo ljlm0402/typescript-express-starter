@@ -4,7 +4,7 @@
       "syntax": "typescript",
       "tsx": false,
       "dynamicImport": true,
-      "decorators": true,
+      "decorators": true
     },
     "transform": {
       "legacyDecorator": true,
@@ -14,10 +14,10 @@
         "pragmaFrag": "React.Fragment",
         "throwIfNamespace": false,
         "development": false,
-        "useBuiltins": false,
-      },
+          "useBuiltins": false
+        }
     },
-    "target": "es2020",
+    "target": "es2022",
     "externalHelpers": false,
     "keepClassNames": true,
     "loose": false,
@@ -40,9 +40,9 @@
         "unsafe_proto": false,
         "unsafe_regexp": false,
         "unsafe_undefined": false,
-        "unused": true,
+        "unused": true
       },
-      "mangle": false,
+      "mangle": false
     },
     "baseUrl": "src",
     "paths": {
@@ -57,15 +57,15 @@
       "@repositories/*": ["repositories/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-    },
+      "@utils/*": ["utils/*"]
+    }
   },
   "module": {
     "type": "commonjs",
     "strict": false,
     "strictMode": true,
     "noInterop": false,
-    "ignoreDynamic": false,
+    "ignoreDynamic": false
   },
-  "exclude": ["node_modules", "dist", "coverage", "**/*.spec.ts", "**/*.test.ts", "logs"],
+  "exclude": ["node_modules", "dist", "coverage", ".*\\.spec\\.ts$", ".*\\.test\\.ts$", "logs"]
 }

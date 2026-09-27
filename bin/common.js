@@ -84,18 +84,18 @@ export const TEMPLATES_VALUES = [
     value: 'prisma-postgresql',
     desc: 'Next-generation ORM for rapid development',
     active: false,
-    tags: ['orm', 'prisma', 'postgresql', 'verified'],
-    version: 'v7.4.1',
+    tags: ['orm', 'prisma', 'postgresql', 'testing-pending'],
+    version: 'v6.19.x',
     maintainer: 'db-team',
-    lastUpdated: '2026-02-23',
-    devtoolsCompatibility: '100%',
-    verificationStatus: 'complete',
+    lastUpdated: '2026-09-26',
+    devtoolsCompatibility: 'partial',
+    verificationStatus: 'pending',
     complexity: 'beginner',
-    maturity: 'stable',
+    maturity: 'beta',
     performanceRating: 'A',
     recommendedFor: ['rapid prototyping', 'large-scale projects', 'developer experience'],
     learningCurve: 'easy',
-    enterpriseReady: true,
+    enterpriseReady: false,
   },
   {
     /** express-cargo - 데코레이터 기반 선언적 검증/바인딩 템플릿 */
@@ -128,9 +128,9 @@ export const TEMPLATES_VALUES = [
     desc: 'Traditional MongoDB ODM',
     active: false,
     tags: ['mongodb', 'odm', 'database', 'testing'],
-    version: 'v7.x',
+    version: 'v8.8.x',
     maintainer: 'nosql-team',
-    lastUpdated: '2026-02-23',
+    lastUpdated: '2026-09-26',
     devtoolsCompatibility: 'testing',
     verificationStatus: 'pending',
     complexity: 'intermediate',
@@ -282,8 +282,9 @@ export const DEVTOOLS_VALUES = [
     devPkgs: ['@biomejs/biome@2.4.6'],
     scripts: {
       lint: 'biome lint .',
-      check: 'biome check .',
-      format: 'biome format . --write',
+      'lint:fix': 'biome lint --write .',
+      format: 'biome format .',
+      'format:fix': 'biome format --write .',
     },
     desc: 'All-in-one formatter and linter',
   },
@@ -340,7 +341,7 @@ export const DEVTOOLS_VALUES = [
       'build:tsup': 'tsup --config tsup.config.ts',
     },
     desc: 'Fast bundler for TypeScript',
-    postInstall: (destDir) => {
+    postInstall: (destDir, packageManager = 'npm') => {
       // tsup 선택 시 메인 build 명령어를 tsup으로 변경
       const pkgPath = path.join(destDir, 'package.json');
       const file = editJsonFile(pkgPath, { autosave: true });
@@ -353,7 +354,8 @@ export const DEVTOOLS_VALUES = [
 
       file.save();
       console.log(chalk.gray('    ❖ Main build command set to: tsup'));
-      console.log(chalk.gray('    ❖ TypeScript fallback available: pnpm build:tsc'));
+      const runCommand = packageManager === 'yarn' ? 'yarn' : `${packageManager} run`;
+      console.log(chalk.gray(`    ❖ TypeScript fallback available: ${runCommand} build:tsc`));
     },
   },
   {
@@ -369,7 +371,7 @@ export const DEVTOOLS_VALUES = [
       'build:swc': 'swc src -d dist --strip-leading-paths --copy-files --delete-dir-on-start',
     },
     desc: 'Rust-based TypeScript compiler',
-    postInstall: (destDir) => {
+    postInstall: (destDir, packageManager = 'npm') => {
       // SWC 선택 시 메인 build 명령어를 SWC로 변경
       const pkgPath = path.join(destDir, 'package.json');
       const file = editJsonFile(pkgPath, { autosave: true });
@@ -385,7 +387,8 @@ export const DEVTOOLS_VALUES = [
 
       file.save();
       console.log(chalk.gray('    ❖ Main build command set to: SWC'));
-      console.log(chalk.gray('    ❖ TypeScript fallback available: pnpm build:tsc'));
+      const runCommand = packageManager === 'yarn' ? 'yarn' : `${packageManager} run`;
+      console.log(chalk.gray(`    ❖ TypeScript fallback available: ${runCommand} build:tsc`));
     },
   },
 
@@ -400,8 +403,8 @@ export const DEVTOOLS_VALUES = [
     devPkgs: [
       '@types/supertest@6.0.3',
       'supertest@7.1.4',
-      '@types/jest@30.0.0',
-      'jest@30.0.5',
+      '@types/jest@29.5.14',
+      'jest@29.7.0',
       'ts-jest@29.4.1',
       'ts-node@10.9.2',
     ],
@@ -445,7 +448,8 @@ export const DEVTOOLS_VALUES = [
       '@types/supertest@6.0.3',
       'supertest@7.1.4',
       'vite-tsconfig-paths@5.1.4',
-      'vitest@3.2.4',
+      'vitest@5.0.2',
+      '@vitest/coverage-v8@5.0.2',
     ],
     scripts: {
       test: 'vitest --run',
@@ -455,6 +459,27 @@ export const DEVTOOLS_VALUES = [
       'test:ci': 'vitest run --coverage',
       'test:ci:unit': 'vitest run src/test/unit --coverage',
       'test:ci:e2e': 'vitest run src/test/e2e --coverage',
+    },
+    postInstall: (projectPath) => {
+      const tsconfigPath = path.join(projectPath, 'tsconfig.json');
+
+      if (fs.existsSync(tsconfigPath)) {
+        const tsconfig = JSON.parse(fs.readFileSync(tsconfigPath, 'utf8'));
+        if (!tsconfig.compilerOptions.types) {
+          tsconfig.compilerOptions.types = ['node'];
+        }
+        if (!tsconfig.compilerOptions.types.includes('vitest/globals')) {
+          tsconfig.compilerOptions.types.push('vitest/globals');
+        }
+        if (!tsconfig.exclude) {
+          tsconfig.exclude = [];
+        }
+        if (!tsconfig.exclude.includes('**/unit_disabled/**')) {
+          tsconfig.exclude.push('**/unit_disabled/**');
+        }
+        fs.writeFileSync(tsconfigPath, JSON.stringify(tsconfig, null, 2), 'utf8');
+        console.log('✅ Vitest types and exclude patterns added to tsconfig.json');
+      }
     },
     desc: 'Fast Vite-powered unit/e2e test framework',
   },
@@ -480,9 +505,9 @@ export const DEVTOOLS_VALUES = [
     pkgs: [],
     devPkgs: [],
     scripts: {
-      'docker:dev': 'docker-compose -f docker-compose.yml up --build',
-      'docker:down': 'docker-compose down',
-      'docker:reset': 'docker-compose down -v && docker-compose up --build',
+      'docker:dev': 'docker compose -f docker-compose.yml up --build',
+      'docker:down': 'docker compose down',
+      'docker:reset': 'docker compose down -v && docker compose up --build',
       'docker:prod': 'docker build -f Dockerfile.prod -t ${npm_package_name}:latest .',
     },
     desc: 'Containerized development and production environment',

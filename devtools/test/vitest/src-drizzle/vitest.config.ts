@@ -56,13 +56,24 @@ export default defineConfig({
     // 환경변수 설정
     env: {
       NODE_ENV: 'test',
+      PORT: '3001',
+      DATABASE_URL:
+        process.env.DATABASE_URL ??
+        'postgresql://postgres:password@localhost:5432/drizzle_postgresql_dev',
+      SECRET_KEY: 'test-secret-key',
+      JWT_SECRET: 'test-jwt-secret-key',
+      JWT_EXPIRES_IN: '1h',
+      LOG_FORMAT: 'dev',
+      LOG_DIR: 'logs',
       LOG_LEVEL: 'error',
+      ORIGIN: '*',
+      CREDENTIALS: 'true',
     },
   },
 
   // TypeScript 설정
   esbuild: {
-    target: 'node18',
+    target: 'node22',
     keepNames: true,
   },
 });

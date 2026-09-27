@@ -2,6 +2,9 @@
   "name": "express-cargo-template",
   "version": "1.0.0",
   "description": "express-cargo template",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "start": "cross-env NODE_ENV=production node dist/server.js",
     "dev": "cross-env NODE_ENV=development nodemon",
@@ -20,7 +23,7 @@
     "helmet": "^8.1.0",
     "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.1",
+    "morgan": "^1.12.0",
     "pino": "^9.9.0",
     "pino-pretty": "^13.1.1",
     "pino-roll": "^3.1.0",
@@ -36,7 +39,7 @@
     "@types/hpp": "^0.2.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
-    "@types/node": "^24.3.0",
+    "@types/node": "^22.0.0",
     "cross-env": "^10.0.0",
     "nodemon": "^3.1.10",
     "ts-node": "^10.9.2",

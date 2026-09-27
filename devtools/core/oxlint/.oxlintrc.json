@@ -8,15 +8,13 @@
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-unused-function-parameters": "off",
     "prefer-const": "warn",
     "no-var": "error",
     "no-useless-escape": "off",
     "no-undef": "off",
     "no-redeclare": "off",
     "eslint-plugin-unicorn/no-useless-fallback-in-spread": "off",
-    "typescript/no-non-null-assertion": "off",
-    "import/no-unresolved": "off"
+    "typescript/no-non-null-assertion": "off"
   },
   "ignorePatterns": [
     "dist/",

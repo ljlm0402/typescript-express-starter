@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 import { HttpException } from '@exceptions/http.exception';
-import { IUser } from '@entities/user.entity';
+import { IUser, IUserResponse } from '@entities/user.entity';
 import { UserRepository, IUserRepository } from '@repositories/user.repository';
 import { hashPassword } from '@utils/hash';
 import { logger } from '@utils/logger';
@@ -15,18 +15,13 @@ export class UserService {
   /**
    * 모든 사용자 조회
    */
-  async getAllUsers(): Promise<Omit<IUser, 'password'>[]> {
+  async getAllUsers(): Promise<IUserResponse[]> {
     try {
       logger.info('Retrieving all users');
 
       const users = await this.userRepository.findAll();
 
-      // 비밀번호 필드 제거
-      const sanitizedUsers = users.map((user) => {
-        const sanitized = user.toJSON ? user.toJSON() : { ...user };
-        delete (sanitized as any).password;
-        return sanitized;
-      });
+      const sanitizedUsers = users.map((user) => user.toJSON<IUserResponse>());
 
       logger.info('Successfully retrieved all users', { count: users.length });
       return sanitizedUsers;
@@ -39,7 +34,7 @@ export class UserService {
   /**
    * ID로 사용자 조회
    */
-  async getUserById(id: string): Promise<Omit<IUser, 'password'>> {
+  async getUserById(id: string): Promise<IUserResponse> {
     try {
       logger.info('Retrieving user by ID', { userId: id });
 
@@ -48,9 +43,7 @@ export class UserService {
         throw new HttpException(404, 'User not found');
       }
 
-      // 비밀번호 필드 제거
-      const sanitized = user.toJSON ? user.toJSON() : { ...user };
-      delete (sanitized as any).password;
+      const sanitized = user.toJSON<IUserResponse>();
 
       logger.info('Successfully retrieved user by ID', { userId: id });
       return sanitized;
@@ -66,7 +59,7 @@ export class UserService {
   /**
    * 이메일로 사용자 조회
    */
-  async getUserByEmail(email: string): Promise<Omit<IUser, 'password'> | null> {
+  async getUserByEmail(email: string): Promise<IUserResponse | null> {
     try {
       logger.info('Retrieving user by email', { email });
 
@@ -75,9 +68,7 @@ export class UserService {
         return null;
       }
 
-      // 비밀번호 필드 제거
-      const sanitized = user.toJSON ? user.toJSON() : { ...user };
-      delete (sanitized as any).password;
+      const sanitized = user.toJSON<IUserResponse>();
 
       logger.info('Successfully retrieved user by email', { email });
       return sanitized;
@@ -93,7 +84,7 @@ export class UserService {
   async createUser(userData: {
     email: string;
     password: string;
-  }): Promise<Omit<IUser, 'password'>> {
+  }): Promise<IUserResponse> {
     try {
       logger.info('Creating new user', { email: userData.email });
 
@@ -112,9 +103,7 @@ export class UserService {
         password: hashedPassword,
       });
 
-      // 비밀번호 필드 제거
-      const sanitized = newUser.toJSON ? newUser.toJSON() : { ...newUser };
-      delete (sanitized as any).password;
+      const sanitized = newUser.toJSON<IUserResponse>();
 
       logger.info('Successfully created user', {
         userId: newUser._id,
@@ -137,7 +126,7 @@ export class UserService {
   async updateUser(
     id: string,
     updateData: { email?: string; password?: string },
-  ): Promise<Omit<IUser, 'password'>> {
+  ): Promise<IUserResponse> {
     try {
       logger.info('Updating user', { userId: id });
 
@@ -167,9 +156,7 @@ export class UserService {
         throw new HttpException(500, 'Failed to update user');
       }
 
-      // 비밀번호 필드 제거
-      const sanitized = updatedUser.toJSON ? updatedUser.toJSON() : { ...updatedUser };
-      delete (sanitized as any).password;
+      const sanitized = updatedUser.toJSON<IUserResponse>();
 
       logger.info('Successfully updated user', { userId: id });
       return sanitized;
