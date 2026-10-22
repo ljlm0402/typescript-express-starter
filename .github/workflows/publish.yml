@@ -21,22 +21,3 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-
-      - name: 📤 Send Notification to Slack
-        uses: slackapi/slack-github-action@v2
-        with:
-          payload: |
-            {
-              "text": "NPM Publish Status: ${{ job.status }}",
-              "blocks": [
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": ":package: *NPM Publish ${{ job.status }}*\n\n:octocat: *Repository:* ${{ github.repository }}\n:label: *Release:* ${{ github.ref_name }}\n:rocket: *Triggered by:* ${{ github.actor }}"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
