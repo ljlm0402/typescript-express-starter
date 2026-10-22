@@ -56,14 +56,14 @@
 
 ## 📝 Introduction
 
-**TypeScript Express Starter** is an interactive CLI tool that generates production-ready TypeScript Express projects with your preferred stack configuration.
+**TypeScript Express Starter** is an interactive CLI tool that generates TypeScript Express projects with your preferred stack configuration.
 
-Instead of starting from scratch, this CLI provides a comprehensive project generator with multiple database integrations, development tools, and deployment configurations. Choose from 10+ templates and customize your development workflow in minutes.
+Start with a basic Express template, Drizzle + PostgreSQL, or decorator-based request validation with express-cargo. Select development tools to generate the dependencies, scripts, and configuration files for your workflow.
 
 - **Interactive Setup**: Choose database, ORM, linter, testing framework, and more
-- **Production Ready**: Docker, PM2, NGINX configurations included
-- **Developer Experience**: Hot reload, testing, linting, and formatting pre-configured
-- **Multiple Stacks**: Support for 10+ database/ORM combinations
+- **Docker Support**: Development and production Dockerfiles when Docker is selected
+- **Developer Experience**: Hot reload plus configuration for your selected testing and linting tools
+- **Template Choices**: Basic Express, Drizzle + PostgreSQL, and express-cargo
 
 ## 💎 CLI Features
 
@@ -71,23 +71,31 @@ Instead of starting from scratch, this CLI provides a comprehensive project gene
 
 - 🚀 **Quick or Custom Mode** — Start fast with presets or choose tools category by category
 
-- 🗄️ **Multiple Database Options** — Prisma, Sequelize, TypeORM, Mongoose, Knex, and more
+- 🗄️ **PostgreSQL Integration** — Drizzle ORM template with database scripts
 
-- 🛠️ **Development Tools** — Choose from ESLint, Biome, Jest, Vitest, Docker, PM2
+- 🛠️ **Development Tools** — Choose from ESLint, Biome, Oxlint, SWC, tsup, Jest, Vitest, Docker
 
-- 📱 **Template Selection** — 10+ pre-configured project templates
+- 📱 **Template Selection** — Three active templates with authentication and user management examples
 
 - ⚡ **Auto Configuration** — Dependencies, scripts, and configs automatically setup
 
-- 🔧 **Smart Dependencies** — Tool compatibility and requirement resolution
+- 🔧 **Dependency Setup** — Collect selected tool dependencies and install them in one step
 
 - 📦 **Package Manager Agnostic** — Works with npm, pnpm, or yarn
 
-- 🚀 **Zero Config Start** — Generated projects work immediately
+- 🚀 **Environment Setup** — Generate `.env` from `.env.example` with random authentication secrets
 
 - 🎨 **Customizable** — Add your own templates and development tools
 
 ## ⚡️ Quick Start
+
+**Requirements:** Node.js **22.12.0 or later** and npm **9.11.0 or later**. Install pnpm or Yarn separately if you select it in the CLI. Docker with Compose is required to use the Docker configuration.
+
+You can also run the CLI without a global installation:
+
+```bash
+npx typescript-express-starter
+```
 
 ```bash
 # Install globally
@@ -120,26 +128,26 @@ typescript-express-starter
 │  ● Recommended (Balanced default toolchain)
 │  ○ Full (One tool from each category)
 │
-◇  Preset ────────────────────────────────────────────────────────────╮
-│                                                                     │
-│  Quick profile selected: recommended (biome, tsup, vitest, docker)  │
-│                                                                     │
-├─────────────────────────────────────────────────────────────────────╯
+◇  Preset ───────────────────────────────────────────────────────────────╮
+│                                                                        │
+│  Quick profile selected: recommended (eslint, tsup, vitest, docker)    │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────╯
 │
-◇  Configuration summary ────────────────────────╮
-│                                                │
-│  Setup mode     : quick                        │
-│  Package manager: pnpm                         │
-│  Template       : Express TypeScript           │
-│  Project name   : your-project-name            │
-│  Devtools       : Biome, tsup, Vitest, Docker  │
-│                                                │
-├────────────────────────────────────────────────╯
+◇  Configuration summary ────────────────────────────────────────────────╮
+│                                                                        │
+│  Setup mode     : quick                                                │
+│  Package manager: npm                                                  │
+│  Template       : Express TypeScript                                   │
+│  Project name   : your-project-name                                    │
+│  Devtools       : ESLint + Prettier, tsup, Vitest, Docker              │
+│                                                                        │
+├────────────────────────────────────────────────────────────────────────╯
 │
 ◆  Proceed with project generation?
 │  ● Yes / ○ No
 │
-✔ 📦 Base dependencies installed!
+✔ Dependencies installed!
 │
 └ 🎉 Project setup complete!
 
@@ -155,6 +163,14 @@ npm run dev
 - 🌐 Express server: `http://localhost:3000/`
 - 🔄 Hot reload with nodemon
 
+### Environment and startup
+
+The CLI creates `.env` from `.env.example` and generates random values for `SECRET_KEY` and `JWT_SECRET` when those keys are present. Existing `.env` files are preserved. Secrets must be at least 32 characters and must not contain known placeholder values. Review the generated settings before deployment.
+
+For Drizzle, configure `DATABASE_URL`, prepare PostgreSQL, and run `npm run db:migrate` before using the API. The `default` and `express-cargo` templates do not require a database. Use `pnpm dev` or `yarn dev` if you selected that package manager.
+
+Authentication and user routes are mounted under `/api/v1/auth` and `/api/v1/users`; the root URL is not a landing page.
+
 ## 📂 Generated Project Structure
 
 When you create a new project, the CLI generates this structure:
@@ -165,24 +181,26 @@ your-project/
 │   ├── config/           # Configuration files, environment settings
 │   ├── controllers/      # Request handling & response logic
 │   ├── dtos/             # Data Transfer Objects for request/response
-│   ├── entities/         # Database entities (if using ORM)
+│   ├── entities/         # Domain entities
 │   ├── exceptions/       # Custom exception classes
 │   ├── interfaces/       # TypeScript interfaces and type definitions
 │   ├── middlewares/      # Middlewares (logging, auth, error handling)
-│   ├── repositories/     # Database access logic
+│   ├── repositories/     # Data access (in-memory or database)
 │   ├── routes/           # API route definitions
 │   ├── services/         # Business logic
 │   ├── utils/            # Utility/helper functions
 │   ├── app.ts            # Express app initialization
 │   └── server.ts         # Server entry point
-├── .env                   # Environment variables file
-├── .env.development.local # Development environment variables
-├── .env.production.local  # Production environment variables
-├── .env.test.local        # Test environment variables
+├── .env                  # Generated local environment settings
+├── .env.example          # Environment variable reference
+├── .gitignore            # Excludes secrets and generated files
+├── .project-meta.json    # Selected template, tools, and package manager
 ├── nodemon.json           # Nodemon configuration
 ├── package.json           # Project dependencies and scripts
 └── tsconfig.json          # TypeScript configuration
 ```
+
+Compiler, test, and Docker files are added according to the selected tools. Environment-specific `.env.{NODE_ENV}.local` files are optional and are not generated. CLI updates apply to newly generated projects; existing projects are maintained separately.
 
 ## 🛠 Development Tools Available
 
@@ -193,7 +211,7 @@ Choose from these categories during project setup:
 | **Linter**    | `biome`, `eslint`, `oxlint` | Code formatting & linting (Biome is all-in-one) |
 | **Bundler**   | `swc`, `tsup`               | Fast TypeScript compilation and bundling        |
 | **Testing**   | `jest`, `vitest`            | Unit & integration testing frameworks           |
-| **Container** | `docker`                    | Docker & docker-compose configuration           |
+| **Container** | `docker`                    | Dockerfiles & Docker Compose configuration           |
 
 ### To be added later (currently in progress):
 
@@ -204,33 +222,35 @@ Choose from these categories during project setup:
 | **Git Hooks** | `husky`         | Pre-commit hooks for quality control |
 | **API Docs**  | `swagger`       | OpenAPI/Swagger documentation        |
 
-**Smart Selection**: The CLI automatically resolves tool dependencies and compatibility.
+**Smart Selection**: Recommended profiles use template-specific tool choices. The CLI copies the matching compiler and test configuration and reports missing required assets.
 
 ## 🧩 Available Templates
 
-Current template status with comprehensive compatibility tested:
+The following templates are available in the CLI and included in the npm package:
 
-### ✅ **Production Ready & Fully Tested**
+### ✅ **Active Templates**
 
-| Template             | Description                                         | Status    | Compatibility |
-| -------------------- | --------------------------------------------------- | --------- | ------------- |
-| `default`            | Express + TypeScript starter                        | ✅ Active | 🎯 Baseline   |
-| `drizzle-postgresql` | Drizzle ORM + PostgreSQL (Type-safe, Zero overhead) | ✅ Active | 🌟 100% (8/8) |
-| `express-cargo`      | Decorator-based request binding & validation        | ✅ Active | 🧪 Pending    |
+| Template | Description | Storage |
+| --- | --- | --- |
+| `default` | Express + TypeScript with Zod request validation | In-memory |
+| `drizzle-postgresql` | Drizzle ORM with PostgreSQL | PostgreSQL |
+| `express-cargo` | Decorator-based DTO validation and request binding | In-memory |
+
+The in-memory templates reset user data when the process restarts. See the [express-cargo guide](templates/express-cargo/README.md) for DTO and binding examples.
 
 ### 🔧 **Enhanced Development Tools Support**
 
-**drizzle-postgresql** template is fully compatible with:
+The active templates provide configuration for the following tools:
 
 #### Linters
 
 - ✅ **Biome** - Modern unified tool (linter + formatter)
 - ✅ **ESLint + Prettier** - Traditional reliable combination
-- ✅ **Oxlint** - Rust-based high-performance linter (18ms!)
+- ✅ **Oxlint** - Rust-based high-performance linter
 
 #### Compilers
 
-- ✅ **tsup** - esbuild-based bundler (193ms build!)
+- ✅ **tsup** - esbuild-based bundler
 - ✅ **SWC** - Rust-based native performance compiler
 
 #### Test Runners
@@ -238,16 +258,18 @@ Current template status with comprehensive compatibility tested:
 - ✅ **Jest** - Mature test framework with full E2E support
 - ✅ **Vitest** - Modern Vite-based test runner
 
-> 🎯 **All 8 combinations tested and verified** - Choose your preferred development experience!
+> 🎯 Generation tests cover 36 combinations across the active templates, linters, compilers, test runners, and Docker. Runtime compatibility checks are available separately with `npm run test:matrix`.
 
 ### 🚧 **Coming Soon**
+
+The entries below are not selectable in the CLI. Prisma and Mongoose implementations exist in the repository but are excluded from the npm package while verification is pending.
 
 #### **ORM/Database Integration**
 
 | Template        | Description                                         | Priority   |
 | --------------- | --------------------------------------------------- | ---------- |
-| `prisma`        | Type-safe database client with auto-generated types | 🔥 Next    |
-| `mongoose`      | Elegant MongoDB ODM for Node.js                     | 🔥 Next    |
+| `prisma-postgresql`        | Type-safe database client with auto-generated types | 🔥 Next    |
+| `mongoose-mongodb`      | Elegant MongoDB ODM for Node.js                     | 🔥 Next    |
 | `typeorm`       | Decorator-based Active Record ORM                   | 🚧 Planned |
 | `sequelize`     | Mature Promise-based SQL ORM                        | 🚧 Planned |
 | `mikro-orm`     | Data Mapper ORM pattern for TypeScript              | 🚧 Planned |
@@ -267,20 +289,20 @@ Current template status with comprehensive compatibility tested:
 
 | Aspect             | Manual Setup                    | TypeScript Express Starter CLI        |
 | ------------------ | ------------------------------- | ------------------------------------- |
-| **Time**           | 🔴 Hours of configuration       | ✅ 2-3 minutes interactive setup      |
+| **Time**           | 🔴 Hours of configuration       | ✅ Guided interactive setup      |
 | **Configuration**  | 🔴 Manual dependency management | ✅ Auto-resolved, compatible versions |
 | **Best Practices** | 🔴 Research required            | ✅ Pre-configured industry standards  |
 | **Consistency**    | 🔴 Varies by developer          | ✅ Standardized project structure     |
-| **Updates**        | 🔴 Manual maintenance           | ✅ CLI updates bring new features     |
+| **Updates**        | 🔴 Manual maintenance           | ✅ Updated templates for new projects     |
 
 ### vs. Other Generators
 
 | Feature              | TypeScript Express Starter | Other Generators |
 | -------------------- | -------------------------- | ---------------- |
-| **Database Choice**  | ✅ 10+ options planned     | Limited options  |
+| **Database Choice**  | ✅ PostgreSQL; more integrations planned     | Limited options  |
 | **Tool Selection**   | ✅ Mix & match dev tools   | Fixed stack      |
 | **TypeScript First** | ✅ Built for TypeScript    | Often JS-first   |
-| **Production Ready** | ✅ Docker, PM2 included    | Basic setup      |
+| **Production Ready** | ✅ Optional Docker configuration    | Basic setup      |
 
 ## ⭐️ Stargazers
 
