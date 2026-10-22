@@ -30,7 +30,7 @@ export default defineConfig({
       'coverage',
       'logs',
       'drizzle/**/*',
-      // 'src/test/unit_disabled/**/*',
+      'src/test/unit_disabled/**/*',
     ],
     testTimeout: 15000,
     setupFiles: ['reflect-metadata'],
@@ -40,7 +40,7 @@ export default defineConfig({
     },
   },
   esbuild: {
-    target: 'node18',
+    target: 'node22',
     keepNames: true,
   },
 });

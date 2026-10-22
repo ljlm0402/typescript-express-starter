@@ -4,13 +4,13 @@
       "syntax": "typescript",
       "tsx": false,
       "decorators": true,
-      "dynamicImport": true,
+      "dynamicImport": true
     },
     "transform": {
       "legacyDecorator": true,
-      "decoratorMetadata": true,
+      "decoratorMetadata": true
     },
-    "target": "es2020",
+    "target": "es2022",
     "externalHelpers": true,
     "keepClassNames": true,
     "loose": true,
@@ -21,9 +21,9 @@
         "drop_debugger": true,
         "keep_fargs": true,
         "pure_getters": true,
-        "unused": true,
+        "unused": true
       },
-      "mangle": false,
+      "mangle": false
     },
     "baseUrl": "src",
     "paths": {
@@ -39,13 +39,13 @@
       "@repositories/*": ["repositories/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-    },
+      "@utils/*": ["utils/*"]
+    }
   },
   "module": {
     "type": "commonjs",
     "strict": false,
-    "strictMode": true,
+    "strictMode": true
   },
-  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts", "coverage", "logs"],
+  "exclude": ["node_modules", "dist", ".*\\.spec\\.ts$", ".*\\.test\\.ts$", "coverage", "logs"]
 }

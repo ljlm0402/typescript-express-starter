@@ -1,103 +1,73 @@
-/**
- * 로거 설정 - Mongoose MongoDB Template
- * 표준 로깅 설정을 사용합니다.
- */
-
-import { 
-  createStandardLogger, 
-  createAccessLogger, 
-  StandardLogConfig,
-  LogLevels
-} from '../../../shared-standards/standard-logging.config';
+import { existsSync, mkdirSync } from 'node:fs';
+import { join } from 'node:path';
+import pino from 'pino';
 import { LOG_DIR, LOG_LEVEL, NODE_ENV } from '@config/env';
 
-// 로그 설정
-const logConfig: StandardLogConfig = {
-  level: LOG_LEVEL || 'info',
-  directory: LOG_DIR || 'logs',
-  isDevelopment: NODE_ENV === 'development',
-  isProduction: NODE_ENV === 'production',
+const isProduction = NODE_ENV === 'production';
+const logDir = join(process.cwd(), LOG_DIR || 'logs');
+
+if (!existsSync(logDir)) {
+  mkdirSync(logDir, { recursive: true });
+}
+
+const transport = pino.transport({
+  targets: isProduction
+    ? [
+        {
+          target: 'pino-roll',
+          level: LOG_LEVEL || 'info',
+          options: {
+            file: join(logDir, 'app'),
+            frequency: 'daily',
+            size: '50m',
+            extension: '.log',
+            mkdir: true,
+            limit: { count: 30 },
+          },
+        },
+      ]
+    : [
+        {
+          target: 'pino-pretty',
+          level: LOG_LEVEL || 'info',
+          options: { colorize: true, translateTime: 'SYS:standard', ignore: 'pid,hostname' },
+        },
+      ],
+});
+
+const baseLogger = pino(
+  {
+    level: LOG_LEVEL || 'info',
+    base: undefined,
+    timestamp: pino.stdTimeFunctions.isoTime,
+    redact: ['req.headers.authorization', 'password', 'token'],
+  },
+  transport,
+);
+
+type LogLevel = 'debug' | 'info' | 'warn' | 'error' | 'fatal';
+
+function writeLog(level: LogLevel, first: unknown, second?: unknown, ...args: unknown[]): void {
+  if (typeof first === 'string') {
+    const context = second && typeof second === 'object' ? second : { detail: second };
+    baseLogger[level](context, first, ...args);
+    return;
+  }
+
+  baseLogger[level](first ?? {}, typeof second === 'string' ? second : undefined, ...args);
+}
+
+export const logger = {
+  debug: (first: unknown, second?: unknown, ...args: unknown[]) =>
+    writeLog('debug', first, second, ...args),
+  info: (first: unknown, second?: unknown, ...args: unknown[]) =>
+    writeLog('info', first, second, ...args),
+  warn: (first: unknown, second?: unknown, ...args: unknown[]) =>
+    writeLog('warn', first, second, ...args),
+  error: (first: unknown, second?: unknown, ...args: unknown[]) =>
+    writeLog('error', first, second, ...args),
+  fatal: (first: unknown, second?: unknown, ...args: unknown[]) =>
+    writeLog('fatal', first, second, ...args),
 };
 
-// 메인 애플리케이션 로거
-export const logger = createStandardLogger(logConfig);
-
-// HTTP 액세스 로거
-export const accessLogger = createAccessLogger(logConfig);
-
-// 로그 레벨 상수 (하위 호환성)
-export { LogLevels };
-
-/**
- * 표준 로그 컨텍스트 인터페이스
- */
-export interface LogContext {
-  operation?: string;
-  userId?: string;
-  requestId?: string;
-  email?: string;
-  duration?: number;
-  metadata?: Record<string, any>;
-}
-
-/**
- * 표준 로거 클래스 (기존 StandardLogger와 호환)
- */
-export class StandardLogger {
-  private logger = logger;
-
-  info(message: string, context?: LogContext): void {
-    this.logger.info({ ...context }, message);
-  }
-
-  warn(message: string, context?: LogContext): void {
-    this.logger.warn({ ...context }, message);
-  }
-
-  error(message: string, error?: Error, context?: LogContext): void {
-    this.logger.error({ 
-      ...context, 
-      error: error ? {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      } : undefined 
-    }, message);
-  }
-
-  debug(message: string, context?: LogContext): void {
-    this.logger.debug({ ...context }, message);
-  }
-
-  fatal(message: string, error?: Error, context?: LogContext): void {
-    this.logger.fatal({ 
-      ...context, 
-      error: error ? {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      } : undefined 
-    }, message);
-  }
-
-  // 성능 로깅을 위한 헬퍼 메서드
-  logOperation(operation: string, startTime: number, context?: Omit<LogContext, 'operation' | 'duration'>): void {
-    const duration = Date.now() - startTime;
-    this.info(`${operation} completed`, {
-      operation,
-      duration,
-      ...context,
-    });
-  }
-
-  // 에러 로깅을 위한 헬퍼 메서드
-  logError(operation: string, error: Error, context?: Omit<LogContext, 'operation'>): void {
-    this.error(`${operation} failed`, error, {
-      operation,
-      ...context,
-    });
-  }
-}
-
-// 기본 로거 인스턴스 (하위 호환성)
-export const standardLogger = new StandardLogger();
+export const stream = { write: (message: string) => logger.info(message.trim()) };

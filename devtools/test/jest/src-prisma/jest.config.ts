@@ -21,25 +21,6 @@ const config: Config = {
       },
     ],
   },
-  moduleNameMapper: pathsToModuleNameMapper(
-    {
-      '@/*': ['*'],
-      '@config/*': ['config/*'],
-      '@controllers/*': ['controllers/*'],
-      '@dtos/*': ['dtos/*'],
-      '@entities/*': ['entities/*'],
-      '@exceptions/*': ['exceptions/*'],
-      '@interfaces/*': ['interfaces/*'],
-      '@middlewares/*': ['middlewares/*'],
-      '@repositories/*': ['repositories/*'],
-      '@routes/*': ['routes/*'],
-      '@services/*': ['services/*'],
-      '@utils/*': ['utils/*'],
-    },
-    {
-      prefix: '<rootDir>/src/',
-    },
-  ),
   // Prisma 특화 설정
   globalSetup: '<rootDir>/src/test/global-setup.ts',
   globalTeardown: '<rootDir>/src/test/global-teardown.ts',

@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   app:
     build:
@@ -20,26 +18,30 @@ services:
       - JWT_SECRET=${JWT_SECRET}
       - LOG_LEVEL=debug
     depends_on:
-      pg:
+      postgres:
         condition: service_healthy
     restart: unless-stopped
     networks:
       - backend
 
-  pg:
-    container_name: ${COMPOSE_PROJECT_NAME:-app}-pg
+  postgres:
+    container_name: ${COMPOSE_PROJECT_NAME:-app}-postgres
     image: postgres:16-alpine
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app_db}
+      POSTGRES_DB: ${POSTGRES_DB:-drizzle_postgresql_dev}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./database/postgres/init:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-app_db}']
+      test:
+        [
+          'CMD-SHELL',
+          'pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-drizzle_postgresql_dev}',
+        ]
       interval: 10s
       timeout: 5s
       retries: 5

@@ -51,6 +51,8 @@ export const AuthMiddleware = async (req: Request, _res: Response, next: NextFun
       firstName: findUser.firstName,
       lastName: findUser.lastName,
       isActive: findUser.isActive,
+      createdAt: findUser.createdAt,
+      updatedAt: findUser.updatedAt,
     };
 
     next();

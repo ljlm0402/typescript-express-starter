@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import type { ZodTypeAny } from 'zod';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 
 export function ValidationMiddleware(schema: ZodTypeAny) {
   return (req: Request, res: Response, next: NextFunction) => {

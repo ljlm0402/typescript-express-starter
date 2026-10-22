@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { sign } from 'jsonwebtoken';
 import { createTestApp, resetUserDB, getUniqueUser } from '@/test/setup';
 
 describe('Auth API', () => {
@@ -51,5 +52,15 @@ describe('Auth API', () => {
       .set('Authorization', `Bearer ${authToken}`);
     expect(logoutRes.statusCode).toBe(200);
     expect(logoutRes.body.message).toBe('logout');
+  });
+
+  it('should reject a token signed with the documented placeholder', async () => {
+    const forgedToken = sign({ id: 'attacker' }, 'your-secret-key');
+
+    const response = await request(server)
+      .post(`${prefix}/auth/logout`)
+      .set('Authorization', `Bearer ${forgedToken}`);
+
+    expect(response.statusCode).toBe(401);
   });
 });

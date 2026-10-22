@@ -7,7 +7,7 @@ import {
   sanitizeUser,
 } from '@entities/user.entity';
 import { IUserRepository } from '@repositories/user.repository';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 import { logger } from '@utils/logger';
 import { hashPassword } from '@utils/hash';
 

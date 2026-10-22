@@ -135,6 +135,17 @@ export function splitNameAndVersion(spec) {
   }
 }
 
+export function mergePackageSpecs(currentDependencies, specs) {
+  const dependencies = { ...currentDependencies };
+
+  for (const spec of specs) {
+    const { name, version } = splitNameAndVersion(spec);
+    dependencies[name] = version || 'latest';
+  }
+
+  return dependencies;
+}
+
 /**
  * Sanitize user input
  */
@@ -147,13 +158,28 @@ export function sanitizeInput(input) {
   return input.replace(/[<>:"|?*]/g, '').trim();
 }
 
+export function isVersionAtLeast(current, required) {
+  const currentParts = String(current).split('.').map(Number);
+  const requiredParts = String(required).split('.').map(Number);
+  const length = Math.max(currentParts.length, requiredParts.length);
+
+  for (let index = 0; index < length; index += 1) {
+    const currentPart = currentParts[index] || 0;
+    const requiredPart = requiredParts[index] || 0;
+    if (currentPart > requiredPart) return true;
+    if (currentPart < requiredPart) return false;
+  }
+
+  return true;
+}
+
 /**
  * Validate Node.js version
  */
 export function validateNodeVersion(required = CONFIG.minNodeVersion) {
-  const current = parseInt(process.versions.node.split('.')[0], 10);
+  const current = process.versions.node;
 
-  if (current < required) {
+  if (!isVersionAtLeast(current, required)) {
     throw new ValidationError(
       `Node.js ${required}+ required. You have ${process.versions.node}`,
       'nodeVersion',

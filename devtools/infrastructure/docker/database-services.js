@@ -97,7 +97,7 @@ export function extractDatabaseType(template) {
   if (template.includes('mongodb') || template.includes('mongo')) {
     return 'mongodb';
   }
-  return 'postgresql'; // 기본값
+  return null;
 }
 
 /**

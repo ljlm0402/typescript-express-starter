@@ -1,6 +1,6 @@
 import { hash } from 'bcryptjs';
 import { injectable, inject } from 'tsyringe';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 import { User } from '@interfaces/users.interface';
 import { UsersRepository } from '@repositories/users.repository';
 import type { IUsersRepository } from '@repositories/users.repository';

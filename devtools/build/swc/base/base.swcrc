@@ -10,7 +10,7 @@
       "legacyDecorator": true,
       "decoratorMetadata": true
     },
-    "target": "es2017",
+      "target": "es2022",
     "externalHelpers": false,
     "keepClassNames": true,
     "loose": false,

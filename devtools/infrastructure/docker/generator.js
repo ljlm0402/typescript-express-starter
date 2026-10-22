@@ -5,12 +5,15 @@
 
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import {
   getDatabaseService,
   extractDatabaseType,
   generateDatabaseEnv,
 } from './database-services.js';
 import { getTemplateConfig } from '../../config/template-mapping.js';
+
+const dockerAssetsDir = path.dirname(fileURLToPath(import.meta.url));
 
 // ORM별 특화 설정
 const ORM_CONFIGURATIONS = {
@@ -117,7 +120,7 @@ function interpolateTemplate(template, variables) {
  */
 function generateDockerConfig(templateName) {
   const dbType = extractDatabaseType(templateName);
-  const databaseService = getDatabaseService(dbType);
+  const databaseService = getDatabaseService(dbType) || { service: '', adminTool: null };
   const templateConfig = getTemplateConfig(templateName);
 
   // ORM 이름 추출
@@ -127,7 +130,7 @@ function generateDockerConfig(templateName) {
   // 기본 설정
   const config = {
     TEMPLATE_NAME: templateName,
-    NODE_VERSION: '18',
+    NODE_VERSION: '22',
     DEFAULT_PORT: '3000',
     CONTAINER_NAME: templateName.replace(/[^a-zA-Z0-9]/g, '-'),
     START_COMMAND: 'npm run dev',
@@ -161,10 +164,7 @@ function generateDockerConfig(templateName) {
  * @returns {string} 생성된 Dockerfile 내용
  */
 export function generateDockerfileDev(templateName, outputPath = null) {
-  const templatePath = path.join(
-    process.cwd(),
-    'devtools/infrastructure/docker/templates/Dockerfile.dev.template',
-  );
+  const templatePath = path.join(dockerAssetsDir, 'common/Dockerfile.dev');
   const template = fs.readFileSync(templatePath, 'utf8');
   const config = generateDockerConfig(templateName);
 
@@ -184,10 +184,7 @@ export function generateDockerfileDev(templateName, outputPath = null) {
  * @returns {string} 생성된 Dockerfile 내용
  */
 export function generateDockerfileProd(templateName, outputPath = null) {
-  const templatePath = path.join(
-    process.cwd(),
-    'devtools/infrastructure/docker/templates/Dockerfile.prod.template',
-  );
+  const templatePath = path.join(dockerAssetsDir, 'common/Dockerfile.prod');
   const template = fs.readFileSync(templatePath, 'utf8');
   const config = generateDockerConfig(templateName);
 
@@ -208,18 +205,13 @@ export function generateDockerfileProd(templateName, outputPath = null) {
  * @returns {string} 생성된 docker-compose.yml 내용
  */
 export function generateDockerCompose(templateName, projectName = null, outputPath = null) {
-  const templatePath = path.join(
-    process.cwd(),
-    'devtools/infrastructure/docker/templates/docker-compose.yml.template',
-  );
-  const template = fs.readFileSync(templatePath, 'utf8');
-  const config = generateDockerConfig(templateName);
-
-  if (projectName) {
-    config.CONTAINER_NAME = projectName.replace(/[^a-zA-Z0-9]/g, '-');
-  }
-
-  const result = interpolateTemplate(template, config);
+  const dbType = extractDatabaseType(templateName);
+  const templatePath = dbType
+    ? path.join(dockerAssetsDir, `database/${dbType === 'postgresql' ? 'postgres' : dbType}.compose.yml`)
+    : null;
+  const result = templatePath && fs.existsSync(templatePath)
+    ? fs.readFileSync(templatePath, 'utf8')
+    : `services:\n  app:\n    build:\n      context: .\n      dockerfile: Dockerfile.dev\n    container_name: ${projectName || '${COMPOSE_PROJECT_NAME:-app}'}-dev\n    ports:\n      - '\${PORT:-3000}:3000'\n    volumes:\n      - .:/app\n      - /app/node_modules\n    env_file:\n      - .env\n`;
 
   if (outputPath) {
     fs.writeFileSync(outputPath, result);
@@ -236,7 +228,7 @@ export function generateDockerCompose(templateName, projectName = null, outputPa
  */
 export function generateDockerignore(templateName, outputPath = null) {
   const baseIgnore = fs.readFileSync(
-    path.join(process.cwd(), 'devtools/infrastructure/docker/base/.dockerignore'),
+    path.join(dockerAssetsDir, 'common/.dockerignore'),
     'utf8',
   );
 

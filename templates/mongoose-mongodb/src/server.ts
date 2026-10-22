@@ -2,6 +2,7 @@ import 'reflect-metadata';
 import '@config/env';
 import { container } from 'tsyringe';
 import App from '@/app';
+import { connectDB } from '@config/database';
 import { AuthRoute } from '@routes/auth.route';
 import { UserRoute } from '@routes/user.route';
 import { logger } from '@utils/logger';
@@ -12,6 +13,7 @@ import { logger } from '@utils/logger';
 async function bootstrap(): Promise<void> {
   try {
     logger.info('🚀 Starting MongoDB Express Server...');
+    await connectDB();
 
     // 라우트 등록
     const routes = [container.resolve(AuthRoute), container.resolve(UserRoute)];

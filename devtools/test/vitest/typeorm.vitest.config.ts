@@ -52,7 +52,7 @@ export default defineConfig({
 
   // TypeScript 설정 (Decorator 지원)
   esbuild: {
-    target: 'node18',
+    target: 'node22',
     keepNames: true,
     experimentalDecorators: true,
   },

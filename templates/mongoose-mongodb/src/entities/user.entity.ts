@@ -11,6 +11,13 @@ export interface IUser extends Document {
   updatedAt: Date;
 }
 
+export interface IUserResponse {
+  id: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 /**
  * User 스키마 정의
  */
@@ -41,21 +48,23 @@ const UserSchema = new Schema<IUser>(
     toJSON: {
       transform: (doc, ret) => {
         // JSON 직렬화 시 _id를 id로 변환하고 불필요한 필드 제거
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
-        delete ret.password; // JSON 응답에서 password 제거
-        return ret;
+        const result = ret as unknown as Record<string, unknown>;
+        result.id = String(result._id);
+        delete result._id;
+        delete result.__v;
+        delete result.password;
+        return result;
       },
     },
     toObject: {
       transform: (doc, ret) => {
         // Object 변환 시에도 동일하게 적용
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
-        delete ret.password;
-        return ret;
+        const result = ret as unknown as Record<string, unknown>;
+        result.id = String(result._id);
+        delete result._id;
+        delete result.__v;
+        delete result.password;
+        return result;
       },
     },
   },
@@ -94,19 +103,3 @@ UserSchema.statics.findByEmailWithPassword = function (email: string) {
  * User 모델 생성 및 내보내기
  */
 export const UserModel = model<IUser>('User', UserSchema);
-
-/**
- * 타입 안전성을 위한 추가 인터페이스
- */
-export interface IUserMethods {
-  toJSON(): Omit<IUser, 'password'>;
-}
-
-export interface IUserStatics {
-  findByEmail(email: string): Promise<IUser | null>;
-  findByEmailWithPassword(email: string): Promise<IUser | null>;
-}
-
-export interface IUserModel extends IUserStatics {
-  new (doc?: any): IUser & IUserMethods;
-}

@@ -54,7 +54,7 @@ export class UserRepository implements IUserRepository {
         return null;
       }
 
-      const user = await UserModel.findById(id).lean();
+      const user = await UserModel.findById(id);
 
       if (user) {
         logger.debug('User found by ID', { userId: id });
@@ -74,7 +74,7 @@ export class UserRepository implements IUserRepository {
     try {
       const user = await UserModel.findOne({
         email: email.toLowerCase(),
-      }).lean();
+      });
 
       if (user) {
         logger.debug('User found by email', { email });
@@ -94,9 +94,7 @@ export class UserRepository implements IUserRepository {
     try {
       const user = await UserModel.findOne({
         email: email.toLowerCase(),
-      })
-        .select('+password')
-        .lean();
+      }).select('+password');
 
       if (user) {
         logger.debug('User found by email with password', { email });
@@ -114,7 +112,7 @@ export class UserRepository implements IUserRepository {
    */
   async findAll(): Promise<IUser[]> {
     try {
-      const users = await UserModel.find({}).sort({ createdAt: -1 }).lean();
+      const users = await UserModel.find({}).sort({ createdAt: -1 });
 
       logger.debug('Retrieved all users', { count: users.length });
 
@@ -143,7 +141,7 @@ export class UserRepository implements IUserRepository {
       const user = await UserModel.findByIdAndUpdate(id, updateQuery, {
         new: true, // 업데이트된 문서 반환
         runValidators: true, // 스키마 검증 실행
-      }).lean();
+      });
 
       if (user) {
         logger.info('User updated successfully', { userId: id });

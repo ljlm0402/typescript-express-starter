@@ -4,15 +4,11 @@
       "syntax": "typescript",
       "tsx": false,
       "decorators": true,
-      "dynamicImport": true,
+      "dynamicImport": true
     },
     "transform": {
       "legacyDecorator": true,
-      "decoratorMetadata": true,
-      "react": {
-        "pragma": "React.createElement",
-        "pragmaFrag": "React.Fragment",
-      },
+      "decoratorMetadata": true
     },
     "target": "es2022",
     "externalHelpers": true,
@@ -25,9 +21,9 @@
         "drop_debugger": true,
         "keep_fargs": true,
         "pure_getters": false,
-        "unused": true,
+        "unused": true
       },
-      "mangle": false,
+      "mangle": false
     },
     "baseUrl": "src",
     "paths": {
@@ -42,23 +38,23 @@
       "@repositories/*": ["repositories/*"],
       "@routes/*": ["routes/*"],
       "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-    },
+      "@utils/*": ["utils/*"]
+    }
   },
   "module": {
     "type": "commonjs",
     "strict": true,
     "strictMode": true,
-    "noInterop": false,
+    "noInterop": false
   },
   "exclude": [
     "node_modules",
     "dist",
-    "prisma/migrations/**/*",
-    "prisma/seed.ts",
-    "**/*.spec.ts",
-    "**/*.test.ts",
+    "prisma/migrations/.*",
+    "prisma/seed\\.ts$",
+    ".*\\.spec\\.ts$",
+    ".*\\.test\\.ts$",
     "coverage",
-    "logs",
-  ],
+    "logs"
+  ]
 }

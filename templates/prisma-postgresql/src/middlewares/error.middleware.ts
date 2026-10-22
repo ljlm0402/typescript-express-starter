@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { JsonWebTokenError, TokenExpiredError } from 'jsonwebtoken';
 import { ZodError, type ZodIssue } from 'zod';
 import { NODE_ENV } from '@config/env';
-import { HttpException } from '@exceptions/httpException';
+import { HttpException } from '@exceptions/http.exception';
 import {
   StandardErrorResponse,
   ValidationErrorDetail,

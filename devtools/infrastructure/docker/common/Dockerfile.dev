@@ -13,10 +13,13 @@ WORKDIR /app
 # 패키지 파일 복사 (캐시 효율 최적화)
 COPY --chown=appuser:appgroup package*.json ./
 COPY --chown=appuser:appgroup pnpm-lock.yaml* ./
+COPY --chown=appuser:appgroup yarn.lock* ./
 
 # 패키지 매니저별 조건부 설치
 RUN if [ -f pnpm-lock.yaml ]; then \
       corepack enable pnpm && pnpm install; \
+    elif [ -f yarn.lock ]; then \
+      corepack enable yarn && yarn install --frozen-lockfile; \
     else \
       npm install; \
     fi
@@ -40,4 +43,4 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=10s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:3000/health || exit 1
 
 # 개발 서버 실행
-CMD ["sh", "-c", "if [ -f pnpm-lock.yaml ]; then pnpm dev; else npm run dev; fi"]
+CMD ["sh", "-c", "if [ -f pnpm-lock.yaml ]; then pnpm dev; elif [ -f yarn.lock ]; then yarn dev; else npm run dev; fi"]

@@ -1,6 +1,7 @@
 import { config } from 'dotenv';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { isSecureSecret } from '@config/secret';
 
 /**
  * 1) dotenv 로드 순서
@@ -25,6 +26,14 @@ function requireString(key: string): string {
   if (!value) {
     errors.push(`${key} is required`);
     return '';
+  }
+  return value;
+}
+
+function requireSecret(key: string): string {
+  const value = requireString(key);
+  if (value && !isSecureSecret(value)) {
+    errors.push(`${key} must be at least 32 characters and must not use a known placeholder`);
   }
   return value;
 }
@@ -102,7 +111,7 @@ function urlWithDefault(key: string, defaultValue: string): string {
  */
 const parsedNodeEnv = parseNodeEnv();
 const parsedPort = optionalPort('PORT'); // 기본값은 app.ts에서 3000 처리
-const parsedSecretKey = requireString('SECRET_KEY');
+const parsedSecretKey = requireSecret('SECRET_KEY');
 const parsedLogFormat = optionalString('LOG_FORMAT'); // 기본값은 app.ts에서 'dev'
 const parsedLogDir = requireString('LOG_DIR');
 const parsedLogLevel = requireString('LOG_LEVEL');
