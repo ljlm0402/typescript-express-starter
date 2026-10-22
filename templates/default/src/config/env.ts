@@ -2,6 +2,7 @@ import { config } from 'dotenv';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { z } from 'zod';
+import { isSecureSecret } from '@config/secret';
 
 /**
  * 1) dotenv 로드 순서
@@ -24,7 +25,9 @@ const EnvSchema = z
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
     PORT: z.coerce.number().int().positive().optional(), // 기본값은 app.ts에서 3000 처리
 
-    SECRET_KEY: z.string().min(1),
+    SECRET_KEY: z.string().refine(isSecureSecret, {
+      message: 'SECRET_KEY must be at least 32 characters and must not use a known placeholder',
+    }),
 
     LOG_FORMAT: z.string().min(1).optional(), // 기본값은 app.ts에서 'dev'
     LOG_DIR: z.string().min(1),

@@ -60,8 +60,8 @@ export default defineConfig({
       DATABASE_URL:
         process.env.DATABASE_URL ??
         'postgresql://postgres:password@localhost:5432/drizzle_postgresql_dev',
-      SECRET_KEY: 'test-secret-key',
-      JWT_SECRET: 'test-jwt-secret-key',
+      SECRET_KEY: 'test-secret-key-with-at-least-32-characters',
+      JWT_SECRET: 'test-jwt-secret-key-with-at-least-32-characters',
       JWT_EXPIRES_IN: '1h',
       LOG_FORMAT: 'dev',
       LOG_DIR: 'logs',

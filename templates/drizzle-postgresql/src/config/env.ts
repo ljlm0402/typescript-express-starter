@@ -2,6 +2,7 @@ import { config } from 'dotenv';
 import { existsSync } from 'fs';
 import { resolve } from 'path';
 import { z } from 'zod';
+import { isSecureSecret } from '@config/secret';
 
 /**
  * 1) dotenv 로드 순서
@@ -26,8 +27,12 @@ const EnvSchema = z
 
     DATABASE_URL: z.string().url().min(1),
 
-    SECRET_KEY: z.string().min(1),
-    JWT_SECRET: z.string().min(1),
+    SECRET_KEY: z.string().refine(isSecureSecret, {
+      message: 'SECRET_KEY must be at least 32 characters and must not use a known placeholder',
+    }),
+    JWT_SECRET: z.string().refine(isSecureSecret, {
+      message: 'JWT_SECRET must be at least 32 characters and must not use a known placeholder',
+    }),
     JWT_EXPIRES_IN: z.string().default('24h'),
 
     LOG_FORMAT: z.string().min(1).optional(), // 기본값은 app.ts에서 'dev'
